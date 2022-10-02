@@ -1,24 +1,12 @@
-# TODO: The maintainer of this repo has not yet edited this file
-
-**REPO OWNER**: Do you want Customer Service & Support (CSS) support for this product/project?
-
-- **No CSS support:** Fill out this template with information about how to file issues and get help.
-- **Yes CSS support:** Fill out an intake form at [aka.ms/onboardsupport](https://aka.ms/onboardsupport). CSS will work with/help you to determine next steps.
-- **Not sure?** Fill out an intake as though the answer were "Yes". CSS will help you decide.
-
-*Then remove this first heading from this SUPPORT.MD file before publishing your repo.*
-
 # Support
 
-## How to file issues and get help  
+Please read below on where to get help with Microsoft.Identity.Web.* libraries.
 
-This project uses GitHub Issues to track bugs and feature requests. Please search the existing 
-issues before filing new issues to avoid duplicates.  For new issues, file your bug or 
-feature request as a new Issue.
+* Questions can go to [GitHub discussions](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/discussions).
+* [Issues or bug reports](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/new?assignees=&labels=bug-unconfirmed%2Cquestion&template=bug_report.md).
+* [Feature requests](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/new?assignees=&labels=enhancement%2C+Feature+Request&template=feature_request.md&title=%5BFeature+Request%5D+). 
 
-For help and questions about using this project, please **REPO MAINTAINER: INSERT INSTRUCTIONS HERE 
-FOR HOW TO ENGAGE REPO OWNERS OR COMMUNITY FOR HELP. COULD BE A STACK OVERFLOW TAG OR OTHER
-CHANNEL. WHERE WILL YOU HELP PEOPLE?**.
+Please include a clear description of the problem, provide step-by-step repro steps, and code snippets/links to code.
 
 ## Microsoft Support Policy  
 
