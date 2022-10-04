@@ -1,0 +1,26 @@
+# template-restore-build-MSIdentityWeb.yaml
+# Performs Nuget Restore and Build of MicrosoftIdentityWeb.sln based on BuildConfiguration
+
+parameters:
+  BuildPlatform: 'any cpu'
+  BuildConfiguration: 'debug'
+  MsIdentityAbstractionsSemVer: '1.0.0-devopsbuild'
+
+steps:
+# This task is needed so that the 1CS Rolsyn analyzers task works.
+# The previous task does the restore
+- task: VSBuild@1
+  displayName: 'Build solution Microsoft.Identity.Abstractions.sln for governance'
+  inputs:
+    solution: Microsoft.Identity.Abstractions.sln
+    msbuildArgs: '/p:RunCodeAnalysis=false /p:MsIdentityAbstractionsSemVer=${{ parameters.MsIdentityAbstractionsSemVer }} /p:SourceLinkCreate=true'
+    platform: ${{ parameters.BuildPlatform }}
+    configuration: ${{ parameters.BuildConfiguration }}
+
+- task: ms.vss-governance-buildtask.governance-build-task-component-detection.ComponentGovernanceComponentDetection@0
+  displayName: 'Component Detection'
+  inputs:
+    failOnAlert: true
+    scanType: 'Register'
+    verbosity: 'Verbose'
+    alertWarningLevel: 'High'
