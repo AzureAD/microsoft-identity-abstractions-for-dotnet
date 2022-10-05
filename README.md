@@ -1,14 +1,19 @@
-# Project
+# Microsoft.Identity.Abstractions
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+Microsoft.Identity.Abstractions contain interfaces and POCO classes used in the Microsoft .NET authentication
+libraries (Microsoft.IdentityModel, MSAL.NET and Microsoft.Identity.Web). It exposes concepts in three domains:
 
-As the maintainer of this project, please make a few updates:
+1. Application options
 
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+   ![image](https://user-images.githubusercontent.com/13203188/193978893-d3e3446e-e794-4a68-8045-b7e3aa624f4a.png)
+
+2. Acquire tokens from Azure AD
+
+   ![image](https://user-images.githubusercontent.com/13203188/193978956-4b93c4f2-ceb5-4bc7-b337-651217455650.png)
+
+3. Calling downstream web APIs
+
+   ![image](https://user-images.githubusercontent.com/13203188/193979008-eeb3ad8c-504d-4969-8825-63d5dbabaad8.png)
 
 ## Contributing
 
