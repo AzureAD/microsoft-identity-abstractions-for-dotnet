@@ -9,7 +9,7 @@ namespace Microsoft.Identity.Abstractions
     /// <summary>
     /// Options for configuring authentication in a web app, web API or daemon app.
     /// <para>
-    /// This class contains generic parameters applying to any OAuth 2.0 identity provider.
+    /// This class contains configuration properties for any OAuth 2.0 identity provider.
     /// For Azure AD specific options see the derived class: <see cref="MicrosoftAuthenticationOptions"/>.
     /// </para>
     /// </summary>
@@ -21,6 +21,14 @@ namespace Microsoft.Identity.Abstractions
         /// If using AzureAD, rather use <see cref="MicrosoftAuthenticationOptions.Instance"/>
         /// and <see cref="MicrosoftAuthenticationOptions.TenantId"/>
         /// </summary>
+        /// <example>
+        /// <code>
+        /// AuthenticationOptions options = new 
+        /// {
+        ///  Authority = "https://login.microsoftonline.com/common/"
+        /// };
+        /// </code>
+        /// </example>
         public virtual string? Authority { get; set; }
 
         /// <summary>
@@ -34,10 +42,10 @@ namespace Microsoft.Identity.Abstractions
         }
 
         /// <summary>
-        /// Flag to enable/disable logging of Personally Identifiable Information (PII).
-        /// PII logs are never written to default outputs like Console, Logcat or NSLog.
+        /// Flag used to enable/disable logging of Personally Identifiable Information (PII).
+        /// PII logs are never written to default outputs.
         /// Default is set to <c>false</c>, which ensures that your application is compliant with GDPR. You can set
-        /// it to <c>true</c> for advanced debugging requiring PII. See https://aka.ms/msal-net-logging.
+        /// it to <c>true</c> for advanced debugging requiring PII.
         /// </summary>
         public bool EnablePiiLogging { get; set; }
 
@@ -51,7 +59,8 @@ namespace Microsoft.Identity.Abstractions
         }
 
         /// <summary>
-        /// Description of the certificates used to prove the identity of the web app or web API.
+        /// Description of the client credentials provided to prove the identity of the web app,
+        /// web API, or daemon app.
         /// </summary>
         /// <example> An example in the appsetting.json:
         /// <code>
@@ -66,29 +75,7 @@ namespace Microsoft.Identity.Abstractions
         ///   See also https://aka.ms/ms-id-web-certificates.
         ///   </example>
         public IEnumerable<CredentialDescription>? ClientCredentials { get; set; }
-
-        /// <summary>
-        /// Specifies if the x5c claim (public key of the certificate) should be sent to the STS.
-        /// Sending the x5c enables application developers to achieve easy certificate rollover in Azure AD:
-        /// this method will send the public certificate to Azure AD along with the token request,
-        /// so that Azure AD can use it to validate the subject name based on a trusted issuer policy.
-        /// This saves the application admin from the need to explicitly manage the certificate rollover
-        /// (either via the app registration portal or using PowerShell/CLI). 
-        /// For details see https://aka.ms/msal-net-sni.
-        /// </summary>
-        /// The default is <c>false</c>.
-        public bool SendX5C { get; set; }
-
-        /// <summary>
-        /// If set to <c>true</c>, when the user signs-in in a web app, the application requests an auth code 
-        /// for the frontend (single page application using MSAL.js for instance). This will allow the front end
-        /// JavaScript code to bypass going to the authoriize endpoint (which requires reloading the page), by 
-        /// directly redeeming the auth code to get access tokens to call APIs.
-        /// See https://aka.ms/msal-net/spa-auth-code for details.
-        /// </summary>
-        /// The default is <c>false.</c>
-        public bool WithSpaAuthCode { get; set; }
-        #endregion Token Acquisition
+        #endregion Token acquisition
 
         #region web API
         /// <summary>
@@ -104,7 +91,8 @@ namespace Microsoft.Identity.Abstractions
         public IEnumerable<string>? Audiences { get; set; }
 
         /// <summary>
-        /// Description of the certificates used to decrypt an encrypted token in a web API.
+        /// Description of the credentials (usually certificates) used to decrypt an encrypted 
+        /// token in a web API.
         /// </summary>
         /// <example> An example in the appsetting.json:
         /// <code>
