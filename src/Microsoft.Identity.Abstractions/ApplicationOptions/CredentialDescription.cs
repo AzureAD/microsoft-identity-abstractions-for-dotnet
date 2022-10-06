@@ -6,12 +6,14 @@ using System.Security.Cryptography.X509Certificates;
 namespace Microsoft.Identity.Abstractions
 {
     /// <summary>
-    /// Description of a credential.
+    /// Description of a credential. Credentials are used to prove the identity of the
+    /// application (See <see cref="AuthenticationOptions.ClientCredentials"/>), or
+    /// to decrypt tokens (See <see cref="AuthenticationOptions.TokenDecryptionCredentials"/>).
     /// </summary>
     public class CredentialDescription
     {
         /// <summary>
-        /// Type of the source of the credential.
+        /// Type of the source of the credential (secret, certificate or signed assertion)
         /// </summary>
         public CredentialSource SourceType { get; set; }
 
@@ -114,7 +116,7 @@ namespace Microsoft.Identity.Abstractions
         public string? ClientSecret { get; set; }
 
         /// <summary>
-        /// ClientId of the Azure managed identity.
+        /// ClientId of the Azure managed identity used to access the certificates from KeyVault.
         /// </summary>
         public string? ManagedIdentityClientId { get; set; }
 

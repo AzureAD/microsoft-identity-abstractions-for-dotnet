@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Microsoft.Identity.Abstractions.DownstreamRestApiOptions">
+    <Position X="3.25" Y="5.5" Width="5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAIAAAAgAAQBAAAAgAAAAAAEACBA=</HashCode>
+      <FileName>DownstreamRestApi\DownstreamRestApiOptions.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="TokenAcquirerOptions" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Microsoft.Identity.Abstractions.AcquireTokenOptions">
+    <Position X="10.25" Y="5.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAIIAAAIACBAABAAgABAAAAAEBAAAAAAAAAAAAEABA=</HashCode>
+      <FileName>TokenAcquisition\AcquireTokenOptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider">
+    <Position X="2" Y="1" Width="13.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>DownstreamRestApi\IAuthorizationHeaderProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Microsoft.Identity.Abstractions.IDownstreamRestApi">
+    <Position X="2" Y="2.5" Width="13.25" />
+    <TypeIdentifier>
+      <HashCode>EAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAEAQAA=</HashCode>
+      <FileName>DownstreamRestApi\IDownstreamRestApi.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

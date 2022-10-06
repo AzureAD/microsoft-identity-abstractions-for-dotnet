@@ -43,7 +43,29 @@ namespace Microsoft.Identity.Abstractions
         /// useful to express that the Client is capable of handling claims challenge.
         /// </summary>
         public IEnumerable<string>? ClientCapabilities { get; set; }
-        #endregion Token acquisition
+
+        /// <summary>
+        /// Specifies if the x5c claim (public key of the certificate) should be sent to the STS.
+        /// Sending the x5c enables application developers to achieve easy certificate rollover in Azure AD:
+        /// this method will send the public certificate to Azure AD along with the token request,
+        /// so that Azure AD can use it to validate the subject name based on a trusted issuer policy.
+        /// This saves the application admin from the need to explicitly manage the certificate rollover
+        /// (either via the app registration portal or using PowerShell/CLI). 
+        /// For details see https://aka.ms/msal-net-sni.
+        /// </summary>
+        /// The default is <c>false</c>.
+        public bool SendX5C { get; set; }
+
+        /// <summary>
+        /// If set to <c>true</c>, when the user signs-in in a web app, the application requests an auth code 
+        /// for the frontend (single page application using MSAL.js for instance). This will allow the front end
+        /// JavaScript code to bypass going to the authoriize endpoint (which requires reloading the page), by 
+        /// directly redeeming the auth code to get access tokens to call APIs.
+        /// See https://aka.ms/msal-net/spa-auth-code for details.
+        /// </summary>
+        /// The default is <c>false.</c>
+        public bool WithSpaAuthCode { get; set; }
+        #endregion Token Acquisition
 
         #region AADB2C
         /// <summary>
