@@ -8,6 +8,3 @@ steps:
 
 # Run Nuget Tool Installer
 - template: template-install-nuget.yaml
-
-# Install keyvault secrets
-- template: template-install-keyvault-secrets.yaml
