@@ -12,6 +12,26 @@ namespace Microsoft.Identity.Abstractions
     public class AcquireTokenOptions
     {
         /// <summary>
+        /// Copy constructor for <see cref="AcquireTokenOptions"/>
+        /// </summary>
+        protected AcquireTokenOptions(AcquireTokenOptions other)
+        {
+            if (other == null)
+                throw new ArgumentNullException(nameof(other));
+
+            Tenant = other.Tenant;
+            UserFlow = other.UserFlow;
+            AuthenticationOptionsName = other.AuthenticationOptionsName;
+            CorrelationId = other.CorrelationId;
+            ExtraQueryParameters = other.ExtraQueryParameters;
+            ExtraHeadersParameters = other.ExtraHeadersParameters;
+            ForceRefresh = other.ForceRefresh;
+            Claims = other.Claims;
+            PopPublicKey = other.PopPublicKey;
+            LongRunningWebApiSessionKey = other.LongRunningWebApiSessionKey;
+        }
+
+        /// <summary>
         /// Enables to override the tenant/account for which to get a token. 
         /// This is useful in multi-tenant apps in the cases where a given user account is a guest 
         /// in other tenants, and you want to acquire tokens for a specific tenant.
@@ -85,24 +105,12 @@ namespace Microsoft.Identity.Abstractions
         public static string LongRunningWebApiSessionKeyAuto { get; set; } = "AllocateForMe";
 
         /// <summary>
-        /// Clone the options (to be able to override them).
+        /// Performs a shallow Clone the options (to be able to override them).
         /// </summary>
-        /// <returns>A clone of the options.</returns>
-        public AcquireTokenOptions Clone()
+        /// <returns>A shallow Clone of the options.</returns>
+        public virtual AcquireTokenOptions Clone()
         {
-            return new AcquireTokenOptions
-            {
-                Tenant = Tenant,
-                UserFlow = UserFlow,
-                AuthenticationOptionsName = AuthenticationOptionsName,
-                CorrelationId = CorrelationId,
-                ExtraQueryParameters = ExtraQueryParameters,
-                ExtraHeadersParameters = ExtraHeadersParameters,
-                ForceRefresh = ForceRefresh,
-                Claims = Claims,
-                PopPublicKey = PopPublicKey,
-                LongRunningWebApiSessionKey = LongRunningWebApiSessionKey,
-            };
+            new AcquireTokenOptions(this)
         }
     }
 }
