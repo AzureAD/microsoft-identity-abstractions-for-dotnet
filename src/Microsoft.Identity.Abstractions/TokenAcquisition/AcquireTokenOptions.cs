@@ -12,12 +12,21 @@ namespace Microsoft.Identity.Abstractions
     public class AcquireTokenOptions
     {
         /// <summary>
+        /// constructor.
+        /// </summary>
+        public AcquireTokenOptions()
+        {
+        }        
+        
+        /// <summary>
         /// Copy constructor for <see cref="AcquireTokenOptions"/>
         /// </summary>
         protected AcquireTokenOptions(AcquireTokenOptions other)
         {
             if (other == null)
+            {
                 throw new ArgumentNullException(nameof(other));
+            }
 
             Tenant = other.Tenant;
             UserFlow = other.UserFlow;
@@ -110,7 +119,7 @@ namespace Microsoft.Identity.Abstractions
         /// <returns>A shallow Clone of the options.</returns>
         public virtual AcquireTokenOptions Clone()
         {
-            new AcquireTokenOptions(this);
+            return new AcquireTokenOptions(this);
         }
     }
 }
