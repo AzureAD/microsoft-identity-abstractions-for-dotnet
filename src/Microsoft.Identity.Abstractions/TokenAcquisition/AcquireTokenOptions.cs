@@ -110,7 +110,7 @@ namespace Microsoft.Identity.Abstractions
         /// <returns>A shallow Clone of the options.</returns>
         public virtual AcquireTokenOptions Clone()
         {
-            new AcquireTokenOptions(this)
+            new AcquireTokenOptions(this);
         }
     }
 }
