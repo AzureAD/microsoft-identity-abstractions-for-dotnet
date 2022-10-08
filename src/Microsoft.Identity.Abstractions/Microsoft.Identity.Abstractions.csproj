@@ -9,4 +9,11 @@
      <AnalysisMode>AllEnabledByDefault</AnalysisMode>
   </PropertyGroup>
 
+  <!-- Temporary until the ownership of the NuGet namespace is solved -->
+  <PropertyGroup>
+    <ClientSemVer>2.0.1-preview</ClientSemVer>
+    <PackageId>Microsoft.Identity.Web.TokenAcquisition.Abstractions</PackageId>
+  </PropertyGroup>
+
+
 </Project>

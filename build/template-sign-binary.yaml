@@ -28,7 +28,7 @@ steps:
          "parameters": [
          {
            "parameterName": "OpusName",
-           "parameterValue": "Microsoft.Identity.Abstractions"
+           "parameterValue": "Microsoft.Identity.Web.TokenAcquisition.Abstractions"
          },
          {
            "parameterName": "OpusInfo",

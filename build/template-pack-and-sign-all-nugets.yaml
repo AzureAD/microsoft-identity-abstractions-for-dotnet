@@ -10,8 +10,8 @@ steps:
 - template: template-pack-and-sign-nuget.yaml
   parameters:
     BuildConfiguration: ${{ parameters.BuildConfiguration }}
-    ProjectRootPath: '$(Build.SourcesDirectory)\src\Microsoft.Identity.Abstractions'
-    AssemblyName: 'Microsoft.Identity.Abstractions'
+    ProjectRootPath: '$(Build.SourcesDirectory)\src\Microsoft.Identity.Web.TokenAcquisition.Abstractions'
+    AssemblyName: 'Microsoft.Identity.Web.TokenAcquisition.Abstractions'
     HasRefAssembly: 'false'
 
 # Copy all packages out to staging
