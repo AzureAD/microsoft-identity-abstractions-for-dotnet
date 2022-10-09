@@ -32,11 +32,11 @@ namespace Microsoft.Identity.Abstractions
 
         #region Token acquisition
         /// <summary>
-        /// Specifies the Azure region. See https://aka.ms/azure-region. By default
-        /// the app attempts to detect the Azure region automatically (the default
-        /// value is "TryAutoDetect").
+        /// Specifies the Azure region. See https://aka.ms/azure-region. To have
+        /// the app attempts to detect the Azure region automatically,
+        /// use "TryAutoDetect".
         /// </summary>
-        public string? AzureRegion { get; set; } = "TryAutoDetect";
+        public string? AzureRegion { get; set; }
 
         /// <summary>
         /// Specifies the capabilities of the client (for instance {"cp1", "cp2"}). This is

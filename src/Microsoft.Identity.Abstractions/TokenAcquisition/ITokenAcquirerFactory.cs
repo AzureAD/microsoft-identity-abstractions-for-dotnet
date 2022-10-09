@@ -17,9 +17,10 @@ namespace Microsoft.Identity.Abstractions
         /// <param name="clientId">Client ID of the application registered to get the tokens.</param>
         /// <param name="clientCredentials">Client Credentials (client certificate, ...) used to
         /// prove the identity of the application registered to get the tokens.</param>
-        /// <param name="region">Optional Azure Region.</param>
+        /// <param name="region">Optional Azure Region. Use "TryAutoDetect" to attempt to detect
+        /// the Azure region.</param>
         /// <returns>An instance of <see cref="ITokenAcquirer"/> that will enable token acquisition.</returns>
-        ITokenAcquirer GetTokenAcquirer(string authority, string clientId, IEnumerable<CredentialDescription> clientCredentials, string? region = "TryAutoDetect");
+        ITokenAcquirer GetTokenAcquirer(string authority, string clientId, IEnumerable<CredentialDescription> clientCredentials);
 
         /// <summary>
         /// Get a token acquirer given a set of application identity options.
