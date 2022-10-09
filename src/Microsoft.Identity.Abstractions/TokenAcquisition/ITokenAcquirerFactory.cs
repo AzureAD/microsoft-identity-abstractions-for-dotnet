@@ -20,7 +20,7 @@ namespace Microsoft.Identity.Abstractions
         /// <param name="region">Optional Azure Region. Use "TryAutoDetect" to attempt to detect
         /// the Azure region.</param>
         /// <returns>An instance of <see cref="ITokenAcquirer"/> that will enable token acquisition.</returns>
-        ITokenAcquirer GetTokenAcquirer(string authority, string clientId, IEnumerable<CredentialDescription> clientCredentials);
+        ITokenAcquirer GetTokenAcquirer(string authority, string clientId, IEnumerable<CredentialDescription> clientCredentials, string? region);
 
         /// <summary>
         /// Get a token acquirer given a set of application identity options.
