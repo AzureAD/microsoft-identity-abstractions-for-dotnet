@@ -63,7 +63,7 @@ namespace Microsoft.Identity.Abstractions
         /// <summary>
         /// Sets the correlation id to be used in the request to the STS "/token" endpoint.
         /// </summary>
-        public Guid CorrelationId { get; set; }
+        public string? CorrelationId { get; set; }
 
         /// <summary>
         /// Sets query parameters for the query string in the HTTP request to the 
