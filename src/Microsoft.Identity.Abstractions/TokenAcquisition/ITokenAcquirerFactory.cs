@@ -28,7 +28,7 @@ namespace Microsoft.Identity.Abstractions
         /// <param name="applicationIdentityOptions">Application configuration. Can be an
         /// <see cref="MicrosoftAuthenticationOptions"/>.</param>
         /// <returns>An instance of <see cref="ITokenAcquirer"/> that will enable token acquisition.</returns>
-        ITokenAcquirer GetTokenAcquirer(AuthenticationOptions applicationIdentityOptions);
+        ITokenAcquirer GetTokenAcquirer(ApplicationAuthenticationOptions applicationIdentityOptions);
 
         /// <summary>
         /// Get a token acquirer for a specific <see cref="MicrosoftAuthenticationOptions"/> named configuration

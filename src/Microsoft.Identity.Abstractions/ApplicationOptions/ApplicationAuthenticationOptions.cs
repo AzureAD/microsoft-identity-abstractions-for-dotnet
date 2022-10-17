@@ -14,7 +14,7 @@ namespace Microsoft.Identity.Abstractions
     /// </para>
     /// </summary>
     /// <example></example>
-    public class AuthenticationOptions
+    public class ApplicationAuthenticationOptions
     {
         /// <summary>
         /// Gets or sets the authority to use when calling the STS. 

@@ -8,7 +8,7 @@ namespace Microsoft.Identity.Abstractions
     /// <summary>
     /// Options for configuring authentication using Azure Active Directory. It has both AAD and B2C configuration attributes.
     /// </summary>
-    public class MicrosoftAuthenticationOptions : AuthenticationOptions
+    public class MicrosoftAuthenticationOptions : ApplicationAuthenticationOptions
     {
         /// <summary>
         /// Gets or sets the Azure Active Directory instance, e.g. <c>"https://login.microsoftonline.com/"</c>.
