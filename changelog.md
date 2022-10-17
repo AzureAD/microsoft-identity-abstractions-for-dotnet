@@ -1,3 +1,9 @@
+2.0.3-preview
+==========
+# Bug fix:
+- CorrelationId should be a string and not a GUID. See [issue](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/20) for details.
+- Rename `AuthenticationOptions` to `ApplicationAuthenticationOptions`.
+
 2.0.2-preview
 ==========
 # Bug fix:
