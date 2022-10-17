@@ -7,8 +7,8 @@ namespace Microsoft.Identity.Abstractions
 {
     /// <summary>
     /// Description of a credential. Credentials are used to prove the identity of the
-    /// application (See <see cref="AuthenticationOptions.ClientCredentials"/>), or
-    /// to decrypt tokens (See <see cref="AuthenticationOptions.TokenDecryptionCredentials"/>).
+    /// application (See <see cref="ApplicationAuthenticationOptions.ClientCredentials"/>), or
+    /// to decrypt tokens (See <see cref="ApplicationAuthenticationOptions.TokenDecryptionCredentials"/>).
     /// </summary>
     public class CredentialDescription
     {
