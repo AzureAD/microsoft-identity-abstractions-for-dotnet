@@ -1,3 +1,8 @@
+1.0.1-preview
+==========
+# Bug fix:
+- Revert back CorrelationId to a GUID, as MSAL.NET requires a GUID.
+
 1.0.0-preview
 ==========
 # Bug fix:
