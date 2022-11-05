@@ -23,9 +23,7 @@ namespace Microsoft.Identity.Abstractions
         /// Load a given credential description, if needed.
         /// </summary>
         /// <param name="credentialDescription">Description of the credentials to load.</param>
-        /// <param name="throwException">Specifies if exceptions should be thrown when
-        /// the credentials cannot be loaded (by default <c>false</c>).</param>
-        Task LoadCredentialsIfNeededAsync(CredentialDescription credentialDescription, bool throwException = false);
+        Task LoadCredentialsIfNeededAsync(CredentialDescription credentialDescription);
 
         /// <summary>
         /// Load the first valid credential from the credentials description list.
