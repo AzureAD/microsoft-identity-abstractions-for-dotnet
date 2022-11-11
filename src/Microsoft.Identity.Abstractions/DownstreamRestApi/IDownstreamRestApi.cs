@@ -35,7 +35,7 @@ namespace Microsoft.Identity.Abstractions
         Task<HttpResponseMessage> CallRestApiForUserAsync(
             string serviceName,
             Action<DownstreamRestApiOptions>? calledDownstreamRestApiOptionsOverride = null,
-            ClaimsPrincipal? user = null,
+            ClaimsPrincipal? user = default,
             HttpContent? content = null,
             CancellationToken cancellationToken = default);
 
@@ -77,7 +77,7 @@ namespace Microsoft.Identity.Abstractions
         Task<TOutput?> GetForUserAsync<TOutput>(
             string serviceName,
             Action<DownstreamRestApiOptions>? DownstreamRestApiOptionsOverride = null,
-            ClaimsPrincipal? user = null,
+            ClaimsPrincipal? user = default,
             CancellationToken cancellationToken = default)
             where TOutput : class;
 
@@ -132,7 +132,7 @@ namespace Microsoft.Identity.Abstractions
             string serviceName,
             TInput input,
             Action<DownstreamRestApiOptions>? downstreamRestApiOptionsOverride = null,
-            ClaimsPrincipal? user = null,
+            ClaimsPrincipal? user = default,
             CancellationToken cancellationToken = default) where TOutput : class;
 
         /// <summary>
@@ -159,7 +159,7 @@ namespace Microsoft.Identity.Abstractions
             string relativePath,
             TInput inputData,
             Action<DownstreamRestApiOptions>? DownstreamRestApiOptionsOverride = null,
-            ClaimsPrincipal? user = null,
+            ClaimsPrincipal? user = default,
             CancellationToken cancellationToken = default)
             where TOutput : class;
 
@@ -185,7 +185,7 @@ namespace Microsoft.Identity.Abstractions
             string relativePath,
             TInput inputData,
             Action<DownstreamRestApiOptions>? DownstreamRestApiOptionsOverride = null,
-            ClaimsPrincipal? user = null,
+            ClaimsPrincipal? user = default,
             CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -212,7 +212,7 @@ namespace Microsoft.Identity.Abstractions
             string relativePath,
             TInput inputData,
             Action<DownstreamRestApiOptions>? DownstreamRestApiOptionsOverride = null,
-            ClaimsPrincipal? user = null,
+            ClaimsPrincipal? user = default,
             CancellationToken cancellationToken = default)
             where TOutput : class;
 
@@ -234,7 +234,7 @@ namespace Microsoft.Identity.Abstractions
         Task<TOutput?> CallRestApiForUserAsync<TOutput>(
             string serviceName,
             Action<DownstreamRestApiOptions>? DownstreamRestApiOptionsOverride = null,
-            ClaimsPrincipal? user = null,
+            ClaimsPrincipal? user = default,
             CancellationToken cancellationToken = default)
             where TOutput : class;
 
@@ -258,7 +258,7 @@ namespace Microsoft.Identity.Abstractions
             string serviceName,
             TInput inputData,
             Action<DownstreamRestApiOptions>? DownstreamRestApiOptionsOverride = null,
-            ClaimsPrincipal? user = null,
+            ClaimsPrincipal? user = default,
             CancellationToken cancellationToken = default);
     }
 }

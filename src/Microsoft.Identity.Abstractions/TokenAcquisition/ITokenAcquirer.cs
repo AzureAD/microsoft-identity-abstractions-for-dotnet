@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Microsoft.Identity.Abstractions
 {
     /// <summary>
-    /// Interface for the token acquisition service (encapsulating MSAL.NET).
+    /// Interface for the token acquisition service (for instance encapsulating MSAL.NET).
     /// </summary>
     public interface ITokenAcquirer
     {
