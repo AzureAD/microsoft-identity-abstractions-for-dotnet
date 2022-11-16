@@ -14,7 +14,8 @@ namespace Microsoft.Identity.Abstractions
         /// Load the credential from the description, if needed.
         /// </summary>
         /// <param name="credentialDescription">Description of the credential.</param>
-        Task LoadIfNeededAsync(CredentialDescription credentialDescription);
+        /// <param name="parameters">Parameters, related to the host application, that the credential source loader can use.</param>
+        Task LoadIfNeededAsync(CredentialDescription credentialDescription, CredentialSourceLoaderParameters? parameters = null);
 
         /// <summary>
         /// Loadable CredentialSource.

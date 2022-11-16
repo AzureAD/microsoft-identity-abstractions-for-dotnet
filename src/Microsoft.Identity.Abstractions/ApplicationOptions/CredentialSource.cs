@@ -52,5 +52,10 @@ namespace Microsoft.Identity.Abstractions
         /// Path to the file containing the signed assertion (for Kubernetes).
         /// </summary>
         SignedAssertionFilePath = 8,
+
+        /// <summary>
+        /// URI to the vault.
+        /// </summary>
+        SignedAssertionFromVault = 9,
     }
 }

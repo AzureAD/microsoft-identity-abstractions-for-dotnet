@@ -28,7 +28,7 @@ namespace Microsoft.Identity.Abstractions
             IEnumerable<string> scopes,
             AcquireTokenOptions? tokenAcquisitionOptions = null,
             ClaimsPrincipal? user = null,
-            CancellationToken cancellationToken = default(CancellationToken));
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Acquires an authentication result from the authority configured in the app, for the confidential client itself (not on behalf of a user)
@@ -45,6 +45,6 @@ namespace Microsoft.Identity.Abstractions
         Task<AcquireTokenResult> GetTokenForAppAsync(
             string scope,
             AcquireTokenOptions? tokenAcquisitionOptions = null,
-            CancellationToken cancellationToken = default(CancellationToken));
+            CancellationToken cancellationToken = default);
     }
 }

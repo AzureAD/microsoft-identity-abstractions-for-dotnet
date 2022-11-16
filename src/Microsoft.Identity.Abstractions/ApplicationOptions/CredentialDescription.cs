@@ -219,9 +219,18 @@ namespace Microsoft.Identity.Abstractions
             {
                 return SourceType switch
                 {
-                    CredentialSource.KeyVault or CredentialSource.Path or CredentialSource.StoreWithThumbprint or CredentialSource.StoreWithDistinguishedName or CredentialSource.Certificate or CredentialSource.Base64Encoded => CredentialType.Certificate,
+                    CredentialSource.KeyVault 
+                    or CredentialSource.Path 
+                    or CredentialSource.StoreWithThumbprint 
+                    or CredentialSource.StoreWithDistinguishedName 
+                    or CredentialSource.Certificate 
+                    or CredentialSource.Base64Encoded => CredentialType.Certificate,
+                    
                     CredentialSource.ClientSecret => CredentialType.Secret,
-                    CredentialSource.SignedAssertionFromManagedIdentity or CredentialSource.SignedAssertionFilePath => CredentialType.SignedAssertion,
+                    
+                    CredentialSource.SignedAssertionFromManagedIdentity 
+                    or CredentialSource.SignedAssertionFilePath 
+                    or CredentialSource.SignedAssertionFromVault => CredentialType.SignedAssertion,
                     _ => default,
                 };
             }

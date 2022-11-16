@@ -29,7 +29,7 @@ namespace Microsoft.Identity.Abstractions
             IEnumerable<string> scopes, 
             DownstreamRestApiOptions? downstreamApiOptions=null, 
             ClaimsPrincipal? claimsPrincipal=null,
-            CancellationToken cancellationToken = default(CancellationToken));
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creates the authorization header used to call a protected web API on behalf
@@ -45,6 +45,6 @@ namespace Microsoft.Identity.Abstractions
         Task<string> CreateAuthorizationHeaderForAppAsync(
             string scopes,
             DownstreamRestApiOptions? downstreamApiOptions = null,
-            CancellationToken cancellationToken = default(CancellationToken));
+            CancellationToken cancellationToken = default);
     }
 }
