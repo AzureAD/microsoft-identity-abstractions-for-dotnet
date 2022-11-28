@@ -7,8 +7,8 @@ namespace Microsoft.Identity.Abstractions
 {
     /// <summary>
     /// Description of a credential. Credentials are used to prove the identity of the
-    /// application (See <see cref="ApplicationAuthenticationOptions.ClientCredentials"/>), or
-    /// to decrypt tokens (See <see cref="ApplicationAuthenticationOptions.TokenDecryptionCredentials"/>).
+    /// application (See <see cref="IdentityApplicationOptions.ClientCredentials"/>), or
+    /// to decrypt tokens (See <see cref="IdentityApplicationOptions.TokenDecryptionCredentials"/>).
     /// </summary>
     public class CredentialDescription
     {
@@ -219,9 +219,18 @@ namespace Microsoft.Identity.Abstractions
             {
                 return SourceType switch
                 {
-                    CredentialSource.KeyVault or CredentialSource.Path or CredentialSource.StoreWithThumbprint or CredentialSource.StoreWithDistinguishedName or CredentialSource.Certificate or CredentialSource.Base64Encoded => CredentialType.Certificate,
+                    CredentialSource.KeyVault 
+                    or CredentialSource.Path 
+                    or CredentialSource.StoreWithThumbprint 
+                    or CredentialSource.StoreWithDistinguishedName 
+                    or CredentialSource.Certificate 
+                    or CredentialSource.Base64Encoded => CredentialType.Certificate,
+                    
                     CredentialSource.ClientSecret => CredentialType.Secret,
-                    CredentialSource.SignedAssertionFromManagedIdentity or CredentialSource.SignedAssertionFilePath => CredentialType.SignedAssertion,
+                    
+                    CredentialSource.SignedAssertionFromManagedIdentity 
+                    or CredentialSource.SignedAssertionFilePath 
+                    or CredentialSource.SignedAssertionFromVault => CredentialType.SignedAssertion,
                     _ => default,
                 };
             }

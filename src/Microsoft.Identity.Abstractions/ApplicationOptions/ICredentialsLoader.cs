@@ -2,8 +2,6 @@
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace Microsoft.Identity.Abstractions
@@ -23,15 +21,17 @@ namespace Microsoft.Identity.Abstractions
         /// Load a given credential description, if needed.
         /// </summary>
         /// <param name="credentialDescription">Description of the credentials to load.</param>
-        Task LoadCredentialsIfNeededAsync(CredentialDescription credentialDescription);
+        /// <param name="parameters">Parameters, related to the host application, that the credential source loader can use.</param>
+        Task LoadCredentialsIfNeededAsync(CredentialDescription credentialDescription, CredentialSourceLoaderParameters? parameters = null);
 
         /// <summary>
         /// Load the first valid credential from the credentials description list.
         /// </summary>
         /// <param name="credentialDescriptions">Description of the credentials.</param>
+        /// <param name="parameters">Parameters, related to the host application, that the credential source loader can use.</param>
         /// <returns>First valid credential description that could be loaded from the credential description list.
         /// <c>null</c> if none is valid.</returns>
-        Task<CredentialDescription?> LoadFirstValidCredentialsAsync(IEnumerable<CredentialDescription> credentialDescriptions);
+        Task<CredentialDescription?> LoadFirstValidCredentialsAsync(IEnumerable<CredentialDescription> credentialDescriptions, CredentialSourceLoaderParameters? parameters = null);
 
         /// <summary>
         /// Resets resettable credentials in the credential description list (for instance reset the 
