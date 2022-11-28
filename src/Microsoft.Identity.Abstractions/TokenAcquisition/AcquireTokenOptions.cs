@@ -28,8 +28,6 @@ namespace Microsoft.Identity.Abstractions
                 throw new ArgumentNullException(nameof(other));
             }
 
-            Tenant = other.Tenant;
-            UserFlow = other.UserFlow;
             AuthenticationOptionsName = other.AuthenticationOptionsName;
             CorrelationId = other.CorrelationId;
             ExtraQueryParameters = other.ExtraQueryParameters;
@@ -38,20 +36,9 @@ namespace Microsoft.Identity.Abstractions
             Claims = other.Claims;
             PopPublicKey = other.PopPublicKey;
             LongRunningWebApiSessionKey = other.LongRunningWebApiSessionKey;
+            Tenant = other.Tenant;
+            UserFlow = other.UserFlow;
         }
-
-        /// <summary>
-        /// Enables to override the tenant/account for which to get a token. 
-        /// This is useful in multi-tenant apps in the cases where a given user account is a guest 
-        /// in other tenants, and you want to acquire tokens for a specific tenant.
-        /// </summary>
-        /// <remarks>Can be the tenant ID or domain name.</remarks>
-        public string? Tenant { get; set; }
-
-        /// <summary>
-        /// In the case of AzureAD B2C, uses a particular user flow.
-        /// </summary>
-        public string? UserFlow { get; set; }
 
         /// <summary>
         /// Gets the parameters describing the confidential client application (ClientId,
@@ -101,7 +88,7 @@ namespace Microsoft.Identity.Abstractions
         /// Key used for long running web APIs that need to call downstream web
         /// APIs on behalf of the user. Can be null, if you are not developing a long
         /// running web API, <see cref="LongRunningWebApiSessionKeyAuto"/> if you want
-        /// Microsoft.Identity.Web to allocate a session key for you, or your own string
+        /// the token acquirer to allocate a session key for you, or your own string
         /// if you want to associate the session with some information you have externally
         /// (for instance a Microsoft Graph hook identifier).
         /// </summary>
@@ -109,9 +96,24 @@ namespace Microsoft.Identity.Abstractions
 
         /// <summary>
         /// Value that can be used for <see cref="LongRunningWebApiSessionKey"/> so that
-        /// MSAL.NET allocates the long running web api session key for the developer.
+        /// the token acquirer allocates the long running web api session key for the developer.
         /// </summary>
         public static string LongRunningWebApiSessionKeyAuto { get; set; } = "AllocateForMe";
+
+        /// <summary>
+        /// (Microsoft identity specific)
+        /// Enables to override the tenant/account for which to get a token. 
+        /// This is useful in multi-tenant apps in the cases where a given user account is a guest 
+        /// in other tenants, and you want to acquire tokens for a specific tenant.
+        /// </summary>
+        /// <remarks>Can be the tenant ID or domain name.</remarks>
+        public string? Tenant { get; set; }
+
+        /// <summary>
+        /// (Microsoft identity specific)
+        /// In the case of AzureAD B2C, uses a particular user flow.
+        /// </summary>
+        public string? UserFlow { get; set; }
 
         /// <summary>
         /// Performs a shallow Clone the options (to be able to override them).

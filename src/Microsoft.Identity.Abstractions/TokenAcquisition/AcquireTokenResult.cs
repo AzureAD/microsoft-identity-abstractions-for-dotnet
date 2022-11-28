@@ -55,7 +55,8 @@ namespace Microsoft.Identity.Abstractions
         public DateTimeOffset ExpiresOn { get; set; }
 
         /// <summary>
-        ///  In the case of Azure AD, gets an identifier for the tenant from which the token was acquired.
+        ///  (Microsoft Identity specific) In the case of Azure AD or Azure AD B2C, 
+        ///  gets an identifier for the tenant for which the token was acquired.
         ///  This property will be null if tenant information is not returned by the service or the service
         ///  is not Azure AD.
         /// </summary>
@@ -67,7 +68,8 @@ namespace Microsoft.Identity.Abstractions
         public string? IdToken { get; set; }
 
         /// <summary>
-        /// Gets the scope values effectively granted by the IdP.
+        /// Gets the scope values effectively granted by the IdP. They can be different
+        /// form the scopes requested.
         /// </summary>
         public IEnumerable<string>? Scopes { get; set; }
 
