@@ -20,7 +20,15 @@ namespace Microsoft.Identity.Abstractions
         /// <param name="idToken">ID Token, in the case of a token for a user.</param>
         /// <param name="scopes">Scopes granted by the IdP.</param>
         /// <param name="correlationId">Correlation ID of the token acquisition.</param>
-        public AcquireTokenResult(string accessToken, DateTimeOffset expiresOn, string tenantId, string idToken, IEnumerable<string> scopes, Guid correlationId)
+        /// <param name="tokenType">Token type of the access token (Bearer or Pop).</param>
+        public AcquireTokenResult(
+            string accessToken,
+            DateTimeOffset expiresOn,
+            string tenantId,
+            string idToken,
+            IEnumerable<string> scopes,
+            Guid correlationId,
+            string tokenType)
         {
             AccessToken = accessToken;
             ExpiresOn = expiresOn;
@@ -28,6 +36,7 @@ namespace Microsoft.Identity.Abstractions
             IdToken = idToken;
             Scopes = scopes;
             CorrelationId = correlationId;
+            TokenType = tokenType;
         }
 
         /// <summary>
@@ -66,5 +75,10 @@ namespace Microsoft.Identity.Abstractions
         /// Gets the correlation id used for the request.
         /// </summary>
         public Guid CorrelationId { get; set; }
+
+        /// <summary>
+        /// Gets the access token type (Bearer or Pop).
+        /// </summary>
+        public string? TokenType { get; set; }
     }
 }
