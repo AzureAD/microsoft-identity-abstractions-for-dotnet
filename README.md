@@ -5,15 +5,15 @@ libraries (Microsoft.IdentityModel, MSAL.NET and Microsoft.Identity.Web). It exp
 
 1. Application options
 
-   ![image](https://user-images.githubusercontent.com/13203188/193978893-d3e3446e-e794-4a68-8045-b7e3aa624f4a.png)
+   ![image](https://user-images.githubusercontent.com/13203188/204172083-d0f30a49-bb77-48e8-9b4b-342ea5dc1003.png)
 
 2. Acquire tokens from Azure AD
 
-   ![image](https://user-images.githubusercontent.com/13203188/193978956-4b93c4f2-ceb5-4bc7-b337-651217455650.png)
+   ![image](https://user-images.githubusercontent.com/13203188/204174362-42758006-cce2-4a12-b40e-162c0b14cfa8.png)
 
 3. Calling downstream web APIs
 
-   ![image](https://user-images.githubusercontent.com/13203188/193979008-eeb3ad8c-504d-4969-8825-63d5dbabaad8.png)
+   ![image](https://user-images.githubusercontent.com/13203188/204174435-3a9e7e4b-bd88-4927-96e2-4ed74a6caee9.png)
 
 ## Contributing
 
