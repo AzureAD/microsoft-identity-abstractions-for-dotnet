@@ -10,16 +10,16 @@ namespace Microsoft.Identity.Abstractions
     /// Options for configuring authentication in a web app, web API or daemon app.
     /// <para>
     /// This class contains configuration properties for any OAuth 2.0 identity provider.
-    /// For Azure AD specific options see the derived class: <see cref="MicrosoftAuthenticationOptions"/>.
+    /// For Azure AD specific options see the derived class: <see cref="IdentityApplicationOptions"/>.
     /// </para>
     /// </summary>
     /// <example></example>
-    public class ApplicationAuthenticationOptions
+    public class IdentityApplicationOptions
     {
         /// <summary>
         /// Gets or sets the authority to use when calling the STS. 
-        /// If using AzureAD, rather use <see cref="MicrosoftAuthenticationOptions.Instance"/>
-        /// and <see cref="MicrosoftAuthenticationOptions.TenantId"/>
+        /// If using AzureAD, rather use <see cref="MicrosoftIdentityApplicationOptions.Instance"/>
+        /// and <see cref="MicrosoftIdentityApplicationOptions.TenantId"/>
         /// </summary>
         /// <example>
         /// <code>
@@ -50,14 +50,6 @@ namespace Microsoft.Identity.Abstractions
         public bool EnablePiiLogging { get; set; }
 
         #region Token Acquisition
-        /// <summary>
-        /// Does the app provide client credentials.
-        /// </summary>
-        public bool HasClientCredentials
-        {
-            get => (ClientCredentials != null && ClientCredentials.Any());
-        }
-
         /// <summary>
         /// Description of the client credentials provided to prove the identity of the web app,
         /// web API, or daemon app.
