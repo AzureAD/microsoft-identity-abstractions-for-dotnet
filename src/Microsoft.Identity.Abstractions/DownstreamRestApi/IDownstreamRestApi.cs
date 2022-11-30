@@ -28,7 +28,7 @@ namespace Microsoft.Identity.Abstractions
         /// or Azure Signal R, where the HttpContext is not available. In other platforms, the library
         /// will find the user from the HTTP request context.</param>
         /// <param name="content">Content to send to the REST API in the case where
-        /// <see cref="DownstreamRestApiOptions.HttpMethod"/> is <code>HttpMethod.Patch</code>, 
+        /// <see cref="AuthorizationHeaderProviderOptions.HttpMethod"/> is <code>HttpMethod.Patch</code>, 
         /// <see cref="HttpMethod.Post"/>, <see cref="HttpMethod.Put"/>.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An <see cref="HttpResponseMessage"/> that the application will process.</returns>
@@ -49,7 +49,7 @@ namespace Microsoft.Identity.Abstractions
         /// <param name="DownstreamRestApiOptionsOverride">(Optional) Overrides the options proposed in the configuration described
         /// by <paramref name="serviceName"/>.</param>
         /// <param name="content">Content to send to the REST API in the case where
-        /// <see cref="DownstreamRestApiOptions.HttpMethod"/> is <code>HttpMethod.Patch</code>, 
+        /// <see cref="AuthorizationHeaderProviderOptions.HttpMethod"/> is <code>HttpMethod.Patch</code>, 
         /// <see cref="HttpMethod.Post"/>, <see cref="HttpMethod.Put"/>.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An <see cref="HttpResponseMessage"/> that the application will process.</returns>

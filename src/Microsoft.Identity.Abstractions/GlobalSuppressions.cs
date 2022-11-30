@@ -7,6 +7,6 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 [assembly: CLSCompliant(true)]
 [assembly: SuppressMessage("Design", "CA1056:URI-like properties should not be strings", Justification = "<Pending>", Scope = "member", Target = "~P:Microsoft.Identity.Abstractions.CredentialDescription.KeyVaultUrl")]
-[assembly: SuppressMessage("Design", "CA1056:URI-like properties should not be strings", Justification = "<Pending>", Scope = "member", Target = "~P:Microsoft.Identity.Abstractions.DownstreamRestApiOptions.BaseUrl")]
+[assembly: SuppressMessage("Design", "CA1056:URI-like properties should not be strings", Justification = "<Pending>", Scope = "member", Target = "~P:Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.BaseUrl")]
 [assembly: SuppressMessage("Usage", "CA2227:Collection properties should be read only", Justification = "<Pending>", Scope = "member", Target = "~P:Microsoft.Identity.Abstractions.AcquireTokenOptions.ExtraQueryParameters")]
 [assembly: SuppressMessage("Usage", "CA2227:Collection properties should be read only", Justification = "<Pending>", Scope = "member", Target = "~P:Microsoft.Identity.Abstractions.AcquireTokenOptions.ExtraHeadersParameters")]

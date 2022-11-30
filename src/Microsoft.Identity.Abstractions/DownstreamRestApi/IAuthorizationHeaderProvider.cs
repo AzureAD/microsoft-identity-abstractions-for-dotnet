@@ -27,7 +27,7 @@ namespace Microsoft.Identity.Abstractions
         /// </returns>
         Task<string> CreateAuthorizationHeaderForUserAsync(
             IEnumerable<string> scopes, 
-            DownstreamRestApiOptions? downstreamApiOptions=null, 
+            AuthorizationHeaderProviderOptions? downstreamApiOptions=null, 
             ClaimsPrincipal? claimsPrincipal=default,
             CancellationToken cancellationToken = default);
 
@@ -44,7 +44,7 @@ namespace Microsoft.Identity.Abstractions
         /// </returns>
         Task<string> CreateAuthorizationHeaderForAppAsync(
             string scopes,
-            DownstreamRestApiOptions? downstreamApiOptions = null,
+            AuthorizationHeaderProviderOptions? downstreamApiOptions = null,
             CancellationToken cancellationToken = default);
     }
 }
