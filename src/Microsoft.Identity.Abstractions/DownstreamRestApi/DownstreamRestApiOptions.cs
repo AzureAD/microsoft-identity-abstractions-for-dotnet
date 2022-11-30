@@ -1,7 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
+using System.Net.Http;
 
 namespace Microsoft.Identity.Abstractions
 {
@@ -40,5 +42,28 @@ namespace Microsoft.Identity.Abstractions
         /// should end in "./default")
         /// </summary>
         public IEnumerable<string>? Scopes { get; set; }
+
+        /// <summary>
+        /// Optional serializer. Will serialize the input to the web API (if any).
+        /// By default, when not provided:
+        /// <list type="bullet">
+        /// <item><description>If the input derives from <c>HttpInput</c>, it's used as is</description></item>
+        /// <item><description>If the input is a string it's used as is an considered a media type json.</description></item>
+        /// <item><description>Otherwise, the object is serialized in JSON, with a UTF8 encoding, and a media
+        /// type of application/json:
+        /// <code>
+        /// new StringContent(JsonSerializer.Serialize(input), Encoding.UTF8, "application/json")
+        /// </code>
+        /// </description></item>
+        /// </list>
+        /// </summary>
+        public Func<object, StringContent>? Serializer { get; set; }
+
+        /// <summary>
+        /// Optional de-serializer. Will de-serialize the output from the web API (if any).
+        /// When not provided, the following is returned:
+        /// <code>JsonSerializer.Deserialize&lt;TOutput&gt;(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });</code>
+        /// </summary>
+        public Func<string, object>? Deserializer { get; set; }
     }
 }

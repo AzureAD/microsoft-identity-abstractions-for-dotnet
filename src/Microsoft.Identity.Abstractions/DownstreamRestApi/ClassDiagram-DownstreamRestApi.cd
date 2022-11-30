@@ -1,21 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="Microsoft.Identity.Abstractions.DownstreamRestApiOptions">
-    <Position X="3.25" Y="5.5" Width="5" />
+    <Position X="3.25" Y="7.75" Width="5" />
+    <Members>
+      <Method Name="Clone" Hidden="true" />
+      <Method Name="DownstreamRestApiOptions" Hidden="true" />
+    </Members>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAACAAAIAAAAgAAQBAAAAgAAAAAAEACBA=</HashCode>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAABAAAAAAAAAAAAAABA=</HashCode>
       <FileName>DownstreamRestApi\DownstreamRestApiOptions.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="TokenAcquirerOptions" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="Microsoft.Identity.Abstractions.AcquireTokenOptions">
     <Position X="10.25" Y="5.5" Width="4.25" />
+    <Members>
+      <Method Name="AcquireTokenOptions" Hidden="true" />
+    </Members>
     <TypeIdentifier>
       <HashCode>AAAIIAAAIACBAABAAgABAAAAAEBAAAAAAAAAAAAEABA=</HashCode>
       <FileName>TokenAcquisition\AcquireTokenOptions.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions">
+    <Position X="3.25" Y="5.25" Width="5" />
+    <Members>
+      <Method Name="AuthorizationHeaderProviderOptions" Hidden="true" />
+      <Method Name="Clone" Hidden="true" />
+      <Method Name="GetApiUrl" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAgAAQBAAAAgAAAAAAEACBA=</HashCode>
+      <FileName>DownstreamRestApi\AuthorizationHeaderProviderOptions.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="TokenAcquirerOptions" />
+    </ShowAsAssociation>
   </Class>
   <Interface Name="Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider">
     <Position X="2" Y="1" Width="13.25" />
