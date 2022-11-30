@@ -16,7 +16,7 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         public AcquireTokenOptions()
         {
-        }        
+        }
         
         /// <summary>
         /// Copy constructor for <see cref="AcquireTokenOptions"/>
@@ -24,9 +24,7 @@ namespace Microsoft.Identity.Abstractions
         protected AcquireTokenOptions(AcquireTokenOptions other)
         {
             if (other == null)
-            {
                 throw new ArgumentNullException(nameof(other));
-            }
 
             AuthenticationOptionsName = other.AuthenticationOptionsName;
             CorrelationId = other.CorrelationId;
