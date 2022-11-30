@@ -13,7 +13,7 @@ libraries (Microsoft.IdentityModel, MSAL.NET and Microsoft.Identity.Web). It exp
 
 3. Calling downstream web APIs
 
-   ![image](https://user-images.githubusercontent.com/13203188/204174435-3a9e7e4b-bd88-4927-96e2-4ed74a6caee9.png)
+   ![image](https://user-images.githubusercontent.com/13203188/204711802-01b6f565-86f0-4560-8224-0671cdd4700b.png)
 
 ## Contributing
 
