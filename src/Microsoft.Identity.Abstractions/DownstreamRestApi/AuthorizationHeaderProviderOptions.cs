@@ -37,7 +37,7 @@ namespace Microsoft.Identity.Abstractions
 
             BaseUrl = other.BaseUrl;
             RelativePath = other.RelativePath;
-            TokenAcquirerOptions = other.TokenAcquirerOptions.Clone();
+            AcquireTokenOptions = other.AcquireTokenOptions.Clone();
             HttpMethod = other.HttpMethod;
             CustomizeHttpRequestMessage = other.CustomizeHttpRequestMessage;
             ProtocolScheme = other.ProtocolScheme;
@@ -79,7 +79,7 @@ namespace Microsoft.Identity.Abstractions
         /// <summary>
         /// Options related to token acquisition.
         /// </summary>
-        public AcquireTokenOptions TokenAcquirerOptions
+        public AcquireTokenOptions AcquireTokenOptions
         {
             get
             {

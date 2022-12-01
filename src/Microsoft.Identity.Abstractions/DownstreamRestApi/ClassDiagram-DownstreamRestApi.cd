@@ -33,7 +33,7 @@
       <FileName>DownstreamRestApi\AuthorizationHeaderProviderOptions.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="TokenAcquirerOptions" />
+      <Property Name="AcquireTokenOptions" />
     </ShowAsAssociation>
   </Class>
   <Interface Name="Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider">
