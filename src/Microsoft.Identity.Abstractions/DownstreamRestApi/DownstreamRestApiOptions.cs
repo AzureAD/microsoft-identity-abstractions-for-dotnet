@@ -3,16 +3,44 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Net.Http;
 
 namespace Microsoft.Identity.Abstractions
 {
     /// <summary>
-    /// Options passed-in to call downstream web APIs. To call Microsoft Graph, see rather
-    /// <c>MicrosoftGraphOptions</c> in the <c>Microsoft.Identity.Web.MicrosoftGraph</c> assembly.
+    /// Options passed-in to call downstream web APIs.
     /// </summary>
     public class DownstreamRestApiOptions
     {
+        AcquireTokenOptions _acquireTokenOptions = new();
+        HttpMethod _httpMethod = HttpMethod.Get;
+        string _protocolScheme = "Bearer";
+
+        /// <summary>
+        /// constructor.
+        /// </summary>
+        public DownstreamRestApiOptions()
+        {
+        }
+
+        /// <summary>
+        /// Copy constructor for <see cref="DownstreamRestApiOptions"/>
+        /// </summary>
+        protected DownstreamRestApiOptions(DownstreamRestApiOptions other)
+        {
+            if (other == null)
+                throw new ArgumentNullException(nameof(other));
+
+            BaseUrl = other.BaseUrl;
+            CustomizeHttpRequestMessage = other.CustomizeHttpRequestMessage;
+            HttpMethod = other.HttpMethod;
+            ProtocolScheme = other.ProtocolScheme;
+            RelativePath = other.RelativePath;
+            AcquireTokenOptions = other.AcquireTokenOptions.Clone();
+            Scopes = other.Scopes;
+        }
+
         /// <summary>
         /// Base URL for the called downstream web API. For instance <c>"https://graph.microsoft.com/beta/"</c>.
         /// </summary>
@@ -26,7 +54,18 @@ namespace Microsoft.Identity.Abstractions
         /// <summary>
         /// HTTP method used to call this downstream web API (by default Get).
         /// </summary>
-        public HttpMethod HttpMethod { get; set; } = HttpMethod.Get;
+        [DefaultValue("Get")]
+        public HttpMethod HttpMethod
+        {
+            get
+            {
+                return _httpMethod;
+            }
+            set
+            {
+                _httpMethod = value ?? throw new ArgumentNullException(nameof(value));
+            }
+        }
 
         /// <summary>
         /// Provides an opportunity for the caller app to customize the HttpRequestMessage. For example,
@@ -36,15 +75,35 @@ namespace Microsoft.Identity.Abstractions
         public Action<HttpRequestMessage>? CustomizeHttpRequestMessage { get; set; }
 
         /// <summary>
-        /// Options related to the token acquisition.
+        /// Options related to token acquisition.
         /// </summary>
-        public AcquireTokenOptions TokenAcquirerOptions { get; set; } = new AcquireTokenOptions();
+        public AcquireTokenOptions AcquireTokenOptions
+        {
+            get
+            {
+                return _acquireTokenOptions;
+            }
+            set
+            {
+                _acquireTokenOptions = value ?? throw new ArgumentNullException(nameof(value));
+            }
+        }
 
         /// <summary>
         /// Name of the protocol scheme used to create the authorization header.
-        /// By default "Bearer"
         /// </summary>
-        public string ProtocolScheme { set; get; } = "Bearer";
+        [DefaultValue("Bearer")]
+        public string ProtocolScheme
+        {
+            get
+            {
+                return _protocolScheme;
+            }
+            set
+            {
+                _protocolScheme = string.IsNullOrEmpty(value) ? throw new ArgumentNullException(_protocolScheme) : value;
+            }
+        }
 
         /// <summary>
         /// Scopes required to call the downstream web API.
@@ -59,15 +118,9 @@ namespace Microsoft.Identity.Abstractions
         /// Clone the options (to be able to override them).
         /// </summary>
         /// <returns>A clone of the options.</returns>
-        public DownstreamRestApiOptions Clone()
+        public virtual DownstreamRestApiOptions Clone()
         {
-            return new DownstreamRestApiOptions
-            {
-                BaseUrl = BaseUrl,
-                RelativePath = RelativePath,
-                TokenAcquirerOptions = TokenAcquirerOptions.Clone(),
-                Scopes = Scopes
-            };
+            return new DownstreamRestApiOptions(this);
         }
 
         /// <summary>
