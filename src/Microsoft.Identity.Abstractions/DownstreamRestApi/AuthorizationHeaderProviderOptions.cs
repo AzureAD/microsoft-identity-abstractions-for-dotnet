@@ -1,7 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
+﻿// Licensed under the MIT License.
 
 using System;
+using System.ComponentModel;
 using System.Net.Http;
 
 namespace Microsoft.Identity.Abstractions
@@ -11,17 +11,20 @@ namespace Microsoft.Identity.Abstractions
     /// <c>MicrosoftGraphOptions</c> in the <c>Microsoft.Identity.Web.MicrosoftGraph</c> assembly.
     /// </summary>
     public class AuthorizationHeaderProviderOptions
-    {   
+    {
+        AcquireTokenOptions _acquireTokenOptions = new();
+        HttpMethod _httpMethod = HttpMethod.Get;
+        string _protocolScheme = "Bearer";
+
         /// <summary>
         /// Default constructor.
         /// </summary>
         public AuthorizationHeaderProviderOptions()
         {
-            TokenAcquirerOptions = new AcquireTokenOptions();
         }
 
         /// <summary>
-        /// Copy constructor
+        /// Copy constructor for <see cref="DownstreamRestApiOptions"/>
         /// </summary>
         /// <param name="other">Options to copy from.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="other"/> is <c>null</c>.</exception>
@@ -53,7 +56,18 @@ namespace Microsoft.Identity.Abstractions
         /// <summary>
         /// HTTP method used to call this downstream web API (by default Get).
         /// </summary>
-        public HttpMethod HttpMethod { get; set; } = HttpMethod.Get;
+        [DefaultValue("Get")]
+        public HttpMethod HttpMethod
+        {
+            get
+            {
+                return _httpMethod;
+            }
+            set
+            {
+                _httpMethod = value ?? throw new ArgumentNullException(nameof(value));
+            }
+        }
 
         /// <summary>
         /// Provides an opportunity for the caller app to customize the HttpRequestMessage. For example,
@@ -63,15 +77,35 @@ namespace Microsoft.Identity.Abstractions
         public Action<HttpRequestMessage>? CustomizeHttpRequestMessage { get; set; }
 
         /// <summary>
-        /// Options related to the token acquisition.
+        /// Options related to token acquisition.
         /// </summary>
-        public AcquireTokenOptions TokenAcquirerOptions { get; set; } = new AcquireTokenOptions();
+        public AcquireTokenOptions TokenAcquirerOptions
+        {
+            get
+            {
+                return _acquireTokenOptions;
+            }
+            set
+            {
+                _acquireTokenOptions = value ?? throw new ArgumentNullException(nameof(value));
+            }
+        }
 
         /// <summary>
-        /// Name of the protocol scheme used to create the authorization header.
-        /// By default "Bearer"
+        /// Name of the protocol scheme used to create the authorization header. By default: "Bearer".
         /// </summary>
-        public string ProtocolScheme { set; get; } = "Bearer";
+        [DefaultValue("Bearer")]
+        public string ProtocolScheme
+        {
+            get
+            {
+                return _protocolScheme;
+            }
+            set
+            {
+                _protocolScheme = string.IsNullOrEmpty(value) ? throw new ArgumentNullException(_protocolScheme) : value;
+            }
+        }
 
         /// <summary>
         /// Clone the options (to be able to override them).

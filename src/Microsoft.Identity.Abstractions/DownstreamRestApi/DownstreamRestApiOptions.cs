@@ -26,10 +26,12 @@ namespace Microsoft.Identity.Abstractions
         public DownstreamRestApiOptions(DownstreamRestApiOptions other) : base(other)
         {
             Scopes = other.Scopes;
+            Serializer = other.Serializer;
+            Deserializer = other.Deserializer;
         }
 
         /// <inheritdoc/>
-        public new virtual AuthorizationHeaderProviderOptions Clone()
+        public override AuthorizationHeaderProviderOptions Clone()
         {
             return new DownstreamRestApiOptions(this);
         }
