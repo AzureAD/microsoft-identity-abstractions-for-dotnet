@@ -59,13 +59,13 @@ namespace Microsoft.Identity.Abstractions
         /// </description></item>
         /// </list>
         /// </summary>
-        public Func<object, StringContent>? Serializer { get; set; }
+        public Func<object?, StringContent?>? Serializer { get; set; }
 
         /// <summary>
         /// Optional de-serializer. Will de-serialize the output from the web API (if any).
         /// When not provided, the following is returned:
         /// <code>JsonSerializer.Deserialize&lt;TOutput&gt;(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });</code>
         /// </summary>
-        public Func<string, object>? Deserializer { get; set; }
+        public Func<string?, object?>? Deserializer { get; set; }
     }
 }

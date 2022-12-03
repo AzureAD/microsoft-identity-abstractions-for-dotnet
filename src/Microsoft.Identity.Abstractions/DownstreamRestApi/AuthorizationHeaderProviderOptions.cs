@@ -41,6 +41,7 @@ namespace Microsoft.Identity.Abstractions
             HttpMethod = other.HttpMethod;
             CustomizeHttpRequestMessage = other.CustomizeHttpRequestMessage;
             ProtocolScheme = other.ProtocolScheme;
+            RequestAppToken = other.RequestAppToken;
         }
 
         /// <summary>
@@ -106,6 +107,15 @@ namespace Microsoft.Identity.Abstractions
                 _protocolScheme = string.IsNullOrEmpty(value) ? throw new ArgumentNullException(_protocolScheme) : value;
             }
         }
+
+        /// <summary>
+        /// Describes if the downstream API is called on behalf of the calling service itself
+        /// (App token) or on behalf of a user processed by the service (user token).
+        /// If <c>true</c>, the token is requested on behalf of the app. Otherwise, it on-behalf of the user.
+        /// </summary>
+        /// <remarks>This is especially usefull when the call to the downstream API is described
+        /// by configuration.</remarks>
+        public bool RequestAppToken { get;set;}
 
         /// <summary>
         /// Clone the options (to be able to override them).
