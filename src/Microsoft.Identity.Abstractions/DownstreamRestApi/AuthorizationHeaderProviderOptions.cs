@@ -134,7 +134,7 @@ namespace Microsoft.Identity.Abstractions
         public string GetApiUrl()
 #pragma warning restore CA1055 // Uri return values should not be strings
         {
-            return BaseUrl?.TrimEnd('/') + $"/{RelativePath}";
+            return BaseUrl?.TrimEnd('/') + $"/{RelativePath?.TrimStart('/')}";
         }
     }
 }

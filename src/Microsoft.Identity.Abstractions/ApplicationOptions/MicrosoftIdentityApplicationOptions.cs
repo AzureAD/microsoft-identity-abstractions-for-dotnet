@@ -92,14 +92,6 @@ namespace Microsoft.Identity.Abstractions
         /// Gets the default user flow (which is signUpsignIn).
         /// </summary>
         public string? DefaultUserFlow => SignUpSignInPolicyId;
-
-        /// <summary>
-        /// Is considered B2C if the attribute SignUpSignInPolicyId is defined.
-        /// </summary>
-        internal bool IsB2C
-        {
-            get => !string.IsNullOrWhiteSpace(DefaultUserFlow);
-        }
         #endregion AADB2C
 
         #region web app
