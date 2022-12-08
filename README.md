@@ -1,3 +1,5 @@
+[![CI](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/actions/workflows/dotnetcore.yml/badge.svg)](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/actions/workflows/dotnetcore.yml)
+
 # Microsoft.Identity.Abstractions
 
 Microsoft.Identity.Abstractions contain interfaces and POCO classes used in the Microsoft .NET authentication
