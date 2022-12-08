@@ -96,7 +96,7 @@ namespace Microsoft.Identity.Abstractions
         /// Value that can be used for <see cref="LongRunningWebApiSessionKey"/> so that
         /// the token acquirer allocates the long running web api session key for the developer.
         /// </summary>
-        public static string LongRunningWebApiSessionKeyAuto { get; set; } = "AllocateForMe";
+        public static string LongRunningWebApiSessionKeyAuto { get; } = "AllocateForMe";
 
         /// <summary>
         /// (Microsoft identity specific)

@@ -86,7 +86,7 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
         public <#= returnType #> <#= httpMethod #>For<#= token #>Async<#= template #>(
-            string serviceName,
+            string? serviceName,
 <# if (hasInput){ #>
             TInput input,
 <# } #>

@@ -35,7 +35,7 @@ namespace Microsoft.Identity.Abstractions
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An <see cref="HttpResponseMessage"/> that the application will process.</returns>
         public Task<HttpResponseMessage> CallRestApiAsync(
-            string serviceName,
+            string? serviceName,
             Action<DownstreamRestApiOptions>? downstreamRestApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             HttpContent? content = null,
@@ -62,7 +62,7 @@ namespace Microsoft.Identity.Abstractions
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An <see cref="HttpResponseMessage"/> that the application will process.</returns>
         Task<HttpResponseMessage> CallRestApiForUserAsync(
-            string serviceName,
+            string? serviceName,
             Action<DownstreamRestApiOptions>? downstreamRestApiOptionsOverride = null,
             ClaimsPrincipal? user = default,
             HttpContent? content = null,
@@ -83,7 +83,7 @@ namespace Microsoft.Identity.Abstractions
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An <see cref="HttpResponseMessage"/> that the application will process.</returns>
         Task<HttpResponseMessage> CallRestApiForAppAsync(
-            string serviceName,
+            string? serviceName,
             Action<DownstreamRestApiOptions>? downstreamRestApiOptionsOverride = null,
             HttpContent? content = null,
             CancellationToken cancellationToken = default);
@@ -136,7 +136,7 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
         Task<TOutput?> CallRestApiForUserAsync<TInput, TOutput>(
-            string serviceName,
+            string? serviceName,
             TInput input,
             Action<DownstreamRestApiOptions>? downstreamRestApiOptionsOverride = null,
             ClaimsPrincipal? user = default,

@@ -12,21 +12,13 @@ namespace Microsoft.Identity.Abstractions
     /// <remarks>This class is useful to provide a better developer experience on the specialized methods
     /// of <see cref="IDownstreamRestApi"/> where the HTTP method is provided already by the name of the 
     /// method, and should not be overriden by the options.</remarks>
-    public class DownstreamRestApiOptionsNoHttpMethod : DownstreamRestApiOptions
+    public class DownstreamRestApiOptionsReadOnlyHttpMethod : DownstreamRestApiOptions
     {
         /// <summary>
-        /// Default constructor
-        /// </summary>
-        public DownstreamRestApiOptionsNoHttpMethod()
-        {
-
-        }
-
-        /// <summary>
-        /// Copy constructor for <see cref="DownstreamRestApiOptionsNoHttpMethod"/>.
+        /// Copy constructor for <see cref="DownstreamRestApiOptionsReadOnlyHttpMethod"/>.
         /// </summary>
         /// <param name="other">other instance to copy from.</param>
-        public DownstreamRestApiOptionsNoHttpMethod(DownstreamRestApiOptionsNoHttpMethod other) : base(other)
+        private DownstreamRestApiOptionsReadOnlyHttpMethod(DownstreamRestApiOptionsReadOnlyHttpMethod other) : base(other)
         {
 
         }
@@ -36,7 +28,7 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <param name="options">Options</param>
         /// <param name="httpMethod">HTTP method.</param>
-        public DownstreamRestApiOptionsNoHttpMethod(DownstreamRestApiOptions options, HttpMethod httpMethod) : base(options)
+        public DownstreamRestApiOptionsReadOnlyHttpMethod(DownstreamRestApiOptions options, HttpMethod httpMethod) : base(options)
         {
             HttpMethod = httpMethod;
         }
@@ -49,7 +41,7 @@ namespace Microsoft.Identity.Abstractions
         /// <inheritdoc/>
         public override AuthorizationHeaderProviderOptions Clone()
         {
-            return new DownstreamRestApiOptionsNoHttpMethod(this);
+            return new DownstreamRestApiOptionsReadOnlyHttpMethod(this);
         }
     }
 }

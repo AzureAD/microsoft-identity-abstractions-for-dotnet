@@ -45,8 +45,8 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
         public Task<TOutput?> GetForUserAsync<TOutput>(
-            string serviceName,
-            Action<DownstreamRestApiOptionsNoHttpMethod>? downstreamRestApiOptionsOverride = null,
+            string? serviceName,
+            Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default)where TOutput : class;
 
@@ -81,9 +81,9 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
         public Task<TOutput?> GetForUserAsync<TInput, TOutput>(
-            string serviceName,
+            string? serviceName,
             TInput input,
-            Action<DownstreamRestApiOptionsNoHttpMethod>? downstreamRestApiOptionsOverride = null,
+            Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default)where TOutput : class;
 
@@ -112,8 +112,8 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
         public Task<TOutput?> GetForAppAsync<TOutput>(
-            string serviceName,
-            Action<DownstreamRestApiOptionsNoHttpMethod>? downstreamRestApiOptionsOverride = null,
+            string? serviceName,
+            Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null,
             CancellationToken cancellationToken = default)where TOutput : class;
 
         /// <summary>
@@ -144,9 +144,9 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
         public Task<TOutput?> GetForAppAsync<TInput, TOutput>(
-            string serviceName,
+            string? serviceName,
             TInput input,
-            Action<DownstreamRestApiOptionsNoHttpMethod>? downstreamRestApiOptionsOverride = null,
+            Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null,
             CancellationToken cancellationToken = default)where TOutput : class;
 
         /// <summary>
@@ -179,9 +179,9 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
         public Task PostForUserAsync<TInput>(
-            string serviceName,
+            string? serviceName,
             TInput input,
-            Action<DownstreamRestApiOptionsNoHttpMethod>? downstreamRestApiOptionsOverride = null,
+            Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default);
 
@@ -216,9 +216,9 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
         public Task<TOutput?> PostForUserAsync<TInput, TOutput>(
-            string serviceName,
+            string? serviceName,
             TInput input,
-            Action<DownstreamRestApiOptionsNoHttpMethod>? downstreamRestApiOptionsOverride = null,
+            Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default)where TOutput : class;
 
@@ -249,9 +249,9 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
         public Task PostForAppAsync<TInput>(
-            string serviceName,
+            string? serviceName,
             TInput input,
-            Action<DownstreamRestApiOptionsNoHttpMethod>? downstreamRestApiOptionsOverride = null,
+            Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null,
             CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -282,9 +282,9 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
         public Task<TOutput?> PostForAppAsync<TInput, TOutput>(
-            string serviceName,
+            string? serviceName,
             TInput input,
-            Action<DownstreamRestApiOptionsNoHttpMethod>? downstreamRestApiOptionsOverride = null,
+            Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null,
             CancellationToken cancellationToken = default)where TOutput : class;
 
         /// <summary>
@@ -317,9 +317,9 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
         public Task PutForUserAsync<TInput>(
-            string serviceName,
+            string? serviceName,
             TInput input,
-            Action<DownstreamRestApiOptionsNoHttpMethod>? downstreamRestApiOptionsOverride = null,
+            Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default);
 
@@ -354,9 +354,9 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
         public Task<TOutput?> PutForUserAsync<TInput, TOutput>(
-            string serviceName,
+            string? serviceName,
             TInput input,
-            Action<DownstreamRestApiOptionsNoHttpMethod>? downstreamRestApiOptionsOverride = null,
+            Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default)where TOutput : class;
 
@@ -387,9 +387,9 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
         public Task PutForAppAsync<TInput>(
-            string serviceName,
+            string? serviceName,
             TInput input,
-            Action<DownstreamRestApiOptionsNoHttpMethod>? downstreamRestApiOptionsOverride = null,
+            Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null,
             CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -420,9 +420,9 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
         public Task<TOutput?> PutForAppAsync<TInput, TOutput>(
-            string serviceName,
+            string? serviceName,
             TInput input,
-            Action<DownstreamRestApiOptionsNoHttpMethod>? downstreamRestApiOptionsOverride = null,
+            Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null,
             CancellationToken cancellationToken = default)where TOutput : class;
 
         /// <summary>
@@ -455,9 +455,9 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
         public Task DeleteForUserAsync<TInput>(
-            string serviceName,
+            string? serviceName,
             TInput input,
-            Action<DownstreamRestApiOptionsNoHttpMethod>? downstreamRestApiOptionsOverride = null,
+            Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default);
 
@@ -492,9 +492,9 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
         public Task<TOutput?> DeleteForUserAsync<TInput, TOutput>(
-            string serviceName,
+            string? serviceName,
             TInput input,
-            Action<DownstreamRestApiOptionsNoHttpMethod>? downstreamRestApiOptionsOverride = null,
+            Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default)where TOutput : class;
 
@@ -525,9 +525,9 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
         public Task DeleteForAppAsync<TInput>(
-            string serviceName,
+            string? serviceName,
             TInput input,
-            Action<DownstreamRestApiOptionsNoHttpMethod>? downstreamRestApiOptionsOverride = null,
+            Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null,
             CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -558,9 +558,9 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
         public Task<TOutput?> DeleteForAppAsync<TInput, TOutput>(
-            string serviceName,
+            string? serviceName,
             TInput input,
-            Action<DownstreamRestApiOptionsNoHttpMethod>? downstreamRestApiOptionsOverride = null,
+            Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null,
             CancellationToken cancellationToken = default)where TOutput : class;
     }
 }
