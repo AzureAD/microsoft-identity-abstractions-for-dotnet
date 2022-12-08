@@ -7,10 +7,8 @@ namespace UnitTests
     public class CredentialDescriptionTest
     {
         [Fact]
-        public void CredentialDescriptionProperties()
+        public void Base64Encoded()
         {
-            CredentialDescription credentialDescription;
-
             // Certificate from Base64 encoding
             // --------------------------------
             /*
@@ -22,7 +20,7 @@ namespace UnitTests
              }]
             }
              */
-            credentialDescription = new CredentialDescription
+            CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.Base64Encoded,
                 Base64EncodedValue = "MIIDHzCgegA.....r1n8Ta0="
@@ -30,7 +28,11 @@ namespace UnitTests
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
             Assert.Null(credentialDescription.Container);
             Assert.Equal(credentialDescription.Base64EncodedValue, credentialDescription.ReferenceOrValue);
+        }
 
+        [Fact]
+        public void CertificateFromPath()
+        {
             // Certificate from path 
             // ---------------------
             /*
@@ -43,7 +45,7 @@ namespace UnitTests
              }]
             }
              */
-            credentialDescription = new CredentialDescription
+            CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.Path,
                 CertificateDiskPath = "c:\\temp\\WebAppCallingWebApiCert.pfx",
@@ -52,7 +54,11 @@ namespace UnitTests
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
             Assert.Equal(credentialDescription.CertificateDiskPath, credentialDescription.Container);
             Assert.Equal(credentialDescription.CertificatePassword, credentialDescription.ReferenceOrValue);
+        }
 
+        [Fact]
+        public void CertificateFromStoreByThumbprint()
+        {
             // Certificate from credential store by thumbprint
             // -------------------------------------------------
             /*
@@ -65,7 +71,7 @@ namespace UnitTests
              }]
             }
              */
-            credentialDescription = new CredentialDescription
+            CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.StoreWithThumbprint,
                 CertificateStorePath = "CurrentUser/My",
@@ -75,7 +81,11 @@ namespace UnitTests
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
             Assert.Equal(credentialDescription.CertificateStorePath, credentialDescription.Container);
             Assert.Equal(credentialDescription.CertificateThumbprint, credentialDescription.ReferenceOrValue);
+        }
 
+        [Fact]
+        public void CertificateFromStoreByDistinguishedName()
+        {
             // Certificate from credential store by distinguished name
             // -------------------------------------------------------
             /*
@@ -88,7 +98,7 @@ namespace UnitTests
              }]
             }
              */
-            credentialDescription = new CredentialDescription
+            CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.StoreWithDistinguishedName,
                 CertificateStorePath = "CurrentUser/My",
@@ -98,7 +108,12 @@ namespace UnitTests
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
             Assert.Equal(credentialDescription.CertificateStorePath, credentialDescription.Container);
             Assert.Equal(credentialDescription.CertificateDistinguishedName, credentialDescription.ReferenceOrValue);
+        }
 
+
+        [Fact]
+        public void CertificateFromKeyVault()
+        {
             // Certificate from KeyVault
             // -------------------------
             /*
@@ -112,7 +127,7 @@ namespace UnitTests
                  ]
                 }
              */
-            credentialDescription = new CredentialDescription
+            CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.KeyVault,
                 KeyVaultUrl = "https://msidentitywebsamples.vault.azure.net",
@@ -122,7 +137,11 @@ namespace UnitTests
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
             Assert.Equal(credentialDescription.KeyVaultUrl, credentialDescription.Container);
             Assert.Equal(credentialDescription.KeyVaultCertificateName, credentialDescription.ReferenceOrValue);
+        }
 
+        [Fact]
+        public void Secret()
+        {
             // Secret
             // ------
             /*
@@ -135,7 +154,7 @@ namespace UnitTests
              }]
             }
              */
-            credentialDescription = new CredentialDescription
+            CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.ClientSecret,
                 ClientSecret = "blah"
@@ -143,8 +162,11 @@ namespace UnitTests
             Assert.Equal(CredentialType.Secret, credentialDescription.CredentialType);
             Assert.Null(credentialDescription.Container);
             Assert.Equal(credentialDescription.ClientSecret, credentialDescription.ReferenceOrValue);
+        }
 
-
+        [Fact]
+        public void SignedAssertionFromMSI()
+        {
             // Signed assertion from Managed identity federation
             // -------------------------------------------------
             // https://learn.microsoft.com/azure/active-directory/develop/workload-identity-federation
@@ -157,7 +179,7 @@ namespace UnitTests
                 }]
             }
             */
-            credentialDescription = new CredentialDescription
+            CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.SignedAssertionFromManagedIdentity,
                 ManagedIdentityClientId = "12345" // optional
@@ -165,8 +187,12 @@ namespace UnitTests
             Assert.Equal(CredentialType.SignedAssertion, credentialDescription.CredentialType);
             Assert.Null(credentialDescription.Container);
             Assert.Equal(credentialDescription.ManagedIdentityClientId, credentialDescription.ReferenceOrValue);
+        }
 
 
+        [Fact]
+        public void SignedAssertionFromFilePath()
+        {
             // Signed assertion from a file (managed identities with workload identity federation
             // from Kubernates pods.
             // ---------------------
@@ -175,12 +201,12 @@ namespace UnitTests
             {
                 "ClientCredentials": [
                 {
-                    "SourceType": "SignedAssertionFromManagedIdentity",
-                    "ManagedIdentityClientId": "12345"
+                    "SourceType": "SignedAssertionFilePath",
+                    "ManagedIdentityClientId": "c:/path.signedAssertion"
                 }]
             }
             */
-            credentialDescription = new CredentialDescription
+            CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.SignedAssertionFilePath,
                 SignedAssertionFileDiskPath = "c:/path.signedAssertion"
@@ -188,11 +214,15 @@ namespace UnitTests
             Assert.Equal(CredentialType.SignedAssertion, credentialDescription.CredentialType);
             Assert.Null(credentialDescription.Container);
             Assert.Equal(credentialDescription.SignedAssertionFileDiskPath, credentialDescription.ReferenceOrValue);
+        }
 
+        [Fact]
+        public void CertificateDirectly()
+        {
             // Preloaded certificate.
             // ---------------------
 #pragma warning disable SYSLIB0026 // Type or member is obsolete
-            credentialDescription = new CredentialDescription
+            CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.Certificate,
                 Certificate = new System.Security.Cryptography.X509Certificates.X509Certificate2()
@@ -203,10 +233,14 @@ namespace UnitTests
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
             Assert.Null(credentialDescription.Container);
             Assert.NotNull(credentialDescription.Certificate);
+        }
 
+        [Fact]
+        public void SignedAssertionFromAnotherVault()
+        {
             // signed assertion from a vault (not KeyVault)
             // -------------------------------------------
-            credentialDescription = new CredentialDescription
+            CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.SignedAssertionFromVault,
                 KeyVaultUrl = "someurl"
