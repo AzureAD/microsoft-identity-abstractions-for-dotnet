@@ -46,7 +46,7 @@ namespace UnitTests
             var authorizationHeaderProviderOptions = new AuthorizationHeaderProviderOptions(downstreamRestApiOptions);
             var authorizationHeaderProviderOptionsClone = authorizationHeaderProviderOptions.Clone();
 
-            var downstreamRestApiClone = downstreamRestApiOptions.Clone() as DownstreamRestApiOptions;
+            var downstreamRestApiClone = downstreamRestApiOptions.Clone();
 
 
             Assert.NotNull(downstreamRestApiClone);
@@ -100,7 +100,7 @@ namespace UnitTests
         {
             IDownstreamRestApi downstreamRestApi = new DummyDownstreamRestApi();
 
-            // Call a service based on the configuration only.
+            // Call a service based on the configuration only. The name "service" maps to a 
             downstreamRestApi.CallRestApiAsync("service");
 
             // Calls a service based on the programmatic description only.
@@ -112,13 +112,13 @@ namespace UnitTests
                     options.RelativePath = "api/values";
                 });
 
+            // Calls a service purely programmatically. 
+            downstreamRestApi.CallRestApiAsync(new DownstreamRestApiOptions { HttpMethod = HttpMethod.Get, RequestAppToken = false });
 
-            // In the following call, it's not possible to set the HttpMethod in the delegate, as it's already provided
-            // in the name of the method
-            // Does not build:
+            // In the following call, it's not possible to set the HttpMethod in the delegate, as it would no
+            // make sense: it's already provided in the name of the method
+            // The following code does not build (on purpose):
             // downstreamRestApi.DeleteForAppAsync("serviceName", "todo", options => { options.HttpMethod = HttpMethod.Put });
-
-
         }
     }
 

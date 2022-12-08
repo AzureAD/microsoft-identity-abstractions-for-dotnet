@@ -38,8 +38,17 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         public new HttpMethod HttpMethod { get { return base.HttpMethod; } private set { base.HttpMethod = value; } }
 
+        /// <summary>
+        /// Clone the options
+        /// </summary>
+        /// <returns>A clone.</returns>
+        public new DownstreamRestApiOptionsReadOnlyHttpMethod Clone()
+        {
+            return (CloneInternal() as DownstreamRestApiOptionsReadOnlyHttpMethod)!;
+        }
+
         /// <inheritdoc/>
-        public override AuthorizationHeaderProviderOptions Clone()
+        protected override AuthorizationHeaderProviderOptions CloneInternal()
         {
             return new DownstreamRestApiOptionsReadOnlyHttpMethod(this);
         }

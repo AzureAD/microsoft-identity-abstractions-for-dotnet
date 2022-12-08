@@ -121,7 +121,16 @@ namespace Microsoft.Identity.Abstractions
         /// Clone the options (to be able to override them).
         /// </summary>
         /// <returns>A clone of the options.</returns>
-        public virtual AuthorizationHeaderProviderOptions Clone()
+        public AuthorizationHeaderProviderOptions Clone()
+        {
+            return CloneInternal();
+        }
+
+        /// <summary>
+        /// Clone the options (to be able to override them).
+        /// </summary>
+        /// <returns>A clone of the options.</returns>
+        protected virtual AuthorizationHeaderProviderOptions CloneInternal()
         {
             return new AuthorizationHeaderProviderOptions(this);
         }

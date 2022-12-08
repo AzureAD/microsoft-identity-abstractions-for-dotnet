@@ -30,11 +30,22 @@ namespace Microsoft.Identity.Abstractions
             Deserializer = other.Deserializer;
         }
 
+        /// <summary>
+        /// Clone the options (to be able to override them).
+        /// </summary>
+        /// <returns>A clone of the options.</returns>
+        public new DownstreamRestApiOptions Clone()
+        {
+            return (CloneInternal() as DownstreamRestApiOptions)!;
+        }
+
         /// <inheritdoc/>
-        public override AuthorizationHeaderProviderOptions Clone()
+        protected override AuthorizationHeaderProviderOptions CloneInternal()
         {
             return new DownstreamRestApiOptions(this);
         }
+
+
 
         /// <summary>
         /// Scopes required to call the downstream web API.
@@ -59,13 +70,13 @@ namespace Microsoft.Identity.Abstractions
         /// </description></item>
         /// </list>
         /// </summary>
-        public Func<object?, StringContent?>? Serializer { get; set; }
+        public Func<object?, HttpContent?>? Serializer { get; set; }
 
         /// <summary>
         /// Optional de-serializer. Will de-serialize the output from the web API (if any).
         /// When not provided, the following is returned:
         /// <code>JsonSerializer.Deserialize&lt;TOutput&gt;(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });</code>
         /// </summary>
-        public Func<string?, object?>? Deserializer { get; set; }
+        public Func<HttpContent?, object?>? Deserializer { get; set; }
     }
 }

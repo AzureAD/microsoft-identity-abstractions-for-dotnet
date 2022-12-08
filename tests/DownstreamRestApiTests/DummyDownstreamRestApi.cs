@@ -21,6 +21,11 @@ namespace UnitTests
             return Task.FromResult<HttpResponseMessage>(null!);
         }
 
+        public Task<HttpResponseMessage> CallRestApiAsync(DownstreamRestApiOptions? downstreamRestApiOptions, ClaimsPrincipal? user = null, HttpContent? content = null, CancellationToken cancellationToken = default)
+        {
+            return Task.FromResult<HttpResponseMessage>(null!);
+        }
+
         public Task<HttpResponseMessage> CallRestApiForAppAsync(string? serviceName, Action<DownstreamRestApiOptions>? downstreamRestApiOptionsOverride = null, HttpContent? content = null, CancellationToken cancellationToken = default)
         {
             return Task.FromResult<HttpResponseMessage>(null!);

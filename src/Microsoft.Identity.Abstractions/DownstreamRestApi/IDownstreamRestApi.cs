@@ -15,6 +15,26 @@ namespace Microsoft.Identity.Abstractions
     public partial interface IDownstreamRestApi
     {
         /// <summary>
+        /// Calls the downstream REST API based on a programmatic description of the
+        /// downstream REST API. The choice of calling the API on behalf of the user or the app, is made using
+        /// <see cref="AuthorizationHeaderProviderOptions.RequestAppToken"/>.
+        /// </summary>
+        /// <param name="downstreamRestApiOptions">Options.</param>
+        /// <param name="user">(Optional) Claims representing a user. This is useful on platforms like Blazor
+        /// or Azure Signal R, where the HttpContext is not available. In other platforms, the library
+        /// will find the user from the HTTP request context.</param>
+        /// <param name="content">Content to send to the REST API in the case where
+        /// <see cref="AuthorizationHeaderProviderOptions.HttpMethod"/> is <code>HttpMethod.Patch</code>, 
+        /// <see cref="HttpMethod.Post"/>, <see cref="HttpMethod.Put"/>.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>An <see cref="HttpResponseMessage"/> that the application will process.</returns>
+        public Task<HttpResponseMessage> CallRestApiAsync(
+            DownstreamRestApiOptions? downstreamRestApiOptions,
+            ClaimsPrincipal? user = null,
+            HttpContent? content = null,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Calls the downstream REST API based on a description of the
         /// downstream REST API in the configuration (service name), overridatable programmatically. The choice
         /// of calling the API on behalf of the user or the app, is made by the configuration or programmatically. 
