@@ -61,7 +61,7 @@ namespace Microsoft.Identity.Abstractions
         /// for the frontend (single page application using MSAL.js for instance). This will allow the front end
         /// JavaScript code to bypass going to the authoriize endpoint (which requires reloading the page), by 
         /// directly redeeming the auth code to get access tokens to call APIs.
-        /// See https://aka.ms/msal-net/spa-auth-code for details. Only works for AAD, not B2C.
+        /// See https://aka.ms/msal-net/hybrid-spa-sample for details. Only works for AAD, not B2C.
         /// </summary>
         /// The default is <c>false.</c>
         public bool WithSpaAuthCode { get; set; }

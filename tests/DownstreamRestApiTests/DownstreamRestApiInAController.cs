@@ -16,9 +16,9 @@ namespace UnitTests
     {
     }
 
-    internal class DownstreamRestApiInAController
+    internal class DownstreamRestApiController
     {
-        private IDownstreamRestApi _downstreamWebApi = new DummyDownstreamRestApi();
+        private IDownstreamRestApi _downstreamWebApi = new CustomDownstreamRestApi();
         private const string ServiceName = "TodoList";
 
         private ActionResult View(object? _) { return new ActionResult(); }

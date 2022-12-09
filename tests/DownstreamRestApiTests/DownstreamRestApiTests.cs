@@ -85,7 +85,7 @@ namespace UnitTests
         [Fact]
         public void CloneNull()
         {
-            Assert.Throws<ArgumentNullException>(() => _ = new DummyAcquireTokenOptions(null!));
+            Assert.Throws<ArgumentNullException>(() => _ = new CustomAcquireTokenOptions(null!));
             Assert.Throws<ArgumentNullException>(() => _ = new AuthorizationHeaderProviderOptions(null!));
         }
 
@@ -100,7 +100,7 @@ namespace UnitTests
         [Fact]
         public void ExerciseApi()
         {
-            IDownstreamRestApi downstreamRestApi = new DummyDownstreamRestApi();
+            IDownstreamRestApi downstreamRestApi = new CustomDownstreamRestApi();
 
             // Call a service based on the configuration only. The name "service" maps to a 
             downstreamRestApi.CallRestApiAsync("service");
@@ -124,11 +124,11 @@ namespace UnitTests
         }
     }
 
-    internal class DummyAcquireTokenOptions : AcquireTokenOptions
+    internal class CustomAcquireTokenOptions : AcquireTokenOptions
     {
-        public DummyAcquireTokenOptions() : base() { }
+        public CustomAcquireTokenOptions() : base() { }
 
-        public DummyAcquireTokenOptions(DummyAcquireTokenOptions other) : base(other) { }
+        public CustomAcquireTokenOptions(CustomAcquireTokenOptions other) : base(other) { }
     }
 
 }

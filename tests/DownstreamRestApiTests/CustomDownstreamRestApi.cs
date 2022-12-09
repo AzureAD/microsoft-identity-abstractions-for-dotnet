@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace UnitTests
 {
-    internal class DummyDownstreamRestApi : IDownstreamRestApi
+    internal class CustomDownstreamRestApi : IDownstreamRestApi
     {
-        public DummyDownstreamRestApi()
+        public CustomDownstreamRestApi()
         {
         }
 
