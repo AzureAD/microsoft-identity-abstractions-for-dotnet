@@ -24,16 +24,13 @@ namespace Microsoft.Identity.Abstractions
         }
 
         /// <summary>
-        /// Copy constructor for <see cref="DownstreamRestApiOptions"/>
+        /// Copy constructor for <see cref="AuthorizationHeaderProviderOptions"/>
         /// </summary>
         /// <param name="other">Options to copy from.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="other"/> is <c>null</c>.</exception>
         public AuthorizationHeaderProviderOptions(AuthorizationHeaderProviderOptions other)
         {
-            if (other == null)
-            {
-                throw new ArgumentNullException(nameof(other));
-            }
+            _ = other ?? throw new ArgumentNullException(nameof(other));
 
             BaseUrl = other.BaseUrl;
             RelativePath = other.RelativePath;

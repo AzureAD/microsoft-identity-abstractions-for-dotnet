@@ -23,8 +23,7 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         protected AcquireTokenOptions(AcquireTokenOptions other)
         {
-            if (other == null)
-                throw new ArgumentNullException(nameof(other));
+            _ = other ?? throw new ArgumentNullException(nameof(other));
 
             AuthenticationOptionsName = other.AuthenticationOptionsName;
             CorrelationId = other.CorrelationId;

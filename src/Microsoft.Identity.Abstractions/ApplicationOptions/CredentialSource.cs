@@ -29,12 +29,12 @@ namespace Microsoft.Identity.Abstractions
         Path = 3,
 
         /// <summary>
-        /// From the certificate store, described by its thumbprint.
+        /// Certificate from the certificate store, described by its thumbprint.
         /// </summary>
         StoreWithThumbprint = 4,
 
         /// <summary>
-        /// From the certificate store, described by its distinguished name.
+        /// Certificate from the certificate store, described by its distinguished name.
         /// </summary>
         StoreWithDistinguishedName = 5,
 

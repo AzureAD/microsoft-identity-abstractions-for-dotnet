@@ -43,10 +43,12 @@ namespace UnitTests
 
             Assert.Equal("https://apitocall.domain.com/api/values", downstreamRestApiOptions.GetApiUrl());
 
-            var authorizationHeaderProviderOptions = new AuthorizationHeaderProviderOptions(downstreamRestApiOptions);
-            var authorizationHeaderProviderOptionsClone = authorizationHeaderProviderOptions.Clone();
+            // Get a clone for an authorization header provider
+            AuthorizationHeaderProviderOptions authorizationHeaderProviderOptions = new AuthorizationHeaderProviderOptions(downstreamRestApiOptions);
+            AuthorizationHeaderProviderOptions authorizationHeaderProviderOptionsClone = authorizationHeaderProviderOptions.Clone();
 
-            var downstreamRestApiClone = downstreamRestApiOptions.Clone();
+            // Clone
+            DownstreamRestApiOptions downstreamRestApiClone = downstreamRestApiOptions.Clone();
 
 
             Assert.NotNull(downstreamRestApiClone);

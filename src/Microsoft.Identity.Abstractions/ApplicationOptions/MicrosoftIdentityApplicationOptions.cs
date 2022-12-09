@@ -33,7 +33,7 @@ namespace Microsoft.Identity.Abstractions
         #region Token acquisition
         /// <summary>
         /// Specifies the Azure region. See https://aka.ms/azure-region. To have
-        /// the app attempts to detect the Azure region automatically,
+        /// the app attempt to detect the Azure region automatically,
         /// use "TryAutoDetect".
         /// </summary>
         public string? AzureRegion { get; set; }
@@ -61,7 +61,7 @@ namespace Microsoft.Identity.Abstractions
         /// for the frontend (single page application using MSAL.js for instance). This will allow the front end
         /// JavaScript code to bypass going to the authoriize endpoint (which requires reloading the page), by 
         /// directly redeeming the auth code to get access tokens to call APIs.
-        /// See https://aka.ms/msal-net/spa-auth-code for details.
+        /// See https://aka.ms/msal-net/spa-auth-code for details. Only works for AAD, not B2C.
         /// </summary>
         /// The default is <c>false.</c>
         public bool WithSpaAuthCode { get; set; }
