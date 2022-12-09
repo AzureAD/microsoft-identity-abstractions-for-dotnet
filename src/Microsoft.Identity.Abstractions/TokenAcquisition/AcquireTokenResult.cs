@@ -38,6 +38,7 @@ namespace Microsoft.Identity.Abstractions
             CorrelationId = correlationId;
             TokenType = tokenType;
         }
+        // Comment brentsch, should the AccessToken ever be null?
 
         /// <summary>
         /// Access Token that can be used to build an authorization header 

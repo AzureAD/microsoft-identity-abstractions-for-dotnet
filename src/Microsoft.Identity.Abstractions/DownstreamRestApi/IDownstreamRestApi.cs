@@ -60,7 +60,7 @@ namespace Microsoft.Identity.Abstractions
             ClaimsPrincipal? user = null,
             HttpContent? content = null,
             CancellationToken cancellationToken = default);
-
+        //Comment - brentsch, if all of these are null, how will this work?
 
         /// <summary>
         /// Calls the downstream REST API on behalf of the user, based on a description of the
@@ -161,6 +161,7 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamRestApiOptions>? downstreamRestApiOptionsOverride = null,
             ClaimsPrincipal? user = default,
             CancellationToken cancellationToken = default) where TOutput : class;
+        // Comment brentsch, - should we have these methods for Calling Apps?
 
         /// <summary>
         /// Call a web API endpoint with an HttpGet, and return strongly typed data.

@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Microsoft.Identity.Abstractions
 {
@@ -48,6 +47,8 @@ namespace Microsoft.Identity.Abstractions
         /// it to <c>true</c> for advanced debugging requiring PII.
         /// </summary>
         public bool EnablePiiLogging { get; set; }
+        // Comment - brentsch, how will this work with other sources of setting PII
+        // I think we have to be careful about claiming this results in the application being compliant with GDPR.
 
         #region Token Acquisition
         /// <summary>

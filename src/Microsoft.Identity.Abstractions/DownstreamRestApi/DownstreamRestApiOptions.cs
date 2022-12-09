@@ -23,8 +23,10 @@ namespace Microsoft.Identity.Abstractions
         /// Copy constructor
         /// </summary>
         /// <param name="other"></param>
-        public DownstreamRestApiOptions(DownstreamRestApiOptions other) : base(other)
+        protected DownstreamRestApiOptions(DownstreamRestApiOptions other) : base(other)
         {
+            _ = other ?? throw new ArgumentNullException(nameof(other));
+
             Scopes = other.Scopes;
             Serializer = other.Serializer;
             Deserializer = other.Deserializer;
