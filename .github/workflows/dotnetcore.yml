@@ -10,11 +10,11 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2.3.4     
-    - name: Setup .NET 6.0.301
+    - name: Setup .NET 7.0.x
       uses: actions/setup-dotnet@v1.7.2
       with:
-        dotnet-version: 6.0.301
+        dotnet-version: 7.0.x
   
     # Install workload  
-    - name: Build with .NET 6.0.301
-      run: dotnet build --configuration Release Microsoft.Identity.Abstractions.sln
+    - name: Build with .NET 7.0.x
+      run: dotnet test --configuration Release Microsoft.Identity.Abstractions.sln

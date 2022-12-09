@@ -22,12 +22,12 @@ namespace Microsoft.Identity.Abstractions
         /// protocols like Pop), and token acquisition options.</param>
         /// <param name="claimsPrincipal">Inbound authentication elements.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>A string containing the authorization request, that is protocol and tokens
+        /// <returns>A string containing the authorization header, that is protocol and tokens
         /// (for instance: "Bearer token", "PoP token", etc ...).
         /// </returns>
         Task<string> CreateAuthorizationHeaderForUserAsync(
             IEnumerable<string> scopes, 
-            DownstreamRestApiOptions? downstreamApiOptions=null, 
+            AuthorizationHeaderProviderOptions? downstreamApiOptions=null, 
             ClaimsPrincipal? claimsPrincipal=default,
             CancellationToken cancellationToken = default);
 
@@ -37,14 +37,15 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <param name="scopes">Scopes for which to request the authorization header.</param>
         /// <param name="downstreamApiOptions">Information about the API that will be called (for some
-        /// protocols like Pop), and token acquisition options.</param>
+        /// protocols like Pop), and token acquisition options. Optional. If not provided, the
+        /// authentication header will be for a bearer token.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>A string containing the authorization request, that is protocol and tokens
+        /// <returns>A string containing the authorization header, that is protocol and tokens
         /// (for instance: "Bearer token", "PoP token", etc ...).
         /// </returns>
         Task<string> CreateAuthorizationHeaderForAppAsync(
             string scopes,
-            DownstreamRestApiOptions? downstreamApiOptions = null,
+            AuthorizationHeaderProviderOptions? downstreamApiOptions = null,
             CancellationToken cancellationToken = default);
     }
 }

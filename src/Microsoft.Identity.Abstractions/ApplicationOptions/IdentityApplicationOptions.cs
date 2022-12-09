@@ -10,15 +10,15 @@ namespace Microsoft.Identity.Abstractions
     /// Options for configuring authentication in a web app, web API or daemon app.
     /// <para>
     /// This class contains configuration properties for any OAuth 2.0 identity provider.
-    /// For Azure AD specific options see the derived class: <see cref="IdentityApplicationOptions"/>.
+    /// For Azure AD specific options see the derived class: <see cref="MicrosoftIdentityApplicationOptions"/>.
     /// </para>
     /// </summary>
     /// <example></example>
     public class IdentityApplicationOptions
     {
         /// <summary>
-        /// Gets or sets the authority to use when calling the STS. 
-        /// If using AzureAD, rather use <see cref="MicrosoftIdentityApplicationOptions.Instance"/>
+        /// Gets or sets the authority to use when calling the identity provider. 
+        /// For AzureAD or Azure AD B2C, rather use <see cref="MicrosoftIdentityApplicationOptions.Instance"/>
         /// and <see cref="MicrosoftIdentityApplicationOptions.TenantId"/>
         /// </summary>
         /// <example>

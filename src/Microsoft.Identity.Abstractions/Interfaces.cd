@@ -16,7 +16,7 @@
       <Method Name="Clone" Hidden="true" />
       <Method Name="GetApiUrl" Hidden="true" />
     </Members>
-    <AssociationLine Name="TokenAcquirerOptions" Type="Microsoft.Identity.Abstractions.AcquireTokenOptions" FixedFromPoint="true" FixedToPoint="true">
+    <AssociationLine Name="AcquireTokenOptions" Type="Microsoft.Identity.Abstractions.AcquireTokenOptions" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="6" Y="4.244" />
         <Point X="8.125" Y="4.244" />
@@ -28,7 +28,7 @@
       <FileName>DownstreamRestApi\DownstreamRestApiOptions.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="TokenAcquirerOptions" />
+      <Property Name="AcquireTokenOptions" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Microsoft.Identity.Abstractions.AcquireTokenResult">

@@ -101,7 +101,7 @@ namespace Microsoft.Identity.Abstractions
         public string? CertificateDiskPath { get; set; }
 
         /// <summary>
-        /// Path on disk to the certificate password.
+        /// Password with which the certificate on disk is protected.
         /// </summary>
         public string? CertificatePassword { get; set; }
 
@@ -116,7 +116,8 @@ namespace Microsoft.Identity.Abstractions
         public string? ClientSecret { get; set; }
 
         /// <summary>
-        /// ClientId of the Azure managed identity used to access the certificates from KeyVault.
+        /// ClientId of the Azure managed identity used to access the certificates from KeyVault
+        /// (in the case of User assigned managed identity).
         /// </summary>
         public string? ManagedIdentityClientId { get; set; }
 

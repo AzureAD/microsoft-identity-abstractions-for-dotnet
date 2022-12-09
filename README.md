@@ -1,11 +1,15 @@
+[![CI](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/actions/workflows/dotnetcore.yml/badge.svg)](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/actions/workflows/dotnetcore.yml)
+
 # Microsoft.Identity.Abstractions
 
 Microsoft.Identity.Abstractions contain interfaces and POCO classes used in the Microsoft .NET authentication
 libraries (Microsoft.IdentityModel, MSAL.NET and Microsoft.Identity.Web). It exposes concepts in three domains:
 
-1. Application options
+1. Application options and credentials loader
 
    ![image](https://user-images.githubusercontent.com/13203188/204172083-d0f30a49-bb77-48e8-9b4b-342ea5dc1003.png)
+
+   ![image](https://user-images.githubusercontent.com/13203188/206561108-acee3ef2-0183-4390-9238-a053a6e70aee.png)
 
 2. Acquire tokens from Azure AD
 
@@ -13,7 +17,7 @@ libraries (Microsoft.IdentityModel, MSAL.NET and Microsoft.Identity.Web). It exp
 
 3. Calling downstream web APIs
 
-   ![image](https://user-images.githubusercontent.com/13203188/204174435-3a9e7e4b-bd88-4927-96e2-4ed74a6caee9.png)
+   ![image](https://user-images.githubusercontent.com/13203188/206561536-e2420c50-e9f9-4827-b64f-2a696b2c7463.png)
 
 ## Contributing
 
