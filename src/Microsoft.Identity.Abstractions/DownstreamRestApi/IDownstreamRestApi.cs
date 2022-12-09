@@ -29,7 +29,7 @@ namespace Microsoft.Identity.Abstractions
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An <see cref="HttpResponseMessage"/> that the application will process.</returns>
         public Task<HttpResponseMessage> CallRestApiAsync(
-            DownstreamRestApiOptions? downstreamRestApiOptions,
+            DownstreamRestApiOptions downstreamRestApiOptions,
             ClaimsPrincipal? user = null,
             HttpContent? content = null,
             CancellationToken cancellationToken = default);

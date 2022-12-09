@@ -90,7 +90,7 @@ namespace Microsoft.Identity.Abstractions
 <# if (hasInput){ #>
             TInput input,
 <# } #>
-            Action<DownstreamRestApiOptionsNoHttpMethod>? downstreamRestApiOptionsOverride = null,
+            Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null,
 <# if (!hasApp){ #>
             ClaimsPrincipal? user = null,
 <# } #>

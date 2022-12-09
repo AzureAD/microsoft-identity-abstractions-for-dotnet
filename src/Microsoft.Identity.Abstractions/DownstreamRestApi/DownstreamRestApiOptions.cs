@@ -45,8 +45,6 @@ namespace Microsoft.Identity.Abstractions
             return new DownstreamRestApiOptions(this);
         }
 
-
-
         /// <summary>
         /// Scopes required to call the downstream web API.
         /// For instance "user.read mail.read".
