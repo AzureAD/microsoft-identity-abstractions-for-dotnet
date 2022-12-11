@@ -11,16 +11,16 @@ namespace Microsoft.Identity.Abstractions
         /// <summary>
         /// Certificate.
         /// </summary>
-        Certificate,
+        Certificate = 0,
 
         /// <summary>
         /// (Client) secret.
         /// </summary>
-        Secret, 
+        Secret = 1,
         
         /// <summary>
         /// Signed assertion.
         /// </summary>
-        SignedAssertion
+        SignedAssertion = 2
     }
 }

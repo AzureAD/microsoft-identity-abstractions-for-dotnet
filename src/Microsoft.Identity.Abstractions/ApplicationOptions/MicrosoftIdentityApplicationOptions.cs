@@ -10,10 +10,12 @@ namespace Microsoft.Identity.Abstractions
     /// </summary>
     public class MicrosoftIdentityApplicationOptions : IdentityApplicationOptions
     {
+        private string? _authority;
+
         /// <summary>
         /// Gets or sets the Azure Active Directory instance, e.g. <c>"https://login.microsoftonline.com/"</c>.
         /// </summary>
-        public string Instance { get; set; } = null!;
+        public string? Instance { get; set; }
 
         /// <summary>
         /// Gets or sets the tenant ID.
@@ -28,7 +30,6 @@ namespace Microsoft.Identity.Abstractions
             get { return _authority ?? $"{Instance}{TenantId}/v2.0"; }
             set { _authority = value; }
         }
-        private string? _authority;
 
         #region Token acquisition
         /// <summary>
@@ -101,14 +102,14 @@ namespace Microsoft.Identity.Abstractions
         /// which is the value used by Microsoft.Identity.Web.UI.
         /// If you override it, you need to provide your own controller/actions.
         /// </summary>
-        public string ResetPasswordPath { get; set; } = "/MicrosoftIdentity/Account/ResetPassword";
+        public string? ResetPasswordPath { get; set; } = "/MicrosoftIdentity/Account/ResetPassword";
 
         /// <summary>
         /// Sets the Error route path.
         /// Defaults to the value /MicrosoftIdentity/Account/Error,
         /// which is the value used by Microsoft.Identity.Web.UI.
         /// </summary>
-        public string ErrorPath { get; set; } = "/MicrosoftIdentity/Account/Error";
+        public string? ErrorPath { get; set; } = "/MicrosoftIdentity/Account/Error";
         #endregion web app
     }
 }

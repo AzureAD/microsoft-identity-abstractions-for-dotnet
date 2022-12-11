@@ -1,8 +1,9 @@
-﻿using Microsoft.Identity.Abstractions;
-using System.Runtime.ConstrainedExecution;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 using Xunit;
 
-namespace UnitTests
+namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
 {
     public class CredentialDescriptionTest
     {
@@ -19,12 +20,13 @@ namespace UnitTests
               "Base64EncodedValue": "MIIDHzCgegA.....r1n8Ta0="
              }]
             }
-             */
-            CredentialDescription credentialDescription = new CredentialDescription
+            */
+            CredentialDescription credentialDescription = new()
             {
                 SourceType = CredentialSource.Base64Encoded,
                 Base64EncodedValue = "MIIDHzCgegA.....r1n8Ta0="
             };
+
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
             Assert.Null(credentialDescription.Container);
             Assert.Equal(credentialDescription.Base64EncodedValue, credentialDescription.ReferenceOrValue);
@@ -44,13 +46,14 @@ namespace UnitTests
               "CertificatePassword": "password"
              }]
             }
-             */
+            */
             CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.Path,
                 CertificateDiskPath = "c:\\temp\\WebAppCallingWebApiCert.pfx",
                 CertificatePassword = "password"
             };
+
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
             Assert.Equal(credentialDescription.CertificateDiskPath, credentialDescription.Container);
             Assert.Equal(credentialDescription.CertificatePassword, credentialDescription.ReferenceOrValue);
@@ -70,7 +73,7 @@ namespace UnitTests
               "CertificateThumbprint": "962D129A...D18EFEB6961684"
              }]
             }
-             */
+            */
             CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.StoreWithThumbprint,
@@ -78,6 +81,7 @@ namespace UnitTests
                 CertificateThumbprint = "962D129A...D18EFEB6961684"
 
             };
+
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
             Assert.Equal(credentialDescription.CertificateStorePath, credentialDescription.Container);
             Assert.Equal(credentialDescription.CertificateThumbprint, credentialDescription.ReferenceOrValue);
@@ -97,7 +101,7 @@ namespace UnitTests
               "CertificateDistinguishedName": "CN=WebAppCallingWebApiCert"
              }]
             }
-             */
+            */
             CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.StoreWithDistinguishedName,
@@ -105,6 +109,7 @@ namespace UnitTests
                 CertificateDistinguishedName = "CN=WebAppCallingWebApiCert"
 
             };
+
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
             Assert.Equal(credentialDescription.CertificateStorePath, credentialDescription.Container);
             Assert.Equal(credentialDescription.CertificateDistinguishedName, credentialDescription.ReferenceOrValue);
@@ -126,7 +131,7 @@ namespace UnitTests
                   }
                  ]
                 }
-             */
+            */
             CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.KeyVault,
@@ -134,6 +139,7 @@ namespace UnitTests
                 KeyVaultCertificateName = "MicrosoftIdentitySamplesCert"
 
             };
+
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
             Assert.Equal(credentialDescription.KeyVaultUrl, credentialDescription.Container);
             Assert.Equal(credentialDescription.KeyVaultCertificateName, credentialDescription.ReferenceOrValue);
@@ -159,6 +165,7 @@ namespace UnitTests
                 SourceType = CredentialSource.ClientSecret,
                 ClientSecret = "blah"
             };
+
             Assert.Equal(CredentialType.Secret, credentialDescription.CredentialType);
             Assert.Null(credentialDescription.Container);
             Assert.Equal(credentialDescription.ClientSecret, credentialDescription.ReferenceOrValue);
@@ -179,6 +186,7 @@ namespace UnitTests
                 }]
             }
             */
+
             CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.SignedAssertionFromManagedIdentity,
@@ -206,6 +214,7 @@ namespace UnitTests
                 }]
             }
             */
+
             CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.SignedAssertionFilePath,
@@ -227,6 +236,7 @@ namespace UnitTests
                 SourceType = CredentialSource.Certificate,
                 Certificate = new System.Security.Cryptography.X509Certificates.X509Certificate2()
             };
+
             credentialDescription.CachedValue = credentialDescription.Certificate;
             Assert.NotNull(credentialDescription.CachedValue);
 #pragma warning restore SYSLIB0026 // Type or member is obsolete
@@ -236,7 +246,7 @@ namespace UnitTests
         }
 
         [Fact]
-        public void SignedAssertionFromAnotherVault()
+        public void SignedAssertionFromVault()
         {
             // signed assertion from a vault (not KeyVault)
             // -------------------------------------------
@@ -245,6 +255,7 @@ namespace UnitTests
                 SourceType = CredentialSource.SignedAssertionFromVault,
                 KeyVaultUrl = "someurl"
             };
+
             Assert.Equal(CredentialType.SignedAssertion, credentialDescription.CredentialType);
 
             // Skip a cred in a list of creds (when they are invalid)

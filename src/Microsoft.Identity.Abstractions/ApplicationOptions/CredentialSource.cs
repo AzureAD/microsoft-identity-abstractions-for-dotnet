@@ -56,6 +56,6 @@ namespace Microsoft.Identity.Abstractions
         /// <summary>
         /// URI to the vault.
         /// </summary>
-        SignedAssertionFromVault = 9,
+        SignedAssertionFromVault = 9
     }
 }

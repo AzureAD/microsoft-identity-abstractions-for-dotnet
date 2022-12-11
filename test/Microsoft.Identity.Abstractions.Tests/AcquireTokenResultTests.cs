@@ -1,12 +1,10 @@
-﻿using Microsoft.Identity.Abstractions;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
-namespace UnitTests
+namespace Microsoft.Identity.Abstractions.TokenAcquisition.Tests
 {
     public class AcquireTokenResultTests
     {
@@ -21,7 +19,7 @@ namespace UnitTests
             Guid correlationId = Guid.NewGuid();
             const string tokenType = "bearer";
 
-            AcquireTokenResult result = new AcquireTokenResult(accessTokenValue, now, tenant, idToken, scopes, correlationId, tokenType);
+            AcquireTokenResult result = new(accessTokenValue, now, tenant, idToken, scopes, correlationId, tokenType);
             Assert.Equal(accessTokenValue, result.AccessToken);
             Assert.Equal(now, result.ExpiresOn);
             Assert.Equal(tenant, result.TenantId );

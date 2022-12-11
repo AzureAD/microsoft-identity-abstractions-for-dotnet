@@ -1,14 +1,13 @@
-﻿using Microsoft.Identity.Abstractions;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace UnitTests
+namespace Microsoft.Identity.Abstractions.DownstreamRestApi.Tests
 {
     internal class CustomDownstreamRestApi : IDownstreamRestApi
     {

@@ -1,10 +1,12 @@
-﻿using Microsoft.Identity.Abstractions;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 using System.Linq;
 using Xunit;
 
-namespace UnitTests
+namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
 {
-    public class MicrosoftIdentityOptionsTests
+    public class MicrosoftIdentityApplicationOptionsTests
     {
         private const string instance = "https://login.microsoftonline.com/";
         private const string clientId = "application-id-from-app-registration";
@@ -13,14 +15,14 @@ namespace UnitTests
         private const string azureRegion = "westus";
         private string[] clientCapabilities = new[] { "cp1" };
         private const string domain = "mydomain.com";
-        private CredentialDescription secret = new CredentialDescription { SourceType = CredentialSource.ClientSecret, ClientSecret = "blah" };
+        private CredentialDescription secret = new() { SourceType = CredentialSource.ClientSecret, ClientSecret = "blah" };
         private CredentialDescription descryptCert = new CredentialDescription { SourceType = CredentialSource.Base64Encoded, Base64EncodedValue = "0123" };
         private string[] audiences = new[] { "https://myapi", clientId };
 
         [Fact]
-        public void MicrosoftIdentityOptionsProperties()
+        public void MicrosoftIdentityApplicationOptionsProperties()
         {
-            MicrosoftIdentityApplicationOptions microsoftIdentityApplicationOptions = new MicrosoftIdentityApplicationOptions
+            MicrosoftIdentityApplicationOptions microsoftIdentityApplicationOptions = new()
             {
                 Instance = instance,
                 TenantId = tenant,
@@ -44,7 +46,9 @@ namespace UnitTests
             };
 
             Assert.Equal("https://login.microsoftonline.com/common/v2.0", microsoftIdentityApplicationOptions.Authority);
+            
             microsoftIdentityApplicationOptions.Authority = "https://login.microsoftonline.com/common";
+
             Assert.Equal("https://login.microsoftonline.com/common", microsoftIdentityApplicationOptions.Authority);
             Assert.Equal(clientId, microsoftIdentityApplicationOptions.ClientId);
             Assert.Equal(tenant, microsoftIdentityApplicationOptions.TenantId);
@@ -64,7 +68,7 @@ namespace UnitTests
         [Fact]
         public void IdentityApplicationOptionsProperties()
         {
-            IdentityApplicationOptions identityApplicationOptions = new IdentityApplicationOptions
+            IdentityApplicationOptions identityApplicationOptions = new()
             {
                 Authority = "https://google.com/",
                 Audiences = audiences
