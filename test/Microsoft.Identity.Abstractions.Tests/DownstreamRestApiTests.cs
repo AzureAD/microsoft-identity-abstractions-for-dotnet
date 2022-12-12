@@ -1,13 +1,13 @@
-using Microsoft.Identity.Abstractions;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel;
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using UnitTests;
 using Xunit;
 
-namespace UnitTests
+namespace Microsoft.Identity.Abstractions.DownstreamRestApi.Tests
 {
     public class DownstreamRestApiTests
     {
@@ -44,12 +44,11 @@ namespace UnitTests
             Assert.Equal("https://apitocall.domain.com/api/values", downstreamRestApiOptions.GetApiUrl());
 
             // Get a clone for an authorization header provider
-            AuthorizationHeaderProviderOptions authorizationHeaderProviderOptions = new AuthorizationHeaderProviderOptions(downstreamRestApiOptions);
+            AuthorizationHeaderProviderOptions authorizationHeaderProviderOptions = new(downstreamRestApiOptions);
             AuthorizationHeaderProviderOptions authorizationHeaderProviderOptionsClone = authorizationHeaderProviderOptions.Clone();
 
             // Clone
             DownstreamRestApiOptions downstreamRestApiClone = downstreamRestApiOptions.Clone();
-
 
             Assert.NotNull(downstreamRestApiClone);
             Assert.Equal(downstreamRestApiOptions.Scopes, downstreamRestApiClone.Scopes!);
@@ -92,7 +91,8 @@ namespace UnitTests
         [Fact]
         public void DisallowedNullMembers()
         {
-            AuthorizationHeaderProviderOptions authenticationHeaderProviderOptions = new AuthorizationHeaderProviderOptions();
+            AuthorizationHeaderProviderOptions authenticationHeaderProviderOptions = new();
+
             Assert.Throws<ArgumentNullException>(() => _ = authenticationHeaderProviderOptions.ProtocolScheme = null!); ;
             Assert.Throws<ArgumentNullException>(() => _ = authenticationHeaderProviderOptions.AcquireTokenOptions = null!);
         }
@@ -130,5 +130,4 @@ namespace UnitTests
 
         public CustomAcquireTokenOptions(CustomAcquireTokenOptions other) : base(other) { }
     }
-
 }

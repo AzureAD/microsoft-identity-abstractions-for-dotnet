@@ -18,7 +18,7 @@ namespace Microsoft.Identity.Abstractions
         /// of a user.
         /// </summary>
         /// <param name="scopes">Scopes for which to request the authorization header.</param>
-        /// <param name="downstreamApiOptions">Information about the API that will be called (for some
+        /// <param name="authorizationHeaderProviderOptions">Information about the API that will be called (for some
         /// protocols like Pop), and token acquisition options.</param>
         /// <param name="claimsPrincipal">Inbound authentication elements.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
@@ -27,7 +27,7 @@ namespace Microsoft.Identity.Abstractions
         /// </returns>
         Task<string> CreateAuthorizationHeaderForUserAsync(
             IEnumerable<string> scopes, 
-            AuthorizationHeaderProviderOptions? downstreamApiOptions=null, 
+            AuthorizationHeaderProviderOptions? authorizationHeaderProviderOptions=null,
             ClaimsPrincipal? claimsPrincipal=default,
             CancellationToken cancellationToken = default);
 

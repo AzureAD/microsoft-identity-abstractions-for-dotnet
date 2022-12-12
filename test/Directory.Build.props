@@ -1,0 +1,14 @@
+<Project>
+
+  <PropertyGroup>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+	<PropertyGroup>
+		<MicrosoftNetTestSdkVersion>17.3.2</MicrosoftNetTestSdkVersion>
+		<XunitVersion>2.4.2</XunitVersion>
+		<XunitRunnerVisualStudioVersion>2.4.5</XunitRunnerVisualStudioVersion>
+		<CoverletCollectorVersion>3.1.2</CoverletCollectorVersion>
+	</PropertyGroup>
+
+</Project>

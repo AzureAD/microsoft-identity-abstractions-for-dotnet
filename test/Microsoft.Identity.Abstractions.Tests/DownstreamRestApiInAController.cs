@@ -1,14 +1,18 @@
-﻿using Microsoft.Identity.Abstractions;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace UnitTests
+namespace Microsoft.Identity.Abstractions.DownstreamRestApi.Tests
 {
     internal class Todo
     {
         public Todo(string description, int id = -1) { Id = id; Description = description; }
+
         public int Id { get; set; }
+
         public string Description { get; set; }
     }
 
@@ -22,7 +26,9 @@ namespace UnitTests
         private const string ServiceName = "TodoList";
 
         private ActionResult View(object? _) { return new ActionResult(); }
+
         private ActionResult NotFound() { return new ActionResult(); }
+
         private ActionResult RedirectToAction(string _) { return new ActionResult(); }
 
         // GET: TodoList. Get all the items in the list
@@ -39,6 +45,7 @@ namespace UnitTests
             var value = await _downstreamWebApi.GetForUserAsync<Todo>(
                 ServiceName,
                 options => options.RelativePath = $"api/todolist/{id}");
+
             return View(value);
         }
 
@@ -46,6 +53,7 @@ namespace UnitTests
         public ActionResult Create()
         {
             Todo todo = new Todo("blah");
+
             return View(todo);
         }
 
@@ -54,6 +62,7 @@ namespace UnitTests
         {
             await _downstreamWebApi.PostForUserAsync<Todo, Todo>(ServiceName, todo,
                 o => o.RelativePath = "api/todolist");
+
             return RedirectToAction("Index");
         }
 
@@ -83,6 +92,7 @@ namespace UnitTests
                     options.HttpMethod = HttpMethod.Patch;
                     options.RelativePath = $"api/todolist/{todo.Id}";
                 });
+
             return RedirectToAction("Index");
         }
 
@@ -111,6 +121,7 @@ namespace UnitTests
                 {
                     options.RelativePath = $"api/todolist/{todo.Id}";
                 });
+
             return RedirectToAction("Index");
         }
     }
