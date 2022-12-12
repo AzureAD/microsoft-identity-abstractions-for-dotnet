@@ -15,6 +15,10 @@ jobs:
       with:
         dotnet-version: 7.0.x
   
-    # Install workload  
+    # Run the tests  
     - name: Build with .NET 7.0.x
       run: dotnet test --configuration Release Microsoft.Identity.Abstractions.sln
+      
+    # Run the tests  
+    - name: Pack
+      run: dotnet pack --configuration Release Microsoft.Identity.Abstractions.sln 
