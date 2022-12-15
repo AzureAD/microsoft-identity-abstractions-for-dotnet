@@ -34,11 +34,7 @@ namespace Microsoft.Identity.Abstractions
         /// Gets or sets the 'client_id' (application ID) as it appears in the 
         /// application registration. This is the string representation of a GUID.
         /// </summary>
-        public string? ClientId
-        {
-            get;
-            set;
-        }
+        public string? ClientId { get; set; }
 
         /// <summary>
         /// Flag used to enable/disable logging of Personally Identifiable Information (PII).

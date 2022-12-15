@@ -30,6 +30,16 @@ namespace Microsoft.Identity.Abstractions.DownstreamRestApi.Tests
             return Task.FromResult<HttpResponseMessage>(null!);
         }
 
+        public Task<TOutput?> CallRestApiForAppAsync<TInput, TOutput>(string? serviceName, TInput input, Action<DownstreamRestApiOptions>? downstreamRestApiOptionsOverride = null, CancellationToken cancellationToken = default) where TOutput : class
+        {
+            return Task.FromResult<TOutput?>(default);
+        }
+
+        public Task<TOutput?> CallRestApiForAppAsync<TOutput>(string serviceName, Action<DownstreamRestApiOptions>? downstreamRestApiOptionsOverride = null, CancellationToken cancellationToken = default) where TOutput : class
+        {
+            return Task.FromResult<TOutput?>(default);
+        }
+
         public Task<HttpResponseMessage> CallRestApiForUserAsync(string? serviceName, Action<DownstreamRestApiOptions>? downstreamRestApiOptionsOverride = null, ClaimsPrincipal? user = null, HttpContent? content = null, CancellationToken cancellationToken = default)
         {
             return Task.FromResult<HttpResponseMessage>(null!);

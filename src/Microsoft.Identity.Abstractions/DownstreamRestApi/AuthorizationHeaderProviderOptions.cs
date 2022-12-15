@@ -112,7 +112,7 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <remarks>This is especially usefull when the call to the downstream API is described
         /// by configuration.</remarks>
-        public bool RequestAppToken { get;set;}
+        public bool RequestAppToken { get; set; }
 
         /// <summary>
         /// Clone the options (to be able to override them).
