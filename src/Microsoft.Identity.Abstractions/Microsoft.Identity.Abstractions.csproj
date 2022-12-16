@@ -5,9 +5,12 @@
     <Product>Microsoft Identity Abstractions</Product>
     <Description>Interface for higher level API for confidential client applications.</Description>
     <ProjectGuid>{98F57CC8-01A0-49F3-B859-DDC4F8F5CD2F}</ProjectGuid>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
      <AnalysisMode>AllEnabledByDefault</AnalysisMode>
   </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Update="DownstreamRestApi\IDownstreamRestApi.HttpMethods.tt">
