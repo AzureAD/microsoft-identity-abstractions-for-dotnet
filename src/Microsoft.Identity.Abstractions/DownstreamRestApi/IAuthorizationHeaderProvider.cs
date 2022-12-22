@@ -27,8 +27,8 @@ namespace Microsoft.Identity.Abstractions
         /// </returns>
         Task<string> CreateAuthorizationHeaderForUserAsync(
             IEnumerable<string> scopes, 
-            AuthorizationHeaderProviderOptions? authorizationHeaderProviderOptions=null,
-            ClaimsPrincipal? claimsPrincipal=default,
+            AuthorizationHeaderProviderOptions? authorizationHeaderProviderOptions = null,
+            ClaimsPrincipal? claimsPrincipal = default,
             CancellationToken cancellationToken = default);
 
         /// <summary>
