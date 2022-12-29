@@ -8,10 +8,6 @@
      <AnalysisMode>AllEnabledByDefault</AnalysisMode>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
-    <PackageReference Include="System.Net.Http" Version="4.3.4" />
-  </ItemGroup>
-
   <ItemGroup>
     <None Update="DownstreamRestApi\IDownstreamRestApi.HttpMethods.tt">
       <LastGenOutput>IDownstreamRestApi.HttpMethods.cs</LastGenOutput>

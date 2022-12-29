@@ -23,8 +23,15 @@ namespace Microsoft.Identity.Abstractions
     public partial interface IDownstreamRestApi
     {
 <#
-  foreach(string httpMethod in new string[]{  "Get", "Post", "Put", "Delete"} )
+  foreach(string httpMethod in new string[]{  "Get", "Post", "Put", "Patch", "Delete"} )
   {
+   if (httpMethod == "Patch")
+   {
+#>
+
+#if NETSTANDARD2_1_OR_GREATER
+<#
+   }
    foreach(string token in new string[] {"User", "App"})
    {
     foreach(string template in new string[] {"<TInput>", "<TOutput>", "<TInput, TOutput>"} )
@@ -35,7 +42,7 @@ namespace Microsoft.Identity.Abstractions
      if (httpMethod == "Get" && !hasOutput)
       continue;
 
-     if ((httpMethod == "Post" || httpMethod == "Put" || httpMethod == "Delete") && !hasInput)
+     if ((httpMethod == "Post" || httpMethod == "Put" || httpMethod == "Delete" || httpMethod == "Patch") && !hasInput)
       continue;
 
      bool hasApp = (token == "App");
@@ -96,8 +103,17 @@ namespace Microsoft.Identity.Abstractions
 <# } #>
             CancellationToken cancellationToken = default)<#= hasOutput?"where TOutput : class;" :";" #>
 <#
-    }
+     }
    }
+#>
+<#
+     if (httpMethod == "Patch")
+     {
+#>
+
+#endif // NETSTANDARD2_1_OR_GREATER
+<#
+    }
   }
 #>
     }

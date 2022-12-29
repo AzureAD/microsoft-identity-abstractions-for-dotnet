@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using Xunit;
 
 namespace Microsoft.Identity.Abstractions.DownstreamRestApi.Tests
@@ -34,7 +35,12 @@ namespace Microsoft.Identity.Abstractions.DownstreamRestApi.Tests
                 BaseUrl = "https://apitocall.domain.com",
                 CustomizeHttpRequestMessage = message => message.Headers.Add("x-sku", "sku-value"),
                 Deserializer = value => value,
-                Serializer = input => (input != null) ? new StringContent(input.ToString()!, new MediaTypeHeaderValue("text/json", "UTF8")) : null,
+                Serializer = input => (input != null) ? new StringContent(input.ToString()!, Encoding.UTF8
+#if !NETFRAMEWORK
+                                                           , new MediaTypeHeaderValue("text/json")
+#endif
+                )
+                                                      : null,
                 HttpMethod = HttpMethod.Trace,
                 ProtocolScheme = "bearer",
                 RelativePath = "/api/values",

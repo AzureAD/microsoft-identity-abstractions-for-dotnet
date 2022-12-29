@@ -425,6 +425,148 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null,
             CancellationToken cancellationToken = default)where TOutput : class;
 
+#if NETSTANDARD2_1_OR_GREATER
+
+        /// <summary>
+        /// Calls, using <see cref="HttpMethod.Patch"/>, a downstream REST API with some input data .
+        /// By default the input data is serialized in JSON  but you can provide your own serializer  in the action
+        /// you pass-in through the <paramref name="downstreamRestApiOptionsOverride"/> parameter.
+        /// </summary>
+        /// <typeparam name="TInput">Generic input type.</typeparam>
+        /// <param name="serviceName">Name of the service describing the downstream REST API. There can
+        /// be several configuration named sections mapped to a <see cref="DownstreamRestApiOptions"/>,
+        /// each for one downstream REST API. You can pass-in null, but in that case <paramref name="downstreamRestApiOptionsOverride"/>
+        /// needs to be set.</param>
+        /// <param name="input">Data sent to the downstream web API, through the body or the HTTP request.</param>
+        /// <param name="downstreamRestApiOptionsOverride">[Optional] Overrides the options proposed in the configuration described
+        /// by <paramref name="serviceName"/>.</param>
+        /// <param name="user">[Optional] Claims representing a user. This is useful in platforms like Blazor
+        /// or Azure Signal R, where the HttpContext is not available. In other platforms, the library
+        /// will find the user from the HttpContext.</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns> The value returned by the downstream web API.</returns>
+        /// <example>
+        /// <code>
+        ///   await _downstreamWebApi.PatchForUserAsync&lt;MyItem&gt;(
+        ///         "MyService",
+        ///         myItem,
+        ///         options =>
+        ///         {
+        ///           options.RelativePath = $"api/todolist/{myItem.Id}";
+        ///         });
+        /// </code>
+        /// </example>
+        public Task PatchForUserAsync<TInput>(
+            string? serviceName,
+            TInput input,
+            Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null,
+            ClaimsPrincipal? user = null,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Calls, using <see cref="HttpMethod.Patch"/>, a downstream REST API with some input data and returning data.
+        /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
+        /// you pass-in through the <paramref name="downstreamRestApiOptionsOverride"/> parameter.
+        /// </summary>
+        /// <typeparam name="TInput">Generic input type.</typeparam>
+        /// <typeparam name="TOutput">Generic output type.</typeparam>
+        /// <param name="serviceName">Name of the service describing the downstream REST API. There can
+        /// be several configuration named sections mapped to a <see cref="DownstreamRestApiOptions"/>,
+        /// each for one downstream REST API. You can pass-in null, but in that case <paramref name="downstreamRestApiOptionsOverride"/>
+        /// needs to be set.</param>
+        /// <param name="input">Data sent to the downstream web API, through the body or the HTTP request.</param>
+        /// <param name="downstreamRestApiOptionsOverride">[Optional] Overrides the options proposed in the configuration described
+        /// by <paramref name="serviceName"/>.</param>
+        /// <param name="user">[Optional] Claims representing a user. This is useful in platforms like Blazor
+        /// or Azure Signal R, where the HttpContext is not available. In other platforms, the library
+        /// will find the user from the HttpContext.</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns> The value returned by the downstream web API.</returns>
+        /// <example>
+        /// <code>
+        ///  var result = await _downstreamWebApi.PatchForUserAsync&lt;MyItem, IEnumerable&lt;MyItem&gt;&gt;(
+        ///         "MyService",
+        ///         myItem,
+        ///         options =>
+        ///         {
+        ///           options.RelativePath = $"api/todolist/{myItem.Id}";
+        ///         });
+        /// </code>
+        /// </example>
+        public Task<TOutput?> PatchForUserAsync<TInput, TOutput>(
+            string? serviceName,
+            TInput input,
+            Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null,
+            ClaimsPrincipal? user = null,
+            CancellationToken cancellationToken = default)where TOutput : class;
+
+        /// <summary>
+        /// Calls, using <see cref="HttpMethod.Patch"/>, a downstream REST API with some input data .
+        /// By default the input data is serialized in JSON  but you can provide your own serializer  in the action
+        /// you pass-in through the <paramref name="downstreamRestApiOptionsOverride"/> parameter.
+        /// </summary>
+        /// <typeparam name="TInput">Generic input type.</typeparam>
+        /// <param name="serviceName">Name of the service describing the downstream REST API. There can
+        /// be several configuration named sections mapped to a <see cref="DownstreamRestApiOptions"/>,
+        /// each for one downstream REST API. You can pass-in null, but in that case <paramref name="downstreamRestApiOptionsOverride"/>
+        /// needs to be set.</param>
+        /// <param name="input">Data sent to the downstream web API, through the body or the HTTP request.</param>
+        /// <param name="downstreamRestApiOptionsOverride">[Optional] Overrides the options proposed in the configuration described
+        /// by <paramref name="serviceName"/>.</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns> The value returned by the downstream web API.</returns>
+        /// <example>
+        /// <code>
+        ///   await _downstreamWebApi.PatchForAppAsync&lt;MyItem&gt;(
+        ///         "MyService",
+        ///         myItem,
+        ///         options =>
+        ///         {
+        ///           options.RelativePath = $"api/todolist/{myItem.Id}";
+        ///         });
+        /// </code>
+        /// </example>
+        public Task PatchForAppAsync<TInput>(
+            string? serviceName,
+            TInput input,
+            Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Calls, using <see cref="HttpMethod.Patch"/>, a downstream REST API with some input data and returning data.
+        /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
+        /// you pass-in through the <paramref name="downstreamRestApiOptionsOverride"/> parameter.
+        /// </summary>
+        /// <typeparam name="TInput">Generic input type.</typeparam>
+        /// <typeparam name="TOutput">Generic output type.</typeparam>
+        /// <param name="serviceName">Name of the service describing the downstream REST API. There can
+        /// be several configuration named sections mapped to a <see cref="DownstreamRestApiOptions"/>,
+        /// each for one downstream REST API. You can pass-in null, but in that case <paramref name="downstreamRestApiOptionsOverride"/>
+        /// needs to be set.</param>
+        /// <param name="input">Data sent to the downstream web API, through the body or the HTTP request.</param>
+        /// <param name="downstreamRestApiOptionsOverride">[Optional] Overrides the options proposed in the configuration described
+        /// by <paramref name="serviceName"/>.</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns> The value returned by the downstream web API.</returns>
+        /// <example>
+        /// <code>
+        ///  var result = await _downstreamWebApi.PatchForAppAsync&lt;MyItem, IEnumerable&lt;MyItem&gt;&gt;(
+        ///         "MyService",
+        ///         myItem,
+        ///         options =>
+        ///         {
+        ///           options.RelativePath = $"api/todolist/{myItem.Id}";
+        ///         });
+        /// </code>
+        /// </example>
+        public Task<TOutput?> PatchForAppAsync<TInput, TOutput>(
+            string? serviceName,
+            TInput input,
+            Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null,
+            CancellationToken cancellationToken = default)where TOutput : class;
+
+#endif // NETSTANDARD2_1_OR_GREATER
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Delete"/>, a downstream REST API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer  in the action
