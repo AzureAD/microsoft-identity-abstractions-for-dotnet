@@ -54,7 +54,7 @@ namespace Microsoft.Identity.Abstractions
 
         /// <summary>
         /// Calls, using <see cref="HttpMethod.<#= httpMethod #>"/>, a downstream REST API <#= hasInput ? "with some input data " : ""#><#= hasInput&&hasOutput ? "and " : ""#><#= hasOutput ? "returning data" : ""#>.
-        /// By default <#= hasInput ? "the input data is serialized in JSON " : ""#><#= hasInput&&hasOutput ? "and " : ""#><#= hasOutput ? "the returned data is deserialized from JSON" : ""#> but you can provide <#= hasInput ? "your own serializer " : ""#><#= hasInput&&hasOutput ? "and " : ""#><#= hasOutput ? "your own deserializer" : ""#> in the action
+        /// By default <#= hasInput ? "the input data is serialized in JSON " : ""#><#= hasInput&&hasOutput ? "and " : ""#><#= hasOutput ? "the returned data is deserialized from JSON" : ""#> but you can provide <#= hasInput ? "your own serializer " : ""#><#= hasInput&&hasOutput ? "and " : ""#><#= hasOutput ? "your own deserializer " : ""#>in the action
         /// you pass-in through the <paramref name="downstreamRestApiOptionsOverride"/> parameter.
         /// </summary>
 <# if (hasInput){ #>
@@ -81,7 +81,7 @@ namespace Microsoft.Identity.Abstractions
         /// <returns> <#= hasInput? "The value returned by the downstream web API." : "a Task" #></returns>
         /// <example>
         /// <code>
-        ///  <#= hasOutput?"var result =" : "" #> await _downstreamWebApi.<#= httpMethod #>For<#= token #>Async<#= sampleCodeTemplate #>(
+        ///  <#= hasOutput?"var result =" : "" #> await _downstreamRestApi.<#= httpMethod #>For<#= token #>Async<#= sampleCodeTemplate #>(
         ///         "MyService",
 <# if (hasInput){ #>
         ///         myItem,

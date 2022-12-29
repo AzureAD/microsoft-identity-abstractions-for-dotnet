@@ -36,7 +36,7 @@ namespace Microsoft.Identity.Abstractions
         /// <returns> a Task</returns>
         /// <example>
         /// <code>
-        ///  var result = await _downstreamWebApi.GetForUserAsync&lt;IEnumerable&lt;MyItem&gt;&gt;(
+        ///  var result = await _downstreamRestApi.GetForUserAsync&lt;IEnumerable&lt;MyItem&gt;&gt;(
         ///         "MyService",
         ///         options =>
         ///         {
@@ -71,7 +71,7 @@ namespace Microsoft.Identity.Abstractions
         /// <returns> The value returned by the downstream web API.</returns>
         /// <example>
         /// <code>
-        ///  var result = await _downstreamWebApi.GetForUserAsync&lt;MyItem, IEnumerable&lt;MyItem&gt;&gt;(
+        ///  var result = await _downstreamRestApi.GetForUserAsync&lt;MyItem, IEnumerable&lt;MyItem&gt;&gt;(
         ///         "MyService",
         ///         myItem,
         ///         options =>
@@ -103,7 +103,7 @@ namespace Microsoft.Identity.Abstractions
         /// <returns> a Task</returns>
         /// <example>
         /// <code>
-        ///  var result = await _downstreamWebApi.GetForAppAsync&lt;IEnumerable&lt;MyItem&gt;&gt;(
+        ///  var result = await _downstreamRestApi.GetForAppAsync&lt;IEnumerable&lt;MyItem&gt;&gt;(
         ///         "MyService",
         ///         options =>
         ///         {
@@ -134,7 +134,7 @@ namespace Microsoft.Identity.Abstractions
         /// <returns> The value returned by the downstream web API.</returns>
         /// <example>
         /// <code>
-        ///  var result = await _downstreamWebApi.GetForAppAsync&lt;MyItem, IEnumerable&lt;MyItem&gt;&gt;(
+        ///  var result = await _downstreamRestApi.GetForAppAsync&lt;MyItem, IEnumerable&lt;MyItem&gt;&gt;(
         ///         "MyService",
         ///         myItem,
         ///         options =>
@@ -151,7 +151,7 @@ namespace Microsoft.Identity.Abstractions
 
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Post"/>, a downstream REST API with some input data .
-        /// By default the input data is serialized in JSON  but you can provide your own serializer  in the action
+        /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
         /// you pass-in through the <paramref name="downstreamRestApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
@@ -169,7 +169,7 @@ namespace Microsoft.Identity.Abstractions
         /// <returns> The value returned by the downstream web API.</returns>
         /// <example>
         /// <code>
-        ///   await _downstreamWebApi.PostForUserAsync&lt;MyItem&gt;(
+        ///   await _downstreamRestApi.PostForUserAsync&lt;MyItem&gt;(
         ///         "MyService",
         ///         myItem,
         ///         options =>
@@ -206,7 +206,7 @@ namespace Microsoft.Identity.Abstractions
         /// <returns> The value returned by the downstream web API.</returns>
         /// <example>
         /// <code>
-        ///  var result = await _downstreamWebApi.PostForUserAsync&lt;MyItem, IEnumerable&lt;MyItem&gt;&gt;(
+        ///  var result = await _downstreamRestApi.PostForUserAsync&lt;MyItem, IEnumerable&lt;MyItem&gt;&gt;(
         ///         "MyService",
         ///         myItem,
         ///         options =>
@@ -224,7 +224,7 @@ namespace Microsoft.Identity.Abstractions
 
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Post"/>, a downstream REST API with some input data .
-        /// By default the input data is serialized in JSON  but you can provide your own serializer  in the action
+        /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
         /// you pass-in through the <paramref name="downstreamRestApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
@@ -239,7 +239,7 @@ namespace Microsoft.Identity.Abstractions
         /// <returns> The value returned by the downstream web API.</returns>
         /// <example>
         /// <code>
-        ///   await _downstreamWebApi.PostForAppAsync&lt;MyItem&gt;(
+        ///   await _downstreamRestApi.PostForAppAsync&lt;MyItem&gt;(
         ///         "MyService",
         ///         myItem,
         ///         options =>
@@ -272,7 +272,7 @@ namespace Microsoft.Identity.Abstractions
         /// <returns> The value returned by the downstream web API.</returns>
         /// <example>
         /// <code>
-        ///  var result = await _downstreamWebApi.PostForAppAsync&lt;MyItem, IEnumerable&lt;MyItem&gt;&gt;(
+        ///  var result = await _downstreamRestApi.PostForAppAsync&lt;MyItem, IEnumerable&lt;MyItem&gt;&gt;(
         ///         "MyService",
         ///         myItem,
         ///         options =>
@@ -289,7 +289,7 @@ namespace Microsoft.Identity.Abstractions
 
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Put"/>, a downstream REST API with some input data .
-        /// By default the input data is serialized in JSON  but you can provide your own serializer  in the action
+        /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
         /// you pass-in through the <paramref name="downstreamRestApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
@@ -307,7 +307,7 @@ namespace Microsoft.Identity.Abstractions
         /// <returns> The value returned by the downstream web API.</returns>
         /// <example>
         /// <code>
-        ///   await _downstreamWebApi.PutForUserAsync&lt;MyItem&gt;(
+        ///   await _downstreamRestApi.PutForUserAsync&lt;MyItem&gt;(
         ///         "MyService",
         ///         myItem,
         ///         options =>
@@ -344,7 +344,7 @@ namespace Microsoft.Identity.Abstractions
         /// <returns> The value returned by the downstream web API.</returns>
         /// <example>
         /// <code>
-        ///  var result = await _downstreamWebApi.PutForUserAsync&lt;MyItem, IEnumerable&lt;MyItem&gt;&gt;(
+        ///  var result = await _downstreamRestApi.PutForUserAsync&lt;MyItem, IEnumerable&lt;MyItem&gt;&gt;(
         ///         "MyService",
         ///         myItem,
         ///         options =>
@@ -362,7 +362,7 @@ namespace Microsoft.Identity.Abstractions
 
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Put"/>, a downstream REST API with some input data .
-        /// By default the input data is serialized in JSON  but you can provide your own serializer  in the action
+        /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
         /// you pass-in through the <paramref name="downstreamRestApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
@@ -377,7 +377,7 @@ namespace Microsoft.Identity.Abstractions
         /// <returns> The value returned by the downstream web API.</returns>
         /// <example>
         /// <code>
-        ///   await _downstreamWebApi.PutForAppAsync&lt;MyItem&gt;(
+        ///   await _downstreamRestApi.PutForAppAsync&lt;MyItem&gt;(
         ///         "MyService",
         ///         myItem,
         ///         options =>
@@ -410,7 +410,7 @@ namespace Microsoft.Identity.Abstractions
         /// <returns> The value returned by the downstream web API.</returns>
         /// <example>
         /// <code>
-        ///  var result = await _downstreamWebApi.PutForAppAsync&lt;MyItem, IEnumerable&lt;MyItem&gt;&gt;(
+        ///  var result = await _downstreamRestApi.PutForAppAsync&lt;MyItem, IEnumerable&lt;MyItem&gt;&gt;(
         ///         "MyService",
         ///         myItem,
         ///         options =>
@@ -429,7 +429,7 @@ namespace Microsoft.Identity.Abstractions
 
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Patch"/>, a downstream REST API with some input data .
-        /// By default the input data is serialized in JSON  but you can provide your own serializer  in the action
+        /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
         /// you pass-in through the <paramref name="downstreamRestApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
@@ -447,7 +447,7 @@ namespace Microsoft.Identity.Abstractions
         /// <returns> The value returned by the downstream web API.</returns>
         /// <example>
         /// <code>
-        ///   await _downstreamWebApi.PatchForUserAsync&lt;MyItem&gt;(
+        ///   await _downstreamRestApi.PatchForUserAsync&lt;MyItem&gt;(
         ///         "MyService",
         ///         myItem,
         ///         options =>
@@ -484,7 +484,7 @@ namespace Microsoft.Identity.Abstractions
         /// <returns> The value returned by the downstream web API.</returns>
         /// <example>
         /// <code>
-        ///  var result = await _downstreamWebApi.PatchForUserAsync&lt;MyItem, IEnumerable&lt;MyItem&gt;&gt;(
+        ///  var result = await _downstreamRestApi.PatchForUserAsync&lt;MyItem, IEnumerable&lt;MyItem&gt;&gt;(
         ///         "MyService",
         ///         myItem,
         ///         options =>
@@ -502,7 +502,7 @@ namespace Microsoft.Identity.Abstractions
 
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Patch"/>, a downstream REST API with some input data .
-        /// By default the input data is serialized in JSON  but you can provide your own serializer  in the action
+        /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
         /// you pass-in through the <paramref name="downstreamRestApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
@@ -517,7 +517,7 @@ namespace Microsoft.Identity.Abstractions
         /// <returns> The value returned by the downstream web API.</returns>
         /// <example>
         /// <code>
-        ///   await _downstreamWebApi.PatchForAppAsync&lt;MyItem&gt;(
+        ///   await _downstreamRestApi.PatchForAppAsync&lt;MyItem&gt;(
         ///         "MyService",
         ///         myItem,
         ///         options =>
@@ -550,7 +550,7 @@ namespace Microsoft.Identity.Abstractions
         /// <returns> The value returned by the downstream web API.</returns>
         /// <example>
         /// <code>
-        ///  var result = await _downstreamWebApi.PatchForAppAsync&lt;MyItem, IEnumerable&lt;MyItem&gt;&gt;(
+        ///  var result = await _downstreamRestApi.PatchForAppAsync&lt;MyItem, IEnumerable&lt;MyItem&gt;&gt;(
         ///         "MyService",
         ///         myItem,
         ///         options =>
@@ -569,7 +569,7 @@ namespace Microsoft.Identity.Abstractions
 
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Delete"/>, a downstream REST API with some input data .
-        /// By default the input data is serialized in JSON  but you can provide your own serializer  in the action
+        /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
         /// you pass-in through the <paramref name="downstreamRestApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
@@ -587,7 +587,7 @@ namespace Microsoft.Identity.Abstractions
         /// <returns> The value returned by the downstream web API.</returns>
         /// <example>
         /// <code>
-        ///   await _downstreamWebApi.DeleteForUserAsync&lt;MyItem&gt;(
+        ///   await _downstreamRestApi.DeleteForUserAsync&lt;MyItem&gt;(
         ///         "MyService",
         ///         myItem,
         ///         options =>
@@ -624,7 +624,7 @@ namespace Microsoft.Identity.Abstractions
         /// <returns> The value returned by the downstream web API.</returns>
         /// <example>
         /// <code>
-        ///  var result = await _downstreamWebApi.DeleteForUserAsync&lt;MyItem, IEnumerable&lt;MyItem&gt;&gt;(
+        ///  var result = await _downstreamRestApi.DeleteForUserAsync&lt;MyItem, IEnumerable&lt;MyItem&gt;&gt;(
         ///         "MyService",
         ///         myItem,
         ///         options =>
@@ -642,7 +642,7 @@ namespace Microsoft.Identity.Abstractions
 
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Delete"/>, a downstream REST API with some input data .
-        /// By default the input data is serialized in JSON  but you can provide your own serializer  in the action
+        /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
         /// you pass-in through the <paramref name="downstreamRestApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
@@ -657,7 +657,7 @@ namespace Microsoft.Identity.Abstractions
         /// <returns> The value returned by the downstream web API.</returns>
         /// <example>
         /// <code>
-        ///   await _downstreamWebApi.DeleteForAppAsync&lt;MyItem&gt;(
+        ///   await _downstreamRestApi.DeleteForAppAsync&lt;MyItem&gt;(
         ///         "MyService",
         ///         myItem,
         ///         options =>
@@ -690,7 +690,7 @@ namespace Microsoft.Identity.Abstractions
         /// <returns> The value returned by the downstream web API.</returns>
         /// <example>
         /// <code>
-        ///  var result = await _downstreamWebApi.DeleteForAppAsync&lt;MyItem, IEnumerable&lt;MyItem&gt;&gt;(
+        ///  var result = await _downstreamRestApi.DeleteForAppAsync&lt;MyItem, IEnumerable&lt;MyItem&gt;&gt;(
         ///         "MyService",
         ///         myItem,
         ///         options =>
