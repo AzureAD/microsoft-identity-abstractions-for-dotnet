@@ -20,7 +20,6 @@ namespace Microsoft.Identity.Abstractions
         /// <param name="other">other instance to copy from.</param>
         private DownstreamRestApiOptionsReadOnlyHttpMethod(DownstreamRestApiOptionsReadOnlyHttpMethod other) : base(other)
         {
-
         }
 
         /// <summary>

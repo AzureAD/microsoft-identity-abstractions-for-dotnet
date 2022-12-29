@@ -95,6 +95,36 @@ namespace Microsoft.Identity.Abstractions.DownstreamRestApi.Tests
             return Task.FromResult<TOutput?>(default);
         }
 
+        public Task PatchForAppAsync<TInput>(string? serviceName, TInput input, Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null, CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TOutput?> PatchForAppAsync<TOutput>(string? serviceName, Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null, CancellationToken cancellationToken = default) where TOutput : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TOutput?> PatchForAppAsync<TInput, TOutput>(string? serviceName, TInput input, Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null, CancellationToken cancellationToken = default) where TOutput : class
+        {
+            return Task.FromResult<TOutput?>(null);
+        }
+
+        public Task PatchForUserAsync<TInput>(string? serviceName, TInput input, Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null, ClaimsPrincipal? user = null, CancellationToken cancellationToken = default)
+        {
+            return Task.FromResult<HttpResponseMessage>(null!);
+        }
+
+        public Task<TOutput?> PatchForUserAsync<TOutput>(string? serviceName, Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null, ClaimsPrincipal? user = null, CancellationToken cancellationToken = default) where TOutput : class
+        {
+            return Task.FromResult<TOutput?>(null);
+        }
+
+        public Task<TOutput?> PatchForUserAsync<TInput, TOutput>(string? serviceName, TInput input, Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null, ClaimsPrincipal? user = null, CancellationToken cancellationToken = default) where TOutput : class
+        {
+            return Task.FromResult<TOutput?>(null);
+        }
+
         public Task PostForAppAsync<TInput>(string? serviceName, TInput input, Action<DownstreamRestApiOptionsReadOnlyHttpMethod>? downstreamRestApiOptionsOverride = null, CancellationToken cancellationToken = default)
         {
             return Task.CompletedTask;

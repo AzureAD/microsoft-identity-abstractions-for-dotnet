@@ -16,7 +16,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
         private string[] clientCapabilities = new[] { "cp1" };
         private const string domain = "mydomain.com";
         private CredentialDescription secret = new() { SourceType = CredentialSource.ClientSecret, ClientSecret = "blah" };
-        private CredentialDescription descryptCert = new CredentialDescription { SourceType = CredentialSource.Base64Encoded, Base64EncodedValue = "0123" };
+        private CredentialDescription decryptCert = new CredentialDescription { SourceType = CredentialSource.Base64Encoded, Base64EncodedValue = "0123" };
         private string[] audiences = new[] { "https://myapi", clientId };
 
         [Fact]
@@ -41,8 +41,13 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                 AllowWebApiToBeAuthorizedByACL = true,
                 TokenDecryptionCredentials = new[]
                 {
-                    descryptCert
-                }
+                    decryptCert
+                },
+                EditProfilePolicyId = "EditProfilePolicyId",
+                SignUpSignInPolicyId = "SignUpSignInPolicyId",
+                ResetPasswordPolicyId = "ResetPasswordPolicyId",
+                ResetPasswordPath = "ResetPasswordPath",
+                ErrorPath = "ErrorPath",
             };
 
             Assert.Equal("https://login.microsoftonline.com/common/v2.0", microsoftIdentityApplicationOptions.Authority);
@@ -60,8 +65,14 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             Assert.True(microsoftIdentityApplicationOptions.WithSpaAuthCode);
             Assert.True(microsoftIdentityApplicationOptions.EnablePiiLogging);
             Assert.Equal(secret, microsoftIdentityApplicationOptions.ClientCredentials.First());
-            Assert.Equal(descryptCert, microsoftIdentityApplicationOptions.TokenDecryptionCredentials.First());
+            Assert.Equal(decryptCert, microsoftIdentityApplicationOptions.TokenDecryptionCredentials.First());
             Assert.Equal(domain, microsoftIdentityApplicationOptions.Domain);
+            Assert.Equal(nameof(microsoftIdentityApplicationOptions.EditProfilePolicyId), microsoftIdentityApplicationOptions.EditProfilePolicyId);
+            Assert.Equal(nameof(microsoftIdentityApplicationOptions.SignUpSignInPolicyId), microsoftIdentityApplicationOptions.SignUpSignInPolicyId);
+            Assert.Equal(nameof(microsoftIdentityApplicationOptions.ResetPasswordPolicyId), microsoftIdentityApplicationOptions.ResetPasswordPolicyId);
+            Assert.Equal(nameof(microsoftIdentityApplicationOptions.ResetPasswordPath), microsoftIdentityApplicationOptions.ResetPasswordPath);
+            Assert.Equal(nameof(microsoftIdentityApplicationOptions.ErrorPath), microsoftIdentityApplicationOptions.ErrorPath);
+            Assert.Equal(nameof(microsoftIdentityApplicationOptions.SignUpSignInPolicyId), microsoftIdentityApplicationOptions.DefaultUserFlow);
         }
 
 

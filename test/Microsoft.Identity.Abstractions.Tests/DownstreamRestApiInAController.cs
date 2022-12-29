@@ -81,6 +81,8 @@ namespace Microsoft.Identity.Abstractions.DownstreamRestApi.Tests
             return View(todo);
         }
 
+// HttpMethod.Patch is only available on netcore2.0 and above, not .NET FW
+#if NETCOREAPP2_0_OR_GREATER
         // POST: TodoList/Edit/5
         public async Task<ActionResult> Edit(int id, /*[Bind("Id,Title,Owner")]*/ Todo todo)
         {
@@ -95,6 +97,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamRestApi.Tests
 
             return RedirectToAction("Index");
         }
+#endif
 
         // GET: TodoList/Delete/5
         public async Task<ActionResult> Delete(int id)
