@@ -1,3 +1,8 @@
+1.0.6-preview
+========
+- [#48](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/48)
+- [#45](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/45)
+
 1.0.5-preview
 ========
 ## API Changes to improve the developer experience
