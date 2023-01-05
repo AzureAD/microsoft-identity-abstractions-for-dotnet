@@ -1,3 +1,7 @@
+1.1.0
+========
+- Releasing non-preview version
+
 1.0.6-preview
 ========
 - [#48](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/48)
@@ -16,7 +20,6 @@
 ========
 ## Feature
 - Adding extensibility for credentials: see [#30](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/30/files)
-
 
 1.0.3-preview
 ==========
