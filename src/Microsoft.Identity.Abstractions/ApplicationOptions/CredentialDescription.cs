@@ -39,9 +39,11 @@ namespace Microsoft.Identity.Abstractions
                 {
                     CredentialSource.Certificate => null,
                     CredentialSource.KeyVault => KeyVaultUrl,
-                    CredentialSource.Base64Encoded => null,
+                    CredentialSource.Base64Encoded => CertificatePassword,
                     CredentialSource.Path => CertificateDiskPath,
                     CredentialSource.StoreWithThumbprint or CredentialSource.StoreWithDistinguishedName => CertificateStorePath,
+                    CredentialSource.SignedAssertionFilePath => SignedAssertionFileDiskPath,
+                    CredentialSource.SignedAssertionFromVault => KeyVaultUrl,
                     _ => null,
                 };
             }
@@ -52,9 +54,14 @@ namespace Microsoft.Identity.Abstractions
                     case CredentialSource.Certificate:
                         break;
                     case CredentialSource.KeyVault:
+                    case CredentialSource.SignedAssertionFromVault:
                         KeyVaultUrl = value;
                         break;
                     case CredentialSource.Base64Encoded:
+                        // This is to avoid a breaking change (in v1.0 there was no password for
+                        // base 64 encoded assertion, which was therefore the reference or value.
+                        // We consider the password as a kind of enveloppe, hence being the container
+                        CertificatePassword = value;
                         break;
                     case CredentialSource.Path:
                         CertificateDiskPath = value;
@@ -62,6 +69,9 @@ namespace Microsoft.Identity.Abstractions
                     case CredentialSource.StoreWithDistinguishedName:
                     case CredentialSource.StoreWithThumbprint:
                         CertificateStorePath = value;
+                        break;
+                    case CredentialSource.SignedAssertionFilePath:
+                        SignedAssertionFileDiskPath = value;
                         break;
                     default:
                         break;
@@ -148,13 +158,13 @@ namespace Microsoft.Identity.Abstractions
                 return SourceType switch
                 {
                     CredentialSource.KeyVault => KeyVaultCertificateName,
+                    CredentialSource.SignedAssertionFromVault => KeyVaultCertificateName,
                     CredentialSource.Path => CertificatePassword,
                     CredentialSource.StoreWithThumbprint => CertificateThumbprint,
                     CredentialSource.StoreWithDistinguishedName => CertificateDistinguishedName,
                     CredentialSource.Certificate or CredentialSource.Base64Encoded => Base64EncodedValue,
-                    CredentialSource.ClientSecret => ClientSecret,
                     CredentialSource.SignedAssertionFromManagedIdentity => ManagedIdentityClientId,
-                    CredentialSource.SignedAssertionFilePath => SignedAssertionFileDiskPath,
+                    CredentialSource.ClientSecret => ClientSecret,
                     _ => null,
                 };
             }
@@ -167,11 +177,14 @@ namespace Microsoft.Identity.Abstractions
                     case CredentialSource.KeyVault:
                         KeyVaultCertificateName = value;
                         break;
+                    case CredentialSource.SignedAssertionFromVault:
+                        KeyVaultCertificateName = value;
+                        break;
                     case CredentialSource.Base64Encoded:
                         Base64EncodedValue = value;
                         break;
                     case CredentialSource.Path:
-                        CertificateDiskPath = value;
+                        CertificatePassword = value;
                         break;
                     case CredentialSource.StoreWithThumbprint:
                         CertificateThumbprint = value;
@@ -184,9 +197,6 @@ namespace Microsoft.Identity.Abstractions
                         break;
                     case CredentialSource.SignedAssertionFromManagedIdentity:
                         ManagedIdentityClientId = value;
-                        break;
-                    case CredentialSource.SignedAssertionFilePath:
-                        SignedAssertionFileDiskPath = value;
                         break;
                     default:
                         break;

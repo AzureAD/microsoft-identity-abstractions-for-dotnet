@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Security.AccessControl;
 using Xunit;
 
 namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
@@ -221,8 +222,8 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                 SignedAssertionFileDiskPath = "c:/path.signedAssertion"
             };
             Assert.Equal(CredentialType.SignedAssertion, credentialDescription.CredentialType);
-            Assert.Null(credentialDescription.Container);
-            Assert.Equal(credentialDescription.SignedAssertionFileDiskPath, credentialDescription.ReferenceOrValue);
+            Assert.Null(credentialDescription.ReferenceOrValue);
+            Assert.Equal(credentialDescription.SignedAssertionFileDiskPath, credentialDescription.Container);
         }
 
         [Fact]
@@ -262,5 +263,56 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             credentialDescription.Skip= true;
             Assert.True(credentialDescription.Skip);
         }
+
+        // Both container and reference or value.
+        [Theory]
+        [InlineData(CredentialSource.Base64Encoded)]
+        [InlineData(CredentialSource.StoreWithThumbprint)]
+        [InlineData(CredentialSource.StoreWithDistinguishedName)]
+        [InlineData(CredentialSource.SignedAssertionFromVault)]
+        [InlineData(CredentialSource.KeyVault)]
+        [InlineData(CredentialSource.Path)]
+        public void TestContainerAndValueOrReference(CredentialSource credentialSource)
+        {
+            CredentialDescription credentialDescription = new CredentialDescription { SourceType = credentialSource };
+            credentialDescription.Container = "container";
+            Assert.Equal("container", credentialDescription.Container);
+            credentialDescription.ReferenceOrValue = "referenceOrValue";
+            Assert.Equal("referenceOrValue", credentialDescription.ReferenceOrValue);
+        }
+
+        [Fact]
+        public void TestContainerAndValueOrReferenceForCertificate()
+        {
+            CredentialDescription credentialDescription = new();
+            credentialDescription.Certificate = new System.Security.Cryptography.X509Certificates.X509Certificate2();
+            credentialDescription.Container = "container";
+            credentialDescription.ReferenceOrValue = "referenceOrValue";
+            Assert.Null(credentialDescription.Container);
+            Assert.Null(credentialDescription.ReferenceOrValue);
+        }
+
+        // Container only
+        [Theory]
+        [InlineData(CredentialSource.SignedAssertionFilePath)]
+        public void TestContainer(CredentialSource credentialSource)
+        {
+            CredentialDescription credentialDescription = new CredentialDescription{SourceType = credentialSource};
+            credentialDescription.Container = "container";
+            Assert.Equal("container", credentialDescription.Container);
+        }
+
+        // Ref/Value only
+        [Theory]
+        [InlineData(CredentialSource.ClientSecret)]
+        [InlineData(CredentialSource.SignedAssertionFromManagedIdentity)]
+        public void TestValueOrReference(CredentialSource credentialSource)
+        {
+            CredentialDescription credentialDescription = new CredentialDescription { SourceType = credentialSource };
+            credentialDescription.ReferenceOrValue = "referenceOrValue";
+            Assert.Equal("referenceOrValue", credentialDescription.ReferenceOrValue);
+        }
+
+
     }
 }
