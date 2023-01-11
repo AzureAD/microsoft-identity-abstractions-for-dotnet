@@ -285,7 +285,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
         public void TestContainerAndValueOrReferenceForCertificate()
         {
             CredentialDescription credentialDescription = new();
-            credentialDescription.Certificate = new System.Security.Cryptography.X509Certificates.X509Certificate2();
+            credentialDescription.Certificate = null;
             credentialDescription.Container = "container";
             credentialDescription.ReferenceOrValue = "referenceOrValue";
             Assert.Null(credentialDescription.Container);
