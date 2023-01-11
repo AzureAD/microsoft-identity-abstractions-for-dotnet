@@ -1,3 +1,7 @@
+1.2.0
+========
+- Fixes [54](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/54)
+
 1.1.0
 ========
 - Releasing non-preview version
