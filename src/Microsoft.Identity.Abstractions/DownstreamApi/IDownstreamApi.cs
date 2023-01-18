@@ -10,115 +10,115 @@ using System.Threading.Tasks;
 namespace Microsoft.Identity.Abstractions
 {
     /// <summary>
-    /// Interface used to call a downstream REST API, for instance from controllers.
+    /// Interface used to call a downstream API, for instance from controllers.
     /// </summary>
-    public partial interface IDownstreamRestApi
+    public partial interface IDownstreamApi
     {
         /// <summary>
-        /// Calls the downstream REST API based on a programmatic description of the
-        /// downstream REST API. The choice of calling the API on behalf of the user or the app, is made using
+        /// Calls the downstream API based on a programmatic description of the
+        /// downstream API. The choice of calling the API on behalf of the user or the app, is made using
         /// <see cref="AuthorizationHeaderProviderOptions.RequestAppToken"/>.
         /// </summary>
-        /// <param name="downstreamRestApiOptions">Options.</param>
+        /// <param name="downstreamApiOptions">Options.</param>
         /// <param name="user">(Optional) Claims representing a user. This is useful on platforms like Blazor
         /// or Azure Signal R, where the HttpContext is not available. In other platforms, the library
         /// will find the user from the HTTP request context.</param>
-        /// <param name="content">Content to send to the REST API in the case where
+        /// <param name="content">Content to send to the API in the case where
         /// <see cref="AuthorizationHeaderProviderOptions.HttpMethod"/> is <code>HttpMethod.Patch</code>, 
         /// <see cref="HttpMethod.Post"/>, <see cref="HttpMethod.Put"/>.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An <see cref="HttpResponseMessage"/> that the application will process.</returns>
-        public Task<HttpResponseMessage> CallRestApiAsync(
-            DownstreamRestApiOptions downstreamRestApiOptions,
+        public Task<HttpResponseMessage> CallAsync(
+            DownstreamApiOptions downstreamApiOptions,
             ClaimsPrincipal? user = null,
             HttpContent? content = null,
             CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Calls the downstream REST API based on a description of the
-        /// downstream REST API in the configuration (service name), overridatable programmatically. The choice
+        /// Calls the downstream API based on a description of the
+        /// downstream API in the configuration (service name), overridatable programmatically. The choice
         /// of calling the API on behalf of the user or the app, is made by the configuration or programmatically. 
         /// This is the lowest level API. There are other APIs for specific Http methods.
         /// </summary>
         /// <param name="serviceName">Name of the service describing the downstream web API. There can
-        /// be several configuration named sections mapped to a <see cref="DownstreamRestApiOptions"/>,
-        /// each for one downstream REST API. You can pass-in null, but in that case <paramref name="downstreamRestApiOptionsOverride"/>
+        /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
+        /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
         /// needs to be set.</param>
-        /// <param name="downstreamRestApiOptionsOverride">(Optional) Overrides the options proposed in the configuration described
+        /// <param name="downstreamApiOptionsOverride">(Optional) Overrides the options proposed in the configuration described
         /// by <paramref name="serviceName"/>. Can be null, in which case only the configuration is applied.</param>
         /// <param name="user">(Optional) Claims representing a user. This is useful on platforms like Blazor
         /// or Azure Signal R, where the HttpContext is not available. In other platforms, the library
         /// will find the user from the HTTP request context.</param>
-        /// <param name="content">Content to send to the REST API in the case where
+        /// <param name="content">Content to send to the API in the case where
         /// <see cref="AuthorizationHeaderProviderOptions.HttpMethod"/> is <code>HttpMethod.Patch</code>, 
         /// <see cref="HttpMethod.Post"/>, <see cref="HttpMethod.Put"/>.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An <see cref="HttpResponseMessage"/> that the application will process.</returns>
-        public Task<HttpResponseMessage> CallRestApiAsync(
+        public Task<HttpResponseMessage> CallApiAsync(
             string? serviceName,
-            Action<DownstreamRestApiOptions>? downstreamRestApiOptionsOverride = null,
+            Action<DownstreamApiOptions>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             HttpContent? content = null,
             CancellationToken cancellationToken = default);
 
 
         /// <summary>
-        /// Calls the downstream REST API on behalf of the user, based on a description of the
-        /// downstream REST API in the configuration (service name), overridatable programmatically. This
+        /// Calls the downstream API on behalf of the user, based on a description of the
+        /// downstream API in the configuration (service name), overridatable programmatically. This
         /// is a lower level API. There are other APIs for specific Http methods.
         /// </summary>
         /// <param name="serviceName">Name of the service describing the downstream web API. There can
-        /// be several configuration named sections mapped to a <see cref="DownstreamRestApiOptions"/>,
-        /// each for one downstream REST API. You can pass-in null, but in that case <paramref name="downstreamRestApiOptionsOverride"/>
+        /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
+        /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
         /// needs to be set.</param>
-        /// <param name="downstreamRestApiOptionsOverride">(Optional) Overrides the options proposed in the configuration described
+        /// <param name="downstreamApiOptionsOverride">(Optional) Overrides the options proposed in the configuration described
         /// by <paramref name="serviceName"/>.</param>
         /// <param name="user">(Optional) Claims representing a user. This is useful on platforms like Blazor
         /// or Azure Signal R, where the HttpContext is not available. In other platforms, the library
         /// will find the user from the HTTP request context.</param>
-        /// <param name="content">Content to send to the REST API in the case where
+        /// <param name="content">Content to send to the API in the case where
         /// <see cref="AuthorizationHeaderProviderOptions.HttpMethod"/> is <code>HttpMethod.Patch</code>, 
         /// <see cref="HttpMethod.Post"/>, <see cref="HttpMethod.Put"/>.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An <see cref="HttpResponseMessage"/> that the application will process.</returns>
-        Task<HttpResponseMessage> CallRestApiForUserAsync(
+        Task<HttpResponseMessage> CallApiForUserAsync(
             string? serviceName,
-            Action<DownstreamRestApiOptions>? downstreamRestApiOptionsOverride = null,
+            Action<DownstreamApiOptions>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = default,
             HttpContent? content = null,
             CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Calls the downstream REST API on behalf of the app itself, with the required scopes.
+        /// Calls the downstream API on behalf of the app itself, with the required scopes.
         /// </summary>
-        /// <param name="serviceName">Name of the service describing the downstream REST API. There can
-        /// be several configuration named sections mapped to a <see cref="DownstreamRestApiOptions"/>,
-        /// each for one downstream REST API. You can pass-in null, but in that case <paramref name="downstreamRestApiOptionsOverride"/>
+        /// <param name="serviceName">Name of the service describing the downstream API. There can
+        /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
+        /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
         /// needs to be set.</param>
-        /// <param name="downstreamRestApiOptionsOverride">(Optional) Overrides the options proposed in the configuration described
+        /// <param name="downstreamApiOptionsOverride">(Optional) Overrides the options proposed in the configuration described
         /// by <paramref name="serviceName"/>.</param>
-        /// <param name="content">Content to send to the REST API in the case where
+        /// <param name="content">Content to send to the API in the case where
         /// <see cref="AuthorizationHeaderProviderOptions.HttpMethod"/> is <code>HttpMethod.Patch</code>, 
         /// <see cref="HttpMethod.Post"/>, <see cref="HttpMethod.Put"/>.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An <see cref="HttpResponseMessage"/> that the application will process.</returns>
-        Task<HttpResponseMessage> CallRestApiForAppAsync(
+        Task<HttpResponseMessage> CallApiForAppAsync(
             string? serviceName,
-            Action<DownstreamRestApiOptions>? downstreamRestApiOptionsOverride = null,
+            Action<DownstreamApiOptions>? downstreamApiOptionsOverride = null,
             HttpContent? content = null,
             CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Calls a downstream REST API consuming JSON with some data and returns data.
+        /// Calls a downstream API consuming JSON with some data and returns data.
         /// </summary>
         /// <typeparam name="TInput">Input type.</typeparam>
         /// <typeparam name="TOutput">Output type.</typeparam>
-        /// <param name="serviceName">Name of the service describing the downstream REST API. There can
-        /// be several configuration named sections mapped to a <see cref="DownstreamRestApiOptions"/>,
-        /// each for one downstream REST API. You can pass-in null, but in that case <paramref name="downstreamRestApiOptionsOverride"/>
+        /// <param name="serviceName">Name of the service describing the downstream API. There can
+        /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
+        /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
         /// needs to be set.</param>
         /// <param name="input">Input parameter to the downstream web API.</param>
-        /// <param name="downstreamRestApiOptionsOverride">Overrides the options proposed in the configuration described
+        /// <param name="downstreamApiOptionsOverride">Overrides the options proposed in the configuration described
         /// by <paramref name="serviceName"/>.</param>
         /// <param name="user">[Optional] Claims representing a user. This is useful in platforms like Blazor
         /// or Azure Signal R, where the HttpContext is not available. In other platforms, the library
@@ -155,10 +155,10 @@ namespace Microsoft.Identity.Abstractions
         /// }
         /// </code>
         /// </example>
-        Task<TOutput?> CallRestApiForUserAsync<TInput, TOutput>(
+        Task<TOutput?> CallApiForUserAsync<TInput, TOutput>(
             string? serviceName,
             TInput input,
-            Action<DownstreamRestApiOptions>? downstreamRestApiOptionsOverride = null,
+            Action<DownstreamApiOptions>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = default,
             CancellationToken cancellationToken = default)
             where TOutput : class;
@@ -167,42 +167,42 @@ namespace Microsoft.Identity.Abstractions
         /// Call a web API endpoint with an HttpGet, and return strongly typed data.
         /// </summary>
         /// <typeparam name="TOutput">Output type.</typeparam>
-        /// <param name="serviceName">Name of the service describing the downstream REST API. There can
-        /// be several configuration named sections mapped to a <see cref="DownstreamRestApiOptions"/>,
-        /// each for one downstream REST API. You can pass-in null, but in that case <paramref name="downstreamRestApiOptionsOverride"/>
+        /// <param name="serviceName">Name of the service describing the downstream API. There can
+        /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
+        /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
         /// needs to be set.</param>
-        /// <param name="downstreamRestApiOptionsOverride">Overrides the options proposed in the configuration described
+        /// <param name="downstreamApiOptionsOverride">Overrides the options proposed in the configuration described
         /// by <paramref name="serviceName"/>.</param>
         /// <param name="user">[Optional] Claims representing a user. This is useful in platforms like Blazor
         /// or Azure Signal R, where the HttpContext is not available. In other platforms, the library
         /// will find the user from the HttpContext.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The value returned by the downstream web API.</returns>
-        Task<TOutput?> CallRestApiForUserAsync<TOutput>(
+        Task<TOutput?> CallApiForUserAsync<TOutput>(
             string serviceName,
-            Action<DownstreamRestApiOptions>? downstreamRestApiOptionsOverride = null,
+            Action<DownstreamApiOptions>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = default,
             CancellationToken cancellationToken = default)
             where TOutput : class;
 
         /// <summary>
-        /// Calls a downstream REST API consuming JSON with some data and returns data.
+        /// Calls a downstream API consuming JSON with some data and returns data.
         /// </summary>
         /// <typeparam name="TInput">Input type.</typeparam>
         /// <typeparam name="TOutput">Output type.</typeparam>
-        /// <param name="serviceName">Name of the service describing the downstream REST API. There can
-        /// be several configuration named sections mapped to a <see cref="DownstreamRestApiOptions"/>,
-        /// each for one downstream REST API. You can pass-in null, but in that case <paramref name="downstreamRestApiOptionsOverride"/>
+        /// <param name="serviceName">Name of the service describing the downstream API. There can
+        /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
+        /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
         /// needs to be set.</param>
         /// <param name="input">Input parameter to the downstream web API.</param>
-        /// <param name="downstreamRestApiOptionsOverride">Overrides the options proposed in the configuration described
+        /// <param name="downstreamApiOptionsOverride">Overrides the options proposed in the configuration described
         /// by <paramref name="serviceName"/>.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The value returned by the downstream web API.</returns>
-        Task<TOutput?> CallRestApiForAppAsync<TInput, TOutput>(
+        Task<TOutput?> CallApiForAppAsync<TInput, TOutput>(
             string? serviceName,
             TInput input,
-            Action<DownstreamRestApiOptions>? downstreamRestApiOptionsOverride = null,
+            Action<DownstreamApiOptions>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default)
             where TOutput : class;
 
@@ -210,17 +210,17 @@ namespace Microsoft.Identity.Abstractions
         /// Call a web API endpoint with an HttpGet, and return strongly typed data.
         /// </summary>
         /// <typeparam name="TOutput">Output type.</typeparam>
-        /// <param name="serviceName">Name of the service describing the downstream REST API. There can
-        /// be several configuration named sections mapped to a <see cref="DownstreamRestApiOptions"/>,
-        /// each for one downstream REST API. You can pass-in null, but in that case <paramref name="downstreamRestApiOptionsOverride"/>
+        /// <param name="serviceName">Name of the service describing the downstream API. There can
+        /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
+        /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
         /// needs to be set.</param>
-        /// <param name="downstreamRestApiOptionsOverride">Overrides the options proposed in the configuration described
+        /// <param name="downstreamApiOptionsOverride">Overrides the options proposed in the configuration described
         /// by <paramref name="serviceName"/>.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The value returned by the downstream web API.</returns>
-        Task<TOutput?> CallRestApiForAppAsync<TOutput>(
+        Task<TOutput?> CallApiForAppAsync<TOutput>(
             string serviceName,
-            Action<DownstreamRestApiOptions>? downstreamRestApiOptionsOverride = null,
+            Action<DownstreamApiOptions>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default)
             where TOutput : class;
     }

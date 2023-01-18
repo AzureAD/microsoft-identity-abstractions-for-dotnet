@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="DownstreamRestApi\IDownstreamRestApi.HttpMethods.tt">
-      <LastGenOutput>IDownstreamRestApi.HttpMethods.cs</LastGenOutput>
+    <None Update="DownstreamApi\IDownstreamApi.HttpMethods.tt">
+      <LastGenOutput>IDownstreamApi.HttpMethods.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
     </None>
   </ItemGroup>
@@ -20,10 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="DownstreamRestApi\IDownstreamRestApi.HttpMethods.cs">
+    <Compile Update="DownstreamApi\IDownstreamApi.HttpMethods.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>IDownstreamRestApi.HttpMethods.tt</DependentUpon>
+      <DependentUpon>IDownstreamApi.HttpMethods.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 

@@ -6,28 +6,28 @@ using System.Net.Http;
 namespace Microsoft.Identity.Abstractions
 {
     /// <summary>
-    /// Specialization of <see cref="DownstreamRestApiOptions"/> where the <see cref="AuthorizationHeaderProviderOptions.HttpMethod"/>
+    /// Specialization of <see cref="DownstreamApiOptions"/> where the <see cref="AuthorizationHeaderProviderOptions.HttpMethod"/>
     /// is not settable beyond it's construction.
     /// </summary>
     /// <remarks>This class is useful to provide a better developer experience on the specialized methods
-    /// of <see cref="IDownstreamRestApi"/> where the HTTP method is provided already by the name of the 
+    /// of <see cref="IDownstreamApi"/> where the HTTP method is provided already by the name of the 
     /// method, and should not be overriden by the options.</remarks>
-    public class DownstreamRestApiOptionsReadOnlyHttpMethod : DownstreamRestApiOptions
+    public class DownstreamApiOptionsReadOnlyHttpMethod : DownstreamApiOptions
     {
         /// <summary>
-        /// Copy constructor for <see cref="DownstreamRestApiOptionsReadOnlyHttpMethod"/>.
+        /// Copy constructor for <see cref="DownstreamApiOptionsReadOnlyHttpMethod"/>.
         /// </summary>
         /// <param name="other">other instance to copy from.</param>
-        private DownstreamRestApiOptionsReadOnlyHttpMethod(DownstreamRestApiOptionsReadOnlyHttpMethod other) : base(other)
+        private DownstreamApiOptionsReadOnlyHttpMethod(DownstreamApiOptionsReadOnlyHttpMethod other) : base(other)
         {
         }
 
         /// <summary>
-        /// Constructor fro a <see cref="DownstreamRestApiOptions"/> and an HTTP method.
+        /// Constructor fro a <see cref="DownstreamApiOptions"/> and an HTTP method.
         /// </summary>
         /// <param name="options">Options</param>
         /// <param name="httpMethod">HTTP method.</param>
-        public DownstreamRestApiOptionsReadOnlyHttpMethod(DownstreamRestApiOptions options, HttpMethod httpMethod) : base(options)
+        public DownstreamApiOptionsReadOnlyHttpMethod(DownstreamApiOptions options, HttpMethod httpMethod) : base(options)
         {
             HttpMethod = httpMethod;
         }
@@ -41,15 +41,15 @@ namespace Microsoft.Identity.Abstractions
         /// Clone the options
         /// </summary>
         /// <returns>A clone.</returns>
-        public new DownstreamRestApiOptionsReadOnlyHttpMethod Clone()
+        public new DownstreamApiOptionsReadOnlyHttpMethod Clone()
         {
-            return (CloneInternal() as DownstreamRestApiOptionsReadOnlyHttpMethod)!;
+            return (CloneInternal() as DownstreamApiOptionsReadOnlyHttpMethod)!;
         }
 
         /// <inheritdoc/>
         protected override AuthorizationHeaderProviderOptions CloneInternal()
         {
-            return new DownstreamRestApiOptionsReadOnlyHttpMethod(this);
+            return new DownstreamApiOptionsReadOnlyHttpMethod(this);
         }
     }
 }
