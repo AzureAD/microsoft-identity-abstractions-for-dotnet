@@ -10,12 +10,12 @@ namespace Microsoft.Identity.Abstractions
     /// <summary>
     /// Options passed-in to call downstream web APIs.
     /// </summary>
-    public class DownstreamRestApiOptions : AuthorizationHeaderProviderOptions
+    public class DownstreamApiOptions : AuthorizationHeaderProviderOptions
     {
         /// <summary>
         /// Default constructor
         /// </summary>
-        public DownstreamRestApiOptions()
+        public DownstreamApiOptions()
         {
         }
 
@@ -23,7 +23,7 @@ namespace Microsoft.Identity.Abstractions
         /// Copy constructor
         /// </summary>
         /// <param name="other"></param>
-        public DownstreamRestApiOptions(DownstreamRestApiOptions other) : base(other)
+        public DownstreamApiOptions(DownstreamApiOptions other) : base(other)
         {
             Scopes = other.Scopes;
             Serializer = other.Serializer;
@@ -34,15 +34,15 @@ namespace Microsoft.Identity.Abstractions
         /// Clone the options (to be able to override them).
         /// </summary>
         /// <returns>A clone of the options.</returns>
-        public new DownstreamRestApiOptions Clone()
+        public new DownstreamApiOptions Clone()
         {
-            return (CloneInternal() as DownstreamRestApiOptions)!;
+            return (CloneInternal() as DownstreamApiOptions)!;
         }
 
         /// <inheritdoc/>
         protected override AuthorizationHeaderProviderOptions CloneInternal()
         {
-            return new DownstreamRestApiOptions(this);
+            return new DownstreamApiOptions(this);
         }
 
         /// <summary>

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Microsoft.Identity.Abstractions.DownstreamRestApi.Tests
+namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
 {
     internal class Todo
     {
@@ -20,9 +20,9 @@ namespace Microsoft.Identity.Abstractions.DownstreamRestApi.Tests
     {
     }
 
-    internal class DownstreamRestApiController
+    internal class DownstreamApiController
     {
-        private IDownstreamRestApi _downstreamWebApi = new CustomDownstreamRestApi();
+        private IDownstreamApi _downstreamWebApi = new CustomDownstreamApi();
         private const string ServiceName = "TodoList";
 
         private ActionResult View(object? _) { return new ActionResult(); }
@@ -86,7 +86,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamRestApi.Tests
         // POST: TodoList/Edit/5
         public async Task<ActionResult> Edit(int id, /*[Bind("Id,Title,Owner")]*/ Todo todo)
         {
-            await _downstreamWebApi.CallRestApiForUserAsync<Todo, Todo>(
+            await _downstreamWebApi.CallApiForUserAsync<Todo, Todo>(
                 ServiceName,
                 todo,
                 options =>
