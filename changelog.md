@@ -1,3 +1,7 @@
+2.0.0
+========
+- Rename DownstreamRestApi to DownstreamApi. 
+
 1.2.0
 ========
 - Fixes [54](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/54)
