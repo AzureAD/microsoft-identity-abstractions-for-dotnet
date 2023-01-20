@@ -20,7 +20,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             return Task.FromResult<HttpResponseMessage>(null!);
         }
 
-        public Task<HttpResponseMessage> CallAsync(DownstreamApiOptions? downstreamApiOptions, ClaimsPrincipal? user = null, HttpContent? content = null, CancellationToken cancellationToken = default)
+        public Task<HttpResponseMessage> CallApiAsync(DownstreamApiOptions? downstreamApiOptions, ClaimsPrincipal? user = null, HttpContent? content = null, CancellationToken cancellationToken = default)
         {
             return Task.FromResult<HttpResponseMessage>(null!);
         }
