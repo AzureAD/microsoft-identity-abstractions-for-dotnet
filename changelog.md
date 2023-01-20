@@ -1,3 +1,7 @@
+2.0.1
+========
+- Rename `CallAsync` to `CallApiAsync`
+
 2.0.0
 ========
 - Rename DownstreamRestApi to DownstreamApi. 
