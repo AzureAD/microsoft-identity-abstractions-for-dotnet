@@ -121,7 +121,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
                 });
 
             // Calls a service purely programmatically. 
-            downstreamApi.CallAsync(new DownstreamApiOptions { HttpMethod = HttpMethod.Get, RequestAppToken = false });
+            downstreamApi.CallApiAsync(new DownstreamApiOptions { HttpMethod = HttpMethod.Get, RequestAppToken = false });
 
             // In the following call, it's not possible to set the HttpMethod in the delegate, as it would no
             // make sense: it's already provided in the name of the method

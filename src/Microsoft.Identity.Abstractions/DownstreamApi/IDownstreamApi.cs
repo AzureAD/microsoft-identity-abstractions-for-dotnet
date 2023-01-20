@@ -28,7 +28,7 @@ namespace Microsoft.Identity.Abstractions
         /// <see cref="HttpMethod.Post"/>, <see cref="HttpMethod.Put"/>.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An <see cref="HttpResponseMessage"/> that the application will process.</returns>
-        public Task<HttpResponseMessage> CallAsync(
+        public Task<HttpResponseMessage> CallApiAsync(
             DownstreamApiOptions downstreamApiOptions,
             ClaimsPrincipal? user = null,
             HttpContent? content = null,
