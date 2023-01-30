@@ -7,8 +7,14 @@ libraries (Microsoft.IdentityModel, MSAL.NET and Microsoft.Identity.Web). It exp
 
 1. Application options and credentials loader
 
+   The application options are typically the options that you find in configuration files like the appsettings.json
+   file. They describe the authentication aspects of your application. The library offers two layer. A standard
+   layer, and a Microsoft Identity platform specialization.
+
    ![image](https://user-images.githubusercontent.com/13203188/215366542-b2a8488b-ff3c-4de7-9634-7f6f29a9b2d3.png)
 
+   An important part of the application options are the credentials. In addition to the credential descriptions, the
+   library offers extensibility mechanisms so that implementers can add their own credential loaders.
    ![image](https://user-images.githubusercontent.com/13203188/206561108-acee3ef2-0183-4390-9238-a053a6e70aee.png)
 
 2. Acquire tokens from Azure AD
