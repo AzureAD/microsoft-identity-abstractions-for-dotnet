@@ -137,6 +137,22 @@ namespace Microsoft.Identity.Abstractions
         public string? SignedAssertionFileDiskPath { get; set; }
 
         /// <summary>
+        /// Tenant in which the application is registered. This property is only used when
+        /// <see cref="SourceType"/> is <see cref="CredentialSource.AutoDecryptKeys"/>, in order
+        /// to determine the authority to use to get a token to get the decrypt the keys. The cloud
+        /// instance will be the same as the application, but the application can be a multi-tenant
+        /// application (tenant = <b>common</b> or <b>organizations</b>), and in this case to get a token, the
+        /// credential type needs to provide a tenant.
+        /// </summary>
+        public string? DecryptKeysApplicationTenant { get; set; }
+
+        /// <summary>
+        /// Protocol to use to get the decrypt keys. This property is only used when
+        /// <see cref="SourceType"/> is <see cref="CredentialSource.AutoDecryptKeys"/>.
+        /// </summary>
+        public string? DecryptKeysProtocol { get; set; } = "bearer";
+
+        /// <summary>
         /// Reference to the certificate or value.
         /// </summary>
         /// <list type="bullet">
@@ -242,6 +258,9 @@ namespace Microsoft.Identity.Abstractions
                     CredentialSource.SignedAssertionFromManagedIdentity 
                     or CredentialSource.SignedAssertionFilePath 
                     or CredentialSource.SignedAssertionFromVault => CredentialType.SignedAssertion,
+
+                    CredentialSource.AutoDecryptKeys => CredentialType.DecryptKeys,
+
                     _ => default,
                 };
             }

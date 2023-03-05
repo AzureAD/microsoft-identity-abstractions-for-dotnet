@@ -56,6 +56,11 @@ namespace Microsoft.Identity.Abstractions
         /// <summary>
         /// URI to the vault.
         /// </summary>
-        SignedAssertionFromVault = 9
+        SignedAssertionFromVault = 9,
+
+        /// <summary>
+        /// Automatic decrypt keys.
+        /// </summary>
+        AutoDecryptKeys= 10
     }
 }
