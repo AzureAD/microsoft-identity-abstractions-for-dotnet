@@ -148,9 +148,9 @@ namespace Microsoft.Identity.Abstractions
 
         /// <summary>
         /// Protocol to use to get the decrypt keys. This property is only used when
-        /// <see cref="SourceType"/> is <see cref="CredentialSource.AutoDecryptKeys"/>.
+        /// <see cref="SourceType"/> is <see cref="CredentialSource.AutoDecryptKeys"/>. By default, "Bearer"
         /// </summary>
-        public string? DecryptKeysProtocol { get; set; } = "bearer";
+        public string? DecryptKeysProtocol { get; set; } = "Bearer";
 
         /// <summary>
         /// Reference to the certificate or value.
