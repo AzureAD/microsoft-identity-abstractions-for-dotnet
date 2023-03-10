@@ -142,15 +142,10 @@ namespace Microsoft.Identity.Abstractions
         /// to determine the authority to use to get a token to get the decrypt the keys. The cloud
         /// instance will be the same as the application, but the application can be a multi-tenant
         /// application (tenant = <b>common</b> or <b>organizations</b>), and in this case to get a token, the
-        /// credential type needs to provide a tenant.
+        /// credential type needs to provide a tenant. In general the developper might want to specify 
+        /// authentication options, including protocol, PopKey, etc ...
         /// </summary>
-        public string? DecryptKeysApplicationTenant { get; set; }
-
-        /// <summary>
-        /// Protocol to use to get the decrypt keys. This property is only used when
-        /// <see cref="SourceType"/> is <see cref="CredentialSource.AutoDecryptKeys"/>. By default, "Bearer"
-        /// </summary>
-        public string? DecryptKeysProtocol { get; set; } = "Bearer";
+        public AuthorizationHeaderProviderOptions? DecryptKeysAuthenticationOptions { get; set; }
 
         /// <summary>
         /// Reference to the certificate or value.

@@ -282,12 +282,17 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.AutoDecryptKeys,
-                DecryptKeysApplicationTenant = "mytenant.onmicrosoftonline.com",
-                DecryptKeysProtocol = "pop"
+                DecryptKeysAuthenticationOptions = new AuthorizationHeaderProviderOptions
+                {
+                     ProtocolScheme = "pop",
+                    AcquireTokenOptions = new AcquireTokenOptions {
+                         Tenant = "mytenant.onmicrosoftonline.com",
+                    }
+                }
             };
             Assert.Equal(CredentialType.DecryptKeys, credentialDescription.CredentialType);
-            Assert.Equal("mytenant.onmicrosoftonline.com", credentialDescription.DecryptKeysApplicationTenant);
-            Assert.Equal("pop", credentialDescription.DecryptKeysProtocol);
+            Assert.Equal("mytenant.onmicrosoftonline.com", credentialDescription.DecryptKeysAuthenticationOptions.AcquireTokenOptions.Tenant);
+            Assert.Equal("pop", credentialDescription.DecryptKeysAuthenticationOptions.ProtocolScheme);
             Assert.Null(credentialDescription.ReferenceOrValue);
             Assert.Null(credentialDescription.Container);
         }
