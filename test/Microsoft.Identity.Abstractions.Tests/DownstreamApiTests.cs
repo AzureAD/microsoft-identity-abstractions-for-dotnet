@@ -28,6 +28,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
                     ForceRefresh = true,
                     LongRunningWebApiSessionKey = AcquireTokenOptions.LongRunningWebApiSessionKeyAuto,
                     PopPublicKey = "PopKey",
+                    JwkClaim = "jwkClaim",
                     Tenant = "domain.com",
                     UserFlow = "susi"
 
@@ -75,12 +76,13 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ForceRefresh, downstreamApiClone.AcquireTokenOptions.ForceRefresh);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.LongRunningWebApiSessionKey, downstreamApiClone.AcquireTokenOptions.LongRunningWebApiSessionKey);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.PopPublicKey, downstreamApiClone.AcquireTokenOptions.PopPublicKey);
+            Assert.Equal(downstreamApiOptions.AcquireTokenOptions.JwkClaim, downstreamApiClone.AcquireTokenOptions.JwkClaim);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.Tenant, downstreamApiClone.AcquireTokenOptions.Tenant);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.UserFlow, downstreamApiClone.AcquireTokenOptions.UserFlow);
 
             // If this fails, think of also adding a line to test the new property
             Assert.Equal(10, typeof(DownstreamApiOptions).GetProperties().Length);
-            Assert.Equal(11, typeof(AcquireTokenOptions).GetProperties().Length);
+            Assert.Equal(12, typeof(AcquireTokenOptions).GetProperties().Length);
 
             DownstreamApiOptionsReadOnlyHttpMethod options = new DownstreamApiOptionsReadOnlyHttpMethod(downstreamApiOptions, HttpMethod.Delete);
             Assert.Equal(HttpMethod.Delete, options.HttpMethod);
