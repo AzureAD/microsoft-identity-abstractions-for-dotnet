@@ -1,3 +1,8 @@
+2.1.0
+========
+- Support a credential description for auto decrypt keys. See issue [#65](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/65) for details.
+- Add `JwtClaim` to `AquireTokenOptions`. See issue [#67]([Support a credential description for auto decrypt keys](https://github.com/AzureAD)/microsoft-identity-abstractions-for-dotnet/issues/67) for details.
+
 2.0.1
 ========
 - Rename `CallAsync` to `CallApiAsync`
