@@ -32,6 +32,7 @@ namespace Microsoft.Identity.Abstractions
             ForceRefresh = other.ForceRefresh;
             Claims = other.Claims;
             PopPublicKey = other.PopPublicKey;
+            JwkClaim = other.JwkClaim;
             LongRunningWebApiSessionKey = other.LongRunningWebApiSessionKey;
             Tenant = other.Tenant;
             UserFlow = other.UserFlow;
@@ -80,6 +81,11 @@ namespace Microsoft.Identity.Abstractions
         /// which MSAL can manage. See https://aka.ms/msal-net-pop.
         /// </summary>
         public string? PopPublicKey { get; set; }
+
+        /// <summary>
+        /// In addition to the <see cref="PopPublicKey"/>, specificy the JwkClaim when needed in specific POP protocols. 
+        /// </summary>
+        public string? JwkClaim { get; set; }
 
         /// <summary>
         /// Key used for long running web APIs that need to call downstream web
