@@ -21,6 +21,11 @@ namespace Microsoft.Identity.Abstractions
         /// <summary>
         /// Signed assertion.
         /// </summary>
-        SignedAssertion = 2
+        SignedAssertion = 2,
+
+        /// <summary>
+        /// Decrypt keys.
+        /// </summary>
+        DecryptKeys = 3
     }
 }

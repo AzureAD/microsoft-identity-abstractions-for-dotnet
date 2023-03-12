@@ -17,6 +17,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
 
         public Task<HttpResponseMessage> CallApiAsync(string? serviceName, Action<DownstreamApiOptions>? downstreamApiOptionsOverride = null, ClaimsPrincipal? user = null, HttpContent? content = null, CancellationToken cancellationToken = default)
         {
+            downstreamApiOptionsOverride?.Invoke(new DownstreamApiOptions());
             return Task.FromResult<HttpResponseMessage>(null!);
         }
 

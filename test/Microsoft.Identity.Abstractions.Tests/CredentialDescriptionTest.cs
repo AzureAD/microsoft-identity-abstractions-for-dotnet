@@ -264,8 +264,64 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             Assert.True(credentialDescription.Skip);
         }
 
-        // Both container and reference or value.
-        [Theory]
+        [Fact]
+        public void AutomaticDecryptKeys()
+        {
+            // Automatic decrypt keys.
+            /*
+            {
+                "TokenDecryptionCredentials": [
+                {
+                    "SourceType": "AutoDecryptKeys",
+                    "DecryptKeysAuthenticationOptions" : {
+                        "ProtocolScheme": "Bearer",
+                        "AcquireTokenOptions": {
+                            "Tenant": "mytenant.onmicrosoftonline.com"
+                        }
+                    }
+                }]
+            }
+            */
+
+            CredentialDescription credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.AutoDecryptKeys,
+                DecryptKeysAuthenticationOptions = new AuthorizationHeaderProviderOptions
+                {
+                     ProtocolScheme = "Bearer",
+                    AcquireTokenOptions = new AcquireTokenOptions {
+                         Tenant = "mytenant.onmicrosoftonline.com",
+                    }
+                }
+            };
+            Assert.Equal(CredentialType.DecryptKeys, credentialDescription.CredentialType);
+            Assert.Equal("mytenant.onmicrosoftonline.com", credentialDescription.DecryptKeysAuthenticationOptions.AcquireTokenOptions.Tenant);
+            Assert.Equal("Bearer", credentialDescription.DecryptKeysAuthenticationOptions.ProtocolScheme);
+            Assert.Null(credentialDescription.ReferenceOrValue);
+            Assert.Null(credentialDescription.Container);
+        }
+
+        [Fact]
+        public void UnknownCredentialSource()
+        {
+            CredentialDescription credentialDescription = new CredentialDescription
+            {
+                SourceType = (CredentialSource)(1000)
+            };
+            Assert.Equal(default(CredentialType), credentialDescription.CredentialType);
+            Assert.Null(credentialDescription.ReferenceOrValue);
+            Assert.Null(credentialDescription.Container);
+
+            credentialDescription.SourceType = (CredentialSource)(-1);
+            credentialDescription.ReferenceOrValue = "referenceOrValue";
+            credentialDescription.Container = "container";
+            Assert.Equal(default(CredentialType), credentialDescription.CredentialType);
+            Assert.Null(credentialDescription.ReferenceOrValue);
+            Assert.Null(credentialDescription.Container);
+        }
+
+            // Both container and reference or value.
+            [Theory]
         [InlineData(CredentialSource.Base64Encoded)]
         [InlineData(CredentialSource.StoreWithThumbprint)]
         [InlineData(CredentialSource.StoreWithDistinguishedName)]
