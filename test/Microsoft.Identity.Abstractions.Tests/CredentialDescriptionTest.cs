@@ -274,7 +274,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                 {
                     "SourceType": "AutoDecryptKeys",
                     "DecryptKeysAuthenticationOptions" : {
-                        "ProtocolScheme": "pop",
+                        "ProtocolScheme": "Bearer",
                         "AcquireTokenOptions": {
                             "Tenant": "mytenant.onmicrosoftonline.com"
                         }
@@ -288,7 +288,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                 SourceType = CredentialSource.AutoDecryptKeys,
                 DecryptKeysAuthenticationOptions = new AuthorizationHeaderProviderOptions
                 {
-                     ProtocolScheme = "pop",
+                     ProtocolScheme = "Bearer",
                     AcquireTokenOptions = new AcquireTokenOptions {
                          Tenant = "mytenant.onmicrosoftonline.com",
                     }

@@ -137,12 +137,12 @@ namespace Microsoft.Identity.Abstractions
         public string? SignedAssertionFileDiskPath { get; set; }
 
         /// <summary>
-        /// Tenant in which the application is registered. This property is only used when
-        /// <see cref="SourceType"/> is <see cref="CredentialSource.AutoDecryptKeys"/>, in order
+        /// Authentication options used to produce an authorization header to access the decrypt keys.
+        /// This property is only used when <see cref="SourceType"/> is <see cref="CredentialSource.AutoDecryptKeys"/>, in order
         /// to determine the authority to use to get a token to get the decrypt the keys. The cloud
         /// instance will be the same as the application, but the application can be a multi-tenant
         /// application (tenant = <b>common</b> or <b>organizations</b>), and in this case to get a token, the
-        /// credential type needs to provide a tenant. In general the developper might want to specify 
+        /// credential type needs to provide a tenant. More generally you might want to specify 
         /// authentication options, including protocol, PopKey, etc ...
         /// </summary>
         public AuthorizationHeaderProviderOptions? DecryptKeysAuthenticationOptions { get; set; }
