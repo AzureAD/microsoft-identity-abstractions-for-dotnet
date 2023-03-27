@@ -11,6 +11,8 @@
     To override a version:
     <PackageVersion Include="Library" VersionOverride="Version"/>
 
+    a) cover all targets for IdWeb and MISE
+    b) Streamline dependency versions
     -->
 
   <PropertyGroup>
