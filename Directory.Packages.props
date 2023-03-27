@@ -1,4 +1,18 @@
 <Project>
+
+    <!--
+    Based on https://devblogs.microsoft.com/nuget/introducing-central-package-management/
+
+    Requirements:
+    - Visual Studio 2022 17.2 and later
+    - .NET SDK 6.0.300 and later
+    - nuget.exe 6.2.0 and later
+
+    To override a version:
+    <PackageVersion Include="Library" VersionOverride="Version"/>
+
+    -->
+
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
