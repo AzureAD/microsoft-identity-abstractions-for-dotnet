@@ -28,7 +28,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
                     ForceRefresh = true,
                     LongRunningWebApiSessionKey = AcquireTokenOptions.LongRunningWebApiSessionKeyAuto,
                     PopPublicKey = "PopKey",
-                    JwkClaim = "jwkClaim",
+                    PopClaim = "jwkClaim",
                     Tenant = "domain.com",
                     UserFlow = "susi"
 
@@ -76,7 +76,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ForceRefresh, downstreamApiClone.AcquireTokenOptions.ForceRefresh);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.LongRunningWebApiSessionKey, downstreamApiClone.AcquireTokenOptions.LongRunningWebApiSessionKey);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.PopPublicKey, downstreamApiClone.AcquireTokenOptions.PopPublicKey);
-            Assert.Equal(downstreamApiOptions.AcquireTokenOptions.JwkClaim, downstreamApiClone.AcquireTokenOptions.JwkClaim);
+            Assert.Equal(downstreamApiOptions.AcquireTokenOptions.PopClaim, downstreamApiClone.AcquireTokenOptions.PopClaim);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.Tenant, downstreamApiClone.AcquireTokenOptions.Tenant);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.UserFlow, downstreamApiClone.AcquireTokenOptions.UserFlow);
 
