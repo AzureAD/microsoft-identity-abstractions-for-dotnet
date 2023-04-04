@@ -32,7 +32,7 @@ namespace Microsoft.Identity.Abstractions
             ForceRefresh = other.ForceRefresh;
             Claims = other.Claims;
             PopPublicKey = other.PopPublicKey;
-            JwkClaim = other.JwkClaim;
+            PopClaim = other.PopClaim;
             LongRunningWebApiSessionKey = other.LongRunningWebApiSessionKey;
             Tenant = other.Tenant;
             UserFlow = other.UserFlow;
@@ -83,9 +83,9 @@ namespace Microsoft.Identity.Abstractions
         public string? PopPublicKey { get; set; }
 
         /// <summary>
-        /// In addition to the <see cref="PopPublicKey"/>, specificy the JwkClaim when needed in specific POP protocols. 
+        /// In addition to the <see cref="PopPublicKey"/>, specify the PopClaim when needed in specific POP protocols. 
         /// </summary>
-        public string? JwkClaim { get; set; }
+        public string? PopClaim { get; set; }
 
         /// <summary>
         /// Key used for long running web APIs that need to call downstream web
