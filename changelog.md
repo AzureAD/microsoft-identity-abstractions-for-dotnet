@@ -1,3 +1,12 @@
+3.0.1
+========
+- Re-add support for net462.
+
+3.0.0
+========
+- Rename `JwtClaim` to `PopClaim` in `AquireTokenOptions`. See issue [#74](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/74) for details.
+- Remove support for net462.
+
 2.1.0
 ========
 - Support a credential description for auto decrypt keys. See issue [#65](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/65) for details.
