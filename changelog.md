@@ -1,3 +1,7 @@
+3.0.1
+========
+- Re-add support for net462.
+
 3.0.0
 ========
 - Rename `JwtClaim` to `PopClaim` in `AquireTokenOptions`. See issue [#74](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/74) for details.
