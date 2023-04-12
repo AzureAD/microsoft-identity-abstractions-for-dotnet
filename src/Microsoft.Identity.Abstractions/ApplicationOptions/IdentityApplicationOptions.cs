@@ -44,6 +44,11 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         public bool EnablePiiLogging { get; set; }
 
+        /// <summary>
+        /// Sets query parameters for the query string in the HTTP request to the IdP.
+        /// </summary>
+        public IDictionary<string, string>? ExtraQueryParameters { get; set; }
+
         #region Token Acquisition
         /// <summary>
         /// Description of the client credentials provided to prove the identity of the web app,

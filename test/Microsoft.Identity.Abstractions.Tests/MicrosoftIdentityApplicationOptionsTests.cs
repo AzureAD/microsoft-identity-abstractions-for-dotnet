@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
@@ -34,6 +35,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                 SendX5C = true,
                 WithSpaAuthCode = true,
                 EnablePiiLogging = true,
+                ExtraQueryParameters = new Dictionary<string, string> { { "slice", "test" } },
                 ClientCredentials = new[]
                 {
                     secret
@@ -73,6 +75,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             Assert.Equal(nameof(microsoftIdentityApplicationOptions.ResetPasswordPath), microsoftIdentityApplicationOptions.ResetPasswordPath);
             Assert.Equal(nameof(microsoftIdentityApplicationOptions.ErrorPath), microsoftIdentityApplicationOptions.ErrorPath);
             Assert.Equal(nameof(microsoftIdentityApplicationOptions.SignUpSignInPolicyId), microsoftIdentityApplicationOptions.DefaultUserFlow);
+            Assert.NotEmpty(microsoftIdentityApplicationOptions.ExtraQueryParameters);
         }
 
 
