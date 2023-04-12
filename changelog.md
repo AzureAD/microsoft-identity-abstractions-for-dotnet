@@ -1,10 +1,15 @@
+3.1.0
+
+========
+- Add `ExtraQueryParameters` to `AcquireTokenOptions`. See [pr](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/79) for details.
+
 3.0.1
 ========
 - Re-add support for net462.
 
 3.0.0
 ========
-- Rename `JwtClaim` to `PopClaim` in `AquireTokenOptions`. See issue [#74](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/74) for details.
+- Rename `JwtClaim` to `PopClaim` in `AcquireTokenOptions`. See issue [#74](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/74) for details.
 - Remove support for net462.
 
 2.1.0
