@@ -1,4 +1,5 @@
-3.1.10
+3.1.0
+
 ========
 - Add `ExtraQueryParameters` to `AcquireTokenOptions`. See [pr](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/79) for details.
 
