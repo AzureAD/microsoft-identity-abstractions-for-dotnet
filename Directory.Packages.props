@@ -16,7 +16,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
 
-  <PropertyGroup Label="Common dependency versions">
+  <ItemGroup Label="Common dependency versions">
     <PackageVersion Include="Azure.Identity" Version="1.8.2" />
     <PackageVersion Include="Azure.Security.KeyVault.Secrets" Version="4.1.0" />
     <PackageVersion Include="Azure.Security.KeyVault.Certificates" Version="4.1.0" />
@@ -52,9 +52,9 @@
     <PackageVersion Include="Xunit" Version="2.4.1" />
     <PackageVersion Include="Xunit.Runner.VisualStudio" Version="2.4.3" />
     <PackageVersion Include="Xunit.Runner.Console" Version="2.4.1" />
-  </PropertyGroup>
+  </ItemGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.0" />
     <PackageVersion Include="Microsoft.AspNetCore.DataProtection" Version="6.0.0" />
@@ -74,9 +74,9 @@
     <PackageVersion Include="System.Security.Cryptography.Xml" Version="6.0.1" />
     <PackageVersion Include="System.Text.Encodings.Web" Version="6.0.0" />
     <PackageVersion Include="System.Text.Json" Version="4.7.2" />
-  </PropertyGroup>
+  </ItemGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'net472'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'net472'">
     <PackageVersion Include="Microsoft.AspNetCore.DataProtection" Version="2.1.1" />
     <PackageVersion Include="Microsoft.Extensions.Caching.Abstractions" Version="2.1.1" />
     <PackageVersion Include="Microsoft.Extensions.Caching.Memory" Version="2.1.1" />
@@ -93,9 +93,9 @@
     <PackageVersion Include="System.Net.Http.Json" Version="3.2.1" />
     <PackageVersion Include="System.Security.Cryptography.Xml" Version="4.7.1" />
     <PackageVersion Include="System.Text.Json" Version="4.7.2" />
-   </PropertyGroup>
+   </ItemGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.18" />
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.18" />
     <PackageVersion Include="Microsoft.AspNetCore.DataProtection" Version="3.1.0" />
@@ -113,9 +113,9 @@
     <PackageVersion Include="System.Net.Http.Json" Version="3.2.1" />
     <PackageVersion Include="System.Text.Json" Version="4.7.2" />
     <PackageVersion Include="System.Security.Cryptography.Xml" Version="4.7.1" />   
-   </PropertyGroup>
+   </ItemGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net5.0'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
     <PackageVersion Include="Microsoft.Extensions.Caching.Abstractions" Version="5.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Caching.Memory" Version="5.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
@@ -128,9 +128,9 @@
     <PackageVersion Include="System.Net.Http.Json" Version="5.0.0" />
     <PackageVersion Include="System.Text.Json" Version="5.0.2" />
     <PackageVersion Include="System.Security.Cryptography.Xml" Version="4.7.1" />    
-   </PropertyGroup>
+   </ItemGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net6.0'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.0" />
     <PackageVersion Include="Microsoft.AspNetCore.DataProtection" Version="6.0.0" />
@@ -145,9 +145,9 @@
     <PackageVersion Include="System.Drawing.Common" Version="6.0.0" />
     <PackageVersion Include="System.Security.Cryptography.Xml" Version="6.0.1" />
     <PackageVersion Include="System.Text.Encodings.Web" Version="6.0.0" />
-  </PropertyGroup>
+  </ItemGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net7.0'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.0" />
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="7.0.0" />
     <PackageVersion Include="Microsoft.AspNetCore.DataProtection" Version="7.0.0" />
@@ -164,5 +164,5 @@
     <PackageVersion Include="System.Drawing.Common" Version="7.0.0" />
     <PackageVersion Include="System.Security.Cryptography.Xml" Version="7.0.0" />
     <PackageVersion Include="System.Text.Encodings.Web" Version="7.0.0" />
-  </PropertyGroup>
+  </ItemGroup>
  </Project>
