@@ -17,152 +17,152 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Common dependency versions">
-    <AzureIdentityVersion>1.8.2</AzureIdentityVersion>
-    <AzureSecurityKeyVaultSecretsVersion>4.1.0</AzureSecurityKeyVaultSecretsVersion>
-    <AzureSecurityKeyVaultCertificatesVersion>4.1.0</AzureSecurityKeyVaultCertificatesVersion>
-    <NewtonsoftJsonVersion>13.0.2</NewtonsoftJsonVersion>
-    <MicrosoftCodeAnalysisFxCopAnalyzersVersion>3.3.1</MicrosoftCodeAnalysisFxCopAnalyzersVersion>
-    <MicrosoftCodeAnalysisNetAnalyzersVersion>6.0.0</MicrosoftCodeAnalysisNetAnalyzersVersion>
-    <MicrosoftDataSqlClientVersion>1.1.4</MicrosoftDataSqlClientVersion>
-    <MicrosoftDotNetApiCompatVersion>5.0.0-beta.19626.1</MicrosoftDotNetApiCompatVersion>
-    <MicrosoftGraphVersion>4.34.0</MicrosoftGraphVersion>
-    <MicrosoftGraphBetaVersion>4.50.0-preview</MicrosoftGraphBetaVersion>
-    <MicrosoftExtensionsCachingCosmos>1.4.0</MicrosoftExtensionsCachingCosmos>
-    <MicrosoftExtensionsCachingSqlServer>6.0.4</MicrosoftExtensionsCachingSqlServer>
-    <MicrosoftExtensionsCachingStackExchangeRedis>6.0.4</MicrosoftExtensionsCachingStackExchangeRedis>
-    <MicrosoftIdentityClientVersion>4.51.0</MicrosoftIdentityClientVersion>
-    <MicrosoftIdentityModelVersion>6.28.1</MicrosoftIdentityModelVersion>
-    <MicrosoftIdentityModelS2SVersion>3.43.0</MicrosoftIdentityModelS2SVersion>
-    <MicrosoftIdentityWebVersion>2.7.0</MicrosoftIdentityWebVersion>
-    <MicrosoftIdentityWebGraphVersion>2.7.0</MicrosoftIdentityWebGraphVersion>
-    <MicrosoftIdentityAbstractionsVersions>3.0.1</MicrosoftIdentityAbstractionsVersions>
-    <MicrosoftInternalAnalyzersVersion>2.6.7</MicrosoftInternalAnalyzersVersion>
-    <MicrosoftNETTestSdkVersion>17.5.0</MicrosoftNETTestSdkVersion>
-    <MicrosoftOwinVersion>4.2.2</MicrosoftOwinVersion>
-    <MicrosoftOwinSecurityVersion>4.2.2</MicrosoftOwinSecurityVersion>    
-    <MicrosoftSourceLinkAzureReposGitVersion>1.0.0</MicrosoftSourceLinkAzureReposGitVersion>
-    <MicrosoftVisualStudioAzureContainersToolsTargetsVersion>1.10.13</MicrosoftVisualStudioAzureContainersToolsTargetsVersion>
-    <MoqVersion>4.14.4</MoqVersion>
-    <SRSClientVersion>2.0.0.985</SRSClientVersion>
-    <SRSClientNetStandardVersion>2.0.0.1198</SRSClientNetStandardVersion> 
-    <StackExchangeRedis>2.5.61</StackExchangeRedis>
-    <SystemNetHttpVersion>4.3.4</SystemNetHttpVersion>
-    <SystemTextEncodingsWebVersion>4.7.2</SystemTextEncodingsWebVersion>
-    <SwashbuckleAspNetCoreVersion>6.5.0</SwashbuckleAspNetCoreVersion>
-    <XunitVersion>2.4.1</XunitVersion>
-    <XunitRunnerVisualStudioVersion>2.4.3</XunitRunnerVisualStudioVersion>
-    <XunitRunnerConsoleVersion>2.4.1</XunitRunnerConsoleVersion>
+    <PackageVersion Include="Azure.Identity" Version="1.8.2" />
+    <PackageVersion Include="Azure.Security.KeyVault.Secrets" Version="4.1.0" />
+    <PackageVersion Include="Azure.Security.KeyVault.Certificates" Version="4.1.0" />
+    <PackageVersion Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.1" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Data.SqlClient" Version="1.1.4" />
+    <PackageVersion Include="Microsoft.DotNet.ApiCompat" Version="5.0.0-beta.19626.1" />
+    <PackageVersion Include="Microsoft.Graph" Version="4.34.0" />
+    <PackageVersion Include="Microsoft.Graph.Beta" Version="4.50.0-preview" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.Cosmos" Version="1.4.0" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.SqlServer" Version="6.0.4" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.4" />
+    <PackageVersion Include="Microsoft.Identity.Client" Version="4.51.0" />
+    <PackageVersion Include="Microsoft.IdentityModel.Tokens" Version="6.28.1" />
+    <PackageVersion Include="Microsoft.IdentityModel.S2S" Version="3.43.0" />
+    <PackageVersion Include="Microsoft.Identity.Web" Version="2.7.0" />
+    <PackageVersion Include="Microsoft.Identity.Web.Graph" Version="2.7.0" />
+    <PackageVersion Include="Microsoft.Identity.Abstractions" Version="3.0.1" />
+    <PackageVersion Include="Microsoft.Internal.Analyzers" Version="2.6.7" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
+    <PackageVersion Include="Microsoft.Owin" Version="4.2.2" />
+    <PackageVersion Include="Microsoft.Owin.Security" Version="4.2.2" />  
+    <PackageVersion Include="Microsoft.SourceLink.AzureRepos.Git" Version="1.0.0" />
+    <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
+    <PackageVersion Include="Moq" Version="4.14.4" />
+    <PackageVersion Include="SRSClient" Version="2.0.0.985" />
+    <PackageVersion Include="SRSClient.NetStandard" Version="2.0.0.1198" />
+    <PackageVersion Include="StackExchange.Redis" Version="2.5.61" />
+    <PackageVersion Include="System.Net.Http" Version="4.3.4" />
+    <PackageVersion Include="System.Text.Encodings.Web" Version="4.7.2" />
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageVersion Include="Xunit" Version="2.4.1" />
+    <PackageVersion Include="Xunit.Runner.VisualStudio" Version="2.4.3" />
+    <PackageVersion Include="Xunit.Runner.Console" Version="2.4.1" />
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
-    <MicrosoftAspNetCoreAuthenticationJwtBearerVersion>6.0.0</MicrosoftAspNetCoreAuthenticationJwtBearerVersion>
-    <MicrosoftAspNetCoreAuthenticationOpenIdConnectVersion>6.0.0</MicrosoftAspNetCoreAuthenticationOpenIdConnectVersion>
-    <MicrosoftAspNetCoreDataProtectionVersion>6.0.0</MicrosoftAspNetCoreDataProtectionVersion>
-    <MicrosoftExtensionsCachingAbstractionsVersion>6.0.0</MicrosoftExtensionsCachingAbstractionsVersion>
-    <MicrosoftExtensionsCachingMemoryVersion>6.0.0</MicrosoftExtensionsCachingMemoryVersion>
-    <MicrosoftExtensionsConfigurationVersion>6.0.0</MicrosoftExtensionsConfigurationVersion>
-    <MicrosoftExtensionsConfigurationBinderVersion>6.0.0</MicrosoftExtensionsConfigurationBinderVersion>  
-    <MicrosoftExtensionsDependencyInjectionVersion>6.0.0</MicrosoftExtensionsDependencyInjectionVersion>
-    <MicrosoftExtensionsHostingVersion>6.0.0</MicrosoftExtensionsHostingVersion>
-    <MicrosoftExtensionsHttpVersion>6.0.0</MicrosoftExtensionsHttpVersion>
-    <MicrosoftExtensionsLoggingVersion>6.0.0</MicrosoftExtensionsLoggingVersion>
-    <MicrosoftExtensionsLoggingAbstractionsVersion>6.0.0</MicrosoftExtensionsLoggingAbstractionsVersion>
-    <MicrosoftExtensionsOptionsVersion>6.0.0</MicrosoftExtensionsOptionsVersion>
-    <MicrosoftExtensionsOptionsConfigurationExtensionsVersion>6.0.0</MicrosoftExtensionsOptionsConfigurationExtensionsVersion>
-    <SystemDrawingCommonVersion>6.0.0</SystemDrawingCommonVersion>
-    <SystemNetHttpJsonVersion>6.0.0</SystemNetHttpJsonVersion>
-    <SystemSecurityCryptographyXmlVersion>6.0.1</SystemSecurityCryptographyXmlVersion>
-    <SystemTextEncodingsWebVersion>6.0.0</SystemTextEncodingsWebVersion>
-    <SystemTextJsonVersion>4.7.2</SystemTextJsonVersion>
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.DataProtection" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.Abstractions" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.Memory" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Options" Version="6.0.0" />
+    <PackageVersion Include="System.Drawing.Common" Version="6.0.0" />
+    <PackageVersion Include="System.Net.Http.Json" Version="6.0.0" />
+    <PackageVersion Include="System.Security.Cryptography.Xml" Version="6.0.1" />
+    <PackageVersion Include="System.Text.Encodings.Web" Version="6.0.0" />
+    <PackageVersion Include="System.Text.Json" Version="4.7.2" />
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'net472'">
-    <MicrosoftAspNetCoreDataProtectionVersion>2.1.1</MicrosoftAspNetCoreDataProtectionVersion>
-    <MicrosoftExtensionsCachingAbstractionsVersion>2.1.1</MicrosoftExtensionsCachingAbstractionsVersion>
-    <MicrosoftExtensionsCachingMemoryVersion>2.1.1</MicrosoftExtensionsCachingMemoryVersion>
-    <MicrosoftExtensionsConfigurationBinderVersion>2.1.1</MicrosoftExtensionsConfigurationBinderVersion>
-    <MicrosoftExtensionsDependencyInjectionVersion>2.1.1</MicrosoftExtensionsDependencyInjectionVersion>
-    <MicrosoftExtensionsLoggingVersion>2.1.1</MicrosoftExtensionsLoggingVersion>
-    <MicrosoftExtensionsHostingVersion>2.1.1</MicrosoftExtensionsHostingVersion>
-    <MicrosoftExtensionsHttpVersion>2.1.1</MicrosoftExtensionsHttpVersion>
-    <MicrosoftExtensionsLoggingAbstractionsVersion>2.1.1</MicrosoftExtensionsLoggingAbstractionsVersion>
-    <MicrosoftExtensionsConfigurationVersion>2.1.1</MicrosoftExtensionsConfigurationVersion>
-    <MicrosoftExtensionsOptionsVersion>2.1.1</MicrosoftExtensionsOptionsVersion>
-    <MicrosoftExtensionsOptionsConfigurationExtensionsVersion>2.1.1</MicrosoftExtensionsOptionsConfigurationExtensionsVersion>
-    <SystemDrawingCommonVersion>4.7.2</SystemDrawingCommonVersion>
-    <SystemNetHttpJsonVersion>3.2.1</SystemNetHttpJsonVersion>
-    <SystemSecurityCryptographyXmlVersion>4.7.1</SystemSecurityCryptographyXmlVersion>
-    <SystemTextJsonVersion>4.7.2</SystemTextJsonVersion>
-  </PropertyGroup>
+    <PackageVersion Include="Microsoft.AspNetCore.DataProtection" Version="2.1.1" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.Abstractions" Version="2.1.1" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.Memory" Version="2.1.1" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="2.1.1" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="2.1.1" />
+    <PackageVersion Include="Microsoft.Extensions.Logging" Version="2.1.1" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="2.1.1" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="2.1.1" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="2.1.1" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
+    <PackageVersion Include="Microsoft.Extensions.Options" Version="2.1.1" />
+    <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.1.1" />
+    <PackageVersion Include="System.Drawing.Common" Version="4.7.2" />
+    <PackageVersion Include="System.Net.Http.Json" Version="3.2.1" />
+    <PackageVersion Include="System.Security.Cryptography.Xml" Version="4.7.1" />
+    <PackageVersion Include="System.Text.Json" Version="4.7.2" />
+   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
-    <MicrosoftAspNetCoreAuthenticationJwtBearerVersion>3.1.18</MicrosoftAspNetCoreAuthenticationJwtBearerVersion>
-    <MicrosoftAspNetCoreAuthenticationOpenIdConnectVersion>3.1.18</MicrosoftAspNetCoreAuthenticationOpenIdConnectVersion>
-    <MicrosoftAspNetCoreDataProtectionVersion>3.1.0</MicrosoftAspNetCoreDataProtectionVersion>
-    <MicrosoftExtensionsCachingAbstractionsVersion>3.1.0</MicrosoftExtensionsCachingAbstractionsVersion>
-    <MicrosoftExtensionsCachingMemoryVersion>3.1.0</MicrosoftExtensionsCachingMemoryVersion>
-    <MicrosoftExtensionsConfigurationVersion>3.1.0</MicrosoftExtensionsConfigurationVersion>
-    <MicrosoftExtensionsConfigurationBinderVersion>3.1.0</MicrosoftExtensionsConfigurationBinderVersion>
-    <MicrosoftExtensionsDependencyInjectionVersion>3.1.0</MicrosoftExtensionsDependencyInjectionVersion>
-    <MicrosoftExtensionsHttpVersion>3.1.0</MicrosoftExtensionsHttpVersion>
-    <MicrosoftExtensionsLoggingAbstractionsVersion>3.1.0</MicrosoftExtensionsLoggingAbstractionsVersion>
-    <MicrosoftExtensionsLoggingVersion>3.1.0</MicrosoftExtensionsLoggingVersion>
-    <MicrosoftExtensionsOptionsVersion>3.1.0</MicrosoftExtensionsOptionsVersion>
-    <MicrosoftExtensionsOptionsConfigurationExtensionsVersion>3.1.0</MicrosoftExtensionsOptionsConfigurationExtensionsVersion>
-    <SystemDrawingCommonVersion>4.7.2</SystemDrawingCommonVersion>
-    <SystemNetHttpJsonVersion>3.2.1</SystemNetHttpJsonVersion>
-    <SystemTextJsonVersion>4.7.2</SystemTextJsonVersion>
-    <SystemSecurityCryptographyXmlVersion>4.7.1</SystemSecurityCryptographyXmlVersion>    
-  </PropertyGroup>
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.18" />
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.18" />
+    <PackageVersion Include="Microsoft.AspNetCore.DataProtection" Version="3.1.0" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.Abstractions" Version="3.1.0" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.Memory" Version="3.1.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="3.1.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.0" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="3.1.0" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="3.1.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging" Version="3.1.0" />
+    <PackageVersion Include="Microsoft.Extensions.Options" Version="3.1.0" />
+    <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.0" />
+    <PackageVersion Include="System.Drawing.Common" Version="4.7.2" />
+    <PackageVersion Include="System.Net.Http.Json" Version="3.2.1" />
+    <PackageVersion Include="System.Text.Json" Version="4.7.2" />
+    <PackageVersion Include="System.Security.Cryptography.Xml" Version="4.7.1" />   
+   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'net5.0'">
-    <MicrosoftExtensionsCachingAbstractionsVersion>5.0.0</MicrosoftExtensionsCachingAbstractionsVersion>
-    <MicrosoftExtensionsCachingMemoryVersion>5.0.0</MicrosoftExtensionsCachingMemoryVersion>
-    <MicrosoftExtensionsConfigurationVersion>5.0.0</MicrosoftExtensionsConfigurationVersion>
-    <MicrosoftExtensionsDependencyInjectionVersion>5.0.0</MicrosoftExtensionsDependencyInjectionVersion>
-    <MicrosoftExtensionsHttpVersion>5.0.0</MicrosoftExtensionsHttpVersion>
-    <MicrosoftExtensionsLoggingAbstractionsVersion>5.0.0</MicrosoftExtensionsLoggingAbstractionsVersion>
-    <MicrosoftExtensionsOptionsVersion>5.0.0</MicrosoftExtensionsOptionsVersion>
-    <MicrosoftExtensionsOptionsConfigurationExtensionsVersion>5.0.0</MicrosoftExtensionsOptionsConfigurationExtensionsVersion>
-    <SystemDrawingCommonVersion>4.7.2</SystemDrawingCommonVersion>
-    <SystemNetHttpJsonVersion>5.0.0</SystemNetHttpJsonVersion>
-    <SystemTextJsonVersion>5.0.2</SystemTextJsonVersion>
-    <SystemSecurityCryptographyXmlVersion>4.7.1</SystemSecurityCryptographyXmlVersion>     
-  </PropertyGroup>
+    <PackageVersion Include="Microsoft.Extensions.Caching.Abstractions" Version="5.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.Memory" Version="5.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="5.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Options" Version="5.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
+    <PackageVersion Include="System.Drawing.Common" Version="4.7.2" />
+    <PackageVersion Include="System.Net.Http.Json" Version="5.0.0" />
+    <PackageVersion Include="System.Text.Json" Version="5.0.2" />
+    <PackageVersion Include="System.Security.Cryptography.Xml" Version="4.7.1" />    
+   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'net6.0'">
-    <MicrosoftAspNetCoreAuthenticationJwtBearerVersion>6.0.0</MicrosoftAspNetCoreAuthenticationJwtBearerVersion>
-    <MicrosoftAspNetCoreAuthenticationOpenIdConnectVersion>6.0.0</MicrosoftAspNetCoreAuthenticationOpenIdConnectVersion>
-    <MicrosoftAspNetCoreDataProtectionVersion>6.0.0</MicrosoftAspNetCoreDataProtectionVersion>
-    <MicrosoftExtensionsCachingMemoryVersion>6.0.0</MicrosoftExtensionsCachingMemoryVersion>
-    <MicrosoftExtensionsConfigurationVersion>6.0.0</MicrosoftExtensionsConfigurationVersion>
-    <MicrosoftExtensionsConfigurationBinderVersion>6.0.0</MicrosoftExtensionsConfigurationBinderVersion>
-    <MicrosoftExtensionsConfigurationJsonVersion>6.0.0</MicrosoftExtensionsConfigurationJsonVersion>
-    <MicrosoftExtensionsDependencyInjectionVersion>6.0.0</MicrosoftExtensionsDependencyInjectionVersion>
-    <MicrosoftExtensionsHostingVersion>6.0.0</MicrosoftExtensionsHostingVersion>
-    <MicrosoftExtensionsHttpVersion>6.0.0</MicrosoftExtensionsHttpVersion>
-    <MicrosoftExtensionsLoggingVersion>6.0.0</MicrosoftExtensionsLoggingVersion>
-    <SystemDrawingCommonVersion>6.0.0</SystemDrawingCommonVersion>
-    <SystemSecurityCryptographyXmlVersion>6.0.1</SystemSecurityCryptographyXmlVersion>
-    <SystemTextEncodingsWebVersion>6.0.0</SystemTextEncodingsWebVersion>
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.DataProtection" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.Memory" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+    <PackageVersion Include="System.Drawing.Common" Version="6.0.0" />
+    <PackageVersion Include="System.Security.Cryptography.Xml" Version="6.0.1" />
+    <PackageVersion Include="System.Text.Encodings.Web" Version="6.0.0" />
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'net7.0'">
-    <MicrosoftAspNetCoreAuthenticationJwtBearerVersion>7.0.0</MicrosoftAspNetCoreAuthenticationJwtBearerVersion>
-    <MicrosoftAspNetCoreAuthenticationOpenIdConnectVersion>7.0.0</MicrosoftAspNetCoreAuthenticationOpenIdConnectVersion>
-    <MicrosoftAspNetCoreDataProtectionVersion>7.0.0</MicrosoftAspNetCoreDataProtectionVersion>
-    <MicrosoftExtensionsCachingMemoryVersion>7.0.0</MicrosoftExtensionsCachingMemoryVersion>
-    <MicrosoftExtensionsConfigurationVersion>7.0.0</MicrosoftExtensionsConfigurationVersion>
-    <MicrosoftExtensionsConfigurationBinderVersion>7.0.0</MicrosoftExtensionsConfigurationBinderVersion>
-    <MicrosoftExtensionsConfigurationJsonVersion>7.0.0</MicrosoftExtensionsConfigurationJsonVersion>
-    <MicrosoftExtensionsDependencyInjectionVersion>7.0.0</MicrosoftExtensionsDependencyInjectionVersion>
-    <MicrosoftExtensionsHostingVersion>7.0.0</MicrosoftExtensionsHostingVersion>
-    <MicrosoftExtensionsHttpVersion>7.0.0</MicrosoftExtensionsHttpVersion>
-    <MicrosoftExtensionsLoggingVersion>7.0/0</MicrosoftExtensionsLoggingVersion>
-    <MicrosoftExtensionsOptionsVersion>7.0.0</MicrosoftExtensionsOptionsVersion>
-    <MicrosoftExtensionsOptionsConfigurationExtensionsVersion>7.0.0</MicrosoftExtensionsOptionsConfigurationExtensionsVersion>
-    <SystemDrawingCommonVersion>7.0.0</SystemDrawingCommonVersion>
-    <SystemSecurityCryptographyXmlVersion>7.0.0</SystemSecurityCryptographyXmlVersion>
-    <SystemTextEncodingsWebVersion>7.0.0</SystemTextEncodingsWebVersion>
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="7.0.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.DataProtection" Version="7.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.Memory" Version="7.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="7.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging" Version="7.0/0" />
+    <PackageVersion Include="Microsoft.Extensions.Options" Version="7.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0" />
+    <PackageVersion Include="System.Drawing.Common" Version="7.0.0" />
+    <PackageVersion Include="System.Security.Cryptography.Xml" Version="7.0.0" />
+    <PackageVersion Include="System.Text.Encodings.Web" Version="7.0.0" />
   </PropertyGroup>
-</Project>
+ </Project>
