@@ -31,7 +31,7 @@
     <PackageVersion Include="Microsoft.Extensions.Caching.SqlServer" Version="6.0.4" />
     <PackageVersion Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.4" />
     <PackageVersion Include="Microsoft.Identity.Client" Version="4.51.0" />
-    <PackageVersion Include="Microsoft.IdentityModel.Tokens" Version="6.28.1" />
+    <PackageVersion Include="Microsoft.IdentityModel.Abstractions" Version="6.28.1" />
     <PackageVersion Include="Microsoft.IdentityModel.S2S" Version="3.43.0" />
     <PackageVersion Include="Microsoft.Identity.Web" Version="2.7.0" />
     <PackageVersion Include="Microsoft.Identity.Web.Graph" Version="2.7.0" />
