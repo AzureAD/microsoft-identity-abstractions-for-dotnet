@@ -47,7 +47,6 @@
     <PackageVersion Include="SRSClient.NetStandard" Version="2.0.0.1198" />
     <PackageVersion Include="StackExchange.Redis" Version="2.5.61" />
     <PackageVersion Include="System.Net.Http" Version="4.3.4" />
-    <PackageVersion Include="System.Text.Encodings.Web" Version="4.7.2" />
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageVersion Include="Xunit" Version="2.4.1" />
     <PackageVersion Include="Xunit.Runner.VisualStudio" Version="2.4.3" />
@@ -92,6 +91,7 @@
     <PackageVersion Include="System.Drawing.Common" Version="4.7.2" />
     <PackageVersion Include="System.Net.Http.Json" Version="3.2.1" />
     <PackageVersion Include="System.Security.Cryptography.Xml" Version="4.7.1" />
+    <PackageVersion Include="System.Text.Encodings.Web" Version="4.7.2" />
     <PackageVersion Include="System.Text.Json" Version="4.7.2" />
    </ItemGroup>
 
@@ -112,6 +112,7 @@
     <PackageVersion Include="System.Drawing.Common" Version="4.7.2" />
     <PackageVersion Include="System.Net.Http.Json" Version="3.2.1" />
     <PackageVersion Include="System.Text.Json" Version="4.7.2" />
+    <PackageVersion Include="System.Text.Encodings.Web" Version="4.7.2" />
     <PackageVersion Include="System.Security.Cryptography.Xml" Version="4.7.1" />   
    </ItemGroup>
 
@@ -127,6 +128,7 @@
     <PackageVersion Include="System.Drawing.Common" Version="4.7.2" />
     <PackageVersion Include="System.Net.Http.Json" Version="5.0.0" />
     <PackageVersion Include="System.Text.Json" Version="5.0.2" />
+    <PackageVersion Include="System.Text.Encodings.Web" Version="5.0.1" />
     <PackageVersion Include="System.Security.Cryptography.Xml" Version="4.7.1" />    
    </ItemGroup>
 
