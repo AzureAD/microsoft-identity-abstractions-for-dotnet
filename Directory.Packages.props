@@ -15,7 +15,7 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
       <IdentityModelVersion>6.30.0</IdentityModelVersion>
-      <S2SVersion>3.50.0</S2SVersion>
+      <S2SVersion>3.45.0</S2SVersion>
   </PropertyGroup>
 
   <ItemGroup Label="Common dependency versions">
