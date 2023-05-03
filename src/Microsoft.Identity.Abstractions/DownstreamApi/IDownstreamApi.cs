@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading;
@@ -155,6 +156,9 @@ namespace Microsoft.Identity.Abstractions
         /// }
         /// </code>
         /// </example>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("Provide source generation for TInput and TOutput")]
+#endif
         Task<TOutput?> CallApiForUserAsync<TInput, TOutput>(
             string? serviceName,
             TInput input,
@@ -178,6 +182,9 @@ namespace Microsoft.Identity.Abstractions
         /// will find the user from the HttpContext.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The value returned by the downstream web API.</returns>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("Provide source generation for TInput and TOutput")]
+#endif
         Task<TOutput?> CallApiForUserAsync<TOutput>(
             string serviceName,
             Action<DownstreamApiOptions>? downstreamApiOptionsOverride = null,
@@ -199,6 +206,9 @@ namespace Microsoft.Identity.Abstractions
         /// by <paramref name="serviceName"/>.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The value returned by the downstream web API.</returns>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("Provide source generation for TInput and TOutput")]
+#endif
         Task<TOutput?> CallApiForAppAsync<TInput, TOutput>(
             string? serviceName,
             TInput input,
@@ -218,6 +228,9 @@ namespace Microsoft.Identity.Abstractions
         /// by <paramref name="serviceName"/>.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The value returned by the downstream web API.</returns>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("Provide source generation for TInput and TOutput")]
+#endif
         Task<TOutput?> CallApiForAppAsync<TOutput>(
             string serviceName,
             Action<DownstreamApiOptions>? downstreamApiOptionsOverride = null,

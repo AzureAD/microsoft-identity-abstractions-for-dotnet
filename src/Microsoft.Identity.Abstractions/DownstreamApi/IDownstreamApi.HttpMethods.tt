@@ -8,6 +8,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading;
@@ -92,6 +93,9 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("Provide source generation for TInput and/or TOutput")]
+#endif
         public <#= returnType #> <#= httpMethod #>For<#= token #>Async<#= template #>(
             string? serviceName,
 <# if (hasInput){ #>
