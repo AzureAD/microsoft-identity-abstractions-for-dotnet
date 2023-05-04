@@ -94,7 +94,7 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET6_0_OR_GREATER
-        [RequiresUnreferencedCode("Provide source generation for TInput and/or TOutput")]
+        [RequiresUnreferencedCode("Provide source generation for TInput and/or TOutput. See https://aka.ms/ms-id-web/il-trimming/generator")]
 #endif
         public <#= returnType #> <#= httpMethod #>For<#= token #>Async<#= template #>(
             string? serviceName,
