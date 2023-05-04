@@ -38,7 +38,8 @@
     <PackageVersion Include="Microsoft.IdentityModel.Tokens" Version="$(IdentityModelVersion)" />
     <PackageVersion Include="Microsoft.IdentityModel.Logging" Version="$(IdentityModelVersion)" />
     <PackageVersion Include="Microsoft.IdentityModel.S2S" Version="$(S2SVersion)" />
-    <PackageVersion Include="Microsoft.IdentityModel.S2S.Extensions.AspNetCore" Version="$(S2SVersion)" />                                                                         
+    <PackageVersion Include="Microsoft.IdentityModel.S2S.Extensions.AspNetCore" Version="$(S2SVersion)" />    
+    <PackageVersion Include="Microsoft.IdentityModel.S2S.Extensions.Owin" Version="$(S2SVersion)" />    
     <PackageVersion Include="Microsoft.Identity.Web" Version="2.7.0" />
     <PackageVersion Include="Microsoft.Identity.Web.Graph" Version="2.7.0" />
     <PackageVersion Include="Microsoft.Identity.Abstractions" Version="3.0.1" />
