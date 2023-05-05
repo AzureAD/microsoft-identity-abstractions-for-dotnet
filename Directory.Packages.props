@@ -44,7 +44,7 @@
     <PackageVersion Include="Microsoft.IdentityModel.S2S.Configuration" Version="$(S2SVersion)" />  
     <PackageVersion Include="Microsoft.IdentityModel.S2S.Tokens" Version="$(S2SVersion)" />  
     <PackageVersion Include="Microsoft.Identity.Web" Version="2.7.0" />
-    <PackageVersion Include="Microsoft.Identity.Web.Graph" Version="2.7.0" />
+    <PackageVersion Include="Microsoft.Identity.Web.MicrosoftGraph" Version="2.7.0" />
     <PackageVersion Include="Microsoft.Identity.Abstractions" Version="3.0.1" />
     <PackageVersion Include="Microsoft.Internal.Analyzers" Version="2.6.7" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
