@@ -174,7 +174,7 @@
     <PackageVersion Include="Microsoft.Extensions.Options" Version="7.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0" />
     <PackageVersion Include="System.Drawing.Common" Version="7.0.0" />
-    <PackageVersion Include="System.Security.Cryptography.Xml" Version="7.0.0" />
+    <PackageVersion Include="System.Security.Cryptography.Xml" Version="7.0.1" />
     <PackageVersion Include="System.Text.Encodings.Web" Version="7.0.0" />
   </ItemGroup>
  </Project>
