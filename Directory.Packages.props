@@ -37,6 +37,7 @@
     <PackageVersion Include="Microsoft.IdentityModel.JsonWebTokens" Version="$(IdentityModelVersion)" />
     <PackageVersion Include="Microsoft.IdentityModel.Tokens" Version="$(IdentityModelVersion)" />
     <PackageVersion Include="Microsoft.IdentityModel.Logging" Version="$(IdentityModelVersion)" />
+    <PackageVersion Include="Microsoft.IdentityModel.TestExtensions" Version="$(IdentityModelVersion)" />
     <PackageVersion Include="Microsoft.IdentityModel.S2S" Version="$(S2SVersion)" />
     <PackageVersion Include="Microsoft.IdentityModel.S2S.Extensions.AspNetCore" Version="$(S2SVersion)" />    
     <PackageVersion Include="Microsoft.IdentityModel.S2S.Extensions.Owin" Version="$(S2SVersion)" />  
