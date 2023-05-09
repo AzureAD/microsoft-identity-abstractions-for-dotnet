@@ -35,6 +35,7 @@
     <PackageVersion Include="Microsoft.Identity.Client" Version="4.51.0" />
     <PackageVersion Include="Microsoft.IdentityModel.Abstractions" Version="$(IdentityModelVersion)" />
     <PackageVersion Include="Microsoft.IdentityModel.JsonWebTokens" Version="$(IdentityModelVersion)" />
+    <PackageVersion Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="$(IdentityModelVersion)" />
     <PackageVersion Include="Microsoft.IdentityModel.Tokens" Version="$(IdentityModelVersion)" />
     <PackageVersion Include="Microsoft.IdentityModel.Logging" Version="$(IdentityModelVersion)" />
     <PackageVersion Include="Microsoft.IdentityModel.TestExtensions" Version="$(IdentityModelVersion)" />
@@ -59,6 +60,7 @@
     <PackageVersion Include="Microsoft.Azure.SecurityResponse.AuthenticationBroker" Version="2.0.0.1279" />
     <PackageVersion Include="StackExchange.Redis" Version="2.5.61" />
     <PackageVersion Include="System.Net.Http" Version="4.3.4" />
+    <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="$(IdentityModelVersion)" />
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageVersion Include="Xunit" Version="2.4.1" />
     <PackageVersion Include="Xunit.Runner.VisualStudio" Version="2.4.3" />
