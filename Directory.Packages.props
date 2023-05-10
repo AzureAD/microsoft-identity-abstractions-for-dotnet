@@ -59,6 +59,7 @@
     <PackageVersion Include="Microsoft.Owin.Testing" Version="4.2.2" />
     <PackageVersion Include="Microsoft.Owin.Security" Version="4.2.2" />  
     <PackageVersion Include="Microsoft.SourceLink.AzureRepos.Git" Version="1.0.0" />
+    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.0" />  
     <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
     <PackageVersion Include="Moq" Version="4.14.4" />
     <PackageVersion Include="Microsoft.Azure.SecurityResponse.Client" Version="2.0.0.1275" />
