@@ -1,5 +1,8 @@
-3.1.0
+3.2.0
+========
+- Add `RequiresUnreferencedCode` attribute to `IDownstreamApi` and `IDownstreamApiHttpMethods`. See [#82](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/82) for details.
 
+3.1.0
 ========
 - Add `ExtraQueryParameters` to `AcquireTokenOptions`. See [pr](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/79) for details.
 
