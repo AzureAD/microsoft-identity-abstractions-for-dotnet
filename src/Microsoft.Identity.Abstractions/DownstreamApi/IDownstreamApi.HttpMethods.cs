@@ -46,7 +46,7 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET6_0_OR_GREATER
-        [RequiresUnreferencedCode("Provide source generation for TInput and/or TOutput. See https://aka.ms/ms-id-web/il-trimming/generator")]
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task<TOutput?> GetForUserAsync<TOutput>(
             string? serviceName,
@@ -85,7 +85,7 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET6_0_OR_GREATER
-        [RequiresUnreferencedCode("Provide source generation for TInput and/or TOutput. See https://aka.ms/ms-id-web/il-trimming/generator")]
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task<TOutput?> GetForUserAsync<TInput, TOutput>(
             string? serviceName,
@@ -119,7 +119,7 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET6_0_OR_GREATER
-        [RequiresUnreferencedCode("Provide source generation for TInput and/or TOutput. See https://aka.ms/ms-id-web/il-trimming/generator")]
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task<TOutput?> GetForAppAsync<TOutput>(
             string? serviceName,
@@ -154,7 +154,7 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET6_0_OR_GREATER
-        [RequiresUnreferencedCode("Provide source generation for TInput and/or TOutput. See https://aka.ms/ms-id-web/il-trimming/generator")]
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task<TOutput?> GetForAppAsync<TInput, TOutput>(
             string? serviceName,
@@ -192,7 +192,7 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET6_0_OR_GREATER
-        [RequiresUnreferencedCode("Provide source generation for TInput and/or TOutput. See https://aka.ms/ms-id-web/il-trimming/generator")]
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task PostForUserAsync<TInput>(
             string? serviceName,
@@ -232,7 +232,7 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET6_0_OR_GREATER
-        [RequiresUnreferencedCode("Provide source generation for TInput and/or TOutput. See https://aka.ms/ms-id-web/il-trimming/generator")]
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task<TOutput?> PostForUserAsync<TInput, TOutput>(
             string? serviceName,
@@ -268,7 +268,7 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET6_0_OR_GREATER
-        [RequiresUnreferencedCode("Provide source generation for TInput and/or TOutput. See https://aka.ms/ms-id-web/il-trimming/generator")]
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task PostForAppAsync<TInput>(
             string? serviceName,
@@ -304,7 +304,7 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET6_0_OR_GREATER
-        [RequiresUnreferencedCode("Provide source generation for TInput and/or TOutput. See https://aka.ms/ms-id-web/il-trimming/generator")]
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task<TOutput?> PostForAppAsync<TInput, TOutput>(
             string? serviceName,
@@ -342,7 +342,7 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET6_0_OR_GREATER
-        [RequiresUnreferencedCode("Provide source generation for TInput and/or TOutput. See https://aka.ms/ms-id-web/il-trimming/generator")]
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task PutForUserAsync<TInput>(
             string? serviceName,
@@ -382,7 +382,7 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET6_0_OR_GREATER
-        [RequiresUnreferencedCode("Provide source generation for TInput and/or TOutput. See https://aka.ms/ms-id-web/il-trimming/generator")]
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task<TOutput?> PutForUserAsync<TInput, TOutput>(
             string? serviceName,
@@ -418,7 +418,7 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET6_0_OR_GREATER
-        [RequiresUnreferencedCode("Provide source generation for TInput and/or TOutput. See https://aka.ms/ms-id-web/il-trimming/generator")]
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task PutForAppAsync<TInput>(
             string? serviceName,
@@ -454,7 +454,7 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET6_0_OR_GREATER
-        [RequiresUnreferencedCode("Provide source generation for TInput and/or TOutput. See https://aka.ms/ms-id-web/il-trimming/generator")]
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task<TOutput?> PutForAppAsync<TInput, TOutput>(
             string? serviceName,
@@ -494,7 +494,7 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET6_0_OR_GREATER
-        [RequiresUnreferencedCode("Provide source generation for TInput and/or TOutput. See https://aka.ms/ms-id-web/il-trimming/generator")]
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task PatchForUserAsync<TInput>(
             string? serviceName,
@@ -534,7 +534,7 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET6_0_OR_GREATER
-        [RequiresUnreferencedCode("Provide source generation for TInput and/or TOutput. See https://aka.ms/ms-id-web/il-trimming/generator")]
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task<TOutput?> PatchForUserAsync<TInput, TOutput>(
             string? serviceName,
@@ -570,7 +570,7 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET6_0_OR_GREATER
-        [RequiresUnreferencedCode("Provide source generation for TInput and/or TOutput. See https://aka.ms/ms-id-web/il-trimming/generator")]
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task PatchForAppAsync<TInput>(
             string? serviceName,
@@ -606,7 +606,7 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET6_0_OR_GREATER
-        [RequiresUnreferencedCode("Provide source generation for TInput and/or TOutput. See https://aka.ms/ms-id-web/il-trimming/generator")]
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task<TOutput?> PatchForAppAsync<TInput, TOutput>(
             string? serviceName,
@@ -646,7 +646,7 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET6_0_OR_GREATER
-        [RequiresUnreferencedCode("Provide source generation for TInput and/or TOutput. See https://aka.ms/ms-id-web/il-trimming/generator")]
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task DeleteForUserAsync<TInput>(
             string? serviceName,
@@ -686,7 +686,7 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET6_0_OR_GREATER
-        [RequiresUnreferencedCode("Provide source generation for TInput and/or TOutput. See https://aka.ms/ms-id-web/il-trimming/generator")]
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task<TOutput?> DeleteForUserAsync<TInput, TOutput>(
             string? serviceName,
@@ -722,7 +722,7 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET6_0_OR_GREATER
-        [RequiresUnreferencedCode("Provide source generation for TInput and/or TOutput. See https://aka.ms/ms-id-web/il-trimming/generator")]
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task DeleteForAppAsync<TInput>(
             string? serviceName,
@@ -758,7 +758,7 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET6_0_OR_GREATER
-        [RequiresUnreferencedCode("Provide source generation for TInput and/or TOutput. See https://aka.ms/ms-id-web/il-trimming/generator")]
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task<TOutput?> DeleteForAppAsync<TInput, TOutput>(
             string? serviceName,
