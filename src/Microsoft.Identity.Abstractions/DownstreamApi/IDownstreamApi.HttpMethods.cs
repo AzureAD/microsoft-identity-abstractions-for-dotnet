@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading;
@@ -44,6 +45,9 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+#endif
         public Task<TOutput?> GetForUserAsync<TOutput>(
             string? serviceName,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
@@ -80,6 +84,9 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+#endif
         public Task<TOutput?> GetForUserAsync<TInput, TOutput>(
             string? serviceName,
             TInput input,
@@ -111,6 +118,9 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+#endif
         public Task<TOutput?> GetForAppAsync<TOutput>(
             string? serviceName,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
@@ -143,6 +153,9 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+#endif
         public Task<TOutput?> GetForAppAsync<TInput, TOutput>(
             string? serviceName,
             TInput input,
@@ -178,6 +191,9 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+#endif
         public Task PostForUserAsync<TInput>(
             string? serviceName,
             TInput input,
@@ -215,6 +231,9 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+#endif
         public Task<TOutput?> PostForUserAsync<TInput, TOutput>(
             string? serviceName,
             TInput input,
@@ -248,6 +267,9 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+#endif
         public Task PostForAppAsync<TInput>(
             string? serviceName,
             TInput input,
@@ -281,6 +303,9 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+#endif
         public Task<TOutput?> PostForAppAsync<TInput, TOutput>(
             string? serviceName,
             TInput input,
@@ -316,6 +341,9 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+#endif
         public Task PutForUserAsync<TInput>(
             string? serviceName,
             TInput input,
@@ -353,6 +381,9 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+#endif
         public Task<TOutput?> PutForUserAsync<TInput, TOutput>(
             string? serviceName,
             TInput input,
@@ -386,6 +417,9 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+#endif
         public Task PutForAppAsync<TInput>(
             string? serviceName,
             TInput input,
@@ -419,6 +453,9 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+#endif
         public Task<TOutput?> PutForAppAsync<TInput, TOutput>(
             string? serviceName,
             TInput input,
@@ -456,6 +493,9 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+#endif
         public Task PatchForUserAsync<TInput>(
             string? serviceName,
             TInput input,
@@ -493,6 +533,9 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+#endif
         public Task<TOutput?> PatchForUserAsync<TInput, TOutput>(
             string? serviceName,
             TInput input,
@@ -526,6 +569,9 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+#endif
         public Task PatchForAppAsync<TInput>(
             string? serviceName,
             TInput input,
@@ -559,6 +605,9 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+#endif
         public Task<TOutput?> PatchForAppAsync<TInput, TOutput>(
             string? serviceName,
             TInput input,
@@ -596,6 +645,9 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+#endif
         public Task DeleteForUserAsync<TInput>(
             string? serviceName,
             TInput input,
@@ -633,6 +685,9 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+#endif
         public Task<TOutput?> DeleteForUserAsync<TInput, TOutput>(
             string? serviceName,
             TInput input,
@@ -666,6 +721,9 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+#endif
         public Task DeleteForAppAsync<TInput>(
             string? serviceName,
             TInput input,
@@ -699,6 +757,9 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+#endif
         public Task<TOutput?> DeleteForAppAsync<TInput, TOutput>(
             string? serviceName,
             TInput input,
