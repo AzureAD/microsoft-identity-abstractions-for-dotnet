@@ -71,6 +71,8 @@
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.0" />  
     <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
     <PackageVersion Include="Moq" Version="4.14.4" />
+    <PackageVersion Include="NSubstitute" Version="4.2.2" />
+    <PackageVersion Include="NSubstitute.Analyzers.CSharp" Version="1.0.13" />
     <PackageVersion Include="Microsoft.Azure.SecurityResponse.Client" Version="2.0.0.1275" />
     <PackageVersion Include="Microsoft.Azure.SecurityResponse.AuthenticationBroker" Version="2.0.0.1279" />
     <PackageVersion Include="StackExchange.Redis" Version="2.5.61" />
