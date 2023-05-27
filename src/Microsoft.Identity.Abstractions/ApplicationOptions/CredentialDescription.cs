@@ -13,7 +13,7 @@ namespace Microsoft.Identity.Abstractions
     public class CredentialDescription
     {
         /// <summary>
-        /// Type of the source of the credential (secret, certificate or signed assertion)
+        /// Type of the source of the credential.
         /// </summary>
         public CredentialSource SourceType { get; set; }
 
@@ -80,8 +80,19 @@ namespace Microsoft.Identity.Abstractions
         }
 
         /// <summary>
-        /// URL of the Key Vault, for instance https://msidentitywebsamples.vault.azure.net.
+        /// When <see cref="SourceType"/> is <see cref="CredentialSource.KeyVault"/>, use this property to specify the
+        /// URL of the Key Vault containing the certificate, in conjunction with <see cref="KeyVaultCertificateName"/>.
         /// </summary>
+        /// <example>
+        /// <format type="text/markdown">
+        /// <![CDATA[
+        /// The Json fragment below describes a certificate stored in Key Vault used as a client credential in a confidential client application:
+        /// :::code language="json" source="~/ /test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="keyvault_json":::
+        /// 
+        /// The code below describes programmatically in C#, the same certificate stored in Key Vault.
+        /// :::code language="csharp" source="~/abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="keyvault_csharp":::
+        /// ]]></format>
+        /// </example>
         public string? KeyVaultUrl { get; set; }
 
         /// <summary>

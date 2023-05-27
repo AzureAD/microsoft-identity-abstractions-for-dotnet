@@ -123,16 +123,19 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             // Certificate from KeyVault
             // -------------------------
             /*
+            // <keyvault_json>
                 {
                  "ClientCredentials": [
                   {
-                  "SourceType": "KeyVault",
-                  "KeyVaultUrl": "https://msidentitywebsamples.vault.azure.net",
-                  "KeyVaultCertificateName": "MicrosoftIdentitySamplesCert"
+                   "SourceType": "KeyVault",
+                   "KeyVaultUrl": "https://msidentitywebsamples.vault.azure.net",
+                   "KeyVaultCertificateName": "MicrosoftIdentitySamplesCert"
                   }
                  ]
                 }
+            // </keyvault_json>
             */
+            // <keyvault_csharp>
             CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.KeyVault,
@@ -140,6 +143,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                 KeyVaultCertificateName = "MicrosoftIdentitySamplesCert"
 
             };
+            // </keyvault_csharp>
 
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
             Assert.Equal(credentialDescription.KeyVaultUrl, credentialDescription.Container);
