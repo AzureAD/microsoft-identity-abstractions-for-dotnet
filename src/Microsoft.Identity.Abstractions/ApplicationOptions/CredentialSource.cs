@@ -28,10 +28,10 @@ namespace Microsoft.Identity.Abstractions
         /// <format type="text/markdown">
         /// <![CDATA[
         /// The Json fragment below describes a certificate stored in Key Vault used as a client credential in a confidential client application:
-        /// :::code language="json" source="/abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="keyvault_json":::
+        /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="keyvault_json":::
         /// 
         /// The code below describes programmatically in C#, the same certificate stored in Key Vault.
-        /// :::code language="csharp" source="/abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="keyvault_csharp":::
+        /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="keyvault_csharp":::
         /// ]]></format>
         /// </example>
         KeyVault = 1,
@@ -44,10 +44,10 @@ namespace Microsoft.Identity.Abstractions
         /// <format type="text/markdown">
         /// <![CDATA[
         /// The Json fragment below describes a certificate by its base64 encoded value, to be used as a client credential in a confidential client application:
-        /// :::code language="json" source="/abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="base64_json":::
+        /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="base64_json":::
         /// 
         /// The code below describes programmatically in C#, the same certificate.
-        /// :::code language="csharp" source="/abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="base64_csharp":::
+        /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="base64_csharp":::
         /// ]]></format>
         /// </example>
         Base64Encoded = 2,
@@ -60,10 +60,10 @@ namespace Microsoft.Identity.Abstractions
         /// <format type="text/markdown">
         /// <![CDATA[
         /// The Json fragment below describes a certificate retrieved by its path and a password to be used as a client credential in a confidential client application:
-        /// :::code language="json" source="/abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="path_json":::
+        /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="path_json":::
         /// 
         /// The code below describes programmatically in C#, a the same certificate.
-        /// :::code language="csharp" source="/abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="path_csharp":::
+        /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="path_csharp":::
         /// ]]></format>
         /// </example>
         Path = 3,
@@ -77,10 +77,10 @@ namespace Microsoft.Identity.Abstractions
         /// <format type="text/markdown">
         /// <![CDATA[
         /// The Json fragment below describes a user certificate stored in the personal certificates folder (<b>CurrentUser/My</b>) and specified by its thumbprint, used as a client credential in a confidential client application:
-        /// :::code language="json" source="/abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="thumbprint_json":::
+        /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="thumbprint_json":::
         /// 
         /// The code below describes programmatically in C#, a computer certificate in the personal certificates folder (<b>LocalMachine/My<b>) accessed by its thumbprint.
-        /// :::code language="csharp" source="/abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="thumbprint_csharp":::
+        /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="thumbprint_csharp":::
         /// ]]></format>
         /// </example>
         StoreWithThumbprint = 4,
@@ -94,10 +94,10 @@ namespace Microsoft.Identity.Abstractions
         /// <format type="text/markdown">
         /// <![CDATA[
         /// The Json fragment below describes a user certificate stored in the personal certificates folder (<b>CurrentUser/My</b>) and specified by its distinguised name, used as a client credential in a confidential client application:
-        /// :::code language="json" source="/abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="distinguishedname_json":::
+        /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="distinguishedname_json":::
         /// 
         /// The code below describes programmatically in C#, a computer certificate in the personal certificates folder (<b>LocalMachine/My<b>).
-        /// :::code language="csharp" source="/abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="distinguishedname_csharp":::
+        /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="distinguishedname_csharp":::
         /// ]]></format>
         /// </example>
         StoreWithDistinguishedName = 5,
@@ -110,10 +110,10 @@ namespace Microsoft.Identity.Abstractions
         /// <format type="text/markdown">
         /// <![CDATA[
         /// The Json fragment below describes a client secret used as a client credential in a confidential client application:
-        /// :::code language="json" source="/abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="secret_json":::
+        /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="secret_json":::
         /// 
         /// The code below describes programmatically in C#, the same client secret.
-        /// :::code language="csharp" source="/abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="secret_csharp":::
+        /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="secret_csharp":::
         /// ]]></format>
         /// </example>
         ClientSecret = 6,
@@ -127,10 +127,10 @@ namespace Microsoft.Identity.Abstractions
         /// <format type="text/markdown">
         /// <![CDATA[
         /// The Json fragment below describes a workload identity federation with a user assigned managed identity:
-        /// :::code language="json" source="/abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="msi_json":::
+        /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="msi_json":::
         /// 
         /// The code below describes programmatically in C#, the same workload identity federation with a user assigned managed identity.
-        /// :::code language="csharp" source="/abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="msi_csharp":::
+        /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="msi_csharp":::
         /// ]]></format>
         /// </example> 
         SignedAssertionFromManagedIdentity = 7,
@@ -144,10 +144,10 @@ namespace Microsoft.Identity.Abstractions
         /// <format type="text/markdown">
         /// <![CDATA[
         /// The Json fragment below describes a signed assertion acquired with workload identity federation with Azure Kubernetes Services (AKS):
-        /// :::code language="json" source="/abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="aks_json":::
+        /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="aks_json":::
         /// 
         /// The code below describes programmatically in C#, the same workload identity federation with with Azure Kubernetes Services (AKS) signed assertion.
-        /// :::code language="csharp" source="/abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="aks_csharp":::
+        /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="aks_csharp":::
         /// ]]></format>
         /// </example>
         SignedAssertionFilePath = 8,
@@ -169,10 +169,10 @@ namespace Microsoft.Identity.Abstractions
         /// <format type="text/markdown">
         /// <![CDATA[
         /// The Json fragment below describes a decrypt credential to get the decrypt keys automatically:
-        /// :::code language="json" source="/abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="autodecryp_json":::
+        /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="autodecryp_json":::
         /// 
         /// The code below describes the same, programmatically in C#.
-        /// :::code language="csharp" source="/abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="autodecryp_csharp":::
+        /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="autodecryp_csharp":::
         /// ]]></format>
         /// </example>
         AutoDecryptKeys = 10
