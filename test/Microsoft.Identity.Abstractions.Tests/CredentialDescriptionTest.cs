@@ -14,6 +14,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             // Certificate from Base64 encoding
             // --------------------------------
             /*
+            // <base64_json>
             {
              "ClientCredentials": [
              {
@@ -21,12 +22,16 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
               "Base64EncodedValue": "MIIDHzCgegA.....r1n8Ta0="
              }]
             }
+            // </base64_json>
             */
+
+            // <base64_csharp>
             CredentialDescription credentialDescription = new()
             {
                 SourceType = CredentialSource.Base64Encoded,
                 Base64EncodedValue = "MIIDHzCgegA.....r1n8Ta0="
             };
+            // </base64_csharp>
 
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
             Assert.Null(credentialDescription.Container);
@@ -39,6 +44,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             // Certificate from path 
             // ---------------------
             /*
+            // <path_json>
             {
              "ClientCredentials": [
              {
@@ -47,13 +53,17 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
               "CertificatePassword": "password"
              }]
             }
+            // </path_json>
             */
+
+            // <path_csharp>
             CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.Path,
                 CertificateDiskPath = "c:\\temp\\WebAppCallingWebApiCert.pfx",
                 CertificatePassword = "password"
             };
+            // </path_csharp>
 
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
             Assert.Equal(credentialDescription.CertificateDiskPath, credentialDescription.Container);
@@ -66,6 +76,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             // Certificate from credential store by thumbprint
             // -------------------------------------------------
             /*
+            // <thumbprint_json>
             {
              "ClientCertificates": [
              {
@@ -74,14 +85,18 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
               "CertificateThumbprint": "962D129A...D18EFEB6961684"
              }]
             }
+            // </thumbprint_json>
             */
+
+            // <thumbprint_csharp>
             CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.StoreWithThumbprint,
-                CertificateStorePath = "CurrentUser/My",
+                CertificateStorePath = "LocalMachine/My",
                 CertificateThumbprint = "962D129A...D18EFEB6961684"
 
             };
+            // </thumbprint_csharp>
 
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
             Assert.Equal(credentialDescription.CertificateStorePath, credentialDescription.Container);
@@ -94,6 +109,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             // Certificate from credential store by distinguished name
             // -------------------------------------------------------
             /*
+            // <distinguishedname_json>
             {
              "ClientCredentials": [
              {
@@ -102,14 +118,18 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
               "CertificateDistinguishedName": "CN=WebAppCallingWebApiCert"
              }]
             }
+            // </distinguishedname_json>
             */
+
+            // <distinguishedname_csharp>
             CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.StoreWithDistinguishedName,
-                CertificateStorePath = "CurrentUser/My",
+                CertificateStorePath = "LocalMachine/My",
                 CertificateDistinguishedName = "CN=WebAppCallingWebApiCert"
 
             };
+            // </distinguishedname_csharp>
 
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
             Assert.Equal(credentialDescription.CertificateStorePath, credentialDescription.Container);
@@ -123,16 +143,19 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             // Certificate from KeyVault
             // -------------------------
             /*
+            // <keyvault_json>
                 {
                  "ClientCredentials": [
                   {
-                  "SourceType": "KeyVault",
-                  "KeyVaultUrl": "https://msidentitywebsamples.vault.azure.net",
-                  "KeyVaultCertificateName": "MicrosoftIdentitySamplesCert"
+                   "SourceType": "KeyVault",
+                   "KeyVaultUrl": "https://msidentitywebsamples.vault.azure.net",
+                   "KeyVaultCertificateName": "MicrosoftIdentitySamplesCert"
                   }
                  ]
                 }
+            // </keyvault_json>
             */
+            // <keyvault_csharp>
             CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.KeyVault,
@@ -140,6 +163,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                 KeyVaultCertificateName = "MicrosoftIdentitySamplesCert"
 
             };
+            // </keyvault_csharp>
 
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
             Assert.Equal(credentialDescription.KeyVaultUrl, credentialDescription.Container);
@@ -152,7 +176,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             // Secret
             // ------
             /*
-
+            // <secret_json>
             {
              "ClientCredentials": [
              {
@@ -160,12 +184,16 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
               "ClientSecret": "blah"
              }]
             }
+            // </secret_json>
              */
+
+            // <secret_csharp>
             CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.ClientSecret,
                 ClientSecret = "blah"
             };
+            // </secret_csharp>
 
             Assert.Equal(CredentialType.Secret, credentialDescription.CredentialType);
             Assert.Null(credentialDescription.Container);
@@ -179,6 +207,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             // -------------------------------------------------
             // https://learn.microsoft.com/azure/active-directory/develop/workload-identity-federation
             /*
+            // <msi_json>
             {
                 "ClientCredentials": [
                 {
@@ -186,13 +215,17 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                     "ManagedIdentityClientId": "12345"
                 }]
             }
+            // </msi_json>
             */
 
+            // <msi_csharp>
             CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.SignedAssertionFromManagedIdentity,
                 ManagedIdentityClientId = "12345" // optional
             };
+            // </msi_csharp>
+
             Assert.Equal(CredentialType.SignedAssertion, credentialDescription.CredentialType);
             Assert.Null(credentialDescription.Container);
             Assert.Equal(credentialDescription.ManagedIdentityClientId, credentialDescription.ReferenceOrValue);
@@ -207,6 +240,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             // ---------------------
             // See https://blog.identitydigest.com/azuread-federate-mi/
             /*
+            // <aks_json>
             {
                 "ClientCredentials": [
                 {
@@ -214,6 +248,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                     "ManagedIdentityClientId": "c:/path.signedAssertion"
                 }]
             }
+            // </aks_json>
             */
 
             CredentialDescription credentialDescription = new CredentialDescription
@@ -232,11 +267,13 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             // Preloaded certificate.
             // ---------------------
 #pragma warning disable SYSLIB0026 // Type or member is obsolete
+            // <cert_csharp>
             CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.Certificate,
                 Certificate = new System.Security.Cryptography.X509Certificates.X509Certificate2()
             };
+            // </cert_csharp>
 
             credentialDescription.CachedValue = credentialDescription.Certificate;
             Assert.NotNull(credentialDescription.CachedValue);
@@ -254,7 +291,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.SignedAssertionFromVault,
-                KeyVaultUrl = "someurl"
+                KeyVaultCertificateName = "somename"
             };
 
             Assert.Equal(CredentialType.SignedAssertion, credentialDescription.CredentialType);
@@ -269,6 +306,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
         {
             // Automatic decrypt keys.
             /*
+            // <autodecryp_json>
             {
                 "TokenDecryptionCredentials": [
                 {
@@ -281,8 +319,10 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                     }
                 }]
             }
+            // </autodecryp_json>
             */
 
+            // <autodecryp_csharp>
             CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.AutoDecryptKeys,
@@ -294,6 +334,8 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                     }
                 }
             };
+            // </autodecryp_csharp>
+
             Assert.Equal(CredentialType.DecryptKeys, credentialDescription.CredentialType);
             Assert.Equal("mytenant.onmicrosoftonline.com", credentialDescription.DecryptKeysAuthenticationOptions.AcquireTokenOptions.Tenant);
             Assert.Equal("Bearer", credentialDescription.DecryptKeysAuthenticationOptions.ProtocolScheme);
