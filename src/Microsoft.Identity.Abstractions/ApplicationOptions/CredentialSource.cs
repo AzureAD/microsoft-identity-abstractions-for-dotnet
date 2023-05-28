@@ -14,7 +14,7 @@ namespace Microsoft.Identity.Abstractions
     public enum CredentialSource
     {
         /// <summary>
-        /// Use this valu if you provide a certificate yourself. When setting the <see cref="CredentialDescription.SourceType"/> property to this value,
+        /// Use this value if you provide a certificate yourself. When setting the <see cref="CredentialDescription.SourceType"/> property to this value,
         /// you will also provide the <see cref="CredentialDescription.Certificate"/>.
         /// </summary>
         Certificate = 0,
@@ -137,7 +137,7 @@ namespace Microsoft.Identity.Abstractions
 
         /// <summary>
         /// Use this value for a Certificateless client credentials using workload identity federation with Azure Kubernetes Services (AKS).
-        /// When setting the <see cref="CredentialDescription.SourceType"/> property to this value, you can also optionnally provide a path containing the signed assertion.
+        /// When setting the <see cref="CredentialDescription.SourceType"/> property to this value, you can also optionally provide a path containing the signed assertion.
         /// If you don't the credential will be searched in files contained in the following environment variables: <b>AZURE_FEDERATED_TOKEN_FILE</b> and <b>AZURE_ACCESS_TOKEN_FILE</b>.
         /// </summary>
         /// <example>
@@ -154,7 +154,7 @@ namespace Microsoft.Identity.Abstractions
 
         /// <summary>
         /// Use this value for a certificateless client credentials generated from another vault.
-        /// When setting the <see cref="CredentialDescription.SourceType"/> property to this value, you can also optionnally provide the name of a certificate used to compute
+        /// When setting the <see cref="CredentialDescription.SourceType"/> property to this value, you can also optionally provide the name of a certificate used to compute
         /// the signed assertion using the <see cref="CredentialDescription.KeyVaultCertificateName"/> property.
         /// </summary>
         SignedAssertionFromVault = 9,

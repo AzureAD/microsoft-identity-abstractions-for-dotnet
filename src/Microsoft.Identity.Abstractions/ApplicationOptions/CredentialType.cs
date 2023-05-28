@@ -4,7 +4,7 @@
 namespace Microsoft.Identity.Abstractions
 {
     /// <summary>
-    /// Crendential type. This is used to specify the type of credential that is being loaded. This value
+    /// Credential type. This is used to specify the type of credential that is being loaded. This value
     /// is provided in the see <see cref="CredentialDescription.CredentialType"/> based on the type of
     /// credential (which depends on the type of <see cref="CredentialSource"/> value of the <see cref="CredentialDescription.SourceType"/>).
     /// </summary>

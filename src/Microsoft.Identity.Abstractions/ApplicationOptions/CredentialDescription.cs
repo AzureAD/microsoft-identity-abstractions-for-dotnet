@@ -172,7 +172,7 @@ namespace Microsoft.Identity.Abstractions
 
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.Path"/>, specifies the path to the certificate on disk. You can
-        /// use this property to specify the path to a PFX file containing the certificate and its private key. If a password is moreover needed, 
+        /// use this property to specify the path to a PFX file containing the certificate and its private key. If a password is needed, 
         /// use <see cref="CertificatePassword"/>.
         /// </summary>
         /// <example>
@@ -240,8 +240,8 @@ namespace Microsoft.Identity.Abstractions
 
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.SignedAssertionFromManagedIdentity"/>, specifies the client ID of the Azure user-assigned managed identity 
-        /// used to provide an signed assertion that will be used as a client credential for the application. This requires that the application is deployed on an Azure, that the managed identity is configured, 
-        /// and that worload identity federation with the managed identity is declared in the application registration. For details, see https://learn.microsoft.com/azure/active-directory/workload-identities/workload-identity-federation.
+        /// used to provide an signed assertion that will be used as a client credential for the application. This requires that the application is deployed on Azure, that the managed identity is configured, 
+        /// and that workload identity federation with the managed identity is declared in the application registration. For details, see https://learn.microsoft.com/azure/active-directory/workload-identities/workload-identity-federation.
         /// </summary>
         /// <example>
         /// <format type="text/markdown">
