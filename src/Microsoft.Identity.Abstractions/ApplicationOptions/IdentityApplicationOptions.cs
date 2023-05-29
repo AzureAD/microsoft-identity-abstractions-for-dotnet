@@ -127,9 +127,10 @@ namespace Microsoft.Identity.Abstractions
         /// Description of the credentials (usually certificates) used to decrypt an encrypted 
         /// token in a web API.
         /// </summary>
+        /// <example> 
         /// <format type="text/markdown">
         /// <![CDATA[
-        /// <example> An example in the appsetting.json:
+        /// Here is how to specify a decrypt certificate read from the certificate store:
         /// 
         /// ```json
         /// "TokenDecryptionCredentials": [
