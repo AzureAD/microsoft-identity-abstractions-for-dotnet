@@ -1,6 +1,6 @@
 3.2.1
 ========
-- Improve the XML documentation
+- Improve the XML documentation (See [#85](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/85) and [#86](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/86))
 - Add unit tests for a 100% code coverage
 
 3.2.0
