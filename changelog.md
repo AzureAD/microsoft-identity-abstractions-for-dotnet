@@ -1,3 +1,8 @@
+3.2.1
+========
+- Improve the XML documentation
+- Add unit tests for a 100% code coverage
+
 3.2.0
 ========
 - Add `RequiresUnreferencedCode` attribute to `IDownstreamApi` and `IDownstreamApiHttpMethods`. See [#82](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/82) for details.
