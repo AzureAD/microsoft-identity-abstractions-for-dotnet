@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
-  <Class Name="Microsoft.Identity.Abstractions.DownstreamRestApiOptions">
+  <Class Name="Microsoft.Identity.Abstractions.DownstreamApiOptions">
     <Position X="3.25" Y="11" Width="5" />
     <Members>
       <Method Name="CloneInternal" Hidden="true" />
-      <Method Name="DownstreamRestApiOptions" Hidden="true" />
+      <Method Name="DownstreamApiOptions" Hidden="true" />
     </Members>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAACAEAAAAAAAAAABAAAAAAAAAAAAAABA=</HashCode>
-      <FileName>DownstreamRestApi\DownstreamRestApiOptions.cs</FileName>
+      <FileName>DownstreamApi\DownstreamApiOptions.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Microsoft.Identity.Abstractions.AcquireTokenOptions">
@@ -39,7 +39,7 @@
       <Property Name="AcquireTokenOptions" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="Microsoft.Identity.Abstractions.DownstreamRestApiOptionsReadOnlyHttpMethod">
+  <Class Name="Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod">
     <Position X="3.25" Y="13.5" Width="5" />
     <Members>
       <Method Name="CloneInternal" Hidden="true" />
@@ -57,7 +57,7 @@
       <FileName>DownstreamRestApi\IAuthorizationHeaderProvider.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Microsoft.Identity.Abstractions.IDownstreamRestApi">
+  <Interface Name="Microsoft.Identity.Abstractions.IDownstreamApi">
     <Position X="2" Y="2.5" Width="13.25" />
     <TypeIdentifier>
       <HashCode>EAAgAgAACBAAAQAAAAAAAAIgAAAAAAAAAAQAAAEAQAA=</HashCode>

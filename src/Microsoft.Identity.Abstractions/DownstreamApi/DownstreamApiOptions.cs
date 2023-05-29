@@ -10,6 +10,38 @@ namespace Microsoft.Identity.Abstractions
     /// <summary>
     /// Options passed-in to call downstream web APIs.
     /// </summary>
+    /// <example>
+    /// <format type="text/markdown">
+    /// <![CDATA[
+    /// Here is an example of a configuration of a downstream API that would retrieve
+    /// the user profile (it's illustrated with Microsoft Graph as this is a well-known API, but of course
+    /// to effectively call Microsoft graph, rather use Microsoft.Identity.Web.MicrosoftGraph)
+    /// 
+    /// ```json
+    ///  "DownstreamApis": [
+    ///     "MyProfile": {
+    ///        "BaseUrl": "https://graph.microsoft.com/v1.0",
+    ///        "RelativePath": "/me/profile",
+    ///         "Scopes": [ "user.read"]
+    ///     }
+    ///   ]
+    /// ```
+    /// 
+    /// The following describes a downstream web API called on behalf of the application itself (application token)
+    /// and using the Pop protocol:
+    /// ```json
+    ///  "DownstreamApis": [
+    ///     "AllBooks": {
+    ///        "BaseUrl": "https://mylibrary.com",
+    ///        "RelativePath": "/books/all",
+    ///        "RequestAppToken": true,
+    ///        "ProtocolScheme": "Pop",
+    ///         "Scopes": ["https://mylibrary.com/.default"]
+    ///     }
+    ///   ]
+    /// ```
+    /// ]]></format>
+    /// </example>
     public class DownstreamApiOptions : AuthorizationHeaderProviderOptions
     {
         /// <summary>
@@ -68,6 +100,7 @@ namespace Microsoft.Identity.Abstractions
         /// </description></item>
         /// </list>
         /// </summary>
+        /// <remarks>This property cannot be set in the configuration. It's code only.</remarks>
         public Func<object?, HttpContent?>? Serializer { get; set; }
 
         /// <summary>
@@ -75,6 +108,7 @@ namespace Microsoft.Identity.Abstractions
         /// When not provided, the following is returned:
         /// <code>JsonSerializer.Deserialize&lt;TOutput&gt;(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });</code>
         /// </summary>
+        /// <remarks>This property cannot be set in the configuration. It's code only.</remarks>
         public Func<HttpContent?, object?>? Deserializer { get; set; }
     }
 }

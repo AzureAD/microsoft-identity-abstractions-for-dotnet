@@ -4,7 +4,8 @@
 namespace Microsoft.Identity.Abstractions
 {
     /// <summary>
-    /// Parameters that credential loaders, like signed assertion providers, can use to load credentials.
+    /// Parameters that credential loaders, like signed assertion providers, can use to load credentials. You won't use this class directly
+    /// unless you are writing a custom credential loader.
     /// </summary>
     /// <seealso cref="ICredentialsLoader.LoadCredentialsIfNeededAsync(CredentialDescription, CredentialSourceLoaderParameters?)"/>
     /// <seealso cref="ICredentialsLoader.LoadFirstValidCredentialsAsync(System.Collections.Generic.IEnumerable{CredentialDescription}, CredentialSourceLoaderParameters?)"></seealso>

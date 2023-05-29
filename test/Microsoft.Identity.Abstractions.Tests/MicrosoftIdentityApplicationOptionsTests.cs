@@ -91,5 +91,26 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             Assert.Equal("https://google.com/", identityApplicationOptions.Authority);
             Assert.Equal(audiences, identityApplicationOptions.Audiences);
         }
+
+        [Theory]
+        [InlineData(null, null, null, "//v2.0")]
+        [InlineData("Instance", "Tenant", null, "Instance/Tenant/v2.0")]
+        [InlineData("Instance/", "Tenant", null, "Instance/Tenant/v2.0")]
+        [InlineData("Instance/", "Tenant", "Authority", "Authority")]
+        public void AuthorityDefaultValues(string instance, string tenant, string authorityIn, string authorityOut)
+        {
+            MicrosoftIdentityApplicationOptions identityApplicationOptions = new()
+            {
+                Instance = instance,
+                TenantId = tenant,
+            };
+            if (authorityIn != null)
+            {
+                identityApplicationOptions.Authority = authorityIn;
+            }
+            
+            Assert.Equal(authorityOut, identityApplicationOptions.Authority);
+
+        }
     }
 }
