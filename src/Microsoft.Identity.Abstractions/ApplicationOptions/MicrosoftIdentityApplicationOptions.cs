@@ -6,7 +6,8 @@ using System.Collections.Generic;
 namespace Microsoft.Identity.Abstractions
 {
     /// <summary>
-    /// Options for configuring authentication using Azure Active Directory. It has both AAD and B2C configuration attributes.
+    /// Options for configuring authentication for a web app, web API, or daemon application, using Azure Active Directory. 
+    /// It has both AAD and B2C configuration attributes.
     /// </summary>
     public class MicrosoftIdentityApplicationOptions : IdentityApplicationOptions
     {
@@ -18,16 +19,21 @@ namespace Microsoft.Identity.Abstractions
         public string? Instance { get; set; }
 
         /// <summary>
-        /// Gets or sets the tenant ID.
+        /// Gets or sets the tenant ID. If your application is multi-tenant, you can also use "common" if it supports
+        /// both work and school, or personal accounts accounts, or "organizations" if your application supports only work 
+        /// and school accounts. If your application is single tenant, set this property to the tenant ID or domain name.
+        /// If your application works only for Microsoft personal accounts, use "consumers".
         /// </summary>
         public string? TenantId { get; set; }
 
         /// <summary>
-        /// Gets or sets the Authority to use when making OpenIdConnect calls.
+        /// Gets or sets the Authority to use when making OpenIdConnect calls. By default the authority is computed
+        /// from the <see cref="Instance"/> and <see cref="TenantId"/> properties, by concatenating them, and appending "v2.0".
+        /// If your authority is not an Azure AD authority, you can set it directly here.
         /// </summary>
         public override string? Authority
         {
-            get { return _authority ?? $"{Instance}{TenantId}/v2.0"; }
+            get { return _authority ?? $"{Instance?.TrimEnd('/')}/{TenantId}/v2.0"; }
             set { _authority = value; }
         }
 
@@ -41,7 +47,8 @@ namespace Microsoft.Identity.Abstractions
 
         /// <summary>
         /// Specifies the capabilities of the client (for instance {"cp1", "cp2"}). This is
-        /// useful to express that the Client is capable of handling claims challenge.
+        /// useful to express that the Client is capable of handling claims challenge. If your application
+        /// is CAE capable, it needs to express "cp1".
         /// </summary>
         public IEnumerable<string>? ClientCapabilities { get; set; }
 

@@ -55,7 +55,7 @@ namespace Microsoft.Identity.Abstractions
         public DateTimeOffset ExpiresOn { get; set; }
 
         /// <summary>
-        ///  (Microsoft Identity specific) In the case of Azure AD or Azure AD B2C, 
+        ///  (Microsoft Identity specific) In the case of Azure AD, Azure AD B2C, or Microsoft Entra External IDs, 
         ///  gets an identifier for the tenant for which the token was acquired.
         ///  This property will be null if tenant information is not returned by the service or the service
         ///  is not Azure AD.
@@ -74,12 +74,13 @@ namespace Microsoft.Identity.Abstractions
         public IEnumerable<string>? Scopes { get; set; }
 
         /// <summary>
-        /// Gets the correlation id used for the request.
+        /// Gets the correlation id used for the request. If provided in <see cref="AcquireTokenOptions.CorrelationId"/>, this
+        /// will be the same, otherwise a new one will be created by the token acquirer.
         /// </summary>
         public Guid CorrelationId { get; set; }
 
         /// <summary>
-        /// Gets the access token type (Bearer or Pop).
+        /// Gets the protocol (Bearer or Pop).
         /// </summary>
         public string? TokenType { get; set; }
     }

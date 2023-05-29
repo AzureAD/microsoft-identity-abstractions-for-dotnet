@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Microsoft.Identity.Abstractions
 {
     /// <summary>
-    /// Interface to implement to load credentials, for instance certificates.
+    /// Contract to implement to load credentials, for instance certificates.
     /// </summary>
     public interface ICredentialSourceLoader
     {
@@ -18,7 +18,7 @@ namespace Microsoft.Identity.Abstractions
         Task LoadIfNeededAsync(CredentialDescription credentialDescription, CredentialSourceLoaderParameters? parameters = null);
 
         /// <summary>
-        /// Loadable CredentialSource.
+        /// CredentialSource that this credential source loader knows how to load.
         /// </summary>
         CredentialSource CredentialSource { get; }
     }

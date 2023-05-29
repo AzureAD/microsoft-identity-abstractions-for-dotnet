@@ -17,7 +17,7 @@
       </MemberNameLabel>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAQEAAQAgAAAAAQAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAQEAAQAgAAAAAQAABBAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ApplicationOptions\IdentityApplicationOptions.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -26,9 +26,9 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Microsoft.Identity.Abstractions.CredentialDescription">
-    <Position X="7.5" Y="0.5" Width="3.25" />
+    <Position X="7.5" Y="0.5" Width="3.75" />
     <TypeIdentifier>
-      <HashCode>AAAAJAQAAAAAAABAAABAEAAAAAgQoBACAQAAGEAAEAA=</HashCode>
+      <HashCode>AAAAJAQAAAAAAABAAABAEAAAAAgQoBAKAQAAGEAAEAA=</HashCode>
       <FileName>ApplicationOptions\CredentialDescription.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -47,16 +47,16 @@
     </TypeIdentifier>
   </Class>
   <Enum Name="Microsoft.Identity.Abstractions.CredentialSource">
-    <Position X="12" Y="2.25" Width="2.75" />
+    <Position X="12.5" Y="2.25" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAQAIQAAAAgAAAQAgAAAAAAAADAEAAACA=</HashCode>
+      <HashCode>AAAAAAAAAAAAQAIQAAAAgAAAQAgAAAAAAAATAEAAACA=</HashCode>
       <FileName>ApplicationOptions\CredentialSource.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Microsoft.Identity.Abstractions.CredentialType">
-    <Position X="12" Y="0.5" Width="1.5" />
+    <Position X="12.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAIEAAAAA=</HashCode>
+      <HashCode>AAAAAAABAAAAAAAAAAAAAAgAAAAAAAAAAAAAIEAAAAA=</HashCode>
       <FileName>ApplicationOptions\CredentialType.cs</FileName>
     </TypeIdentifier>
   </Enum>

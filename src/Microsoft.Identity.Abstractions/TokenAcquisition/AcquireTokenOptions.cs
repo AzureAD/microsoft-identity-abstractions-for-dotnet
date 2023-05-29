@@ -7,12 +7,13 @@ using System.Collections.Generic;
 namespace Microsoft.Identity.Abstractions
 {
     /// <summary>
-    /// Options directing the token acquisition.
+    /// Options directing the token acquisition. These options are provided to the <see cref="ITokenAcquirer"/> methods, or
+    /// part of the <see cref="AuthorizationHeaderProviderOptions"/>, or <see cref="DownstreamApiOptions"/>.
     /// </summary>
     public class AcquireTokenOptions
     {
         /// <summary>
-        /// constructor.
+        /// Default constructor.
         /// </summary>
         public AcquireTokenOptions()
         {
@@ -39,9 +40,9 @@ namespace Microsoft.Identity.Abstractions
         }
 
         /// <summary>
-        /// Gets the parameters describing the confidential client application (ClientId,
-        /// Region, Authority, client credentials) from a particular 
-        /// (ASP.NET Core) authentication scheme / settings.
+        /// Gets the name of the options describing the confidential client application (ClientId,
+        /// Region, Authority, client credentials). In ASP.NET Core, the authenticatiopn options name 
+        /// is the same as the authentication scheme.
         /// </summary>
         public string? AuthenticationOptionsName { get; set; }
 
@@ -62,6 +63,8 @@ namespace Microsoft.Identity.Abstractions
         /// <summary>
         /// A string with one or multiple claims to request. It's a json blob (encoded or not)
         /// Normally used with Conditional Access. It receives the Claims member of the UiRequiredException.
+        /// It can also be used to request specific optional claims, and for 
+        /// <see href="https://learn.microsoft.com/en-us/azure/active-directory/conditional-access/concept-conditional-access-cloud-apps">CA Auth context</see> 
         /// </summary>
         public string? Claims { get; set; }
 

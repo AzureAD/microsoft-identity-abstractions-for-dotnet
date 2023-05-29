@@ -11,7 +11,7 @@ namespace Microsoft.Identity.Abstractions
     /// </summary>
     /// <remarks>This class is useful to provide a better developer experience on the specialized methods
     /// of <see cref="IDownstreamApi"/> where the HTTP method is provided already by the name of the 
-    /// method, and should not be overriden by the options.</remarks>
+    /// method, and should not be overriden by the options. You shouldn't need to use it directly.</remarks>
     public class DownstreamApiOptionsReadOnlyHttpMethod : DownstreamApiOptions
     {
         /// <summary>
