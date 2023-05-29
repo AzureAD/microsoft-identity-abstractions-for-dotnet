@@ -33,7 +33,7 @@ namespace Microsoft.Identity.Abstractions
         /// <summary>
         /// Load the first valid credential from the credentials description list. This is useful when you have multiple deployments
         /// (for instance on your developer machine, you can use a certificate from KeyVault, and when deployed in AKS, you use
-        /// worload identity federation for AKS. You can express the list of credentials in the appsettings.json file, and this method will
+        /// workload identity federation for AKS. You can express the list of credentials in the appsettings.json file, and this method will
         /// load the most appropriate based on the order.
         /// </summary>
         /// <param name="credentialDescriptions">Description of the credentials.</param>
