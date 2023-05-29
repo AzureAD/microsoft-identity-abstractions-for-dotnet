@@ -130,6 +130,27 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             // The following code does not build (on purpose):
             // downstreamApi.DeleteForAppAsync("serviceName", "todo", options => { options.HttpMethod = HttpMethod.Put });
         }
+
+
+        [Theory]
+        [InlineData("https://myapi/", "controller/action", "https://myapi/controller/action")]
+        [InlineData("https://myapi", "controller/action", "https://myapi/controller/action")]
+        [InlineData("https://myapi/", "/controller/action", "https://myapi/controller/action")]
+        [InlineData("https://myapi", "/controller/action", "https://myapi/controller/action")]
+        [InlineData("https://myapi", null, "https://myapi/")]
+        [InlineData(null, "/controller/action", "/controller/action")]
+        [InlineData(null, "controller/action", "/controller/action")]
+        public void ComputeUrl(string baseUrl, string relativePath, string expectedUrl)
+        {
+            DownstreamApiOptions options = new DownstreamApiOptions { BaseUrl = baseUrl, RelativePath = relativePath };
+            Assert.Equal(expectedUrl, options.GetApiUrl());
+        }
+
+        [Fact]
+        public void NullHttpVerbThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => { new DownstreamApiOptions { HttpMethod = null! }; });
+        }
     }
 
     internal class CustomAcquireTokenOptions : AcquireTokenOptions
