@@ -24,6 +24,8 @@ namespace Microsoft.Identity.Abstractions
         /// <summary>
         /// Container in which to find the credential. You will normally not use this property directly. It could be used
         /// by property editors in tools or IDEs. Instead, use the properties that are specific to the <see cref="SourceType"/>.
+        /// </summary>
+        /// <remarks>
         /// <list type="bullet">
         /// <item>If <see cref="SourceType"/> equals <see cref="CredentialSource.KeyVault"/>, then
         /// the container is the Key Vault base URL.</item>
@@ -35,7 +37,7 @@ namespace Microsoft.Identity.Abstractions
         /// or <see cref="CredentialSource.StoreWithThumbprint"/>, then
         /// this value is the path to the credential in the cert store, for instance <c>CurrentUser/My</c>.</item>
         /// </list>
-        /// </summary>
+        /// </remarks>
         public string? Container
         {
             get
@@ -91,7 +93,7 @@ namespace Microsoft.Identity.Abstractions
         /// <example>
         /// <format type="text/markdown">
         /// <![CDATA[
-        /// The Json fragment below describes a certificate stored in Key Vault used as a client credential in a confidential client application:
+        /// The JSON fragment below describes a certificate stored in Key Vault used as a client credential in a confidential client application:
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="keyvault_json":::
         /// 
         /// The code below describes programmatically in C#, the same certificate stored in Key Vault.
@@ -122,7 +124,7 @@ namespace Microsoft.Identity.Abstractions
         /// <example>
         /// <format type="text/markdown">
         /// <![CDATA[
-        /// The Json fragment below describes a user certificate stored in the personal certificates folder (<b>CurrentUser/My</b>) and specified by its distinguised name, used as a client credential in a confidential client application:
+        /// The JSON fragment below describes a user certificate stored in the personal certificates folder (<b>CurrentUser/My</b>) and specified by its distinguised name, used as a client credential in a confidential client application:
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="distinguishedname_json":::
         /// 
         /// The code below describes programmatically in C#, a computer certificate in the personal certificates folder (<b>LocalMachine/My<b>).
@@ -141,7 +143,7 @@ namespace Microsoft.Identity.Abstractions
         /// <example>
         /// <format type="text/markdown">
         /// <![CDATA[
-        /// The Json fragment below describes a certificate stored in Key Vault used as a client credential in a confidential client application:
+        /// The JSON fragment below describes a certificate stored in Key Vault used as a client credential in a confidential client application:
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="keyvault_json":::
         /// 
         /// The code below describes programmatically in C#, the same certificate stored in Key Vault.
@@ -157,7 +159,7 @@ namespace Microsoft.Identity.Abstractions
         /// <example>
         /// <format type="text/markdown">
         /// <![CDATA[
-        /// The Json fragment below describes a user certificate stored in the personal certificates folder (<b>CurrentUser/My</b>) and specified by its thumbprint, used as a client credential in a confidential client application:
+        /// The JSON fragment below describes a user certificate stored in the personal certificates folder (<b>CurrentUser/My</b>) and specified by its thumbprint, used as a client credential in a confidential client application:
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="thumbprint_json":::
         /// 
         /// The code below describes programmatically in C#, a computer certificate in the personal certificates folder (<b>LocalMachine/My<b>) accessed by its thumbprint.
@@ -178,7 +180,7 @@ namespace Microsoft.Identity.Abstractions
         /// <example>
         /// <format type="text/markdown">
         /// <![CDATA[
-        /// The Json fragment below describes a certificate retrieved by its path and a password to be used as a client credential in a confidential client application:
+        /// The JSON fragment below describes a certificate retrieved by its path and a password to be used as a client credential in a confidential client application:
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="path_json":::
         /// 
         /// The code below describes programmatically in C#, a the same certificate.
@@ -196,7 +198,7 @@ namespace Microsoft.Identity.Abstractions
         /// <example>
         /// <format type="text/markdown">
         /// <![CDATA[
-        /// The Json fragment below describes a certificate retrieved by its path and a password to be used as a client credential in a confidential client application:
+        /// The JSON fragment below describes a certificate retrieved by its path and a password to be used as a client credential in a confidential client application:
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="path_json":::
         /// 
         /// The code below describes programmatically in C#, the same certificate.
@@ -209,17 +211,17 @@ namespace Microsoft.Identity.Abstractions
 
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.Base64Encoded"/>, specifies the base64 encoded value of the certificate.
+        /// </summary>
         /// <example>
         /// <format type="text/markdown">
         /// <![CDATA[
-        /// The Json fragment below describes a certificate by its base64 encoded value, to be used as a client credential in a confidential client application:
+        /// The JSON fragment below describes a certificate by its base64 encoded value, to be used as a client credential in a confidential client application:
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="base64_json":::
         /// 
         /// The code below describes programmatically in C#, the same certificate.
         /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="base64_csharp":::
         /// ]]></format>
         /// </example>
-        /// </summary>
         public string? Base64EncodedValue { get; set; }
 
         /// <summary>
@@ -229,7 +231,7 @@ namespace Microsoft.Identity.Abstractions
         /// <example>
         /// <format type="text/markdown">
         /// <![CDATA[
-        /// The Json fragment below describes a client secret used as a client credential in a confidential client application:
+        /// The JSON fragment below describes a client secret used as a client credential in a confidential client application:
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="secret_json":::
         /// 
         /// The code below describes programmatically in C#, the same client secret.
@@ -246,7 +248,7 @@ namespace Microsoft.Identity.Abstractions
         /// <example>
         /// <format type="text/markdown">
         /// <![CDATA[
-        /// The Json fragment below describes a workload identity federation with a user assigned managed identity:
+        /// The JSON fragment below describes a workload identity federation with a user assigned managed identity:
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="msi_json":::
         /// 
         /// The code below describes programmatically in C#, the same workload identity federation with a user assigned managed identity.
@@ -267,7 +269,7 @@ namespace Microsoft.Identity.Abstractions
         /// <example>
         /// <format type="text/markdown">
         /// <![CDATA[
-        /// The Json fragment below describes a signed assertion acquired with workload identity federation with Azure Kubernetes Services (AKS):
+        /// The JSON fragment below describes a signed assertion acquired with workload identity federation with Azure Kubernetes Services (AKS):
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="aks_json":::
         /// 
         /// The code below describes programmatically in C#, the same workload identity federation with with Azure Kubernetes Services (AKS) signed assertion.
@@ -289,7 +291,7 @@ namespace Microsoft.Identity.Abstractions
         /// <example>
         /// <format type="text/markdown">
         /// <![CDATA[
-        /// The Json fragment below describes a decrypt credential to get the decrypt keys automatically:
+        /// The JSON fragment below describes a decrypt credential to get the decrypt keys automatically:
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="autodecryp_json":::
         /// 
         /// The code below describes the same, programmatically in C#.
@@ -302,6 +304,7 @@ namespace Microsoft.Identity.Abstractions
         /// Reference to the certificate or value. You will normally not use this property directly. It could be used
         /// by property editors in tools or IDEs. Instead, use the properties that are specific to the <see cref="SourceType"/>.
         /// </summary>
+        /// <remarks>
         /// <list type="bullet">
         /// <item>If <see cref="SourceType"/> equals <see cref="CredentialSource.KeyVault"/>, then
         /// the reference is the name of the certificate in Key Vault (maybe the version?).</item>
@@ -314,6 +317,7 @@ namespace Microsoft.Identity.Abstractions
         /// <item>If <see cref="SourceType"/> equals <see cref="CredentialSource.StoreWithThumbprint"/>,
         /// this value is the thumbprint.</item>
         /// </list>
+        /// </remarks>
         public string? ReferenceOrValue
         {
             get
@@ -389,7 +393,10 @@ namespace Microsoft.Identity.Abstractions
         public bool Skip { get; set; }
 
         /// <summary>
-        /// Describes the type of credentials, based on the <see cref="SourceType"/>. Returns:
+        /// Describes the type of credentials, based on the <see cref="SourceType"/>.
+        /// </summary>
+        /// <remarks>
+        /// Returns:
         /// <list type="bullet">
         /// <item>
         /// <term><see cref="CredentialType.Certificate"/></term>
@@ -411,7 +418,7 @@ namespace Microsoft.Identity.Abstractions
         /// <description>when <see cref="SourceType"/> is <see cref="CredentialSource.AutoDecryptKeys"/>.</description>
         /// </item>
         /// </list>
-        /// </summary>
+        /// </remarks>
         public CredentialType CredentialType
         {
             get
