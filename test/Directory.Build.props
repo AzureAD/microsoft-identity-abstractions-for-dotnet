@@ -13,4 +13,8 @@
 		<CoverletCollectorVersion>3.1.2</CoverletCollectorVersion>
 	</PropertyGroup>
 
+	<ItemGroup Condition="'$(TargetFramework)' == 'net462'">
+		<Reference Include="System.Net.Http" />
+	</ItemGroup>
+
 </Project>
