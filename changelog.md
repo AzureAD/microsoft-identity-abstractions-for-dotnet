@@ -1,3 +1,7 @@
+4.0.0
+========
+- Use Assembly Reference instead of PackageReference. See [PR](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/91) for details.
+
 3.2.1
 ========
 - Improve the XML documentation (See [#85](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/85) and [#86](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/86))
