@@ -25,7 +25,7 @@ namespace Microsoft.Identity.Abstractions
             get
             {
                 if (_cachedId == null)
-                    _cachedId = $"{SourceType}_{ReferenceOrValue}";
+                    _cachedId = $"{SourceType}_{Container}_{ReferenceOrValue}";
 
                 return _cachedId;
             }
