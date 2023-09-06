@@ -410,14 +410,18 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             Assert.Equal("referenceOrValue", credentialDescription.ReferenceOrValue);
         }
 
-        [Fact]
-        public void TestId()
+        [Theory]
+        [InlineData(CredentialSource.KeyVault, "KeyVaultUrl", "CertificateName")]
+        [InlineData(CredentialSource.KeyVault, null, "CertificateName")]
+        [InlineData(CredentialSource.KeyVault, "KeyVaultUrl", null)]
+        [InlineData(CredentialSource.KeyVault, null, null)]
+        public void TestId(CredentialSource sourceType, string credentialLocation, string credentialName)
         {
             var credentialDescription = new CredentialDescription
             {
-                SourceType = CredentialSource.KeyVault,
-                Container = "KeyVaultUrl",
-                ReferenceOrValue = "CertificateName"
+                SourceType = sourceType,
+                Container = credentialLocation,
+                ReferenceOrValue = credentialName
             };
 
             var id = credentialDescription.Id;
