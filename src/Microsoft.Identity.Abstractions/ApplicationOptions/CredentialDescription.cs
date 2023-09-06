@@ -15,6 +15,22 @@ namespace Microsoft.Identity.Abstractions
     /// </summary>
     public class CredentialDescription
     {
+        private string? _cachedId;
+
+        /// <summary>
+        /// Gets a unique identifier for a CredentialDescription based on <see cref="SourceType"/> and <see cref="ReferenceOrValue"/>.
+        /// </summary>
+        public string Id
+        {
+            get
+            {
+                if (_cachedId == null)
+                    _cachedId = $"{SourceType}_{ReferenceOrValue}";
+
+                return _cachedId;
+            }
+        }
+
         /// <summary>
         /// Type of the source of the credential. This property is used to determine which other properties need
         /// to be provided to describe the credential.
