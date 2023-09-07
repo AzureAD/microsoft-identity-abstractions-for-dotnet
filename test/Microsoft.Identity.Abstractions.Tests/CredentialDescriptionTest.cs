@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System.Security.AccessControl;
 using Xunit;
 
 namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
@@ -411,6 +410,27 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             Assert.Equal("referenceOrValue", credentialDescription.ReferenceOrValue);
         }
 
+        [Theory]
+        [InlineData(CredentialSource.KeyVault, "KeyVaultUrl", "CertificateName")]
+        [InlineData(CredentialSource.KeyVault, null, "CertificateName")]
+        [InlineData(CredentialSource.KeyVault, "KeyVaultUrl", null)]
+        [InlineData(CredentialSource.KeyVault, null, null)]
+        public void TestId(CredentialSource sourceType, string credentialLocation, string credentialName)
+        {
+            var credentialDescription = new CredentialDescription
+            {
+                SourceType = sourceType,
+                Container = credentialLocation,
+                ReferenceOrValue = credentialName
+            };
 
+            var id = credentialDescription.Id;
+
+            var expectedId = $"{credentialDescription.SourceType}_{credentialDescription.Container}_{credentialDescription.ReferenceOrValue}";
+            Assert.Equal(expectedId, id);
+
+            var cachedId = credentialDescription.Id;
+            Assert.Equal(expectedId, cachedId);
+        }
     }
 }
