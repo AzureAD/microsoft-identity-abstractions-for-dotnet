@@ -1,3 +1,7 @@
+4.1.0
+========
+- New `Id` propoerty on CredentialDescription. See [PR](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/94) for details
+
 4.0.0
 ========
 - Use Assembly Reference instead of PackageReference. See [PR](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/91) for details.
