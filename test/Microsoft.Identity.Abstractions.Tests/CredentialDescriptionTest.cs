@@ -411,11 +411,11 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
         }
 
         [Theory]
-        [InlineData(CredentialSource.KeyVault, "KeyVaultUrl", "CertificateName")]
-        [InlineData(CredentialSource.KeyVault, null, "CertificateName")]
-        [InlineData(CredentialSource.KeyVault, "KeyVaultUrl", null)]
-        [InlineData(CredentialSource.KeyVault, null, null)]
-        public void TestId(CredentialSource sourceType, string credentialLocation, string credentialName)
+        [InlineData(CredentialSource.KeyVault, "KeyVaultUrl", "CertificateName", "KeyVault_KeyVaultUrl_CertificateName")]
+        [InlineData(CredentialSource.KeyVault, null, "CertificateName", "KeyVault__CertificateName")]
+        [InlineData(CredentialSource.KeyVault, "KeyVaultUrl", null, "KeyVault_KeyVaultUrl_")]
+        [InlineData(CredentialSource.KeyVault, null, null, "KeyVault__")]
+        public void TestId(CredentialSource sourceType, string credentialLocation, string credentialName, string expectedId)
         {
             var credentialDescription = new CredentialDescription
             {
@@ -425,11 +425,9 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             };
 
             var id = credentialDescription.Id;
-
-            var expectedId = $"{credentialDescription.SourceType}_{credentialDescription.Container}_{credentialDescription.ReferenceOrValue}";
-            Assert.Equal(expectedId, id);
-
             var cachedId = credentialDescription.Id;
+
+            Assert.Equal(expectedId, id);
             Assert.Equal(expectedId, cachedId);
         }
     }
