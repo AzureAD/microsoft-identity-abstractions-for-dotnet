@@ -14,7 +14,7 @@ namespace Microsoft.Identity.Abstractions
     public class AuthorizationHeaderProviderOptions
     {
         AcquireTokenOptions _acquireTokenOptions = new();
-        HttpMethod _httpMethod = HttpMethod.Get;
+        string _httpMethod = "Get";
         string _protocolScheme = "Bearer";
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Microsoft.Identity.Abstractions
             BaseUrl = other.BaseUrl;
             RelativePath = other.RelativePath;
             AcquireTokenOptions = other.AcquireTokenOptions.Clone();
-            HttpMethod = other.HttpMethod;
+            HttpMethod = other.HttpMethod.ToString();
             CustomizeHttpRequestMessage = other.CustomizeHttpRequestMessage;
             ProtocolScheme = other.ProtocolScheme;
             RequestAppToken = other.RequestAppToken;
@@ -56,7 +56,7 @@ namespace Microsoft.Identity.Abstractions
         /// HTTP method used to call this downstream web API (by default Get).
         /// </summary>
         [DefaultValue("Get")]
-        public HttpMethod HttpMethod
+        public string HttpMethod
         {
             get
             {
@@ -64,7 +64,7 @@ namespace Microsoft.Identity.Abstractions
             }
             set
             {
-                _httpMethod = value ?? throw new ArgumentNullException(nameof(value));
+                _httpMethod = string.IsNullOrEmpty(value) ? "Get" : value;
             }
         }
 
@@ -102,7 +102,7 @@ namespace Microsoft.Identity.Abstractions
             }
             set
             {
-                _protocolScheme = string.IsNullOrEmpty(value) ? throw new ArgumentNullException(_protocolScheme) : value;
+                _protocolScheme = string.IsNullOrEmpty(value) ? "Bearer" : value;
             }
         }
 

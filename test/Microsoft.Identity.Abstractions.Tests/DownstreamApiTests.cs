@@ -42,7 +42,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
 #endif
                 )
                                                       : null,
-                HttpMethod = HttpMethod.Trace,
+                HttpMethod = HttpMethod.Trace.ToString(),
                 ProtocolScheme = "bearer",
                 RelativePath = "/api/values",
                 RequestAppToken = true
@@ -84,9 +84,9 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             Assert.Equal(10, typeof(DownstreamApiOptions).GetProperties().Length);
             Assert.Equal(12, typeof(AcquireTokenOptions).GetProperties().Length);
 
-            DownstreamApiOptionsReadOnlyHttpMethod options = new DownstreamApiOptionsReadOnlyHttpMethod(downstreamApiOptions, HttpMethod.Delete);
-            Assert.Equal(HttpMethod.Delete, options.HttpMethod);
-            Assert.Equal(HttpMethod.Delete, options.Clone().HttpMethod);
+            DownstreamApiOptionsReadOnlyHttpMethod options = new DownstreamApiOptionsReadOnlyHttpMethod(downstreamApiOptions, HttpMethod.Delete.ToString());
+            Assert.Equal(HttpMethod.Delete.ToString(), options.HttpMethod);
+            Assert.Equal(HttpMethod.Delete.ToString(), options.Clone().HttpMethod);
         }
 
         [Fact]
@@ -101,7 +101,6 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
         {
             AuthorizationHeaderProviderOptions authenticationHeaderProviderOptions = new();
 
-            Assert.Throws<ArgumentNullException>(() => _ = authenticationHeaderProviderOptions.ProtocolScheme = null!); ;
             Assert.Throws<ArgumentNullException>(() => _ = authenticationHeaderProviderOptions.AcquireTokenOptions = null!);
         }
 
@@ -117,13 +116,13 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             downstreamApi.CallApiAsync(null,
                 options =>
                 {
-                    options.HttpMethod = HttpMethod.Get;
+                    options.HttpMethod = HttpMethod.Get.ToString();
                     options.BaseUrl = "https://monApi.domain.com";
                     options.RelativePath = "api/values";
                 });
 
             // Calls a service purely programmatically. 
-            downstreamApi.CallApiAsync(new DownstreamApiOptions { HttpMethod = HttpMethod.Get, RequestAppToken = false });
+            downstreamApi.CallApiAsync(new DownstreamApiOptions { HttpMethod = HttpMethod.Get.ToString(), RequestAppToken = false });
 
             // In the following call, it's not possible to set the HttpMethod in the delegate, as it would no
             // make sense: it's already provided in the name of the method
@@ -144,12 +143,6 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
         {
             DownstreamApiOptions options = new DownstreamApiOptions { BaseUrl = baseUrl, RelativePath = relativePath };
             Assert.Equal(expectedUrl, options.GetApiUrl());
-        }
-
-        [Fact]
-        public void NullHttpVerbThrows()
-        {
-            Assert.Throws<ArgumentNullException>(() => { new DownstreamApiOptions { HttpMethod = null! }; });
         }
     }
 
