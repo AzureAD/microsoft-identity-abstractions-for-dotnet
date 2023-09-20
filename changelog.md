@@ -1,6 +1,10 @@
+5.0.0
+========
+- Change `AuthorizationHeaderProviderOptions` to use a `string` instead of `HttpMethod`. See [PR](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/99) for details
+
 4.1.0
 ========
-- New `Id` propoerty on CredentialDescription. See [PR](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/94) for details
+- New `Id` property on CredentialDescription. See [PR](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/94) for details
 
 4.0.0
 ========
