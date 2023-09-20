@@ -4,6 +4,8 @@
 
 - Change `AuthorizationHeaderProviderOptions` to use a `string` instead of `HttpMethod`. See [PR](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/99) for details. This is a breaking change, but shouldn't affect you if you are using the configuration.
 
+- Add integrated API compatibility. See [PR](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/99) for details.
+
 
 4.1.0
 ========
