@@ -15,7 +15,7 @@ With that said, we have additionally marked issues that are good candidates for 
 
 If you would like to make a contribution to an area not captured [here](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22+label%3A%22good+first+issue%22+), first open an issue with a description of the change you would like to make and the problem it solves so it can be discussed before a pull request is submitted.
 
-If you are working on an involved feature, please file a design proposal, more instructions can be found below, under [Before writing code](#before-writing-code).
+If you are working on an involved feature, please file a design proposal. More instructions can be found below, under [Before writing code](#before-writing-code).
 
 ## Before writing code
 
