@@ -34,6 +34,7 @@ namespace Microsoft.Identity.Abstractions
             Claims = other.Claims;
             PopPublicKey = other.PopPublicKey;
             PopClaim = other.PopClaim;
+            ManagedIdentity = other.ManagedIdentity?.Clone();
             LongRunningWebApiSessionKey = other.LongRunningWebApiSessionKey;
             Tenant = other.Tenant;
             UserFlow = other.UserFlow;
@@ -64,7 +65,8 @@ namespace Microsoft.Identity.Abstractions
         /// A string with one or multiple claims to request. It's a json blob (encoded or not)
         /// Normally used with Conditional Access. It receives the Claims member of the UiRequiredException.
         /// It can also be used to request specific optional claims, and for 
-        /// <see href="https://learn.microsoft.com/en-us/azure/active-directory/conditional-access/concept-conditional-access-cloud-apps">CA Auth context</see> 
+        /// <see href="https://learn.microsoft.com/en-us/azure/active-directory/conditional-access/concept-conditional-access-cloud-apps">
+        /// CA Auth context</see>
         /// </summary>
         public string? Claims { get; set; }
 
@@ -89,6 +91,39 @@ namespace Microsoft.Identity.Abstractions
         /// In addition to the <see cref="PopPublicKey"/>, specify the PopClaim when needed in specific POP protocols. 
         /// </summary>
         public string? PopClaim { get; set; }
+
+        /// <summary>
+        /// When <see cref="ManagedIdentity"/> is set, the application uses a managed identity instead of client credentials to
+        /// acquire an app token.<br/><br/>
+        /// 
+        /// The type of managed identity is defined by the <see cref="ManagedIdentityOptions.ManagedIdentityType"/> field. When
+        /// using a <see cref="ManagedIdentityType.SystemAssigned"/> identity, this is the only field that needs to be set and is
+        /// set by default. However, for readability it can be useful to set explicitly<br/><br/>
+        /// 
+        /// To use a user-assigned identity, select the <see cref="ManagedIdentityType"/> that corresponds to the
+        /// <see cref="ManagedIdentityOptions.ClientId"/> you plan to use for authentication.<br/><br/>
+        /// 
+        /// Using either form of managed identity requires the application to be deployed on Azure and
+        /// the managed identity to be configured. For more details, check the
+        /// <see href="https://aka.ms/Entra/ManagedIdentityOverview"> managed identities for Azure documentation</see>.
+        /// </summary>
+        /// <example>
+        /// <format type="text/markdown">
+        /// <![CDATA[
+        /// The Json fragment below describes how to use a system-assigned Managed Identity for authentication in a confidential client application :
+        /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/AquireTokenOptions.cs" id="managedidentitysystem_json":::
+        /// 
+        /// The code below describes the same, programmatically in C#.
+        /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/AquireTokenOptions.cs" id="managedidentitysystem_csharp":::
+        /// 
+        /// The Json fragment below describes how to use a user-assigned Managed Identity for authentication in a confidential client application :
+        /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/AquireTokenOptions.cs" id="managedidentityuser_json":::
+        /// 
+        /// The code below describes the same, programmatically in C#.
+        /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/AquireTokenOptions.cs" id="managedidentityuser_csharp":::
+        /// ]]></format>
+        /// </example>
+        public ManagedIdentityOptions? ManagedIdentity { get; set; }
 
         /// <summary>
         /// Key used for long running web APIs that need to call downstream web
