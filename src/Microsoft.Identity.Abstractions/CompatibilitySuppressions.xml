@@ -2,27 +2,6 @@
 <!-- https://learn.microsoft.com/en-us/dotnet/fundamentals/package-validation/diagnostic-ids -->
 <Suppressions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Suppression>
-    <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod.#ctor(Microsoft.Identity.Abstractions.DownstreamApiOptions,System.Net.Http.HttpMethod)</Target>
-    <Left>lib/net462/Microsoft.Identity.Abstractions.dll</Left>
-    <Right>lib/net462/Microsoft.Identity.Abstractions.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod.#ctor(Microsoft.Identity.Abstractions.DownstreamApiOptions,System.Net.Http.HttpMethod)</Target>
-    <Left>lib/netstandard2.0/Microsoft.Identity.Abstractions.dll</Left>
-    <Right>lib/netstandard2.0/Microsoft.Identity.Abstractions.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod.#ctor(Microsoft.Identity.Abstractions.DownstreamApiOptions,System.Net.Http.HttpMethod)</Target>
-    <Left>lib/netstandard2.1/Microsoft.Identity.Abstractions.dll</Left>
-    <Right>lib/netstandard2.1/Microsoft.Identity.Abstractions.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
     <DiagnosticId>CP0003</DiagnosticId>
     <Target>Microsoft.Identity.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae</Target>
     <Left>lib/net462/Microsoft.Identity.Abstractions.dll</Left>
