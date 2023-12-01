@@ -33,34 +33,9 @@ namespace Microsoft.Identity.Abstractions
         {
             return new ManagedIdentityOptions
             {
-                ManagedIdentityType = this.ManagedIdentityType,
-                ClientId = this.ClientId
+                ManagedIdentityType = ManagedIdentityType,
+                ClientId = ClientId
             };
-        }
-
-        /// <summary>
-        /// Ensures any <see cref="ManagedIdentityOptions"/> object is equal if all fields hold the same values.
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public override bool Equals(object obj)
-        {
-            if (obj == null || GetType() != obj.GetType())
-            {
-                return false;
-            }
-            ManagedIdentityOptions other = (ManagedIdentityOptions)obj;
-            return ManagedIdentityType == other.ManagedIdentityType &&
-                ClientId == other.ClientId;
-        }
-
-        /// <summary>
-        /// Returns the hash code for the instance based on the values of its fields.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            return new { ManagedIdentityType, ClientId }.GetHashCode();
         }
     }
 }
