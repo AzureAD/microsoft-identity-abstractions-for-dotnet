@@ -76,7 +76,8 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ExtraQueryParameters, downstreamApiClone.AcquireTokenOptions.ExtraQueryParameters);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ForceRefresh, downstreamApiClone.AcquireTokenOptions.ForceRefresh);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.LongRunningWebApiSessionKey, downstreamApiClone.AcquireTokenOptions.LongRunningWebApiSessionKey);
-            Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ManagedIdentity, downstreamApiClone.AcquireTokenOptions.ManagedIdentity);
+            Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ManagedIdentity.ManagedIdentityType, downstreamApiClone.AcquireTokenOptions.ManagedIdentity.ManagedIdentityType);
+            Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ManagedIdentity.ClientId, downstreamApiClone.AcquireTokenOptions.ManagedIdentity.ClientId);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.PopPublicKey, downstreamApiClone.AcquireTokenOptions.PopPublicKey);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.PopClaim, downstreamApiClone.AcquireTokenOptions.PopClaim);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.Tenant, downstreamApiClone.AcquireTokenOptions.Tenant);
