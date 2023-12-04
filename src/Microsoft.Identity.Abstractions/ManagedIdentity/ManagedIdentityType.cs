@@ -4,7 +4,7 @@
 namespace Microsoft.Identity.Abstractions
 {
     /// <summary>
-    /// Used by <see cref="ManagedIdentityOptions"/> to specify the type of managed identity to use.<br/><br/>
+    /// Used by <see cref="ManagedIdentityOptions"/> to specify the type of managed identity to use.
     /// See <see href="https://aka.ms/Entra/ManagedIdentityOverview"/> for more details.
     /// </summary>
     public enum ManagedIdentityType

@@ -99,7 +99,7 @@ namespace Microsoft.Identity.Abstractions
         /// <summary>
         /// In a web API, accepted audiences for the tokens received by the web API.
         /// <para>See also <see cref="Audience"/>.</para>
-        /// The audience is the intended recipient of the token. You can usually assume that the ApplicationId of your web API
+        /// The audience is the intended recipient of the token. You can usually assume that the ApplicationID of your web API
         /// is a valid audience. It can, in general be any of the App ID URIs (or resource identitfier) you defined for your application
         /// during its registration in the Azure portal.
         /// </summary>
