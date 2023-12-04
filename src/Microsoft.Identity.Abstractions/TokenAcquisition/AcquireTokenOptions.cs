@@ -41,14 +41,14 @@ namespace Microsoft.Identity.Abstractions
         }
 
         /// <summary>
-        /// Gets the name of the options describing the confidential client application (ClientId,
+        /// Gets the name of the options describing the confidential client application (ClientID,
         /// Region, Authority, client credentials). In ASP.NET Core, the authenticatiopn options name 
         /// is the same as the authentication scheme.
         /// </summary>
         public string? AuthenticationOptionsName { get; set; }
 
         /// <summary>
-        /// Sets the correlation id to be used in the request to the STS "/token" endpoint.
+        /// Sets the correlation ID to be used in the request to the STS "/token" endpoint.
         /// </summary>
         public Guid? CorrelationId { get; set; }
 
@@ -94,15 +94,12 @@ namespace Microsoft.Identity.Abstractions
 
         /// <summary>
         /// When <see cref="ManagedIdentity"/> is set, the application uses a managed identity instead of client credentials to
-        /// acquire an app token.<br/><br/>
-        /// 
+        /// acquire an app token.
         /// The type of managed identity is defined by the <see cref="ManagedIdentityOptions.ManagedIdentityType"/> field. When
         /// using a <see cref="ManagedIdentityType.SystemAssigned"/> identity, this is the only field that needs to be set and is
-        /// set by default. However, for readability it can be useful to set explicitly<br/><br/>
-        /// 
+        /// set by default. However, for readability it can be useful to set explicitly.
         /// To use a user-assigned identity, select the <see cref="ManagedIdentityType"/> that corresponds to the
-        /// <see cref="ManagedIdentityOptions.ClientId"/> you plan to use for authentication.<br/><br/>
-        /// 
+        /// <see cref="ManagedIdentityOptions.ClientId"/> you plan to use for authentication.
         /// Using either form of managed identity requires the application to be deployed on Azure and
         /// the managed identity to be configured. For more details, check the
         /// <see href="https://aka.ms/Entra/ManagedIdentityOverview"> managed identities for Azure documentation</see>.
