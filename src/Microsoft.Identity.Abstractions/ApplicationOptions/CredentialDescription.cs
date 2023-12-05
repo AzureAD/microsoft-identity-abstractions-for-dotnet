@@ -67,7 +67,7 @@ namespace Microsoft.Identity.Abstractions
                     CredentialSource.StoreWithThumbprint or CredentialSource.StoreWithDistinguishedName => CertificateStorePath,
                     CredentialSource.SignedAssertionFilePath => SignedAssertionFileDiskPath,
                     CredentialSource.SignedAssertionFromVault => KeyVaultUrl,
-                    _ => null,
+                    _ => null
                 };
             }
             set
@@ -257,8 +257,8 @@ namespace Microsoft.Identity.Abstractions
         public string? ClientSecret { get; set; }
 
         /// <summary>
-        /// When <see cref="SourceType"/> is <see cref="CredentialSource.SignedAssertionFromManagedIdentity"/>, specifies the client ID of the Azure user-assigned managed identity 
-        /// used to provide an signed assertion that will be used as a client credential for the application. This requires that the application is deployed on Azure, that the managed identity is configured, 
+        /// When <see cref="SourceType"/> is <see cref="CredentialSource.SignedAssertionFromManagedIdentity"/>, it specifies the client ID of the Azure user-assigned managed identity 
+        /// used to provide a signed assertion to act as a client credential for the application. This requires that the application is deployed on Azure, that the managed identity is configured, 
         /// and that workload identity federation with the managed identity is declared in the application registration. For details, see https://learn.microsoft.com/azure/active-directory/workload-identities/workload-identity-federation.
         /// </summary>
         /// <example>
