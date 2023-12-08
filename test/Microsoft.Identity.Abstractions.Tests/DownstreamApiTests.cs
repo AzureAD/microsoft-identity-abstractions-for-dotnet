@@ -27,6 +27,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
                     ExtraQueryParameters = new Dictionary<string, string> { { "slice", "test" } },
                     ForceRefresh = true,
                     LongRunningWebApiSessionKey = AcquireTokenOptions.LongRunningWebApiSessionKeyAuto,
+                    ManagedIdentity = new ManagedIdentityOptions(),
                     PopPublicKey = "PopKey",
                     PopClaim = "jwkClaim",
                     Tenant = "domain.com",
@@ -75,6 +76,8 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ExtraQueryParameters, downstreamApiClone.AcquireTokenOptions.ExtraQueryParameters);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ForceRefresh, downstreamApiClone.AcquireTokenOptions.ForceRefresh);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.LongRunningWebApiSessionKey, downstreamApiClone.AcquireTokenOptions.LongRunningWebApiSessionKey);
+            Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ManagedIdentity.ManagedIdentityType, downstreamApiClone.AcquireTokenOptions.ManagedIdentity?.ManagedIdentityType);
+            Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ManagedIdentity.ClientId, downstreamApiClone.AcquireTokenOptions.ManagedIdentity?.ClientId);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.PopPublicKey, downstreamApiClone.AcquireTokenOptions.PopPublicKey);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.PopClaim, downstreamApiClone.AcquireTokenOptions.PopClaim);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.Tenant, downstreamApiClone.AcquireTokenOptions.Tenant);
@@ -82,7 +85,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
 
             // If this fails, think of also adding a line to test the new property
             Assert.Equal(10, typeof(DownstreamApiOptions).GetProperties().Length);
-            Assert.Equal(12, typeof(AcquireTokenOptions).GetProperties().Length);
+            Assert.Equal(13, typeof(AcquireTokenOptions).GetProperties().Length);
 
             DownstreamApiOptionsReadOnlyHttpMethod options = new DownstreamApiOptionsReadOnlyHttpMethod(downstreamApiOptions, HttpMethod.Delete.ToString());
             Assert.Equal(HttpMethod.Delete.ToString(), options.HttpMethod);
