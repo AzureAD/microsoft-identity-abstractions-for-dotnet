@@ -17,9 +17,7 @@ namespace Microsoft.Identity.Abstractions.Tests
             // <managedidentity_json>
             {
                 "AquireTokenOptions": {
-                    "ManagedIdentity": {
-                        "ManagedIdentityType": "SystemAssigned"
-                    }
+                    "ManagedIdentity"
                 }
             }
             // </managedidentitysystem_json>
@@ -29,14 +27,11 @@ namespace Microsoft.Identity.Abstractions.Tests
             AcquireTokenOptions acquireTokenOptions = new AcquireTokenOptions
             {
                 ManagedIdentity = new ManagedIdentityOptions()
-                {
-                    // default: ManagedIdentityType = ManagedIdentityType.SystemAssigned
-                }
             };
             // </managedidentitysystem_csharp>
 
-            Assert.Equal(ManagedIdentityType.SystemAssigned, acquireTokenOptions.ManagedIdentity.ManagedIdentityType);
-            Assert.Null(acquireTokenOptions.ManagedIdentity.ClientId);
+            Assert.NotNull(acquireTokenOptions.ManagedIdentity);
+            Assert.Null(acquireTokenOptions.ManagedIdentity.UserAssignedClientId);
         }
 
         [Fact]
@@ -50,8 +45,7 @@ namespace Microsoft.Identity.Abstractions.Tests
             {
                 "AquireTokenOptions": {
                     "ManagedIdentity": {
-                        "ManagedIdentityType": "UserAssigned"
-                        "ClientId": "[ClientIdForTheManagedIdentityResource]"
+                        "UserAssignedClientId": "[ClientIdForTheManagedIdentityResource]"
                     }
                 }
             }
@@ -59,20 +53,19 @@ namespace Microsoft.Identity.Abstractions.Tests
             */
 
             // <managedidentityuser_csharp>
-            ManagedIdentityOptions managedIdentityDescription = new ManagedIdentityOptions
+            ManagedIdentityOptions managedIdentityOptions = new ManagedIdentityOptions
             {
-                ManagedIdentityType = ManagedIdentityType.UserAssigned,
-                ClientId = "[ClientIdForTheManagedIdentityResource]"
+                UserAssignedClientId = "[ClientIdForTheManagedIdentityResource]"
             };
 
             AcquireTokenOptions acquireTokenOptions = new AcquireTokenOptions
             {
-                ManagedIdentity = managedIdentityDescription
+                ManagedIdentity = managedIdentityOptions
             };
             // </managedidentityuser_csharp>
 
-            Assert.Equal(ManagedIdentityType.UserAssigned, acquireTokenOptions.ManagedIdentity.ManagedIdentityType);
-            Assert.Equal(managedIdentityDescription.ClientId, acquireTokenOptions.ManagedIdentity.ClientId);
+            Assert.NotNull(acquireTokenOptions.ManagedIdentity);
+            Assert.Equal(managedIdentityOptions.UserAssignedClientId, acquireTokenOptions.ManagedIdentity.UserAssignedClientId);
         }
     }
 }

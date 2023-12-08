@@ -95,13 +95,10 @@ namespace Microsoft.Identity.Abstractions
         /// <summary>
         /// When <see cref="ManagedIdentity"/> is set, the application uses a managed identity instead of client credentials to
         /// acquire an app token.
-        /// The type of managed identity is defined by the <see cref="ManagedIdentityOptions.ManagedIdentityType"/> field. When
-        /// using a <see cref="ManagedIdentityType.SystemAssigned"/> identity, this is the only field that needs to be set and is
-        /// set by default. However, for readability it can be useful to set explicitly.
-        /// To use a user-assigned identity, select the <see cref="ManagedIdentityType"/> that corresponds to the
-        /// <see cref="ManagedIdentityOptions.ClientId"/> you plan to use for authentication.
-        /// Using either form of managed identity requires the application to be deployed on Azure and
-        /// the managed identity to be configured. For more details, check the
+        /// To use a system-assigned identity, simply leave <see cref="ManagedIdentityOptions.UserAssignedClientId"/> null.
+        /// To use a user-assigned identity, set <see cref="ManagedIdentityOptions.UserAssignedClientId"/> to the ClientID of the
+        /// user-assigned identity you want to use. Using either form of managed identity requires the application to be deployed
+        /// on Azure and the managed identity to be configured. For more details, check the
         /// <see href="https://aka.ms/Entra/ManagedIdentityOverview"> managed identities for Azure documentation</see>.
         /// </summary>
         /// <example>
