@@ -1,3 +1,9 @@
+5.1.0
+========
+## API additions to enable support for managed identities.
+- Created a new [ManagedIdentityOptions class](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/blob/main/src/Microsoft.Identity.Abstractions/TokenAcquisition/ManagedIdentityOptions.cs).
+- Added a 'ManagedIdentity' property to the [AcquireTokenOptions class](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/blob/main/src/Microsoft.Identity.Abstractions/TokenAcquisition/AcquireTokenOptions.cs). See [#115](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/115) for details.
+
 5.0.0
 ========
 - Introduce a unique identifier for a CredentialDescription object. See [PR](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/94) for details.
