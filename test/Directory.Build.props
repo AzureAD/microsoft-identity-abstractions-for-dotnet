@@ -5,7 +5,6 @@
   </PropertyGroup>
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0</TargetFrameworks>
 		<MicrosoftNetTestSdkVersion>17.3.2</MicrosoftNetTestSdkVersion>
 		<!-- GHSA-5crp-9r3c-p9vr -->
 		<NewtonsoftJsonVersion>13.0.1</NewtonsoftJsonVersion>
