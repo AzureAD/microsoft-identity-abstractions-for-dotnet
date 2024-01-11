@@ -25,7 +25,7 @@
 		<AssemblyOriginatorKeyFile>../../build/MSAL.snk</AssemblyOriginatorKeyFile>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<Nullable>enable</Nullable>
-		<LangVersion>8</LangVersion>
+		<LangVersion>9.0</LangVersion>
 		<PackageVersion>5.1.0</PackageVersion>
 		<EnablePackageValidation>true</EnablePackageValidation>
 		<PackageValidationBaselineVersion>5.0.0</PackageValidationBaselineVersion>
