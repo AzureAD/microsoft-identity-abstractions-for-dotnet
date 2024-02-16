@@ -17,7 +17,7 @@ namespace Microsoft.Identity.Abstractions.Tests
             // <managedidentity_json>
             {
                 "AquireTokenOptions": {
-                    "ManagedIdentity"
+                    "ManagedIdentity": {}
                 }
             }
             // </managedidentitysystem_json>
