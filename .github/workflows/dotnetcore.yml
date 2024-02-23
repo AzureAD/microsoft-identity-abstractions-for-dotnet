@@ -21,4 +21,4 @@ jobs:
       
     # Run the tests  
     - name: Pack
-      run: dotnet pack --configuration Release Microsoft.Identity.Abstractions.sln 
+      run: dotnet pack --configuration --no-restore --no-build Release Microsoft.Identity.Abstractions.sln 
