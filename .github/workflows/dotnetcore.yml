@@ -17,8 +17,8 @@ jobs:
   
     # Run the tests  
     - name: Build with .NET 8.0.x
-      run: dotnet test --configuration Release Microsoft.Identity.Abstractions.sln
+      run: dotnet test -v m --configuration Release Microsoft.Identity.Abstractions.sln
       
     # Run the tests  
     - name: Pack
-      run: dotnet pack --configuration --no-restore --no-build Release Microsoft.Identity.Abstractions.sln 
+      run: dotnet pack --configuration Release --no-restore --no-build -v m Microsoft.Identity.Abstractions.sln 
