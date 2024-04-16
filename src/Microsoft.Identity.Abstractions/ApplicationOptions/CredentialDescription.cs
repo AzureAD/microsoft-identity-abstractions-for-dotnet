@@ -460,5 +460,22 @@ namespace Microsoft.Identity.Abstractions
                 };
             }
         }
+
+        /// <summary>
+        /// (Microsoft identity specific)
+        /// Value that can be used to configure the token exchange resource url.
+        /// </summary>
+        /// /// <example>
+        /// <format type="text/markdown">
+        /// <![CDATA[
+        /// The JSON fragment below describes a workload identity federation with a user assigned managed identity:
+        /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="tokenExchangeUrl_json":::
+        /// 
+        /// The code below describes programmatically in C#, the same workload identity federation with a user assigned managed identity.
+        /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="tokenExchangeUrl_csharp":::
+        /// ]]></format>
+        /// </example> 
+        /// <remarks>If you want to use the default token exchange resource "api://AzureADTokenExchange", don't provide a token exchange url.</remarks>
+        public string? TokenExchangeUrl { get; set; }
     }
 }
