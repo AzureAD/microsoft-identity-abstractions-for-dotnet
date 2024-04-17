@@ -26,7 +26,7 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<Nullable>enable</Nullable>
 		<LangVersion>12</LangVersion>
-		<!-- <PackageVersion>5.2.0</PackageVersion> -->
+		<PackageVersion>5.2.0</PackageVersion>
 		<EnablePackageValidation>true</EnablePackageValidation>
 		<PackageValidationBaselineVersion>5.0.0</PackageValidationBaselineVersion>
 	</PropertyGroup>
