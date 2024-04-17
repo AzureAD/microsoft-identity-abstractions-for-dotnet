@@ -463,7 +463,8 @@ namespace Microsoft.Identity.Abstractions
 
         /// <summary>
         /// (Microsoft Entra specific)
-        /// Value that can be used to configure the token exchange resource url.
+        /// Value that can be used to configure the token exchange resource url in the case
+        /// of federation identity credentials with Managed identity.
         /// </summary>
         /// /// <example>
         /// <format type="text/markdown">
