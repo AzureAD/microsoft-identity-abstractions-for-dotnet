@@ -28,7 +28,7 @@
 		<LangVersion>12</LangVersion>
 		<!-- <PackageVersion>5.2.0</PackageVersion> -->
 		<EnablePackageValidation>true</EnablePackageValidation>
-		<PackageValidationBaselineVersion>5.1.0</PackageValidationBaselineVersion>
+		<PackageValidationBaselineVersion>5.0.0</PackageValidationBaselineVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Label="Source Link">
