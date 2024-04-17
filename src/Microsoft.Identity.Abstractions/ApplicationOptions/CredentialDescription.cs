@@ -462,7 +462,7 @@ namespace Microsoft.Identity.Abstractions
         }
 
         /// <summary>
-        /// (Microsoft identity specific)
+        /// (Microsoft Entra specific)
         /// Value that can be used to configure the token exchange resource url.
         /// </summary>
         /// /// <example>
