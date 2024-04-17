@@ -343,6 +343,32 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
         }
 
         [Fact]
+        public void TokenExchangeUrl()
+        {
+            /*
+            // <tokenExchangeUrl_json>
+            {
+                "ClientCredentials": [
+                {
+                    "SourceType": "SignedAssertionFromManagedIdentity",
+                    "TokenExchangeUrl": "api://AzureADTokenExchangeChina"
+                }]
+            }
+            // </tokenExchangeUrl_json>
+            */
+
+            // <tokenExchangeUrl_csharp>
+            CredentialDescription credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.SignedAssertionFromManagedIdentity,
+                TokenExchangeUrl = "api://AzureADTokenExchangeChina"
+            };
+            // </tokenExchangeUrl_csharp>
+
+            Assert.Equal("api://AzureADTokenExchangeChina", credentialDescription.TokenExchangeUrl);
+        }
+
+        [Fact]
         public void UnknownCredentialSource()
         {
             CredentialDescription credentialDescription = new CredentialDescription
@@ -361,8 +387,8 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             Assert.Null(credentialDescription.Container);
         }
 
-            // Both container and reference or value.
-            [Theory]
+        // Both container and reference or value.
+        [Theory]
         [InlineData(CredentialSource.Base64Encoded)]
         [InlineData(CredentialSource.StoreWithThumbprint)]
         [InlineData(CredentialSource.StoreWithDistinguishedName)]
