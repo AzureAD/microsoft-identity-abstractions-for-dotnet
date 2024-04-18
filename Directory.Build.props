@@ -1,7 +1,7 @@
 <Project>
 	<PropertyGroup>
 		<!--This should be passed from the VSTS build-->
-		<ClientSemVer Condition="'$(ClientSemVer)' == ''">1.0.0-local</ClientSemVer>
+		<ClientSemVer Condition="'$(ClientSemVer)' == ''">5.2.0-local</ClientSemVer>
 		<!--This will generate AssemblyVersion, AssemblyFileVersion and AssemblyInformationVersion-->
 		<Version>$(ClientSemVer)</Version>
 
@@ -26,7 +26,7 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<Nullable>enable</Nullable>
 		<LangVersion>12</LangVersion>
-		<PackageVersion>5.1.0</PackageVersion>
+		<PackageVersion>$(ClientSemVer)</PackageVersion>
 		<EnablePackageValidation>true</EnablePackageValidation>
 		<PackageValidationBaselineVersion>5.0.0</PackageValidationBaselineVersion>
 	</PropertyGroup>
