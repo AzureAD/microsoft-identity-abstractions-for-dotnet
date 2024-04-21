@@ -81,9 +81,11 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.PopClaim, downstreamApiClone.AcquireTokenOptions.PopClaim);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.Tenant, downstreamApiClone.AcquireTokenOptions.Tenant);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.UserFlow, downstreamApiClone.AcquireTokenOptions.UserFlow);
+            Assert.Equal("application/json", downstreamApiClone.AcceptHeader);
+            Assert.Equal("application/json", downstreamApiClone.ContentType);
 
             // If this fails, think of also adding a line to test the new property
-            Assert.Equal(10, typeof(DownstreamApiOptions).GetProperties().Length);
+            Assert.Equal(12, typeof(DownstreamApiOptions).GetProperties().Length);
             Assert.Equal(13, typeof(AcquireTokenOptions).GetProperties().Length);
 
             DownstreamApiOptionsReadOnlyHttpMethod options = new DownstreamApiOptionsReadOnlyHttpMethod(downstreamApiOptions, HttpMethod.Delete.ToString());
