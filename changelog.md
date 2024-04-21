@@ -1,3 +1,16 @@
+5.3.0
+========
+
+## New features:
+- Added two new properties `AcceptHeader` and `ContentType` to `DownstreamApiOptions` class. See issue [#123](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/123) for details.
+
+## Bug fix:
+- Fix file path for xml comment. See issue [#117](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/117) for details.
+
+5.2.0
+========
+- Added a `TokenExchangeUrl` to the [CredentialDescription](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/blob/main/src/Microsoft.Identity.Abstractions/ApplicationOptions/CredentialDescription.cs#L480) class.
+
 5.1.0
 ========
 ## API additions to enable support for managed identities.
