@@ -105,16 +105,16 @@ namespace Microsoft.Identity.Abstractions
         /// <format type="text/markdown">
         /// <![CDATA[
         /// The Json fragment below describes how to use a system-assigned Managed Identity for authentication in a confidential client application :
-        /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/AquireTokenOptions.cs" id="managedidentitysystem_json":::
+        /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/AquireTokenOptionsTests.cs" id="managedidentitysystem_json":::
         /// 
         /// The code below describes the same, programmatically in C#.
-        /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/AquireTokenOptions.cs" id="managedidentitysystem_csharp":::
+        /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/AquireTokenOptionsTests.cs" id="managedidentitysystem_csharp":::
         /// 
         /// The Json fragment below describes how to use a user-assigned Managed Identity for authentication in a confidential client application :
-        /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/AquireTokenOptions.cs" id="managedidentityuser_json":::
+        /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/AquireTokenOptionsTests.cs" id="managedidentityuser_json":::
         /// 
         /// The code below describes the same, programmatically in C#.
-        /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/AquireTokenOptions.cs" id="managedidentityuser_csharp":::
+        /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/AquireTokenOptionsTests.cs" id="managedidentityuser_csharp":::
         /// ]]></format>
         /// </example>
         public ManagedIdentityOptions? ManagedIdentity { get; set; }
