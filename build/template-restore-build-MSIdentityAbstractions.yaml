@@ -11,15 +11,15 @@ steps:
   displayName: 'Build solution Microsoft.Identity.Abstractions.sln and run tests'
   inputs:
     command: test
-    projects: 'Microsoft.Identity.Abstractions.sln'
-    arguments: '--collect "Code Coverage" --settings "build\CodeCoverage.runsettings" --configuration ${{ parameters.BuildConfiguration }} -p:RunCodeAnalysis=true -p:MsIdentityAbstractionsSemVer=${{ parameters.MsIdentityAbstractionsSemVer }} -p:SourceLinkCreate=true'
+    projects: '$(IdAdstractionsSourceDir)Microsoft.Identity.Abstractions.sln'
+    arguments: '--collect "Code Coverage" --settings "$(IdAdstractionsSourceDir)build\CodeCoverage.runsettings" --configuration ${{ parameters.BuildConfiguration }} -p:RunCodeAnalysis=true -p:MsIdentityAbstractionsSemVer=${{ parameters.MsIdentityAbstractionsSemVer }} -p:SourceLinkCreate=true'
 
 # This task is needed so that the 1CS Rolsyn analyzers task works.
 # The previous task does the restore
 - task: VSBuild@1
   displayName: 'Build solution Microsoft.Identity.Abstractions.sln for governance'
   inputs:
-    solution: Microsoft.Identity.Abstractions.sln
+    solution: $(IdAdstractionsSourceDir)Microsoft.Identity.Abstractions.sln
     msbuildArgs: '/p:RunCodeAnalysis=false /p:MsIdentityAbstractionsSemVer=${{ parameters.MsIdentityAbstractionsSemVer }} /p:SourceLinkCreate=true'
     platform: ${{ parameters.BuildPlatform }}
     configuration: ${{ parameters.BuildConfiguration }}

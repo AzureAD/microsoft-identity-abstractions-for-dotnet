@@ -10,7 +10,7 @@ steps:
 - template: template-pack-and-sign-nuget.yaml
   parameters:
     BuildConfiguration: ${{ parameters.BuildConfiguration }}
-    ProjectRootPath: '$(Build.SourcesDirectory)\src\Microsoft.Identity.Abstractions'
+    ProjectRootPath: '$(Build.SourcesDirectory)\$(IdAdstractionsSourceDir)src\Microsoft.Identity.Abstractions'
     AssemblyName: 'Microsoft.Identity.Abstractions'
     HasRefAssembly: 'false'
 
@@ -18,7 +18,7 @@ steps:
 - task: CopyFiles@2
   displayName: 'Copy Files from $(Build.SourcesDirectory) to: $(Build.ArtifactStagingDirectory)\packages'
   inputs:
-    SourceFolder: '$(Build.SourcesDirectory)'
+    SourceFolder: '$(Build.SourcesDirectory)$(IdAdstractionsSourceDir)'
     Contents: '**\*nupkg'
     TargetFolder: '$(Build.ArtifactStagingDirectory)\packages'
     flattenFolders: true
@@ -51,3 +51,13 @@ steps:
     SessionTimeout: 20
     VerboseLogin: true
   timeoutInMinutes: 5
+  condition: and(succeeded(), eq(variables['PipelineType'], 'Legacy'))
+
+- task: onebranch.pipeline.signing@1
+  displayName: 'Sign Packages with OneBranch'
+  inputs:
+    command: 'sign'
+    signing_profile: 'CP-401405'
+    files_to_sign: '*.nupkg'
+    search_root: '$(Build.ArtifactStagingDirectory)\packages'
+  condition: and(succeeded(), eq(variables['PipelineType'], 'OneBranch'))
