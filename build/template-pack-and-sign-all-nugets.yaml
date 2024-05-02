@@ -16,9 +16,9 @@ steps:
 
 # Copy all packages out to staging
 - task: CopyFiles@2
-  displayName: 'Copy Files from $(Build.SourcesDirectory) to: $(Build.ArtifactStagingDirectory)\packages'
+  displayName: 'Copy Files from $(Build.SourcesDirectory)\$(IdAdstractionsSourceDir) to: $(Build.ArtifactStagingDirectory)\packages'
   inputs:
-    SourceFolder: '$(Build.SourcesDirectory)$(IdAdstractionsSourceDir)'
+    SourceFolder: '$(Build.SourcesDirectory)\$(IdAdstractionsSourceDir)'
     Contents: '**\*nupkg'
     TargetFolder: '$(Build.ArtifactStagingDirectory)\packages'
     flattenFolders: true
