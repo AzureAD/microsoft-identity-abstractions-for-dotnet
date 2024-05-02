@@ -12,6 +12,7 @@ steps:
     GdnPublishTsaOnboard: false
     GdnPublishTsaConfigFile: '$(Build.SourcesDirectory)/build/tsaConfig.json'
   continueOnError: true
+  condition: and(succeeded(), eq(variables['PipelineType'], 'Legacy'))
 
 - task: mspremier.PostBuildCleanup.PostBuildCleanup-task.PostBuildCleanup@3
   displayName: 'Clean Agent Directories'
