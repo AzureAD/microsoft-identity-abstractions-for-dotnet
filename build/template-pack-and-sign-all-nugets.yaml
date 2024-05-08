@@ -10,15 +10,15 @@ steps:
 - template: template-pack-and-sign-nuget.yaml
   parameters:
     BuildConfiguration: ${{ parameters.BuildConfiguration }}
-    ProjectRootPath: '$(Build.SourcesDirectory)\$(IdAdstractionsSourceDir)src\Microsoft.Identity.Abstractions'
+    ProjectRootPath: '$(Build.SourcesDirectory)\$(IdAbstractionsSourceDir)src\Microsoft.Identity.Abstractions'
     AssemblyName: 'Microsoft.Identity.Abstractions'
     HasRefAssembly: 'false'
 
 # Copy all packages out to staging
 - task: CopyFiles@2
-  displayName: 'Copy Files from $(Build.SourcesDirectory)\$(IdAdstractionsSourceDir) to: $(Build.ArtifactStagingDirectory)\packages'
+  displayName: 'Copy Files from $(Build.SourcesDirectory)\$(IdAbstractionsSourceDir) to: $(Build.ArtifactStagingDirectory)\packages'
   inputs:
-    SourceFolder: '$(Build.SourcesDirectory)\$(IdAdstractionsSourceDir)'
+    SourceFolder: '$(Build.SourcesDirectory)\$(IdAbstractionsSourceDir)'
     Contents: '**\*nupkg'
     TargetFolder: '$(Build.ArtifactStagingDirectory)\packages'
     flattenFolders: true
