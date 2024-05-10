@@ -14,17 +14,20 @@ steps:
     command: custom
     arguments: 'verify -Signature ${{ parameters.NugetPackagesWildcard }}'
   continueOnError: true
+  condition: and(succeeded(), eq(variables['PipelineType'], 'Legacy'))
 
 - task: AzureArtifacts.manifest-generator-task.manifest-generator-task.ManifestGeneratorTask@0
   displayName: 'Generation Task'
   inputs:
     BuildDropPath: '${{ parameters.ArtifactPublishPath }}'
+  condition: and(succeeded(), eq(variables['PipelineType'], 'Legacy'))
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: packages'
   inputs:
     PathtoPublish: '${{ parameters.ArtifactPublishPath }}'
     ArtifactName: '${{ parameters.DropArtifactName }}'
+  condition: and(succeeded(), eq(variables['PipelineType'], 'Legacy'))
 
 - task: NuGetCommand@2
   displayName: 'Publish packages to VSTS feed'
