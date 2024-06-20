@@ -1,7 +1,7 @@
 <Project>
 	<PropertyGroup>
 		<!--This should be passed from the VSTS build-->
-		<ClientSemVer Condition="'$(ClientSemVer)' == ''">5.2.0-local</ClientSemVer>
+		<ClientSemVer Condition="'$(ClientSemVer)' == ''">6.0.0-local</ClientSemVer>
 		<!--This will generate AssemblyVersion, AssemblyFileVersion and AssemblyInformationVersion-->
 		<Version>$(ClientSemVer)</Version>
 
