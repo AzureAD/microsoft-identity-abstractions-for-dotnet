@@ -1,3 +1,8 @@
+6.0.0
+========
+## Breaking changes:
+- Updates the 'IAuthorizationHeaderProvider' interface to include a new method 'GetAuthorizationHeaderAsync'. See issue [#130](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/130) for details.
+
 5.3.0
 ========
 
