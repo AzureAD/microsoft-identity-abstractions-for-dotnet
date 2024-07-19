@@ -46,6 +46,10 @@
 	<PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
 		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 	</PropertyGroup>
+    
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net8.0'">
+    <SystemTextJsonVersion>8.0.4</SystemTextJsonVersion>
+  </PropertyGroup>
 
 	<ItemGroup>
 		<None Include="..\..\LICENSE">

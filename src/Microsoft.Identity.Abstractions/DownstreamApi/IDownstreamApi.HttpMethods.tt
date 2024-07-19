@@ -15,6 +15,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Identity.Abstractions;
 
+#if NET8_0_OR_GREATER
+using System.Text.Json.Serialization.Metadata;
+#endif
+
 namespace Microsoft.Identity.Abstractions
 {
     /// <summary>
@@ -24,6 +28,8 @@ namespace Microsoft.Identity.Abstractions
     public partial interface IDownstreamApi
     {
 <#
+  foreach(string framework in new string[]{  "all", "net8" } )
+  {
   foreach(string httpMethod in new string[]{  "Get", "Post", "Put", "Patch", "Delete"} )
   {
    if (httpMethod == "Patch")
@@ -52,62 +58,10 @@ namespace Microsoft.Identity.Abstractions
      string user = !hasApp ? "user" : "null";
      string sampleCodeTemplate = template.Replace("TOutput", "IEnumerable<MyItem>").Replace("TInput", "MyItem").Replace("<", "&lt;").Replace(">", "&gt;");
 #>
-
-        /// <summary>
-        /// Calls, using <see cref="HttpMethod.<#= httpMethod #>"/>, a downstream API <#= hasInput ? "with some input data " : ""#><#= hasInput&&hasOutput ? "and " : ""#><#= hasOutput ? "returning data" : ""#>.
-        /// By default <#= hasInput ? "the input data is serialized in JSON " : ""#><#= hasInput&&hasOutput ? "and " : ""#><#= hasOutput ? "the returned data is deserialized from JSON" : ""#> but you can provide <#= hasInput ? "your own serializer " : ""#><#= hasInput&&hasOutput ? "and " : ""#><#= hasOutput ? "your own deserializer " : ""#>in the action
-        /// you pass-in through the <paramref name="downstreamApiOptionsOverride"/> parameter.
-        /// </summary>
-<# if (hasInput){ #>
-        /// <typeparam name="TInput">Generic input type.</typeparam>
-<# } #>
-<# if (hasOutput){ #>
-        /// <typeparam name="TOutput">Generic output type.</typeparam>
-<# } #>
-        /// <param name="serviceName">Name of the service describing the downstream API. There can
-        /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
-        /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
-        /// needs to be set.</param>
-<# if (hasInput){ #>
-        /// <param name="input">Data sent to the downstream web API, through the body or the HTTP request.</param>
-<# } #>
-        /// <param name="downstreamApiOptionsOverride">[Optional] Overrides the options proposed in the configuration described
-        /// by <paramref name="serviceName"/>.</param>
-<# if (!hasApp){ #>
-        /// <param name="user">[Optional] Claims representing a user. This is useful in platforms like Blazor
-        /// or Azure Signal R, where the HttpContext is not available. In other platforms, the library
-        /// will find the user from the HttpContext.</param>
-<# } #>
-        /// <param name="cancellationToken"></param>
-        /// <returns> <#= hasInput? "The value returned by the downstream web API." : "a Task" #></returns>
-        /// <example>
-        /// <code>
-        ///  <#= hasOutput?"var result =" : "" #> await _downstreamApi.<#= httpMethod #>For<#= token #>Async<#= sampleCodeTemplate #>(
-        ///         "MyService",
-<# if (hasInput){ #>
-        ///         myItem,
-<# } #>
-        ///         options =>
-        ///         {
-        ///           options.RelativePath = $"api/todolist<#= hasInput? "/{myItem.Id}": ""#>";
-        ///         });
-        /// </code>
-        /// </example>
-#if NET6_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
-#endif
-        public <#= returnType #> <#= httpMethod #>For<#= token #>Async<#= template #>(
-            string? serviceName,
-<# if (hasInput){ #>
-            TInput input,
-<# } #>
-            Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
-<# if (!hasApp){ #>
-            ClaimsPrincipal? user = null,
-<# } #>
-            CancellationToken cancellationToken = default)<#= hasOutput?"where TOutput : class;" :";" #>
+<# if (framework == "net8"){ #>
 
 #if NET8_0_OR_GREATER
+<# } #>
         /// <summary>
         /// Calls, using <see cref="HttpMethod.<#= httpMethod #>"/>, a downstream API <#= hasInput ? "with some input data " : ""#><#= hasInput&&hasOutput ? "and " : ""#><#= hasOutput ? "returning data" : ""#>.
         /// By default <#= hasInput ? "the input data is serialized in JSON " : ""#><#= hasInput&&hasOutput ? "and " : ""#><#= hasOutput ? "the returned data is deserialized from JSON" : ""#> but you can provide <#= hasInput ? "your own serializer " : ""#><#= hasInput&&hasOutput ? "and " : ""#><#= hasOutput ? "your own deserializer " : ""#>in the action
@@ -120,10 +74,10 @@ namespace Microsoft.Identity.Abstractions
         /// <typeparam name="TOutput">Generic output type.</typeparam>
 <# } #>
 
-<# if (hasInput){ #>
+<# if (hasInput && framework == "net8"){ #>
         /// <typeparam name="JsonTypeInfo<TInput>">JSON serialization metadata for TInput</typeparam>
 <# } #>
-<# if (hasOutput){ #>
+<# if (hasOutput && framework == "net8"){ #>
         /// <typeparam name="JsonTypeInfo<TOutput>">JSON serialization metadata for TOutput</typeparam>
 <# } #>
         /// <param name="serviceName">Name of the service describing the downstream API. There can
@@ -155,13 +109,20 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
+<# if (framework != "net8"){ #>
+#if NET6_0_OR_GREATER
+        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+#endif
+<# } #>
         public <#= returnType #> <#= httpMethod #>For<#= token #>Async<#= template #>(
             string? serviceName,
 <# if (hasInput){ #>
             TInput input,
+<# } #>
+<# if (hasInput && framework == "net8"){ #>
             JsonTypeInfo<TInput> inputJsonTypeInfo,
 <# } #>
-<# if (hasOutput){ #>
+<# if (hasOutput && framework == "net8"){ #>
             JsonTypeInfo<TOutput> outputJsonTypeInfo,
 <# } #>
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
@@ -169,7 +130,9 @@ namespace Microsoft.Identity.Abstractions
             ClaimsPrincipal? user = null,
 <# } #>
             CancellationToken cancellationToken = default)<#= hasOutput?"where TOutput : class;" :";" #>
-#endif
+<# if (framework == "net8"){ #>
+#endif // NET8_0_OR_GREATER
+<# } #>
 <#
      }
    }
@@ -181,7 +144,8 @@ namespace Microsoft.Identity.Abstractions
 
 #endif // NETSTANDARD2_1_OR_GREATER
 <#
-    }
+        }
+      }
   }
 #>
     }
