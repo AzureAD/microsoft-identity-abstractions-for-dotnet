@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
 {
-    internal class CustomDownstreamApi : IDownstreamApi
+    internal partial class CustomDownstreamApi : IDownstreamApi
     {
         public CustomDownstreamApi()
         {
