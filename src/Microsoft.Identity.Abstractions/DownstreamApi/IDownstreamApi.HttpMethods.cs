@@ -21,6 +21,7 @@ namespace Microsoft.Identity.Abstractions
     /// </summary>
     public partial interface IDownstreamApi
     {
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Get"/>, a downstream API returning data.
         /// By default the returned data is deserialized from JSON but you can provide your own deserializer in the action
@@ -56,6 +57,7 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default)where TOutput : class;
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Get"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -95,6 +97,7 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default)where TOutput : class;
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Get"/>, a downstream API returning data.
         /// By default the returned data is deserialized from JSON but you can provide your own deserializer in the action
@@ -126,6 +129,7 @@ namespace Microsoft.Identity.Abstractions
             string? serviceName,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default)where TOutput : class;
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Get"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -161,6 +165,7 @@ namespace Microsoft.Identity.Abstractions
             TInput input,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default)where TOutput : class;
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Post"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
@@ -199,6 +204,7 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Post"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -238,6 +244,7 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default)where TOutput : class;
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Post"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
@@ -272,6 +279,7 @@ namespace Microsoft.Identity.Abstractions
             TInput input,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Post"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -307,6 +315,7 @@ namespace Microsoft.Identity.Abstractions
             TInput input,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default)where TOutput : class;
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Put"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
@@ -345,6 +354,7 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Put"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -384,6 +394,7 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default)where TOutput : class;
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Put"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
@@ -418,6 +429,7 @@ namespace Microsoft.Identity.Abstractions
             TInput input,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Put"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -455,6 +467,7 @@ namespace Microsoft.Identity.Abstractions
             CancellationToken cancellationToken = default)where TOutput : class;
 
 #if NETSTANDARD2_1_OR_GREATER
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Patch"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
@@ -493,6 +506,7 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Patch"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -532,6 +546,7 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default)where TOutput : class;
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Patch"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
@@ -566,6 +581,7 @@ namespace Microsoft.Identity.Abstractions
             TInput input,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Patch"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -603,6 +619,7 @@ namespace Microsoft.Identity.Abstractions
             CancellationToken cancellationToken = default)where TOutput : class;
 
 #endif // NETSTANDARD2_1_OR_GREATER
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Delete"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
@@ -641,6 +658,7 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Delete"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -680,6 +698,7 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default)where TOutput : class;
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Delete"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
@@ -714,6 +733,7 @@ namespace Microsoft.Identity.Abstractions
             TInput input,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Delete"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -751,6 +771,7 @@ namespace Microsoft.Identity.Abstractions
             CancellationToken cancellationToken = default)where TOutput : class;
 
 #if NET8_0_OR_GREATER
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Get"/>, a downstream API returning data.
         /// By default the returned data is deserialized from JSON but you can provide your own deserializer in the action
@@ -785,6 +806,7 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default)where TOutput : class;
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Get"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -825,6 +847,7 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default)where TOutput : class;
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Get"/>, a downstream API returning data.
         /// By default the returned data is deserialized from JSON but you can provide your own deserializer in the action
@@ -855,6 +878,7 @@ namespace Microsoft.Identity.Abstractions
             JsonTypeInfo<TOutput> outputJsonTypeInfo,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default)where TOutput : class;
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Get"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -891,6 +915,7 @@ namespace Microsoft.Identity.Abstractions
             JsonTypeInfo<TOutput> outputJsonTypeInfo,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default)where TOutput : class;
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Post"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
@@ -928,6 +953,7 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Post"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -968,6 +994,7 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default)where TOutput : class;
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Post"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
@@ -1001,6 +1028,7 @@ namespace Microsoft.Identity.Abstractions
             JsonTypeInfo<TInput> inputJsonTypeInfo,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Post"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -1037,6 +1065,7 @@ namespace Microsoft.Identity.Abstractions
             JsonTypeInfo<TOutput> outputJsonTypeInfo,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default)where TOutput : class;
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Put"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
@@ -1074,6 +1103,7 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Put"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -1114,6 +1144,7 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default)where TOutput : class;
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Put"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
@@ -1147,6 +1178,7 @@ namespace Microsoft.Identity.Abstractions
             JsonTypeInfo<TInput> inputJsonTypeInfo,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Put"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -1185,6 +1217,7 @@ namespace Microsoft.Identity.Abstractions
             CancellationToken cancellationToken = default)where TOutput : class;
 
 #if NETSTANDARD2_1_OR_GREATER
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Patch"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
@@ -1222,6 +1255,7 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Patch"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -1262,6 +1296,7 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default)where TOutput : class;
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Patch"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
@@ -1295,6 +1330,7 @@ namespace Microsoft.Identity.Abstractions
             JsonTypeInfo<TInput> inputJsonTypeInfo,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Patch"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -1333,6 +1369,7 @@ namespace Microsoft.Identity.Abstractions
             CancellationToken cancellationToken = default)where TOutput : class;
 
 #endif // NETSTANDARD2_1_OR_GREATER
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Delete"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
@@ -1370,6 +1407,7 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Delete"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -1410,6 +1448,7 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default)where TOutput : class;
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Delete"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
@@ -1443,6 +1482,7 @@ namespace Microsoft.Identity.Abstractions
             JsonTypeInfo<TInput> inputJsonTypeInfo,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Delete"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action

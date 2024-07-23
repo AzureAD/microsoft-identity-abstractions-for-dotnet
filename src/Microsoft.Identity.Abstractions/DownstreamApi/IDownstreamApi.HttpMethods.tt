@@ -67,6 +67,7 @@ namespace Microsoft.Identity.Abstractions
      string user = !hasApp ? "user" : "null";
      string sampleCodeTemplate = template.Replace("TOutput", "IEnumerable<MyItem>").Replace("TInput", "MyItem").Replace("<", "&lt;").Replace(">", "&gt;");
 #>
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.<#= httpMethod #>"/>, a downstream API <#= hasInput ? "with some input data " : ""#><#= hasInput&&hasOutput ? "and " : ""#><#= hasOutput ? "returning data" : ""#>.
         /// By default <#= hasInput ? "the input data is serialized in JSON " : ""#><#= hasInput&&hasOutput ? "and " : ""#><#= hasOutput ? "the returned data is deserialized from JSON" : ""#> but you can provide <#= hasInput ? "your own serializer " : ""#><#= hasInput&&hasOutput ? "and " : ""#><#= hasOutput ? "your own deserializer " : ""#>in the action
