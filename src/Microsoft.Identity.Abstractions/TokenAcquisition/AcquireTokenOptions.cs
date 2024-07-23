@@ -42,7 +42,7 @@ namespace Microsoft.Identity.Abstractions
 
         /// <summary>
         /// Gets the name of the options describing the confidential client application (ClientID,
-        /// Region, Authority, client credentials). In ASP.NET Core, the authenticatiopn options name 
+        /// Region, Authority, client credentials). In ASP.NET Core, the authentication options name
         /// is the same as the authentication scheme.
         /// </summary>
         public string? AuthenticationOptionsName { get; set; }
