@@ -30,6 +30,15 @@ namespace Microsoft.Identity.Abstractions
 <#
   foreach(string framework in new string[]{  "all", "net8" } )
   {
+  
+    if (framework == "net8")
+    {
+#>
+
+#if NET8_0_OR_GREATER
+<#
+    }
+
   foreach(string httpMethod in new string[]{  "Get", "Post", "Put", "Patch", "Delete"} )
   {
    if (httpMethod == "Patch")
@@ -58,10 +67,6 @@ namespace Microsoft.Identity.Abstractions
      string user = !hasApp ? "user" : "null";
      string sampleCodeTemplate = template.Replace("TOutput", "IEnumerable<MyItem>").Replace("TInput", "MyItem").Replace("<", "&lt;").Replace(">", "&gt;");
 #>
-<# if (framework == "net8"){ #>
-
-#if NET8_0_OR_GREATER
-<# } #>
         /// <summary>
         /// Calls, using <see cref="HttpMethod.<#= httpMethod #>"/>, a downstream API <#= hasInput ? "with some input data " : ""#><#= hasInput&&hasOutput ? "and " : ""#><#= hasOutput ? "returning data" : ""#>.
         /// By default <#= hasInput ? "the input data is serialized in JSON " : ""#><#= hasInput&&hasOutput ? "and " : ""#><#= hasOutput ? "the returned data is deserialized from JSON" : ""#> but you can provide <#= hasInput ? "your own serializer " : ""#><#= hasInput&&hasOutput ? "and " : ""#><#= hasOutput ? "your own deserializer " : ""#>in the action
@@ -73,12 +78,11 @@ namespace Microsoft.Identity.Abstractions
 <# if (hasOutput){ #>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
 <# } #>
-
 <# if (hasInput && framework == "net8"){ #>
-        /// <typeparam name="JsonTypeInfo<TInput>">JSON serialization metadata for TInput</typeparam>
+        /// <param name="inputJsonTypeInfo">JSON serialization metadata for TInput</param>
 <# } #>
 <# if (hasOutput && framework == "net8"){ #>
-        /// <typeparam name="JsonTypeInfo<TOutput>">JSON serialization metadata for TOutput</typeparam>
+        /// <param name="outputJsonTypeInfo">JSON serialization metadata for TOutput</param>
 <# } #>
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
@@ -130,9 +134,6 @@ namespace Microsoft.Identity.Abstractions
             ClaimsPrincipal? user = null,
 <# } #>
             CancellationToken cancellationToken = default)<#= hasOutput?"where TOutput : class;" :";" #>
-<# if (framework == "net8"){ #>
-#endif // NET8_0_OR_GREATER
-<# } #>
 <#
      }
    }
@@ -146,7 +147,10 @@ namespace Microsoft.Identity.Abstractions
 <#
         }
       }
-  }
+if (framework == "net8") {#>
+#endif // NET8_0_OR_GREATER
+<#}
+}
 #>
     }
 }

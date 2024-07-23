@@ -7,6 +7,11 @@ using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 
+#if NET8_0_OR_GREATER
+using System.Text.Json.Serialization.Metadata;
+using System.Diagnostics.CodeAnalysis;
+#endif
+
 namespace Microsoft.Identity.Abstractions
 {
     /// <summary>
@@ -286,7 +291,7 @@ namespace Microsoft.Identity.Abstractions
         /// }
         /// </code>
         /// </example>
-        Task<TOutput?> CallApiForUserAsync<TInput, TOutput>(
+        public Task<TOutput?> CallApiForUserAsync<TInput, TOutput>(
             string? serviceName,
             TInput input,
             JsonTypeInfo<TInput> inputJsonTypeInfo,
@@ -312,7 +317,7 @@ namespace Microsoft.Identity.Abstractions
         /// will find the user from the HttpContext.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The value returned by the downstream web API.</returns>
-        Task<TOutput?> CallApiForUserAsync<TOutput>(
+        public Task<TOutput?> CallApiForUserAsync<TOutput>(
             string serviceName,
             JsonTypeInfo<TOutput> outputJsonTypeInfo,
             Action<DownstreamApiOptions>? downstreamApiOptionsOverride = null,
@@ -336,7 +341,7 @@ namespace Microsoft.Identity.Abstractions
         /// by <paramref name="serviceName"/>.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The value returned by the downstream web API.</returns>
-        Task<TOutput?> CallApiForAppAsync<TInput, TOutput>(
+        public Task<TOutput?> CallApiForAppAsync<TInput, TOutput>(
             string? serviceName,
             TInput input,
             JsonTypeInfo<TInput> inputJsonTypeInfo,
@@ -358,7 +363,7 @@ namespace Microsoft.Identity.Abstractions
         /// by <paramref name="serviceName"/>.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The value returned by the downstream web API.</returns>
-        Task<TOutput?> CallApiForAppAsync<TOutput>(
+        public Task<TOutput?> CallApiForAppAsync<TOutput>(
             string serviceName,
             JsonTypeInfo<TOutput> outputJsonTypeInfo,
             Action<DownstreamApiOptions>? downstreamApiOptionsOverride = null,

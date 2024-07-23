@@ -27,7 +27,6 @@ namespace Microsoft.Identity.Abstractions
         /// you pass-in through the <paramref name="downstreamApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
-
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -64,7 +63,6 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
-
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -103,7 +101,6 @@ namespace Microsoft.Identity.Abstractions
         /// you pass-in through the <paramref name="downstreamApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
-
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -136,7 +133,6 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
-
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -171,7 +167,6 @@ namespace Microsoft.Identity.Abstractions
         /// you pass-in through the <paramref name="downstreamApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
-
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -211,7 +206,6 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
-
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -250,7 +244,6 @@ namespace Microsoft.Identity.Abstractions
         /// you pass-in through the <paramref name="downstreamApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
-
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -286,7 +279,6 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
-
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -321,7 +313,6 @@ namespace Microsoft.Identity.Abstractions
         /// you pass-in through the <paramref name="downstreamApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
-
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -361,7 +352,6 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
-
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -400,7 +390,6 @@ namespace Microsoft.Identity.Abstractions
         /// you pass-in through the <paramref name="downstreamApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
-
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -436,7 +425,6 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
-
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -473,7 +461,6 @@ namespace Microsoft.Identity.Abstractions
         /// you pass-in through the <paramref name="downstreamApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
-
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -513,7 +500,6 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
-
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -552,7 +538,6 @@ namespace Microsoft.Identity.Abstractions
         /// you pass-in through the <paramref name="downstreamApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
-
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -588,7 +573,6 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
-
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -625,7 +609,6 @@ namespace Microsoft.Identity.Abstractions
         /// you pass-in through the <paramref name="downstreamApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
-
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -665,7 +648,6 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
-
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -704,7 +686,6 @@ namespace Microsoft.Identity.Abstractions
         /// you pass-in through the <paramref name="downstreamApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
-
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -740,7 +721,6 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
-
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -777,8 +757,7 @@ namespace Microsoft.Identity.Abstractions
         /// you pass-in through the <paramref name="downstreamApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
-
-        /// <typeparam name="JsonTypeInfo<TOutput>">JSON serialization metadata for TOutput</typeparam>
+        /// <param name="outputJsonTypeInfo">JSON serialization metadata for TOutput</param>
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -806,9 +785,6 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default)where TOutput : class;
-#endif // NET8_0_OR_GREATER
-
-#if NET8_0_OR_GREATER
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Get"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -816,9 +792,8 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
-
-        /// <typeparam name="JsonTypeInfo<TInput>">JSON serialization metadata for TInput</typeparam>
-        /// <typeparam name="JsonTypeInfo<TOutput>">JSON serialization metadata for TOutput</typeparam>
+        /// <param name="inputJsonTypeInfo">JSON serialization metadata for TInput</param>
+        /// <param name="outputJsonTypeInfo">JSON serialization metadata for TOutput</param>
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -850,17 +825,13 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default)where TOutput : class;
-#endif // NET8_0_OR_GREATER
-
-#if NET8_0_OR_GREATER
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Get"/>, a downstream API returning data.
         /// By default the returned data is deserialized from JSON but you can provide your own deserializer in the action
         /// you pass-in through the <paramref name="downstreamApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
-
-        /// <typeparam name="JsonTypeInfo<TOutput>">JSON serialization metadata for TOutput</typeparam>
+        /// <param name="outputJsonTypeInfo">JSON serialization metadata for TOutput</param>
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -884,9 +855,6 @@ namespace Microsoft.Identity.Abstractions
             JsonTypeInfo<TOutput> outputJsonTypeInfo,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default)where TOutput : class;
-#endif // NET8_0_OR_GREATER
-
-#if NET8_0_OR_GREATER
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Get"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -894,9 +862,8 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
-
-        /// <typeparam name="JsonTypeInfo<TInput>">JSON serialization metadata for TInput</typeparam>
-        /// <typeparam name="JsonTypeInfo<TOutput>">JSON serialization metadata for TOutput</typeparam>
+        /// <param name="inputJsonTypeInfo">JSON serialization metadata for TInput</param>
+        /// <param name="outputJsonTypeInfo">JSON serialization metadata for TOutput</param>
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -924,17 +891,13 @@ namespace Microsoft.Identity.Abstractions
             JsonTypeInfo<TOutput> outputJsonTypeInfo,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default)where TOutput : class;
-#endif // NET8_0_OR_GREATER
-
-#if NET8_0_OR_GREATER
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Post"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
         /// you pass-in through the <paramref name="downstreamApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
-
-        /// <typeparam name="JsonTypeInfo<TInput>">JSON serialization metadata for TInput</typeparam>
+        /// <param name="inputJsonTypeInfo">JSON serialization metadata for TInput</param>
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -965,9 +928,6 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default);
-#endif // NET8_0_OR_GREATER
-
-#if NET8_0_OR_GREATER
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Post"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -975,9 +935,8 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
-
-        /// <typeparam name="JsonTypeInfo<TInput>">JSON serialization metadata for TInput</typeparam>
-        /// <typeparam name="JsonTypeInfo<TOutput>">JSON serialization metadata for TOutput</typeparam>
+        /// <param name="inputJsonTypeInfo">JSON serialization metadata for TInput</param>
+        /// <param name="outputJsonTypeInfo">JSON serialization metadata for TOutput</param>
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -1009,17 +968,13 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default)where TOutput : class;
-#endif // NET8_0_OR_GREATER
-
-#if NET8_0_OR_GREATER
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Post"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
         /// you pass-in through the <paramref name="downstreamApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
-
-        /// <typeparam name="JsonTypeInfo<TInput>">JSON serialization metadata for TInput</typeparam>
+        /// <param name="inputJsonTypeInfo">JSON serialization metadata for TInput</param>
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -1046,9 +1001,6 @@ namespace Microsoft.Identity.Abstractions
             JsonTypeInfo<TInput> inputJsonTypeInfo,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default);
-#endif // NET8_0_OR_GREATER
-
-#if NET8_0_OR_GREATER
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Post"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -1056,9 +1008,8 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
-
-        /// <typeparam name="JsonTypeInfo<TInput>">JSON serialization metadata for TInput</typeparam>
-        /// <typeparam name="JsonTypeInfo<TOutput>">JSON serialization metadata for TOutput</typeparam>
+        /// <param name="inputJsonTypeInfo">JSON serialization metadata for TInput</param>
+        /// <param name="outputJsonTypeInfo">JSON serialization metadata for TOutput</param>
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -1086,17 +1037,13 @@ namespace Microsoft.Identity.Abstractions
             JsonTypeInfo<TOutput> outputJsonTypeInfo,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default)where TOutput : class;
-#endif // NET8_0_OR_GREATER
-
-#if NET8_0_OR_GREATER
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Put"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
         /// you pass-in through the <paramref name="downstreamApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
-
-        /// <typeparam name="JsonTypeInfo<TInput>">JSON serialization metadata for TInput</typeparam>
+        /// <param name="inputJsonTypeInfo">JSON serialization metadata for TInput</param>
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -1127,9 +1074,6 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default);
-#endif // NET8_0_OR_GREATER
-
-#if NET8_0_OR_GREATER
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Put"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -1137,9 +1081,8 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
-
-        /// <typeparam name="JsonTypeInfo<TInput>">JSON serialization metadata for TInput</typeparam>
-        /// <typeparam name="JsonTypeInfo<TOutput>">JSON serialization metadata for TOutput</typeparam>
+        /// <param name="inputJsonTypeInfo">JSON serialization metadata for TInput</param>
+        /// <param name="outputJsonTypeInfo">JSON serialization metadata for TOutput</param>
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -1171,17 +1114,13 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default)where TOutput : class;
-#endif // NET8_0_OR_GREATER
-
-#if NET8_0_OR_GREATER
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Put"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
         /// you pass-in through the <paramref name="downstreamApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
-
-        /// <typeparam name="JsonTypeInfo<TInput>">JSON serialization metadata for TInput</typeparam>
+        /// <param name="inputJsonTypeInfo">JSON serialization metadata for TInput</param>
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -1208,9 +1147,6 @@ namespace Microsoft.Identity.Abstractions
             JsonTypeInfo<TInput> inputJsonTypeInfo,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default);
-#endif // NET8_0_OR_GREATER
-
-#if NET8_0_OR_GREATER
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Put"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -1218,9 +1154,8 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
-
-        /// <typeparam name="JsonTypeInfo<TInput>">JSON serialization metadata for TInput</typeparam>
-        /// <typeparam name="JsonTypeInfo<TOutput>">JSON serialization metadata for TOutput</typeparam>
+        /// <param name="inputJsonTypeInfo">JSON serialization metadata for TInput</param>
+        /// <param name="outputJsonTypeInfo">JSON serialization metadata for TOutput</param>
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -1248,19 +1183,15 @@ namespace Microsoft.Identity.Abstractions
             JsonTypeInfo<TOutput> outputJsonTypeInfo,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default)where TOutput : class;
-#endif // NET8_0_OR_GREATER
 
 #if NETSTANDARD2_1_OR_GREATER
-
-#if NET8_0_OR_GREATER
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Patch"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
         /// you pass-in through the <paramref name="downstreamApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
-
-        /// <typeparam name="JsonTypeInfo<TInput>">JSON serialization metadata for TInput</typeparam>
+        /// <param name="inputJsonTypeInfo">JSON serialization metadata for TInput</param>
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -1291,9 +1222,6 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default);
-#endif // NET8_0_OR_GREATER
-
-#if NET8_0_OR_GREATER
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Patch"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -1301,9 +1229,8 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
-
-        /// <typeparam name="JsonTypeInfo<TInput>">JSON serialization metadata for TInput</typeparam>
-        /// <typeparam name="JsonTypeInfo<TOutput>">JSON serialization metadata for TOutput</typeparam>
+        /// <param name="inputJsonTypeInfo">JSON serialization metadata for TInput</param>
+        /// <param name="outputJsonTypeInfo">JSON serialization metadata for TOutput</param>
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -1335,17 +1262,13 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default)where TOutput : class;
-#endif // NET8_0_OR_GREATER
-
-#if NET8_0_OR_GREATER
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Patch"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
         /// you pass-in through the <paramref name="downstreamApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
-
-        /// <typeparam name="JsonTypeInfo<TInput>">JSON serialization metadata for TInput</typeparam>
+        /// <param name="inputJsonTypeInfo">JSON serialization metadata for TInput</param>
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -1372,9 +1295,6 @@ namespace Microsoft.Identity.Abstractions
             JsonTypeInfo<TInput> inputJsonTypeInfo,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default);
-#endif // NET8_0_OR_GREATER
-
-#if NET8_0_OR_GREATER
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Patch"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -1382,9 +1302,8 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
-
-        /// <typeparam name="JsonTypeInfo<TInput>">JSON serialization metadata for TInput</typeparam>
-        /// <typeparam name="JsonTypeInfo<TOutput>">JSON serialization metadata for TOutput</typeparam>
+        /// <param name="inputJsonTypeInfo">JSON serialization metadata for TInput</param>
+        /// <param name="outputJsonTypeInfo">JSON serialization metadata for TOutput</param>
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -1412,19 +1331,15 @@ namespace Microsoft.Identity.Abstractions
             JsonTypeInfo<TOutput> outputJsonTypeInfo,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default)where TOutput : class;
-#endif // NET8_0_OR_GREATER
 
 #endif // NETSTANDARD2_1_OR_GREATER
-
-#if NET8_0_OR_GREATER
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Delete"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
         /// you pass-in through the <paramref name="downstreamApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
-
-        /// <typeparam name="JsonTypeInfo<TInput>">JSON serialization metadata for TInput</typeparam>
+        /// <param name="inputJsonTypeInfo">JSON serialization metadata for TInput</param>
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -1455,9 +1370,6 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default);
-#endif // NET8_0_OR_GREATER
-
-#if NET8_0_OR_GREATER
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Delete"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -1465,9 +1377,8 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
-
-        /// <typeparam name="JsonTypeInfo<TInput>">JSON serialization metadata for TInput</typeparam>
-        /// <typeparam name="JsonTypeInfo<TOutput>">JSON serialization metadata for TOutput</typeparam>
+        /// <param name="inputJsonTypeInfo">JSON serialization metadata for TInput</param>
+        /// <param name="outputJsonTypeInfo">JSON serialization metadata for TOutput</param>
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -1499,17 +1410,13 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             ClaimsPrincipal? user = null,
             CancellationToken cancellationToken = default)where TOutput : class;
-#endif // NET8_0_OR_GREATER
-
-#if NET8_0_OR_GREATER
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Delete"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
         /// you pass-in through the <paramref name="downstreamApiOptionsOverride"/> parameter.
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
-
-        /// <typeparam name="JsonTypeInfo<TInput>">JSON serialization metadata for TInput</typeparam>
+        /// <param name="inputJsonTypeInfo">JSON serialization metadata for TInput</param>
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -1536,9 +1443,6 @@ namespace Microsoft.Identity.Abstractions
             JsonTypeInfo<TInput> inputJsonTypeInfo,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default);
-#endif // NET8_0_OR_GREATER
-
-#if NET8_0_OR_GREATER
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Delete"/>, a downstream API with some input data and returning data.
         /// By default the input data is serialized in JSON and the returned data is deserialized from JSON but you can provide your own serializer and your own deserializer in the action
@@ -1546,9 +1450,8 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <typeparam name="TInput">Generic input type.</typeparam>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
-
-        /// <typeparam name="JsonTypeInfo<TInput>">JSON serialization metadata for TInput</typeparam>
-        /// <typeparam name="JsonTypeInfo<TOutput>">JSON serialization metadata for TOutput</typeparam>
+        /// <param name="inputJsonTypeInfo">JSON serialization metadata for TInput</param>
+        /// <param name="outputJsonTypeInfo">JSON serialization metadata for TOutput</param>
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
