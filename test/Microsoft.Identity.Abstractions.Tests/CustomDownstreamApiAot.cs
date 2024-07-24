@@ -84,6 +84,30 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             return Task.FromResult<TOutput?>(JsonSerializer.Deserialize<TOutput>(inputJson, outputJsonTypeInfo));
         }
 
+        public Task PatchForAppAsync<TInput>(string? serviceName, TInput input, JsonTypeInfo<TInput> inputJsonTypeInfo, Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null, CancellationToken cancellationToken = default)
+        {
+            JsonSerializer.Serialize(input, inputJsonTypeInfo);
+            return Task.CompletedTask;
+        }
+
+        public Task<TOutput?> PatchForAppAsync<TInput, TOutput>(string? serviceName, TInput input, JsonTypeInfo<TInput> inputJsonTypeInfo, JsonTypeInfo<TOutput> outputJsonTypeInfo, Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null, CancellationToken cancellationToken = default) where TOutput : class
+        {
+            string inputJson = JsonSerializer.Serialize(input, inputJsonTypeInfo);
+            return Task.FromResult<TOutput?>(JsonSerializer.Deserialize<TOutput>(inputJson, outputJsonTypeInfo));
+        }
+
+        public Task PatchForUserAsync<TInput>(string? serviceName, TInput input, JsonTypeInfo<TInput> inputJsonTypeInfo, Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null, ClaimsPrincipal? user = null, CancellationToken cancellationToken = default)
+        {
+            JsonSerializer.Serialize(input, inputJsonTypeInfo);
+            return Task.CompletedTask;
+        }
+
+        public Task<TOutput?> PatchForUserAsync<TInput, TOutput>(string? serviceName, TInput input, JsonTypeInfo<TInput> inputJsonTypeInfo, JsonTypeInfo<TOutput> outputJsonTypeInfo, Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null, ClaimsPrincipal? user = null, CancellationToken cancellationToken = default) where TOutput : class
+        {
+            string inputJson = JsonSerializer.Serialize(input, inputJsonTypeInfo);
+            return Task.FromResult<TOutput?>(JsonSerializer.Deserialize<TOutput>(inputJson, outputJsonTypeInfo));
+        }
+
         public Task PostForAppAsync<TInput>(string? serviceName, TInput input, JsonTypeInfo<TInput> inputJsonTypeInfo, Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null, CancellationToken cancellationToken = default)
         {
             JsonSerializer.Serialize(input, inputJsonTypeInfo);
