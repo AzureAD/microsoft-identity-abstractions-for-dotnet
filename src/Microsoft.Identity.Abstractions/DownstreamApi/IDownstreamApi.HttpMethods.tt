@@ -41,7 +41,7 @@ namespace Microsoft.Identity.Abstractions
 
   foreach(string httpMethod in new string[]{  "Get", "Post", "Put", "Patch", "Delete"} )
   {
-   if (httpMethod == "Patch")
+   if (httpMethod == "Patch" && framework != "net8")
    {
 #>
 
@@ -140,7 +140,7 @@ namespace Microsoft.Identity.Abstractions
    }
 #>
 <#
-     if (httpMethod == "Patch")
+     if (httpMethod == "Patch" && framework != "net8")
      {
 #>
 
