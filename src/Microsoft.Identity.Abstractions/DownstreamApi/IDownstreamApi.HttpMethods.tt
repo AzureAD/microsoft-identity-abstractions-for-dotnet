@@ -41,11 +41,11 @@ namespace Microsoft.Identity.Abstractions
 
   foreach(string httpMethod in new string[]{  "Get", "Post", "Put", "Patch", "Delete"} )
   {
-   if (httpMethod == "Patch" && framework != "net8")
+   if (httpMethod == "Patch")
    {
 #>
 
-#if NETSTANDARD2_1_OR_GREATER
+#if NETSTANDARD2_1_OR_GREATER || NET
 <#
    }
    foreach(string token in new string[] {"User", "App"})
@@ -140,11 +140,11 @@ namespace Microsoft.Identity.Abstractions
    }
 #>
 <#
-     if (httpMethod == "Patch" && framework != "net8")
+     if (httpMethod == "Patch")
      {
 #>
 
-#endif // NETSTANDARD2_1_OR_GREATER
+#endif // NETSTANDARD2_1_OR_GREATER || NET
 <#
         }
       }

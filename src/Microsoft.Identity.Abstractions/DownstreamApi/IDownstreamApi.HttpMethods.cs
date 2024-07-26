@@ -466,7 +466,7 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default)where TOutput : class;
 
-#if NETSTANDARD2_1_OR_GREATER
+#if NETSTANDARD2_1_OR_GREATER || NET
 
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Patch"/>, a downstream API with some input data .
@@ -618,7 +618,7 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default)where TOutput : class;
 
-#endif // NETSTANDARD2_1_OR_GREATER
+#endif // NETSTANDARD2_1_OR_GREATER || NET
 
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Delete"/>, a downstream API with some input data .
@@ -1216,6 +1216,8 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default)where TOutput : class;
 
+#if NETSTANDARD2_1_OR_GREATER || NET
+
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Patch"/>, a downstream API with some input data .
         /// By default the input data is serialized in JSON  but you can provide your own serializer in the action
@@ -1365,6 +1367,8 @@ namespace Microsoft.Identity.Abstractions
             JsonTypeInfo<TOutput> outputJsonTypeInfo,
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default)where TOutput : class;
+
+#endif // NETSTANDARD2_1_OR_GREATER || NET
 
         /// <summary>
         /// Calls, using <see cref="HttpMethod.Delete"/>, a downstream API with some input data .
