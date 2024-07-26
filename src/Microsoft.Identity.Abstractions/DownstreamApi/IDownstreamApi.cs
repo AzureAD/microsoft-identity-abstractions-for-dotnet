@@ -2,12 +2,15 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Security.Claims;
-using System.Text.Json.Serialization.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
+
+#if NET8_0_OR_GREATER
+using System.Text.Json.Serialization.Metadata;
+using System.Diagnostics.CodeAnalysis;
+#endif
 
 namespace Microsoft.Identity.Abstractions
 {

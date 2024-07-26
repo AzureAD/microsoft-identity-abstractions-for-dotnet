@@ -26,8 +26,4 @@
       <DependentUpon>IDownstreamApi.HttpMethods.tt</DependentUpon>
     </Compile>
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.Text.Json" Version="$(SystemTextJsonVersion)" />
-  </ItemGroup>
 </Project>
