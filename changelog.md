@@ -1,3 +1,8 @@
+7.0.0
+========
+## Breaking changes:
+- Extends the 'IDownstreamApi' interface to include overrides with `JsonTypeInfo<T>` parameters for source generated JSON serialization. See  [PR](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/131) for details.
+
 6.0.0
 ========
 ## Breaking changes:
