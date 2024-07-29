@@ -8,9 +8,16 @@ using System.Net.Http.Headers;
 using System.Text;
 using Xunit;
 
+
+#if NET8_0_OR_GREATER
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
+#endif
+
 namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
 {
-    public class DownstreamApiTests
+    public partial class DownstreamApiTests
     {
         [Fact]
         public void CloneClonesAllProperties()
@@ -148,6 +155,38 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             DownstreamApiOptions options = new DownstreamApiOptions { BaseUrl = baseUrl, RelativePath = relativePath };
             Assert.Equal(expectedUrl, options.GetApiUrl());
         }
+
+#if NET8_0_OR_GREATER
+        internal class CustomApiResponse
+        {
+            public int ErrorCode { get; set; }
+        }
+
+        internal class CustomApiInput
+        {
+            public int ErrorCode { get; set; }
+        }
+
+        [JsonSerializable(typeof(CustomApiInput))]
+        [JsonSerializable(typeof(CustomApiResponse))]
+        internal partial class CustomApiResponseJsonContext : JsonSerializerContext
+        {
+        }
+
+        [Fact]
+        public void ExerciseApiAotOverloads()
+        {
+            // Test that the AOT Json serialzation overloads work
+
+            IDownstreamApi downstreamApi = new CustomDownstreamApi();
+            CustomApiResponse? response = downstreamApi.CallApiForUserAsync<CustomApiResponse>("service", CustomApiResponseJsonContext.Default.CustomApiResponse).Result;
+            Assert.Equal(200, response?.ErrorCode);
+
+            CustomApiInput input = new CustomApiInput { ErrorCode = 123 };
+            response = downstreamApi.GetForAppAsync<CustomApiInput, CustomApiResponse>("service", input, CustomApiResponseJsonContext.Default.CustomApiInput, CustomApiResponseJsonContext.Default.CustomApiResponse).Result;
+            Assert.Equal(123, response?.ErrorCode);
+        }
+#endif
     }
 
     internal class CustomAcquireTokenOptions : AcquireTokenOptions

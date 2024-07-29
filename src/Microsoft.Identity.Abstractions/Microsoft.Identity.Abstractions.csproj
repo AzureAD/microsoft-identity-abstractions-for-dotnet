@@ -26,5 +26,4 @@
       <DependentUpon>IDownstreamApi.HttpMethods.tt</DependentUpon>
     </Compile>
   </ItemGroup>
-
 </Project>
