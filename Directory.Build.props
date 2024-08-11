@@ -1,9 +1,9 @@
 <Project>
 	<PropertyGroup>
 		<!--This should be passed from the VSTS build-->
-		<ClientSemVer Condition="'$(ClientSemVer)' == ''">6.0.0-local</ClientSemVer>
+		<MicrosoftIdentityAbstractionsVersion Condition="'$(MicrosoftIdentityAbstractionsVersion)' == ''">6.0.0-local</MicrosoftIdentityAbstractionsVersion>
 		<!--This will generate AssemblyVersion, AssemblyFileVersion and AssemblyInformationVersion-->
-		<Version>$(ClientSemVer)</Version>
+		<Version>$(MicrosoftIdentityAbstractionsVersion)</Version>
 
 		<AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)\build\35MSSharedLib1024.snk</AssemblyOriginatorKeyFile>
 		<RepositoryType>git</RepositoryType>
@@ -26,7 +26,6 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<Nullable>enable</Nullable>
 		<LangVersion>12</LangVersion>
-		<PackageVersion>$(ClientSemVer)</PackageVersion>
 		<EnablePackageValidation>true</EnablePackageValidation>
 		<PackageValidationBaselineVersion>5.0.0</PackageValidationBaselineVersion>
 	</PropertyGroup>
