@@ -32,6 +32,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
                     CorrelationId = Guid.NewGuid(),
                     ExtraHeadersParameters = new Dictionary<string, string> { { "slice", "test" } },
                     ExtraQueryParameters = new Dictionary<string, string> { { "slice", "test" } },
+                    ExtraParameters = new Dictionary<string, object> { { "param1", "value1" }, { "param2", "value2" } },
                     ForceRefresh = true,
                     LongRunningWebApiSessionKey = AcquireTokenOptions.LongRunningWebApiSessionKeyAuto,
                     ManagedIdentity = new ManagedIdentityOptions(),
@@ -81,6 +82,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.CorrelationId, downstreamApiClone.AcquireTokenOptions.CorrelationId);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ExtraHeadersParameters, downstreamApiClone.AcquireTokenOptions.ExtraHeadersParameters);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ExtraQueryParameters, downstreamApiClone.AcquireTokenOptions.ExtraQueryParameters);
+            Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ExtraParameters, downstreamApiClone.AcquireTokenOptions.ExtraParameters);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ForceRefresh, downstreamApiClone.AcquireTokenOptions.ForceRefresh);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.LongRunningWebApiSessionKey, downstreamApiClone.AcquireTokenOptions.LongRunningWebApiSessionKey);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ManagedIdentity.UserAssignedClientId, downstreamApiClone.AcquireTokenOptions.ManagedIdentity?.UserAssignedClientId);
@@ -93,7 +95,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
 
             // If this fails, think of also adding a line to test the new property
             Assert.Equal(12, typeof(DownstreamApiOptions).GetProperties().Length);
-            Assert.Equal(13, typeof(AcquireTokenOptions).GetProperties().Length);
+            Assert.Equal(14, typeof(AcquireTokenOptions).GetProperties().Length);
 
             DownstreamApiOptionsReadOnlyHttpMethod options = new DownstreamApiOptionsReadOnlyHttpMethod(downstreamApiOptions, HttpMethod.Delete.ToString());
             Assert.Equal(HttpMethod.Delete.ToString(), options.HttpMethod);
