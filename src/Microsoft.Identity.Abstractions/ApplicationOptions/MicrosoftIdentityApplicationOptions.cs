@@ -24,7 +24,7 @@ namespace Microsoft.Identity.Abstractions
         /// and school accounts. If your application is single tenant, set this property to the tenant ID or domain name.
         /// If your application works only for Microsoft personal accounts, use "consumers".
         /// </summary>
-        public string? TenantId { get; set; }
+        public virtual string? TenantId { get; set; }
 
         /// <summary>
         /// Gets or sets the Authority to use when making OpenIdConnect calls. By default the authority is computed
@@ -43,7 +43,7 @@ namespace Microsoft.Identity.Abstractions
         /// the app attempt to detect the Azure region automatically,
         /// use "TryAutoDetect".
         /// </summary>
-        public string? AzureRegion { get; set; }
+        public virtual string? AzureRegion { get; set; }
 
         /// <summary>
         /// Specifies the capabilities of the client (for instance {"cp1", "cp2"}). This is

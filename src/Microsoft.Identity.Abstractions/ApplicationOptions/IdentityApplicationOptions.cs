@@ -37,7 +37,7 @@ namespace Microsoft.Identity.Abstractions
         /// Gets or sets the 'client_id' (application ID) as it appears in the 
         /// application registration. This is the string representation of a GUID.
         /// </summary>
-        public string? ClientId { get; set; }
+        public virtual string? ClientId { get; set; }
 
         /// <summary>
         /// Flag used to enable/disable logging of Personally Identifiable Information (PII).
@@ -84,7 +84,7 @@ namespace Microsoft.Identity.Abstractions
         ///   See also https://aka.ms/ms-id-web-certificates.
         /// ]]></format>
         /// </example>
-        public IEnumerable<CredentialDescription>? ClientCredentials { get; set; }
+        public virtual IEnumerable<CredentialDescription>? ClientCredentials { get; set; }
         #endregion Token acquisition
 
         #region web API
