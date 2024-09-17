@@ -1,84 +1,82 @@
 <Project>
-	<PropertyGroup>
-		<!--This should be passed from the VSTS build-->
-		<MicrosoftIdentityAbstractionsVersion Condition="'$(MicrosoftIdentityAbstractionsVersion)' == ''">6.0.0-local</MicrosoftIdentityAbstractionsVersion>
-		<!--This will generate AssemblyVersion, AssemblyFileVersion and AssemblyInformationVersion-->
-		<Version>$(MicrosoftIdentityAbstractionsVersion)</Version>
+    <PropertyGroup>
+        <!-- This should be passed from the VSTS build -->
+        <MicrosoftIdentityAbstractionsVersion Condition="'$(MicrosoftIdentityAbstractionsVersion)' == ''">7.0.1</MicrosoftIdentityAbstractionsVersion>
+        <!-- This will generate AssemblyVersion, AssemblyFileVersion and AssemblyInformationVersion -->
+        <Version>$(MicrosoftIdentityAbstractionsVersion)</Version>
+        <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)\build\35MSSharedLib1024.snk</AssemblyOriginatorKeyFile>
+        <RepositoryType>git</RepositoryType>
+        <Authors>Microsoft</Authors>
+        <Company>Microsoft Corporation</Company>
+        <Copyright>© Microsoft Corporation. All rights reserved.</Copyright>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet</RepositoryUrl>
+        <PackageReleaseNotes>The release notes are available at https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/releases and the roadmap at https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/wiki#roadmap </PackageReleaseNotes>
+        <PackageTags>Microsoft Identity Abstractions for dotnet;Microsoft identity platform;Microsoft Identity Web;.NET;ASP.NET Core;Web App;Web API;B2C;Azure Active Directory;AAD;Identity;Authentication;Authorization</PackageTags>
+        <DefineConstants>$(DefineConstants);WEB</DefineConstants>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    </PropertyGroup>
+	
+    <PropertyGroup>
+        <TargetFrameworks>netstandard2.0;netstandard2.1;net462;net8.0</TargetFrameworks>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>../../build/MSAL.snk</AssemblyOriginatorKeyFile>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <Nullable>enable</Nullable>
+        <LangVersion>12</LangVersion>
+        <EnablePackageValidation>true</EnablePackageValidation>
+        <PackageValidationBaselineVersion>7.0.0</PackageValidationBaselineVersion>
+        <BannedApiAnalyzersVersion>3.3.4</BannedApiAnalyzersVersion>
+        <MicrosoftCodeAnalysisPublicApiAnalyzers>3.3.4</MicrosoftCodeAnalysisPublicApiAnalyzers>
+        <MicrosoftCodeAnalysisNetAnalyzersVersion>8.0.0</MicrosoftCodeAnalysisNetAnalyzersVersion>
+    </PropertyGroup>
 
-		<AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)\build\35MSSharedLib1024.snk</AssemblyOriginatorKeyFile>
-		<RepositoryType>git</RepositoryType>
-		<Authors>Microsoft</Authors>
-		<Company>Microsoft Corporation</Company>
-		<Copyright>© Microsoft Corporation. All rights reserved.</Copyright>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageProjectUrl>https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet</RepositoryUrl>
-		<PackageReleaseNotes>The release notes are available at https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/releases and the roadmap at https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/wiki#roadmap </PackageReleaseNotes>
-		<PackageTags>Microsoft Identity Abstractions for dotnet;Microsoft identity platform;Microsoft Identity Web;.NET;ASP.NET Core;Web App;Web API;B2C;Azure Active Directory;AAD;Identity;Authentication;Authorization</PackageTags>
-		<DefineConstants>$(DefineConstants);WEB</DefineConstants>
-		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-	</PropertyGroup>
+    <PropertyGroup Label="Source Link">
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <!-- Build symbol package (.snupkg) to distribute the PDB containing Source Link -->
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <!-- The MSAL.snk has both private and public keys -->
+        <DelaySign>false</DelaySign>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    </PropertyGroup>
+    
+    <PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    </PropertyGroup>
 
-	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;netstandard2.1;net462;net8.0</TargetFrameworks>
-		<SignAssembly>true</SignAssembly>
-		<AssemblyOriginatorKeyFile>../../build/MSAL.snk</AssemblyOriginatorKeyFile>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<Nullable>enable</Nullable>
-		<LangVersion>12</LangVersion>
-		<EnablePackageValidation>true</EnablePackageValidation>
-		<PackageValidationBaselineVersion>5.0.0</PackageValidationBaselineVersion>
-    <BannedApiAnalyzersVersion>3.3.4</BannedApiAnalyzersVersion>
-    <MicrosoftCodeAnalysisPublicApiAnalyzers>3.3.4</MicrosoftCodeAnalysisPublicApiAnalyzers>
-    <MicrosoftCodeAnalysisNetAnalyzersVersion>8.0.0</MicrosoftCodeAnalysisNetAnalyzersVersion>
-  </PropertyGroup>
+    <ItemGroup>
+        <None Include="..\..\LICENSE">
+            <Pack>True</Pack>
+            <PackagePath />
+        </None>
+    </ItemGroup>
 
-  <!-- This step doesn't build on our Linux pipeline. -->
-  <PropertyGroup Condition=" '$(OS)' == 'Windows_NT' ">
-    <EnforcePublicApiAnalyzer>true</EnforcePublicApiAnalyzer>
-  </PropertyGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
+        <Reference Include="System.Net.Http" />
+    </ItemGroup>
 
-  <PropertyGroup Label="Source Link">
-		<PublishRepositoryUrl>true</PublishRepositoryUrl>
-		<EmbedUntrackedSources>true</EmbedUntrackedSources>
-		<!-- Build symbol package (.snupkg) to distribute the PDB containing Source Link -->
-		<IncludeSymbols>true</IncludeSymbols>
-		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-		<!-- The MSAL.snk has both private and public keys -->
-		<DelaySign>false</DelaySign>
-		<EnableNETAnalyzers>true</EnableNETAnalyzers>
-    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-    <EnforceThreadingAnalyzers>true</EnforceThreadingAnalyzers>
-	</PropertyGroup>
+    <ItemGroup Label="Build Tools"
+               Condition="$([MSBuild]::IsOsPlatform('Windows'))">
+        <PackageReference Include="Microsoft.SourceLink.GitHub"
+                          Version="1.0.0"
+                          PrivateAssets="All" />
+    </ItemGroup>
 
-	<PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
-		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-	</PropertyGroup>
+    <ItemGroup>
+        <!-- Protects against sync-over-async: https://github.com/microsoft/vs-threading/blob/main/doc/analyzers/index.md. -->
+        <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers"
+                          Version="17.11.20"
+                          PrivateAssets="all" />
 
-	<ItemGroup>
-		<None Include="..\..\LICENSE">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</None>
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net462'">
-		<Reference Include="System.Net.Http" />
-	</ItemGroup>
-
-	<ItemGroup Label="Build Tools" Condition="$([MSBuild]::IsOsPlatform('Windows'))">
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-	</ItemGroup>
-
-  <ItemGroup Condition="'$(EnforceThreadingAnalyzers)' == 'true'">
-    <!-- Protects against sync-over-async: https://github.com/microsoft/vs-threading/blob/main/doc/analyzers/index.md. -->
-    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.11.20" PrivateAssets="all" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="$(MicrosoftCodeAnalysisPublicApiAnalyzers)" Condition="'$(EnforcePublicApiAnalyzer)' == 'true'">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
+		<!-- Help understand public API changes -->				  
+        <PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers"
+                          Version="$(MicrosoftCodeAnalysisPublicApiAnalyzers)">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
 </Project>
