@@ -31,7 +31,6 @@
     <BannedApiAnalyzersVersion>3.3.4</BannedApiAnalyzersVersion>
     <MicrosoftCodeAnalysisPublicApiAnalyzers>3.3.4</MicrosoftCodeAnalysisPublicApiAnalyzers>
     <MicrosoftCodeAnalysisNetAnalyzersVersion>8.0.0</MicrosoftCodeAnalysisNetAnalyzersVersion>
-    <MicrosoftInternalAnalyzersVersion>2.9.7</MicrosoftInternalAnalyzersVersion>
   </PropertyGroup>
 
   <!-- This step doesn't build on our Linux pipeline. -->
@@ -70,18 +69,6 @@
 	<ItemGroup Label="Build Tools" Condition="$([MSBuild]::IsOsPlatform('Windows'))">
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
 	</ItemGroup>
-
-  <!-- Dont run analyzers on notargets projects. -->
-  <ItemGroup Condition="'$(UsingMicrosoftNoTargetsSdk)' != 'true'">
-    <!-- PrivateAssets="All" is on these packages to ensure they're development dependencies
-         and aren't included as transitionary dependencies to package consumers.
-         For clarity, without PrivateAssets marked here, anyone consuming Microsoft.Identity.ServiceEssentials
-         would also be forced to install these dependencies.  PrivateAssets avoids this problem. -->
-    <PackageReference Include="Microsoft.Internal.Analyzers" Version="$(MicrosoftInternalAnalyzersVersion)">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
 
   <ItemGroup Condition="'$(EnforceThreadingAnalyzers)' == 'true'">
     <!-- Protects against sync-over-async: https://github.com/microsoft/vs-threading/blob/main/doc/analyzers/index.md. -->
