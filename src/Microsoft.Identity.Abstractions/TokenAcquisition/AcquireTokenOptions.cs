@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Microsoft.Identity.Abstractions
 {
@@ -30,6 +31,7 @@ namespace Microsoft.Identity.Abstractions
             CorrelationId = other.CorrelationId;
             ExtraQueryParameters = other.ExtraQueryParameters;
             ExtraHeadersParameters = other.ExtraHeadersParameters;
+            ExtraParameters = other.ExtraParameters;
             ForceRefresh = other.ForceRefresh;
             Claims = other.Claims;
             PopPublicKey = other.PopPublicKey;
@@ -57,6 +59,15 @@ namespace Microsoft.Identity.Abstractions
         /// "/token" endpoint.
         /// </summary>
         public IDictionary<string, string>? ExtraQueryParameters { get; set; }
+
+        /// <summary>
+        /// An property bag used for extensiblity. 
+        /// </summary>
+        /// <remarks>
+        /// Not meant to be used by application developers, but by other SDKs.
+        /// </remarks>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public IDictionary<string, object>? ExtraParameters { get; set; }
 
         /// Sets extra headers in the HTTP request to the STS "/token" endpoint.
         public IDictionary<string, string>? ExtraHeadersParameters { get; set; }
