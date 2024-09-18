@@ -115,7 +115,7 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 <# if (framework != "net8"){ #>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
 <# } #>

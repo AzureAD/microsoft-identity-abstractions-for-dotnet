@@ -49,7 +49,7 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task<TOutput?> GetForUserAsync<TOutput>(
@@ -88,7 +88,7 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task<TOutput?> GetForUserAsync<TInput, TOutput>(
@@ -122,7 +122,7 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task<TOutput?> GetForAppAsync<TOutput>(
@@ -157,7 +157,7 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task<TOutput?> GetForAppAsync<TInput, TOutput>(
@@ -195,7 +195,7 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task PostForUserAsync<TInput>(
@@ -235,7 +235,7 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task<TOutput?> PostForUserAsync<TInput, TOutput>(
@@ -271,7 +271,7 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task PostForAppAsync<TInput>(
@@ -307,7 +307,7 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task<TOutput?> PostForAppAsync<TInput, TOutput>(
@@ -345,7 +345,7 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task PutForUserAsync<TInput>(
@@ -385,7 +385,7 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task<TOutput?> PutForUserAsync<TInput, TOutput>(
@@ -421,7 +421,7 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task PutForAppAsync<TInput>(
@@ -457,7 +457,7 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task<TOutput?> PutForAppAsync<TInput, TOutput>(
@@ -497,7 +497,7 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task PatchForUserAsync<TInput>(
@@ -537,7 +537,7 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task<TOutput?> PatchForUserAsync<TInput, TOutput>(
@@ -573,7 +573,7 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task PatchForAppAsync<TInput>(
@@ -609,7 +609,7 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task<TOutput?> PatchForAppAsync<TInput, TOutput>(
@@ -649,7 +649,7 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task DeleteForUserAsync<TInput>(
@@ -689,7 +689,7 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task<TOutput?> DeleteForUserAsync<TInput, TOutput>(
@@ -725,7 +725,7 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task DeleteForAppAsync<TInput>(
@@ -761,7 +761,7 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         public Task<TOutput?> DeleteForAppAsync<TInput, TOutput>(
