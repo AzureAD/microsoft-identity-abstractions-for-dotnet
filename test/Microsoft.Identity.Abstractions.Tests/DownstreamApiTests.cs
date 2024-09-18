@@ -100,6 +100,12 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             DownstreamApiOptionsReadOnlyHttpMethod options = new DownstreamApiOptionsReadOnlyHttpMethod(downstreamApiOptions, HttpMethod.Delete.ToString());
             Assert.Equal(HttpMethod.Delete.ToString(), options.HttpMethod);
             Assert.Equal(HttpMethod.Delete.ToString(), options.Clone().HttpMethod);
+
+            // Special cases
+            authorizationHeaderProviderOptions.HttpMethod = null;
+            authorizationHeaderProviderOptions.ProtocolScheme = null;
+            Assert.Equal("Get", authorizationHeaderProviderOptions.HttpMethod);
+            Assert.Equal("Bearer", authorizationHeaderProviderOptions.ProtocolScheme);
         }
 
         [Fact]
