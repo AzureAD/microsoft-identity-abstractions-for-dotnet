@@ -160,7 +160,7 @@ namespace Microsoft.Identity.Abstractions
         /// }
         /// </code>
         /// </example>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         Task<TOutput?> CallApiForUserAsync<TInput, TOutput>(
@@ -186,7 +186,7 @@ namespace Microsoft.Identity.Abstractions
         /// will find the user from the HttpContext.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The value returned by the downstream web API.</returns>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         Task<TOutput?> CallApiForUserAsync<TOutput>(
@@ -210,7 +210,7 @@ namespace Microsoft.Identity.Abstractions
         /// by <paramref name="serviceName"/>.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The value returned by the downstream web API.</returns>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         Task<TOutput?> CallApiForAppAsync<TInput, TOutput>(
@@ -232,7 +232,7 @@ namespace Microsoft.Identity.Abstractions
         /// by <paramref name="serviceName"/>.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The value returned by the downstream web API.</returns>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         Task<TOutput?> CallApiForAppAsync<TOutput>(
