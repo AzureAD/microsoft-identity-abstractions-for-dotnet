@@ -102,8 +102,8 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             Assert.Equal(HttpMethod.Delete.ToString(), options.Clone().HttpMethod);
 
             // Special cases
-            authorizationHeaderProviderOptions.HttpMethod = null!;
-            authorizationHeaderProviderOptions.ProtocolScheme = null!;
+            authorizationHeaderProviderOptions.HttpMethod = null!!;
+            authorizationHeaderProviderOptions.ProtocolScheme = null!!;
             Assert.Equal("Get", authorizationHeaderProviderOptions.HttpMethod);
             Assert.Equal("Bearer", authorizationHeaderProviderOptions.ProtocolScheme);
         }
