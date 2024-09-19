@@ -1,3 +1,12 @@
+7.0.1
+========
+## New features:
+- Add support for internal Microsoft services for token acquisition extensibility. See issue [#135](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/135) for details.
+
+## Engineering excellence
+- Add publicAPI, bannedAPI and Async analyzers. See issue [#136](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/136) for details.
+- Fix compiler warnings. See issue [#137](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/137) for details.
+
 7.0.0
 ========
 ## Breaking changes:
@@ -10,7 +19,6 @@
 
 5.3.0
 ========
-
 ## New features:
 - Added two new properties `AcceptHeader` and `ContentType` to `DownstreamApiOptions` class. See issue [#123](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/123) for details.
 
