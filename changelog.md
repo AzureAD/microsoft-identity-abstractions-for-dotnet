@@ -1,4 +1,4 @@
-7.0.1
+7.1.0
 ========
 ## New features:
 - Add support for internal Microsoft services for token acquisition extensibility. See issue [#135](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/135) for details.
