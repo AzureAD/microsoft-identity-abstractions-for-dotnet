@@ -250,3 +250,5 @@ virtual Microsoft.Identity.Abstractions.CredentialDescription.CachedValue.get ->
 virtual Microsoft.Identity.Abstractions.CredentialDescription.CachedValue.set -> void
 virtual Microsoft.Identity.Abstractions.IdentityApplicationOptions.Authority.get -> string?
 virtual Microsoft.Identity.Abstractions.IdentityApplicationOptions.Authority.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenOptions.ExtraParameters.get -> System.Collections.Generic.IDictionary<string!, object!>?
+Microsoft.Identity.Abstractions.AcquireTokenOptions.ExtraParameters.set -> void
