@@ -1,3 +1,8 @@
+7.2.0
+========
+## New features:
+- Add `AppHomeTenantId` to `MicrosoftIdentityApplicationOptions` to allow multi-tenant applications to specify the `AppHomeTenantId` to be used for client credentials. See PR [#142](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/142) and [Id Web](https://github.com/AzureAD/microsoft-identity-web/issues/3121) for details.
+
 7.1.0
 ========
 ## New features:
