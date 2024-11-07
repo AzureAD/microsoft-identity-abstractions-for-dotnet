@@ -39,6 +39,11 @@ namespace Microsoft.Identity.Abstractions
 
         #region Token acquisition
         /// <summary>
+        /// Home tenant of the app in which the app can acquire a token to call a downstream API on behalf of itself.
+        /// </summary>
+        public string? AppHomeTenantId { get; set; }
+
+        /// <summary>
         /// Specifies the Azure region. See https://aka.ms/azure-region. To have
         /// the app attempt to detect the Azure region automatically,
         /// use "TryAutoDetect".
