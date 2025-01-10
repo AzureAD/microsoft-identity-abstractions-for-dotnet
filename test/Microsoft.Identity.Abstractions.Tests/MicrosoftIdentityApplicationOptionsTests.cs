@@ -19,6 +19,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
         private CredentialDescription secret = new() { SourceType = CredentialSource.ClientSecret, ClientSecret = "blah" };
         private CredentialDescription decryptCert = new CredentialDescription { SourceType = CredentialSource.Base64Encoded, Base64EncodedValue = "0123" };
         private string[] audiences = new[] { "https://myapi", clientId };
+        private const string appHomeTenantId = "this-is-a-tenant-guid";
 
         [Fact]
         public void MicrosoftIdentityApplicationOptionsProperties()
@@ -27,6 +28,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             {
                 Instance = instance,
                 TenantId = tenant,
+                AppHomeTenantId = appHomeTenantId,
                 ClientId = clientId,
                 Audience = audience,
                 AzureRegion = azureRegion,
@@ -59,6 +61,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             Assert.Equal("https://login.microsoftonline.com/common", microsoftIdentityApplicationOptions.Authority);
             Assert.Equal(clientId, microsoftIdentityApplicationOptions.ClientId);
             Assert.Equal(tenant, microsoftIdentityApplicationOptions.TenantId);
+            Assert.Equal(appHomeTenantId, microsoftIdentityApplicationOptions.AppHomeTenantId);
             Assert.Equal(clientId, microsoftIdentityApplicationOptions.Audience);
             Assert.Equal(clientCapabilities, microsoftIdentityApplicationOptions.ClientCapabilities);
             Assert.Equal(azureRegion, microsoftIdentityApplicationOptions.AzureRegion);

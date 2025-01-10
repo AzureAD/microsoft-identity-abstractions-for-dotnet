@@ -15,6 +15,22 @@ namespace Microsoft.Identity.Abstractions
     /// </summary>
     public class CredentialDescription
     {
+        private string? _cachedId;
+
+        /// <summary>
+        /// Gets a unique identifier for a CredentialDescription based on <see cref="SourceType"/> and <see cref="ReferenceOrValue"/>.
+        /// </summary>
+        public string Id
+        {
+            get
+            {
+                if (_cachedId == null)
+                    _cachedId = $"{SourceType}_{Container}_{ReferenceOrValue}";
+
+                return _cachedId;
+            }
+        }
+
         /// <summary>
         /// Type of the source of the credential. This property is used to determine which other properties need
         /// to be provided to describe the credential.
@@ -51,7 +67,7 @@ namespace Microsoft.Identity.Abstractions
                     CredentialSource.StoreWithThumbprint or CredentialSource.StoreWithDistinguishedName => CertificateStorePath,
                     CredentialSource.SignedAssertionFilePath => SignedAssertionFileDiskPath,
                     CredentialSource.SignedAssertionFromVault => KeyVaultUrl,
-                    _ => null,
+                    _ => null
                 };
             }
             set
@@ -241,8 +257,8 @@ namespace Microsoft.Identity.Abstractions
         public string? ClientSecret { get; set; }
 
         /// <summary>
-        /// When <see cref="SourceType"/> is <see cref="CredentialSource.SignedAssertionFromManagedIdentity"/>, specifies the client ID of the Azure user-assigned managed identity 
-        /// used to provide an signed assertion that will be used as a client credential for the application. This requires that the application is deployed on Azure, that the managed identity is configured, 
+        /// When <see cref="SourceType"/> is <see cref="CredentialSource.SignedAssertionFromManagedIdentity"/>, it specifies the client ID of the Azure user-assigned managed identity 
+        /// used to provide a signed assertion to act as a client credential for the application. This requires that the application is deployed on Azure, that the managed identity is configured, 
         /// and that workload identity federation with the managed identity is declared in the application registration. For details, see https://learn.microsoft.com/azure/active-directory/workload-identities/workload-identity-federation.
         /// </summary>
         /// <example>
@@ -444,5 +460,23 @@ namespace Microsoft.Identity.Abstractions
                 };
             }
         }
+
+        /// <summary>
+        /// (Microsoft Entra specific)
+        /// Value that can be used to configure the token exchange resource url in the case
+        /// of federation identity credentials with Managed identity.
+        /// </summary>
+        /// /// <example>
+        /// <format type="text/markdown">
+        /// <![CDATA[
+        /// The JSON fragment below describes a workload identity federation with a user assigned managed identity:
+        /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="tokenExchangeUrl_json":::
+        /// 
+        /// The code below describes programmatically in C#, the same workload identity federation with a user assigned managed identity.
+        /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="tokenExchangeUrl_csharp":::
+        /// ]]></format>
+        /// </example> 
+        /// <remarks>If you want to use the default token exchange resource "api://AzureADTokenExchange", don't provide a token exchange url.</remarks>
+        public string? TokenExchangeUrl { get; set; }
     }
 }

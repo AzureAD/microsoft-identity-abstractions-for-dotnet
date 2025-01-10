@@ -5,7 +5,8 @@
     <Product>Microsoft Identity Abstractions</Product>
     <Description>Interface for higher level API for confidential client applications.</Description>
     <ProjectGuid>{98F57CC8-01A0-49F3-B859-DDC4F8F5CD2F}</ProjectGuid>
-     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,4 +28,16 @@
     </Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="PublicAPI/$(TargetFramework)/PublicAPI.Shipped.txt" />
+    <AdditionalFiles Include="PublicAPI/$(TargetFramework)/PublicAPI.Unshipped.txt" />
+  </ItemGroup>
+  
 </Project>

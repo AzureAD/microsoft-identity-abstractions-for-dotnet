@@ -2,11 +2,15 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
+
+#if NET8_0_OR_GREATER
+using System.Text.Json.Serialization.Metadata;
+using System.Diagnostics.CodeAnalysis;
+#endif
 
 namespace Microsoft.Identity.Abstractions
 {
@@ -156,7 +160,7 @@ namespace Microsoft.Identity.Abstractions
         /// }
         /// </code>
         /// </example>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         Task<TOutput?> CallApiForUserAsync<TInput, TOutput>(
@@ -182,7 +186,7 @@ namespace Microsoft.Identity.Abstractions
         /// will find the user from the HttpContext.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The value returned by the downstream web API.</returns>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         Task<TOutput?> CallApiForUserAsync<TOutput>(
@@ -206,7 +210,7 @@ namespace Microsoft.Identity.Abstractions
         /// by <paramref name="serviceName"/>.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The value returned by the downstream web API.</returns>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         Task<TOutput?> CallApiForAppAsync<TInput, TOutput>(
@@ -228,7 +232,7 @@ namespace Microsoft.Identity.Abstractions
         /// by <paramref name="serviceName"/>.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The value returned by the downstream web API.</returns>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
         Task<TOutput?> CallApiForAppAsync<TOutput>(
@@ -236,5 +240,136 @@ namespace Microsoft.Identity.Abstractions
             Action<DownstreamApiOptions>? downstreamApiOptionsOverride = null,
             CancellationToken cancellationToken = default)
             where TOutput : class;
+
+#if NET8_0_OR_GREATER
+        /// <summary>
+        /// Calls a downstream API consuming JSON with some data and returns data.
+        /// </summary>
+        /// <typeparam name="TInput">Input type.</typeparam>
+        /// <typeparam name="TOutput">Output type.</typeparam>
+        /// <param name="serviceName">Name of the service describing the downstream API. There can
+        /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
+        /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
+        /// needs to be set.</param>
+        /// <param name="input">Input parameter to the downstream web API.</param>
+        /// <param name="inputJsonTypeInfo">JSON serialization metadata for TInput</param>
+        /// <param name="outputJsonTypeInfo">JSON serialization metadata for TOutput</param>
+        /// <param name="downstreamApiOptionsOverride">Overrides the options proposed in the configuration described
+        /// by <paramref name="serviceName"/>.</param>
+        /// <param name="user">[Optional] Claims representing a user. This is useful in platforms like Blazor
+        /// or Azure Signal R, where the HttpContext is not available. In other platforms, the library
+        /// will find the user from the HttpContext.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>The value returned by the downstream web API.</returns>
+        /// <example>
+        /// A list method that returns an IEnumerable&lt;MyItem&gt;&gt;.
+        /// <code>
+        /// public Task&lt;IEnumerable&lt;MyItem&gt;&gt; GetAsync()
+        /// {
+        ///  return _downstreamWebApi.CallWebApiForUserAsync&lt;object, IEnumerable&lt;MyItem&gt;&gt;(
+        ///         ServiceName,
+        ///         null,
+        ///         options =>
+        ///         {
+        ///           options.RelativePath = $"api/todolist";
+        ///         });
+        /// }
+        /// </code>
+        ///
+        /// Example of editing.
+        /// <code>
+        /// public Task&lt;MyItem&gt; EditAsync(MyItem myItem)
+        /// {
+        ///   return _downstreamWebApi.CallWebApiForUserAsync&lt;MyItem, MyItem&gt;(
+        ///         ServiceName,
+        ///         nyItem,
+        ///         options =>
+        ///         {
+        ///            options.HttpMethod = HttpMethod.Patch;
+        ///            options.RelativePath = $"api/todolist/{myItem.Id}";
+        ///         });
+        /// }
+        /// </code>
+        /// </example>
+        public Task<TOutput?> CallApiForUserAsync<TInput, TOutput>(
+            string? serviceName,
+            TInput input,
+            JsonTypeInfo<TInput> inputJsonTypeInfo,
+            JsonTypeInfo<TOutput> outputJsonTypeInfo,
+            Action<DownstreamApiOptions>? downstreamApiOptionsOverride = null,
+            ClaimsPrincipal? user = default,
+            CancellationToken cancellationToken = default)
+            where TOutput : class;
+
+        /// <summary>
+        /// Call a web API endpoint with an HttpGet, and return strongly typed data.
+        /// </summary>
+        /// <typeparam name="TOutput">Output type.</typeparam>
+        /// <param name="serviceName">Name of the service describing the downstream API. There can
+        /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
+        /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
+        /// needs to be set.</param>
+        /// <param name="outputJsonTypeInfo">JSON serialization metadata for TOutput</param>
+        /// <param name="downstreamApiOptionsOverride">Overrides the options proposed in the configuration described
+        /// by <paramref name="serviceName"/>.</param>
+        /// <param name="user">[Optional] Claims representing a user. This is useful in platforms like Blazor
+        /// or Azure Signal R, where the HttpContext is not available. In other platforms, the library
+        /// will find the user from the HttpContext.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>The value returned by the downstream web API.</returns>
+        public Task<TOutput?> CallApiForUserAsync<TOutput>(
+            string serviceName,
+            JsonTypeInfo<TOutput> outputJsonTypeInfo,
+            Action<DownstreamApiOptions>? downstreamApiOptionsOverride = null,
+            ClaimsPrincipal? user = default,
+            CancellationToken cancellationToken = default)
+            where TOutput : class;
+
+        /// <summary>
+        /// Calls a downstream API consuming JSON with some data and returns data.
+        /// </summary>
+        /// <typeparam name="TInput">Input type.</typeparam>
+        /// <typeparam name="TOutput">Output type.</typeparam>
+        /// <param name="serviceName">Name of the service describing the downstream API. There can
+        /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
+        /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
+        /// needs to be set.</param>
+        /// <param name="input">Input parameter to the downstream web API.</param>
+        /// <param name="inputJsonTypeInfo">JSON serialization metadata for TInput</param>
+        /// <param name="outputJsonTypeInfo">JSON serialization metadata for TOutput</param>
+        /// <param name="downstreamApiOptionsOverride">Overrides the options proposed in the configuration described
+        /// by <paramref name="serviceName"/>.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>The value returned by the downstream web API.</returns>
+        public Task<TOutput?> CallApiForAppAsync<TInput, TOutput>(
+            string? serviceName,
+            TInput input,
+            JsonTypeInfo<TInput> inputJsonTypeInfo,
+            JsonTypeInfo<TOutput> outputJsonTypeInfo,
+            Action<DownstreamApiOptions>? downstreamApiOptionsOverride = null,
+            CancellationToken cancellationToken = default)
+            where TOutput : class;
+
+        /// <summary>
+        /// Call a web API endpoint with an HttpGet, and return strongly typed data.
+        /// </summary>
+        /// <typeparam name="TOutput">Output type.</typeparam>
+        /// <param name="serviceName">Name of the service describing the downstream API. There can
+        /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
+        /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
+        /// needs to be set.</param>
+        /// <param name="outputJsonTypeInfo">JSON serialization metadata for TOutput</param>
+        /// <param name="downstreamApiOptionsOverride">Overrides the options proposed in the configuration described
+        /// by <paramref name="serviceName"/>.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>The value returned by the downstream web API.</returns>
+        public Task<TOutput?> CallApiForAppAsync<TOutput>(
+            string serviceName,
+            JsonTypeInfo<TOutput> outputJsonTypeInfo,
+            Action<DownstreamApiOptions>? downstreamApiOptionsOverride = null,
+            CancellationToken cancellationToken = default)
+            where TOutput : class;
+#endif
     }
+
 }

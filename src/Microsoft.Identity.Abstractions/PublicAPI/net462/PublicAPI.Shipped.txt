@@ -1,0 +1,250 @@
+#nullable enable
+Microsoft.Identity.Abstractions.AcquireTokenOptions
+Microsoft.Identity.Abstractions.AcquireTokenOptions.AcquireTokenOptions() -> void
+Microsoft.Identity.Abstractions.AcquireTokenOptions.AcquireTokenOptions(Microsoft.Identity.Abstractions.AcquireTokenOptions! other) -> void
+Microsoft.Identity.Abstractions.AcquireTokenOptions.AuthenticationOptionsName.get -> string?
+Microsoft.Identity.Abstractions.AcquireTokenOptions.AuthenticationOptionsName.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenOptions.Claims.get -> string?
+Microsoft.Identity.Abstractions.AcquireTokenOptions.Claims.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenOptions.CorrelationId.get -> System.Guid?
+Microsoft.Identity.Abstractions.AcquireTokenOptions.CorrelationId.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenOptions.ExtraHeadersParameters.get -> System.Collections.Generic.IDictionary<string!, string!>?
+Microsoft.Identity.Abstractions.AcquireTokenOptions.ExtraHeadersParameters.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenOptions.ExtraQueryParameters.get -> System.Collections.Generic.IDictionary<string!, string!>?
+Microsoft.Identity.Abstractions.AcquireTokenOptions.ExtraQueryParameters.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenOptions.ForceRefresh.get -> bool
+Microsoft.Identity.Abstractions.AcquireTokenOptions.ForceRefresh.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenOptions.LongRunningWebApiSessionKey.get -> string?
+Microsoft.Identity.Abstractions.AcquireTokenOptions.LongRunningWebApiSessionKey.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenOptions.ManagedIdentity.get -> Microsoft.Identity.Abstractions.ManagedIdentityOptions?
+Microsoft.Identity.Abstractions.AcquireTokenOptions.ManagedIdentity.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenOptions.PopClaim.get -> string?
+Microsoft.Identity.Abstractions.AcquireTokenOptions.PopClaim.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenOptions.PopPublicKey.get -> string?
+Microsoft.Identity.Abstractions.AcquireTokenOptions.PopPublicKey.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenOptions.Tenant.get -> string?
+Microsoft.Identity.Abstractions.AcquireTokenOptions.Tenant.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenOptions.UserFlow.get -> string?
+Microsoft.Identity.Abstractions.AcquireTokenOptions.UserFlow.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenResult
+Microsoft.Identity.Abstractions.AcquireTokenResult.AccessToken.get -> string?
+Microsoft.Identity.Abstractions.AcquireTokenResult.AccessToken.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenResult.AcquireTokenResult(string! accessToken, System.DateTimeOffset expiresOn, string! tenantId, string! idToken, System.Collections.Generic.IEnumerable<string!>! scopes, System.Guid correlationId, string! tokenType) -> void
+Microsoft.Identity.Abstractions.AcquireTokenResult.CorrelationId.get -> System.Guid
+Microsoft.Identity.Abstractions.AcquireTokenResult.CorrelationId.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenResult.ExpiresOn.get -> System.DateTimeOffset
+Microsoft.Identity.Abstractions.AcquireTokenResult.ExpiresOn.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenResult.IdToken.get -> string?
+Microsoft.Identity.Abstractions.AcquireTokenResult.IdToken.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenResult.Scopes.get -> System.Collections.Generic.IEnumerable<string!>?
+Microsoft.Identity.Abstractions.AcquireTokenResult.Scopes.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenResult.TenantId.get -> string?
+Microsoft.Identity.Abstractions.AcquireTokenResult.TenantId.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenResult.TokenType.get -> string?
+Microsoft.Identity.Abstractions.AcquireTokenResult.TokenType.set -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.AcquireTokenOptions.get -> Microsoft.Identity.Abstractions.AcquireTokenOptions!
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.AcquireTokenOptions.set -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.AuthorizationHeaderProviderOptions() -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.AuthorizationHeaderProviderOptions(Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions! other) -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.BaseUrl.get -> string?
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.BaseUrl.set -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.Clone() -> Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions!
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.CustomizeHttpRequestMessage.get -> System.Action<System.Net.Http.HttpRequestMessage!>?
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.CustomizeHttpRequestMessage.set -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.GetApiUrl() -> string!
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.HttpMethod.get -> string!
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.HttpMethod.set -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.ProtocolScheme.get -> string!
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.ProtocolScheme.set -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.RelativePath.get -> string!
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.RelativePath.set -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.RequestAppToken.get -> bool
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.RequestAppToken.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription
+Microsoft.Identity.Abstractions.CredentialDescription.Base64EncodedValue.get -> string?
+Microsoft.Identity.Abstractions.CredentialDescription.Base64EncodedValue.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.Certificate.get -> System.Security.Cryptography.X509Certificates.X509Certificate2?
+Microsoft.Identity.Abstractions.CredentialDescription.Certificate.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.CertificateDiskPath.get -> string?
+Microsoft.Identity.Abstractions.CredentialDescription.CertificateDiskPath.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.CertificateDistinguishedName.get -> string?
+Microsoft.Identity.Abstractions.CredentialDescription.CertificateDistinguishedName.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.CertificatePassword.get -> string?
+Microsoft.Identity.Abstractions.CredentialDescription.CertificatePassword.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.CertificateStorePath.get -> string?
+Microsoft.Identity.Abstractions.CredentialDescription.CertificateStorePath.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.CertificateThumbprint.get -> string?
+Microsoft.Identity.Abstractions.CredentialDescription.CertificateThumbprint.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.ClientSecret.get -> string?
+Microsoft.Identity.Abstractions.CredentialDescription.ClientSecret.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.Container.get -> string?
+Microsoft.Identity.Abstractions.CredentialDescription.Container.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.CredentialDescription() -> void
+Microsoft.Identity.Abstractions.CredentialDescription.CredentialType.get -> Microsoft.Identity.Abstractions.CredentialType
+Microsoft.Identity.Abstractions.CredentialDescription.DecryptKeysAuthenticationOptions.get -> Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions?
+Microsoft.Identity.Abstractions.CredentialDescription.DecryptKeysAuthenticationOptions.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.Id.get -> string!
+Microsoft.Identity.Abstractions.CredentialDescription.KeyVaultCertificateName.get -> string?
+Microsoft.Identity.Abstractions.CredentialDescription.KeyVaultCertificateName.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.KeyVaultUrl.get -> string?
+Microsoft.Identity.Abstractions.CredentialDescription.KeyVaultUrl.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.ManagedIdentityClientId.get -> string?
+Microsoft.Identity.Abstractions.CredentialDescription.ManagedIdentityClientId.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.ReferenceOrValue.get -> string?
+Microsoft.Identity.Abstractions.CredentialDescription.ReferenceOrValue.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.SignedAssertionFileDiskPath.get -> string?
+Microsoft.Identity.Abstractions.CredentialDescription.SignedAssertionFileDiskPath.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.Skip.get -> bool
+Microsoft.Identity.Abstractions.CredentialDescription.Skip.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.SourceType.get -> Microsoft.Identity.Abstractions.CredentialSource
+Microsoft.Identity.Abstractions.CredentialDescription.SourceType.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.TokenExchangeUrl.get -> string?
+Microsoft.Identity.Abstractions.CredentialDescription.TokenExchangeUrl.set -> void
+Microsoft.Identity.Abstractions.CredentialSource
+Microsoft.Identity.Abstractions.CredentialSource.AutoDecryptKeys = 10 -> Microsoft.Identity.Abstractions.CredentialSource
+Microsoft.Identity.Abstractions.CredentialSource.Base64Encoded = 2 -> Microsoft.Identity.Abstractions.CredentialSource
+Microsoft.Identity.Abstractions.CredentialSource.Certificate = 0 -> Microsoft.Identity.Abstractions.CredentialSource
+Microsoft.Identity.Abstractions.CredentialSource.ClientSecret = 6 -> Microsoft.Identity.Abstractions.CredentialSource
+Microsoft.Identity.Abstractions.CredentialSource.KeyVault = 1 -> Microsoft.Identity.Abstractions.CredentialSource
+Microsoft.Identity.Abstractions.CredentialSource.Path = 3 -> Microsoft.Identity.Abstractions.CredentialSource
+Microsoft.Identity.Abstractions.CredentialSource.SignedAssertionFilePath = 8 -> Microsoft.Identity.Abstractions.CredentialSource
+Microsoft.Identity.Abstractions.CredentialSource.SignedAssertionFromManagedIdentity = 7 -> Microsoft.Identity.Abstractions.CredentialSource
+Microsoft.Identity.Abstractions.CredentialSource.SignedAssertionFromVault = 9 -> Microsoft.Identity.Abstractions.CredentialSource
+Microsoft.Identity.Abstractions.CredentialSource.StoreWithDistinguishedName = 5 -> Microsoft.Identity.Abstractions.CredentialSource
+Microsoft.Identity.Abstractions.CredentialSource.StoreWithThumbprint = 4 -> Microsoft.Identity.Abstractions.CredentialSource
+Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters
+Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.Authority.get -> string!
+Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.Authority.set -> void
+Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.ClientId.get -> string!
+Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.ClientId.set -> void
+Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.CredentialSourceLoaderParameters(string! clientId, string! authority) -> void
+Microsoft.Identity.Abstractions.CredentialType
+Microsoft.Identity.Abstractions.CredentialType.Certificate = 0 -> Microsoft.Identity.Abstractions.CredentialType
+Microsoft.Identity.Abstractions.CredentialType.DecryptKeys = 3 -> Microsoft.Identity.Abstractions.CredentialType
+Microsoft.Identity.Abstractions.CredentialType.Secret = 1 -> Microsoft.Identity.Abstractions.CredentialType
+Microsoft.Identity.Abstractions.CredentialType.SignedAssertion = 2 -> Microsoft.Identity.Abstractions.CredentialType
+Microsoft.Identity.Abstractions.DownstreamApiOptions
+Microsoft.Identity.Abstractions.DownstreamApiOptions.AcceptHeader.get -> string!
+Microsoft.Identity.Abstractions.DownstreamApiOptions.AcceptHeader.set -> void
+Microsoft.Identity.Abstractions.DownstreamApiOptions.Clone() -> Microsoft.Identity.Abstractions.DownstreamApiOptions!
+Microsoft.Identity.Abstractions.DownstreamApiOptions.ContentType.get -> string!
+Microsoft.Identity.Abstractions.DownstreamApiOptions.ContentType.set -> void
+Microsoft.Identity.Abstractions.DownstreamApiOptions.Deserializer.get -> System.Func<System.Net.Http.HttpContent?, object?>?
+Microsoft.Identity.Abstractions.DownstreamApiOptions.Deserializer.set -> void
+Microsoft.Identity.Abstractions.DownstreamApiOptions.DownstreamApiOptions() -> void
+Microsoft.Identity.Abstractions.DownstreamApiOptions.DownstreamApiOptions(Microsoft.Identity.Abstractions.DownstreamApiOptions! other) -> void
+Microsoft.Identity.Abstractions.DownstreamApiOptions.Scopes.get -> System.Collections.Generic.IEnumerable<string!>?
+Microsoft.Identity.Abstractions.DownstreamApiOptions.Scopes.set -> void
+Microsoft.Identity.Abstractions.DownstreamApiOptions.Serializer.get -> System.Func<object?, System.Net.Http.HttpContent?>?
+Microsoft.Identity.Abstractions.DownstreamApiOptions.Serializer.set -> void
+Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod
+Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod.Clone() -> Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod!
+Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod.DownstreamApiOptionsReadOnlyHttpMethod(Microsoft.Identity.Abstractions.DownstreamApiOptions! options, string! httpMethod) -> void
+Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod.HttpMethod.get -> string!
+Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider
+Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider.CreateAuthorizationHeaderAsync(System.Collections.Generic.IEnumerable<string!>! scopes, Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions? options = null, System.Security.Claims.ClaimsPrincipal? claimsPrincipal = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<string!>!
+Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider.CreateAuthorizationHeaderForAppAsync(string! scopes, Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions? downstreamApiOptions = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<string!>!
+Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider.CreateAuthorizationHeaderForUserAsync(System.Collections.Generic.IEnumerable<string!>! scopes, Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions? authorizationHeaderProviderOptions = null, System.Security.Claims.ClaimsPrincipal? claimsPrincipal = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<string!>!
+Microsoft.Identity.Abstractions.ICredentialsLoader
+Microsoft.Identity.Abstractions.ICredentialsLoader.CredentialSourceLoaders.get -> System.Collections.Generic.IDictionary<Microsoft.Identity.Abstractions.CredentialSource, Microsoft.Identity.Abstractions.ICredentialSourceLoader!>!
+Microsoft.Identity.Abstractions.ICredentialsLoader.LoadCredentialsIfNeededAsync(Microsoft.Identity.Abstractions.CredentialDescription! credentialDescription, Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters? parameters = null) -> System.Threading.Tasks.Task!
+Microsoft.Identity.Abstractions.ICredentialsLoader.LoadFirstValidCredentialsAsync(System.Collections.Generic.IEnumerable<Microsoft.Identity.Abstractions.CredentialDescription!>! credentialDescriptions, Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters? parameters = null) -> System.Threading.Tasks.Task<Microsoft.Identity.Abstractions.CredentialDescription?>!
+Microsoft.Identity.Abstractions.ICredentialsLoader.ResetCredentials(System.Collections.Generic.IEnumerable<Microsoft.Identity.Abstractions.CredentialDescription!>! credentialDescriptions) -> void
+Microsoft.Identity.Abstractions.ICredentialSourceLoader
+Microsoft.Identity.Abstractions.ICredentialSourceLoader.CredentialSource.get -> Microsoft.Identity.Abstractions.CredentialSource
+Microsoft.Identity.Abstractions.ICredentialSourceLoader.LoadIfNeededAsync(Microsoft.Identity.Abstractions.CredentialDescription! credentialDescription, Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters? parameters = null) -> System.Threading.Tasks.Task!
+Microsoft.Identity.Abstractions.IdentityApplicationOptions
+Microsoft.Identity.Abstractions.IdentityApplicationOptions.AllowWebApiToBeAuthorizedByACL.get -> bool
+Microsoft.Identity.Abstractions.IdentityApplicationOptions.AllowWebApiToBeAuthorizedByACL.set -> void
+Microsoft.Identity.Abstractions.IdentityApplicationOptions.Audience.get -> string?
+Microsoft.Identity.Abstractions.IdentityApplicationOptions.Audience.set -> void
+Microsoft.Identity.Abstractions.IdentityApplicationOptions.Audiences.get -> System.Collections.Generic.IEnumerable<string!>?
+Microsoft.Identity.Abstractions.IdentityApplicationOptions.Audiences.set -> void
+Microsoft.Identity.Abstractions.IdentityApplicationOptions.ClientCredentials.get -> System.Collections.Generic.IEnumerable<Microsoft.Identity.Abstractions.CredentialDescription!>?
+Microsoft.Identity.Abstractions.IdentityApplicationOptions.ClientCredentials.set -> void
+Microsoft.Identity.Abstractions.IdentityApplicationOptions.ClientId.get -> string?
+Microsoft.Identity.Abstractions.IdentityApplicationOptions.ClientId.set -> void
+Microsoft.Identity.Abstractions.IdentityApplicationOptions.EnablePiiLogging.get -> bool
+Microsoft.Identity.Abstractions.IdentityApplicationOptions.EnablePiiLogging.set -> void
+Microsoft.Identity.Abstractions.IdentityApplicationOptions.ExtraQueryParameters.get -> System.Collections.Generic.IDictionary<string!, string!>?
+Microsoft.Identity.Abstractions.IdentityApplicationOptions.ExtraQueryParameters.set -> void
+Microsoft.Identity.Abstractions.IdentityApplicationOptions.IdentityApplicationOptions() -> void
+Microsoft.Identity.Abstractions.IdentityApplicationOptions.TokenDecryptionCredentials.get -> System.Collections.Generic.IEnumerable<Microsoft.Identity.Abstractions.CredentialDescription!>?
+Microsoft.Identity.Abstractions.IdentityApplicationOptions.TokenDecryptionCredentials.set -> void
+Microsoft.Identity.Abstractions.IDownstreamApi
+Microsoft.Identity.Abstractions.IDownstreamApi.CallApiAsync(Microsoft.Identity.Abstractions.DownstreamApiOptions! downstreamApiOptions, System.Security.Claims.ClaimsPrincipal? user = null, System.Net.Http.HttpContent? content = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage!>!
+Microsoft.Identity.Abstractions.IDownstreamApi.CallApiAsync(string? serviceName, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptions!>? downstreamApiOptionsOverride = null, System.Security.Claims.ClaimsPrincipal? user = null, System.Net.Http.HttpContent? content = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage!>!
+Microsoft.Identity.Abstractions.IDownstreamApi.CallApiForAppAsync(string? serviceName, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptions!>? downstreamApiOptionsOverride = null, System.Net.Http.HttpContent? content = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage!>!
+Microsoft.Identity.Abstractions.IDownstreamApi.CallApiForAppAsync<TInput, TOutput>(string? serviceName, TInput input, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptions!>? downstreamApiOptionsOverride = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TOutput?>!
+Microsoft.Identity.Abstractions.IDownstreamApi.CallApiForAppAsync<TOutput>(string! serviceName, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptions!>? downstreamApiOptionsOverride = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TOutput?>!
+Microsoft.Identity.Abstractions.IDownstreamApi.CallApiForUserAsync(string? serviceName, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptions!>? downstreamApiOptionsOverride = null, System.Security.Claims.ClaimsPrincipal? user = null, System.Net.Http.HttpContent? content = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage!>!
+Microsoft.Identity.Abstractions.IDownstreamApi.CallApiForUserAsync<TInput, TOutput>(string? serviceName, TInput input, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptions!>? downstreamApiOptionsOverride = null, System.Security.Claims.ClaimsPrincipal? user = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TOutput?>!
+Microsoft.Identity.Abstractions.IDownstreamApi.CallApiForUserAsync<TOutput>(string! serviceName, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptions!>? downstreamApiOptionsOverride = null, System.Security.Claims.ClaimsPrincipal? user = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TOutput?>!
+Microsoft.Identity.Abstractions.IDownstreamApi.DeleteForAppAsync<TInput, TOutput>(string? serviceName, TInput input, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod!>? downstreamApiOptionsOverride = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TOutput?>!
+Microsoft.Identity.Abstractions.IDownstreamApi.DeleteForAppAsync<TInput>(string? serviceName, TInput input, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod!>? downstreamApiOptionsOverride = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+Microsoft.Identity.Abstractions.IDownstreamApi.DeleteForUserAsync<TInput, TOutput>(string? serviceName, TInput input, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod!>? downstreamApiOptionsOverride = null, System.Security.Claims.ClaimsPrincipal? user = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TOutput?>!
+Microsoft.Identity.Abstractions.IDownstreamApi.DeleteForUserAsync<TInput>(string? serviceName, TInput input, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod!>? downstreamApiOptionsOverride = null, System.Security.Claims.ClaimsPrincipal? user = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+Microsoft.Identity.Abstractions.IDownstreamApi.GetForAppAsync<TInput, TOutput>(string? serviceName, TInput input, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod!>? downstreamApiOptionsOverride = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TOutput?>!
+Microsoft.Identity.Abstractions.IDownstreamApi.GetForAppAsync<TOutput>(string? serviceName, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod!>? downstreamApiOptionsOverride = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TOutput?>!
+Microsoft.Identity.Abstractions.IDownstreamApi.GetForUserAsync<TInput, TOutput>(string? serviceName, TInput input, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod!>? downstreamApiOptionsOverride = null, System.Security.Claims.ClaimsPrincipal? user = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TOutput?>!
+Microsoft.Identity.Abstractions.IDownstreamApi.GetForUserAsync<TOutput>(string? serviceName, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod!>? downstreamApiOptionsOverride = null, System.Security.Claims.ClaimsPrincipal? user = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TOutput?>!
+Microsoft.Identity.Abstractions.IDownstreamApi.PostForAppAsync<TInput, TOutput>(string? serviceName, TInput input, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod!>? downstreamApiOptionsOverride = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TOutput?>!
+Microsoft.Identity.Abstractions.IDownstreamApi.PostForAppAsync<TInput>(string? serviceName, TInput input, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod!>? downstreamApiOptionsOverride = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+Microsoft.Identity.Abstractions.IDownstreamApi.PostForUserAsync<TInput, TOutput>(string? serviceName, TInput input, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod!>? downstreamApiOptionsOverride = null, System.Security.Claims.ClaimsPrincipal? user = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TOutput?>!
+Microsoft.Identity.Abstractions.IDownstreamApi.PostForUserAsync<TInput>(string? serviceName, TInput input, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod!>? downstreamApiOptionsOverride = null, System.Security.Claims.ClaimsPrincipal? user = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+Microsoft.Identity.Abstractions.IDownstreamApi.PutForAppAsync<TInput, TOutput>(string? serviceName, TInput input, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod!>? downstreamApiOptionsOverride = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TOutput?>!
+Microsoft.Identity.Abstractions.IDownstreamApi.PutForAppAsync<TInput>(string? serviceName, TInput input, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod!>? downstreamApiOptionsOverride = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+Microsoft.Identity.Abstractions.IDownstreamApi.PutForUserAsync<TInput, TOutput>(string? serviceName, TInput input, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod!>? downstreamApiOptionsOverride = null, System.Security.Claims.ClaimsPrincipal? user = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TOutput?>!
+Microsoft.Identity.Abstractions.IDownstreamApi.PutForUserAsync<TInput>(string? serviceName, TInput input, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod!>? downstreamApiOptionsOverride = null, System.Security.Claims.ClaimsPrincipal? user = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+Microsoft.Identity.Abstractions.ITokenAcquirer
+Microsoft.Identity.Abstractions.ITokenAcquirer.GetTokenForAppAsync(string! scope, Microsoft.Identity.Abstractions.AcquireTokenOptions? tokenAcquisitionOptions = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Microsoft.Identity.Abstractions.AcquireTokenResult!>!
+Microsoft.Identity.Abstractions.ITokenAcquirer.GetTokenForUserAsync(System.Collections.Generic.IEnumerable<string!>! scopes, Microsoft.Identity.Abstractions.AcquireTokenOptions? tokenAcquisitionOptions = null, System.Security.Claims.ClaimsPrincipal? user = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Microsoft.Identity.Abstractions.AcquireTokenResult!>!
+Microsoft.Identity.Abstractions.ITokenAcquirerFactory
+Microsoft.Identity.Abstractions.ITokenAcquirerFactory.GetTokenAcquirer(Microsoft.Identity.Abstractions.IdentityApplicationOptions! identityApplicationOptions) -> Microsoft.Identity.Abstractions.ITokenAcquirer!
+Microsoft.Identity.Abstractions.ITokenAcquirerFactory.GetTokenAcquirer(string! optionName = "") -> Microsoft.Identity.Abstractions.ITokenAcquirer!
+Microsoft.Identity.Abstractions.ManagedIdentityOptions
+Microsoft.Identity.Abstractions.ManagedIdentityOptions.Clone() -> Microsoft.Identity.Abstractions.ManagedIdentityOptions!
+Microsoft.Identity.Abstractions.ManagedIdentityOptions.ManagedIdentityOptions() -> void
+Microsoft.Identity.Abstractions.ManagedIdentityOptions.UserAssignedClientId.get -> string?
+Microsoft.Identity.Abstractions.ManagedIdentityOptions.UserAssignedClientId.set -> void
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.AzureRegion.get -> string?
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.AzureRegion.set -> void
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.ClientCapabilities.get -> System.Collections.Generic.IEnumerable<string!>?
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.ClientCapabilities.set -> void
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.DefaultUserFlow.get -> string?
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.Domain.get -> string?
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.Domain.set -> void
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.EditProfilePolicyId.get -> string?
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.EditProfilePolicyId.set -> void
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.ErrorPath.get -> string?
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.ErrorPath.set -> void
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.Instance.get -> string?
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.Instance.set -> void
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.MicrosoftIdentityApplicationOptions() -> void
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.ResetPasswordPath.get -> string?
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.ResetPasswordPath.set -> void
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.ResetPasswordPolicyId.get -> string?
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.ResetPasswordPolicyId.set -> void
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.SendX5C.get -> bool
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.SendX5C.set -> void
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.SignUpSignInPolicyId.get -> string?
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.SignUpSignInPolicyId.set -> void
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.TenantId.get -> string?
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.TenantId.set -> void
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.WithSpaAuthCode.get -> bool
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.WithSpaAuthCode.set -> void
+override Microsoft.Identity.Abstractions.DownstreamApiOptions.CloneInternal() -> Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions!
+override Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod.CloneInternal() -> Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions!
+override Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.Authority.get -> string?
+override Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.Authority.set -> void
+static Microsoft.Identity.Abstractions.AcquireTokenOptions.LongRunningWebApiSessionKeyAuto.get -> string!
+virtual Microsoft.Identity.Abstractions.AcquireTokenOptions.Clone() -> Microsoft.Identity.Abstractions.AcquireTokenOptions!
+virtual Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.CloneInternal() -> Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions!
+virtual Microsoft.Identity.Abstractions.CredentialDescription.CachedValue.get -> object?
+virtual Microsoft.Identity.Abstractions.CredentialDescription.CachedValue.set -> void
+virtual Microsoft.Identity.Abstractions.IdentityApplicationOptions.Authority.get -> string?
+virtual Microsoft.Identity.Abstractions.IdentityApplicationOptions.Authority.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenOptions.ExtraParameters.get -> System.Collections.Generic.IDictionary<string!, object!>?
+Microsoft.Identity.Abstractions.AcquireTokenOptions.ExtraParameters.set -> void

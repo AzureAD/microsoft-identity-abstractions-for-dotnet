@@ -28,11 +28,11 @@ steps:
          "parameters": [
          {
            "parameterName": "OpusName",
-           "parameterValue": "Microsoft.Identity.Abstractions"
+           "parameterValue": "Microsoft"
          },
          {
            "parameterName": "OpusInfo",
-           "parameterValue": "http://test"
+           "parameterValue": "http://www.microsoft.com"
          },
          {
            "parameterName": "PageHash",
@@ -61,6 +61,16 @@ steps:
     SessionTimeout: 20
     VerboseLogin: true
   timeoutInMinutes: 10
+  condition: and(succeeded(), eq(variables['PipelineType'], 'Legacy'))
+
+- task: onebranch.pipeline.signing@1
+  displayName: 'Sign ${{ parameters.Pattern }} with OneBranch'
+  inputs:
+    command: 'sign'
+    signing_profile: 'external_distribution' #CP-230012 -> https://eng.ms/docs/products/onebranch/signing/containerbuildsigning#signing-using-onebranchpipelinesigning-ado-task
+    files_to_sign: '${{ parameters.Pattern }}'
+    search_root: '${{ parameters.FolderPath }}'
+  condition: and(succeeded(), eq(variables['PipelineType'], 'OneBranch'))
 
 - task: securedevelopmentteam.vss-secure-development-tools.build-task-binskim.BinSkim@4
   displayName: 'Run BinSkim ${{ parameters.Pattern }}'
@@ -69,8 +79,10 @@ steps:
     AnalyzeTargetGlob: ${{ parameters.Pattern }}
     AnalyzeVerbose: true
     AnalyzeHashes: true
+  condition: and(succeeded(), eq(variables['PipelineType'], 'Legacy'))
  
 - task: securedevelopmentteam.vss-secure-development-tools.build-task-postanalysis.PostAnalysis@2
   displayName: 'Check BinSkim Results'
   inputs:
     GdnBreakGdnToolBinSkim: true
+  condition: and(succeeded(), eq(variables['PipelineType'], 'Legacy'))

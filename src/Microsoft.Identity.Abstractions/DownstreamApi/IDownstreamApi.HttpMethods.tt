@@ -8,12 +8,16 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Identity.Abstractions;
+
+#if NET8_0_OR_GREATER
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization.Metadata;
+#endif
 
 namespace Microsoft.Identity.Abstractions
 {
@@ -24,13 +28,24 @@ namespace Microsoft.Identity.Abstractions
     public partial interface IDownstreamApi
     {
 <#
+  foreach(string framework in new string[]{  "all", "net8" } )
+  {
+  
+    if (framework == "net8")
+    {
+#>
+
+#if NET8_0_OR_GREATER
+<#
+    }
+
   foreach(string httpMethod in new string[]{  "Get", "Post", "Put", "Patch", "Delete"} )
   {
-   if (httpMethod == "Patch")
+   if (httpMethod == "Patch" && framework != "net8")
    {
 #>
 
-#if NETSTANDARD2_1_OR_GREATER
+#if NETSTANDARD2_1_OR_GREATER || NET
 <#
    }
    foreach(string token in new string[] {"User", "App"})
@@ -64,6 +79,12 @@ namespace Microsoft.Identity.Abstractions
 <# if (hasOutput){ #>
         /// <typeparam name="TOutput">Generic output type.</typeparam>
 <# } #>
+<# if (hasInput && framework == "net8"){ #>
+        /// <param name="inputJsonTypeInfo">JSON serialization metadata for TInput</param>
+<# } #>
+<# if (hasOutput && framework == "net8"){ #>
+        /// <param name="outputJsonTypeInfo">JSON serialization metadata for TOutput</param>
+<# } #>
         /// <param name="serviceName">Name of the service describing the downstream API. There can
         /// be several configuration named sections mapped to a <see cref="DownstreamApiOptions"/>,
         /// each for one downstream API. You can pass-in null, but in that case <paramref name="downstreamApiOptionsOverride"/>
@@ -93,13 +114,21 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
-#if NET6_0_OR_GREATER
+<# if (framework != "net8"){ #>
+#if NET8_0_OR_GREATER
         [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
 #endif
+<# } #>
         public <#= returnType #> <#= httpMethod #>For<#= token #>Async<#= template #>(
             string? serviceName,
 <# if (hasInput){ #>
             TInput input,
+<# } #>
+<# if (hasInput && framework == "net8"){ #>
+            JsonTypeInfo<TInput> inputJsonTypeInfo,
+<# } #>
+<# if (hasOutput && framework == "net8"){ #>
+            JsonTypeInfo<TOutput> outputJsonTypeInfo,
 <# } #>
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,
 <# if (!hasApp){ #>
@@ -111,14 +140,18 @@ namespace Microsoft.Identity.Abstractions
    }
 #>
 <#
-     if (httpMethod == "Patch")
+     if (httpMethod == "Patch" && framework != "net8")
      {
 #>
 
-#endif // NETSTANDARD2_1_OR_GREATER
+#endif // NETSTANDARD2_1_OR_GREATER || NET
 <#
-    }
-  }
+        }
+      }
+if (framework == "net8") {#>
+#endif // NET8_0_OR_GREATER
+<#}
+}
 #>
     }
 }

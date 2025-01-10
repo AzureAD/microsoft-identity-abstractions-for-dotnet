@@ -91,7 +91,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
                 todo,
                 options =>
                 {
-                    options.HttpMethod = HttpMethod.Patch;
+                    options.HttpMethod = HttpMethod.Patch.ToString();
                     options.RelativePath = $"api/todolist/{todo.Id}";
                 });
 

@@ -45,14 +45,14 @@ namespace Microsoft.Identity.Abstractions
     public class DownstreamApiOptions : AuthorizationHeaderProviderOptions
     {
         /// <summary>
-        /// Default constructor
+        /// Default constructor.
         /// </summary>
         public DownstreamApiOptions()
         {
         }
 
         /// <summary>
-        /// Copy constructor
+        /// Copy constructor.
         /// </summary>
         /// <param name="other"></param>
         public DownstreamApiOptions(DownstreamApiOptions other) : base(other)
@@ -60,6 +60,8 @@ namespace Microsoft.Identity.Abstractions
             Scopes = other.Scopes;
             Serializer = other.Serializer;
             Deserializer = other.Deserializer;
+            AcceptHeader = other.AcceptHeader;
+            ContentType = other.ContentType;
         }
 
         /// <summary>
@@ -110,5 +112,18 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <remarks>This property cannot be set in the configuration. It's code only.</remarks>
         public Func<HttpContent?, object?>? Deserializer { get; set; }
+
+        /// <summary>
+        /// The HTTP Accept header is used to inform that server about the content type
+        /// that the client is expecting in the response.
+        /// </summary>
+        /// <default>application/json</default>
+        public string AcceptHeader { get; set; } = "application/json";
+
+        /// <summary>
+        /// Content type of the request body.
+        /// </summary>
+        /// <default>application/json</default>
+        public string ContentType { get; set; } = "application/json";
     }
 }

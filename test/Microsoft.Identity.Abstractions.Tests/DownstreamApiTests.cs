@@ -8,9 +8,16 @@ using System.Net.Http.Headers;
 using System.Text;
 using Xunit;
 
+
+#if NET8_0_OR_GREATER
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
+#endif
+
 namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
 {
-    public class DownstreamApiTests
+    public partial class DownstreamApiTests
     {
         [Fact]
         public void CloneClonesAllProperties()
@@ -25,8 +32,10 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
                     CorrelationId = Guid.NewGuid(),
                     ExtraHeadersParameters = new Dictionary<string, string> { { "slice", "test" } },
                     ExtraQueryParameters = new Dictionary<string, string> { { "slice", "test" } },
+                    ExtraParameters = new Dictionary<string, object> { { "param1", "value1" }, { "param2", "value2" } },
                     ForceRefresh = true,
                     LongRunningWebApiSessionKey = AcquireTokenOptions.LongRunningWebApiSessionKeyAuto,
+                    ManagedIdentity = new ManagedIdentityOptions(),
                     PopPublicKey = "PopKey",
                     PopClaim = "jwkClaim",
                     Tenant = "domain.com",
@@ -42,7 +51,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
 #endif
                 )
                                                       : null,
-                HttpMethod = HttpMethod.Trace,
+                HttpMethod = HttpMethod.Trace.ToString(),
                 ProtocolScheme = "bearer",
                 RelativePath = "/api/values",
                 RequestAppToken = true
@@ -73,20 +82,30 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.CorrelationId, downstreamApiClone.AcquireTokenOptions.CorrelationId);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ExtraHeadersParameters, downstreamApiClone.AcquireTokenOptions.ExtraHeadersParameters);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ExtraQueryParameters, downstreamApiClone.AcquireTokenOptions.ExtraQueryParameters);
+            Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ExtraParameters, downstreamApiClone.AcquireTokenOptions.ExtraParameters);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ForceRefresh, downstreamApiClone.AcquireTokenOptions.ForceRefresh);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.LongRunningWebApiSessionKey, downstreamApiClone.AcquireTokenOptions.LongRunningWebApiSessionKey);
+            Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ManagedIdentity.UserAssignedClientId, downstreamApiClone.AcquireTokenOptions.ManagedIdentity?.UserAssignedClientId);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.PopPublicKey, downstreamApiClone.AcquireTokenOptions.PopPublicKey);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.PopClaim, downstreamApiClone.AcquireTokenOptions.PopClaim);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.Tenant, downstreamApiClone.AcquireTokenOptions.Tenant);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.UserFlow, downstreamApiClone.AcquireTokenOptions.UserFlow);
+            Assert.Equal("application/json", downstreamApiClone.AcceptHeader);
+            Assert.Equal("application/json", downstreamApiClone.ContentType);
 
             // If this fails, think of also adding a line to test the new property
-            Assert.Equal(10, typeof(DownstreamApiOptions).GetProperties().Length);
-            Assert.Equal(12, typeof(AcquireTokenOptions).GetProperties().Length);
+            Assert.Equal(12, typeof(DownstreamApiOptions).GetProperties().Length);
+            Assert.Equal(14, typeof(AcquireTokenOptions).GetProperties().Length);
 
-            DownstreamApiOptionsReadOnlyHttpMethod options = new DownstreamApiOptionsReadOnlyHttpMethod(downstreamApiOptions, HttpMethod.Delete);
-            Assert.Equal(HttpMethod.Delete, options.HttpMethod);
-            Assert.Equal(HttpMethod.Delete, options.Clone().HttpMethod);
+            DownstreamApiOptionsReadOnlyHttpMethod options = new DownstreamApiOptionsReadOnlyHttpMethod(downstreamApiOptions, HttpMethod.Delete.ToString());
+            Assert.Equal(HttpMethod.Delete.ToString(), options.HttpMethod);
+            Assert.Equal(HttpMethod.Delete.ToString(), options.Clone().HttpMethod);
+
+            // Special cases
+            authorizationHeaderProviderOptions.HttpMethod = null!;
+            authorizationHeaderProviderOptions.ProtocolScheme = null!;
+            Assert.Equal("Get", authorizationHeaderProviderOptions.HttpMethod);
+            Assert.Equal("Bearer", authorizationHeaderProviderOptions.ProtocolScheme);
         }
 
         [Fact]
@@ -101,7 +120,6 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
         {
             AuthorizationHeaderProviderOptions authenticationHeaderProviderOptions = new();
 
-            Assert.Throws<ArgumentNullException>(() => _ = authenticationHeaderProviderOptions.ProtocolScheme = null!); ;
             Assert.Throws<ArgumentNullException>(() => _ = authenticationHeaderProviderOptions.AcquireTokenOptions = null!);
         }
 
@@ -117,13 +135,13 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             downstreamApi.CallApiAsync(null,
                 options =>
                 {
-                    options.HttpMethod = HttpMethod.Get;
+                    options.HttpMethod = HttpMethod.Get.ToString();
                     options.BaseUrl = "https://monApi.domain.com";
                     options.RelativePath = "api/values";
                 });
 
             // Calls a service purely programmatically. 
-            downstreamApi.CallApiAsync(new DownstreamApiOptions { HttpMethod = HttpMethod.Get, RequestAppToken = false });
+            downstreamApi.CallApiAsync(new DownstreamApiOptions { HttpMethod = HttpMethod.Get.ToString(), RequestAppToken = false });
 
             // In the following call, it's not possible to set the HttpMethod in the delegate, as it would no
             // make sense: it's already provided in the name of the method
@@ -146,11 +164,37 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             Assert.Equal(expectedUrl, options.GetApiUrl());
         }
 
-        [Fact]
-        public void NullHttpVerbThrows()
+#if NET8_0_OR_GREATER
+        internal class CustomApiResponse
         {
-            Assert.Throws<ArgumentNullException>(() => { new DownstreamApiOptions { HttpMethod = null! }; });
+            public int ErrorCode { get; set; }
         }
+
+        internal class CustomApiInput
+        {
+            public int ErrorCode { get; set; }
+        }
+
+        [JsonSerializable(typeof(CustomApiInput))]
+        [JsonSerializable(typeof(CustomApiResponse))]
+        internal partial class CustomApiResponseJsonContext : JsonSerializerContext
+        {
+        }
+
+        [Fact]
+        public void ExerciseApiAotOverloads()
+        {
+            // Test that the AOT Json serialzation overloads work
+
+            IDownstreamApi downstreamApi = new CustomDownstreamApi();
+            CustomApiResponse? response = downstreamApi.CallApiForUserAsync<CustomApiResponse>("service", CustomApiResponseJsonContext.Default.CustomApiResponse).Result;
+            Assert.Equal(200, response?.ErrorCode);
+
+            CustomApiInput input = new CustomApiInput { ErrorCode = 123 };
+            response = downstreamApi.GetForAppAsync<CustomApiInput, CustomApiResponse>("service", input, CustomApiResponseJsonContext.Default.CustomApiInput, CustomApiResponseJsonContext.Default.CustomApiResponse).Result;
+            Assert.Equal(123, response?.ErrorCode);
+        }
+#endif
     }
 
     internal class CustomAcquireTokenOptions : AcquireTokenOptions
