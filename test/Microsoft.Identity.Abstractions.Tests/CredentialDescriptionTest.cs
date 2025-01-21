@@ -196,7 +196,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
 
             Assert.Equal(CredentialType.Secret, credentialDescription.CredentialType);
             Assert.Null(credentialDescription.Container);
-            Assert.Equal(credentialDescription.ClientSecret, credentialDescription.ReferenceOrValue);
+            Assert.Equal("***", credentialDescription.ReferenceOrValue);
         }
 
         [Fact]
@@ -426,14 +426,23 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
         }
 
         // Ref/Value only
-        [Theory]
-        [InlineData(CredentialSource.ClientSecret)]
-        [InlineData(CredentialSource.SignedAssertionFromManagedIdentity)]
-        public void TestValueOrReference(CredentialSource credentialSource)
+        [Fact]
+        public void TestValueOrReferenceForSignedAssertionManagedIdentity()
         {
-            CredentialDescription credentialDescription = new CredentialDescription { SourceType = credentialSource };
+            CredentialDescription credentialDescription = new CredentialDescription 
+            { SourceType = CredentialSource.SignedAssertionFromManagedIdentity };
             credentialDescription.ReferenceOrValue = "referenceOrValue";
             Assert.Equal("referenceOrValue", credentialDescription.ReferenceOrValue);
+        }
+
+        // Ref/Value only
+        [Fact]
+        public void TestValueOrReferenceForClientSecret()
+        {
+            CredentialDescription credentialDescription = new CredentialDescription
+            { SourceType = CredentialSource.ClientSecret };
+            credentialDescription.ReferenceOrValue = "referenceOrValue";
+            Assert.Equal("***", credentialDescription.ReferenceOrValue);
         }
 
         [Theory]

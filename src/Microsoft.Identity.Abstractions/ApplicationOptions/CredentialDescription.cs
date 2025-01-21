@@ -347,7 +347,7 @@ namespace Microsoft.Identity.Abstractions
                     CredentialSource.StoreWithDistinguishedName => CertificateDistinguishedName,
                     CredentialSource.Certificate or CredentialSource.Base64Encoded => Base64EncodedValue,
                     CredentialSource.SignedAssertionFromManagedIdentity => ManagedIdentityClientId,
-                    CredentialSource.ClientSecret => ClientSecret,
+                    CredentialSource.ClientSecret => "***",
                     _ => null,
                 };
             }

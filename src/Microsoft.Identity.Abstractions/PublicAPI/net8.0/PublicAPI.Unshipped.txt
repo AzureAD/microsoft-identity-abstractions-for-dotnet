@@ -1,3 +1,1 @@
 #nullable enable
-Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.AppHomeTenantId.get -> string?
-Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.AppHomeTenantId.set -> void
