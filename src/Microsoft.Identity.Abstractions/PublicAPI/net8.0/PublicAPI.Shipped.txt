@@ -276,4 +276,7 @@ virtual Microsoft.Identity.Abstractions.IdentityApplicationOptions.Authority.get
 virtual Microsoft.Identity.Abstractions.IdentityApplicationOptions.Authority.set -> void
 Microsoft.Identity.Abstractions.AcquireTokenOptions.ExtraParameters.get -> System.Collections.Generic.IDictionary<string!, object!>?
 Microsoft.Identity.Abstractions.AcquireTokenOptions.ExtraParameters.set -> void
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.AppHomeTenantId.get -> string?
+Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.AppHomeTenantId.set -> void
+
 
