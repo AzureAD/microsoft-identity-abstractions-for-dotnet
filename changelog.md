@@ -1,3 +1,8 @@
+7.2.1
+========
+## Bug fix:
+- `Id` property in `CredentialDescription` was derived from secret values, primarily affecting logging (information level) of credential attempts in `Microsoft.Identity.Web`, it doesn't affect higher log levels because if the failure occurs, it indicates that a credential description has both a credential source that can fail (e.g., certificate) and the `ClientSecret` property set, which is not a typical scenario. See issue [#147](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/142) for details.
+
 7.2.0
 ========
 ## New features:
