@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using Xunit;
+using System.Collections.Generic;
 
 namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
 {
@@ -343,6 +344,24 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
         }
 
         [Fact]
+        public void CustomSignedAssertion()
+        {
+            // Signed assertion from a custom provider
+            // -------------------------------------------
+            CredentialDescription credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.CustomSignedAssertion,
+                CustomSignedAssertionProviderName = "MyCustomProvider",
+                CustomSignedAssertionProviderData = new Dictionary<string, object>(){ { "MyCustomProviderData_Key", "MyCustomProviderData_Data" } }
+
+            };
+
+            Assert.Equal(CredentialType.SignedAssertion, credentialDescription.CredentialType);
+            Assert.Null(credentialDescription.Container);
+            Assert.Null(credentialDescription.ReferenceOrValue);
+        }
+
+        [Fact]
         public void TokenExchangeUrl()
         {
             /*
@@ -412,6 +431,17 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             credentialDescription.Container = "container";
             credentialDescription.ReferenceOrValue = "referenceOrValue";
             Assert.Null(credentialDescription.Container);
+            Assert.Null(credentialDescription.ReferenceOrValue);
+        }
+
+        // This is still in the process of being implemented so for now it will return null. This test will need to change once it is fully implemented.
+        [Fact]
+        public void TestContainerAndValueOrReferenceForCustomSignedAssertion()
+        {
+            CredentialDescription credentialDescription = new CredentialDescription { SourceType = CredentialSource.CustomSignedAssertion };
+            credentialDescription.Container = "container";
+            Assert.Null(credentialDescription.Container);
+            credentialDescription.ReferenceOrValue = "referenceOrValue";
             Assert.Null(credentialDescription.ReferenceOrValue);
         }
 

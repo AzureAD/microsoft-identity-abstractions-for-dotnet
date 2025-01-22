@@ -175,6 +175,12 @@ namespace Microsoft.Identity.Abstractions
         /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="autodecryp_csharp":::
         /// ]]></format>
         /// </example>
-        AutoDecryptKeys = 10
+        AutoDecryptKeys = 10,
+
+        /// <summary>
+        /// Use this value in order to utilize a credential provider that is not part of the Microsoft.Identity.Abstractions library.
+        /// This is an extension point, which goes along with <see cref = "CredentialDescription.CustomSignedAssertionProviderName" />
+        /// </summary>
+        CustomSignedAssertion = 11
     }
 }
