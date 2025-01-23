@@ -62,6 +62,7 @@ Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.RelativePath.
 Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.RequestAppToken.get -> bool
 Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.RequestAppToken.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription
+Microsoft.Identity.Abstractions.CredentialDescription.CredentialDescription(Microsoft.Identity.Abstractions.CredentialDescription! other) -> void
 Microsoft.Identity.Abstractions.CredentialDescription.Base64EncodedValue.get -> string?
 Microsoft.Identity.Abstractions.CredentialDescription.Base64EncodedValue.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.Certificate.get -> System.Security.Cryptography.X509Certificates.X509Certificate2?
