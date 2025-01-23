@@ -78,8 +78,6 @@ Microsoft.Identity.Abstractions.CredentialDescription.CertificateThumbprint.get 
 Microsoft.Identity.Abstractions.CredentialDescription.CertificateThumbprint.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.ClientSecret.get -> string?
 Microsoft.Identity.Abstractions.CredentialDescription.ClientSecret.set -> void
-Microsoft.Identity.Abstractions.CredentialDescription.Container.get -> string?
-Microsoft.Identity.Abstractions.CredentialDescription.Container.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.CredentialDescription() -> void
 Microsoft.Identity.Abstractions.CredentialDescription.CredentialType.get -> Microsoft.Identity.Abstractions.CredentialType
 Microsoft.Identity.Abstractions.CredentialDescription.DecryptKeysAuthenticationOptions.get -> Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions?
@@ -91,8 +89,6 @@ Microsoft.Identity.Abstractions.CredentialDescription.KeyVaultUrl.get -> string?
 Microsoft.Identity.Abstractions.CredentialDescription.KeyVaultUrl.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.ManagedIdentityClientId.get -> string?
 Microsoft.Identity.Abstractions.CredentialDescription.ManagedIdentityClientId.set -> void
-Microsoft.Identity.Abstractions.CredentialDescription.ReferenceOrValue.get -> string?
-Microsoft.Identity.Abstractions.CredentialDescription.ReferenceOrValue.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.SignedAssertionFileDiskPath.get -> string?
 Microsoft.Identity.Abstractions.CredentialDescription.SignedAssertionFileDiskPath.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.Skip.get -> bool
