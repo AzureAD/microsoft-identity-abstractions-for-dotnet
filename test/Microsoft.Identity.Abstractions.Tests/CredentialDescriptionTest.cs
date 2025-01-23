@@ -348,6 +348,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
         {
             // Signed assertion from a custom provider
             // -------------------------------------------
+            // Arrange
             CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.CustomSignedAssertion,
@@ -355,9 +356,15 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                 CustomSignedAssertionProviderData = new Dictionary<string, object>(){ { "MyCustomProviderData_Key", "MyCustomProviderData_Data" } }
 
             };
+            string expectedId = "CustomSignedAssertion_MyCustomProvider_";
+
+            // Act
+            var id = credentialDescription.Id;
+
 
             Assert.Equal(CredentialType.SignedAssertion, credentialDescription.CredentialType);
-            Assert.Null(credentialDescription.Container);
+            Assert.Equal(expectedId, id);
+            Assert.Equal( credentialDescription.CustomSignedAssertionProviderName, credentialDescription.Container);
             Assert.Null(credentialDescription.ReferenceOrValue);
         }
 
@@ -438,10 +445,14 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
         [Fact]
         public void TestContainerAndValueOrReferenceForCustomSignedAssertion()
         {
-            CredentialDescription credentialDescription = new CredentialDescription { SourceType = CredentialSource.CustomSignedAssertion };
-            credentialDescription.Container = "container";
-            Assert.Null(credentialDescription.Container);
-            credentialDescription.ReferenceOrValue = "referenceOrValue";
+            CredentialDescription credentialDescription = new()
+            {
+                SourceType = CredentialSource.CustomSignedAssertion,
+                Container = "container",
+                ReferenceOrValue = "referenceOrValue"
+            };
+
+            Assert.Equal(credentialDescription.Container, credentialDescription.CustomSignedAssertionProviderName);
             Assert.Null(credentialDescription.ReferenceOrValue);
         }
 

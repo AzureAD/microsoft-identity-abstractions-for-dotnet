@@ -38,22 +38,24 @@ namespace Microsoft.Identity.Abstractions
             if (other == null)
                 throw new ArgumentNullException(nameof(other));
 #endif
-            SourceType = other.SourceType;
-            KeyVaultUrl = other.KeyVaultUrl;
-            KeyVaultCertificateName = other.KeyVaultCertificateName;
+            Base64EncodedValue = other.Base64EncodedValue;
+            CachedValue = other.CachedValue;
+            Certificate = other.Certificate;
             CertificateStorePath = other.CertificateStorePath;
             CertificateDistinguishedName = other.CertificateDistinguishedName;
             CertificateThumbprint = other.CertificateThumbprint;
             CertificateDiskPath = other.CertificateDiskPath;
             CertificatePassword = other.CertificatePassword;
-            Base64EncodedValue = other.Base64EncodedValue;
             ClientSecret = other.ClientSecret;
+            CustomSignedAssertionProviderData = other.CustomSignedAssertionProviderData;
+            CustomSignedAssertionProviderName = other.CustomSignedAssertionProviderName;
+            DecryptKeysAuthenticationOptions = other.DecryptKeysAuthenticationOptions;
+            KeyVaultCertificateName = other.KeyVaultCertificateName;
+            KeyVaultUrl = other.KeyVaultUrl;
             ManagedIdentityClientId = other.ManagedIdentityClientId;
             SignedAssertionFileDiskPath = other.SignedAssertionFileDiskPath;
-            DecryptKeysAuthenticationOptions = other.DecryptKeysAuthenticationOptions;
-            Certificate = other.Certificate;
-            CachedValue = other.CachedValue;
             Skip = other.Skip;
+            SourceType = other.SourceType;
             TokenExchangeUrl = other.TokenExchangeUrl;
         }
 
@@ -109,7 +111,7 @@ namespace Microsoft.Identity.Abstractions
                     CredentialSource.StoreWithThumbprint or CredentialSource.StoreWithDistinguishedName => CertificateStorePath,
                     CredentialSource.SignedAssertionFilePath => SignedAssertionFileDiskPath,
                     CredentialSource.SignedAssertionFromVault => KeyVaultUrl,
-                    CredentialSource.CustomSignedAssertion => null,
+                    CredentialSource.CustomSignedAssertion => CustomSignedAssertionProviderName,
                     _ => null
                 };
             }
@@ -140,6 +142,7 @@ namespace Microsoft.Identity.Abstractions
                         SignedAssertionFileDiskPath = value;
                         break;
                     case CredentialSource.CustomSignedAssertion:
+                        CustomSignedAssertionProviderName = value;
                         break;
                     default:
                         break;
