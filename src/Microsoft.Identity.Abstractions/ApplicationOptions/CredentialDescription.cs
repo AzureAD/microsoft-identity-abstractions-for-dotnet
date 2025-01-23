@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Microsoft.Identity.Abstractions
@@ -15,6 +16,45 @@ namespace Microsoft.Identity.Abstractions
     /// </summary>
     public class CredentialDescription
     {
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public CredentialDescription()
+        {
+
+        }
+
+        /// <summary>
+        /// Copy constructor for <see cref="CredentialDescription"/>
+        /// </summary>
+        /// <param name="other">CredentialDescription to copy.</param>
+        public CredentialDescription(CredentialDescription other)
+        {
+#if NET8_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(other);
+#else
+            if (other == null)
+                throw new ArgumentNullException(nameof(other));
+#endif
+            SourceType = other.SourceType;
+            KeyVaultUrl = other.KeyVaultUrl;
+            KeyVaultCertificateName = other.KeyVaultCertificateName;
+            CertificateStorePath = other.CertificateStorePath;
+            CertificateDistinguishedName = other.CertificateDistinguishedName;
+            CertificateThumbprint = other.CertificateThumbprint;
+            CertificateDiskPath = other.CertificateDiskPath;
+            CertificatePassword = other.CertificatePassword;
+            Base64EncodedValue = other.Base64EncodedValue;
+            ClientSecret = other.ClientSecret;
+            ManagedIdentityClientId = other.ManagedIdentityClientId;
+            SignedAssertionFileDiskPath = other.SignedAssertionFileDiskPath;
+            DecryptKeysAuthenticationOptions = other.DecryptKeysAuthenticationOptions;
+            Certificate = other.Certificate;
+            CachedValue = other.CachedValue;
+            Skip = other.Skip;
+            TokenExchangeUrl = other.TokenExchangeUrl;
+        }
+
         private string? _cachedId;
 
         /// <summary>
@@ -54,7 +94,7 @@ namespace Microsoft.Identity.Abstractions
         /// this value is the path to the credential in the cert store, for instance <c>CurrentUser/My</c>.</item>
         /// </list>
         /// </remarks>
-        public string? Container
+        internal string? Container
         {
             get
             {
@@ -334,7 +374,7 @@ namespace Microsoft.Identity.Abstractions
         /// this value is the thumbprint.</item>
         /// </list>
         /// </remarks>
-        public string? ReferenceOrValue
+        internal string? ReferenceOrValue
         {
             get
             {

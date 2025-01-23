@@ -1,1 +1,2 @@
 #nullable enable
+Microsoft.Identity.Abstractions.CredentialDescription.CredentialDescription(Microsoft.Identity.Abstractions.CredentialDescription! other) -> void
