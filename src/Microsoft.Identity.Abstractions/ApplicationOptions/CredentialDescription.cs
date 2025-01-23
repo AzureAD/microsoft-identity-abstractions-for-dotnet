@@ -27,7 +27,7 @@ namespace Microsoft.Identity.Abstractions
         /// <summary>
         /// Copy constructor for <see cref="CredentialDescription"/>
         /// </summary>
-        /// <param name="other"></param>
+        /// <param name="other">CredentialDescription to copy.</param>
         public CredentialDescription(CredentialDescription other)
         {
 #if NET8_0_OR_GREATER
