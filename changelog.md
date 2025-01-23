@@ -1,3 +1,10 @@
+8.0.0
+========
+## Fundamentals:
+- Removed the Container and ValueOrReference from the public API of CredentialDescription. They were technical debt used for compatibility
+  with Microsoft.Identity.Web 1.x, no longer necessary. See [PR #151](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/151)
+  for details.
+
 7.2.1
 ========
 ## Bug fix:
