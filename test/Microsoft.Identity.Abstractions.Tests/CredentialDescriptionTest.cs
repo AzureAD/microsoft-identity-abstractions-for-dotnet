@@ -349,6 +349,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             // Signed assertion from a custom provider
             // -------------------------------------------
             // Arrange
+            string expectedId = "CustomSignedAssertion_MyCustomProvider_";
             CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.CustomSignedAssertion,
@@ -356,12 +357,11 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                 CustomSignedAssertionProviderData = new Dictionary<string, object>(){ { "MyCustomProviderData_Key", "MyCustomProviderData_Data" } }
 
             };
-            string expectedId = "CustomSignedAssertion_MyCustomProvider_";
 
             // Act
             var id = credentialDescription.Id;
 
-
+            // Assert
             Assert.Equal(CredentialType.SignedAssertion, credentialDescription.CredentialType);
             Assert.Equal(expectedId, id);
             Assert.Equal( credentialDescription.CustomSignedAssertionProviderName, credentialDescription.Container);
