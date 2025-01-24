@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Microsoft.Identity.Abstractions
@@ -36,22 +38,24 @@ namespace Microsoft.Identity.Abstractions
             if (other == null)
                 throw new ArgumentNullException(nameof(other));
 #endif
-            SourceType = other.SourceType;
-            KeyVaultUrl = other.KeyVaultUrl;
-            KeyVaultCertificateName = other.KeyVaultCertificateName;
+            Base64EncodedValue = other.Base64EncodedValue;
+            CachedValue = other.CachedValue;
+            Certificate = other.Certificate;
             CertificateStorePath = other.CertificateStorePath;
             CertificateDistinguishedName = other.CertificateDistinguishedName;
             CertificateThumbprint = other.CertificateThumbprint;
             CertificateDiskPath = other.CertificateDiskPath;
             CertificatePassword = other.CertificatePassword;
-            Base64EncodedValue = other.Base64EncodedValue;
             ClientSecret = other.ClientSecret;
+            CustomSignedAssertionProviderData = other.CustomSignedAssertionProviderData;
+            CustomSignedAssertionProviderName = other.CustomSignedAssertionProviderName;
+            DecryptKeysAuthenticationOptions = other.DecryptKeysAuthenticationOptions;
+            KeyVaultCertificateName = other.KeyVaultCertificateName;
+            KeyVaultUrl = other.KeyVaultUrl;
             ManagedIdentityClientId = other.ManagedIdentityClientId;
             SignedAssertionFileDiskPath = other.SignedAssertionFileDiskPath;
-            DecryptKeysAuthenticationOptions = other.DecryptKeysAuthenticationOptions;
-            Certificate = other.Certificate;
-            CachedValue = other.CachedValue;
             Skip = other.Skip;
+            SourceType = other.SourceType;
             TokenExchangeUrl = other.TokenExchangeUrl;
         }
 
@@ -107,6 +111,7 @@ namespace Microsoft.Identity.Abstractions
                     CredentialSource.StoreWithThumbprint or CredentialSource.StoreWithDistinguishedName => CertificateStorePath,
                     CredentialSource.SignedAssertionFilePath => SignedAssertionFileDiskPath,
                     CredentialSource.SignedAssertionFromVault => KeyVaultUrl,
+                    CredentialSource.CustomSignedAssertion => CustomSignedAssertionProviderName,
                     _ => null
                 };
             }
@@ -135,6 +140,9 @@ namespace Microsoft.Identity.Abstractions
                         break;
                     case CredentialSource.SignedAssertionFilePath:
                         SignedAssertionFileDiskPath = value;
+                        break;
+                    case CredentialSource.CustomSignedAssertion:
+                        CustomSignedAssertionProviderName = value;
                         break;
                     default:
                         break;
@@ -388,6 +396,7 @@ namespace Microsoft.Identity.Abstractions
                     CredentialSource.Certificate or CredentialSource.Base64Encoded => Base64EncodedValue,
                     CredentialSource.SignedAssertionFromManagedIdentity => ManagedIdentityClientId,
                     CredentialSource.ClientSecret => "***",
+                    CredentialSource.CustomSignedAssertion => null,
                     _ => null,
                 };
             }
@@ -420,6 +429,8 @@ namespace Microsoft.Identity.Abstractions
                         break;
                     case CredentialSource.SignedAssertionFromManagedIdentity:
                         ManagedIdentityClientId = value;
+                        break;
+                    case CredentialSource.CustomSignedAssertion:
                         break;
                     default:
                         break;
@@ -492,7 +503,8 @@ namespace Microsoft.Identity.Abstractions
                     
                     CredentialSource.SignedAssertionFromManagedIdentity 
                     or CredentialSource.SignedAssertionFilePath 
-                    or CredentialSource.SignedAssertionFromVault => CredentialType.SignedAssertion,
+                    or CredentialSource.SignedAssertionFromVault
+                    or CredentialSource.CustomSignedAssertion => CredentialType.SignedAssertion,
 
                     CredentialSource.AutoDecryptKeys => CredentialType.DecryptKeys,
 
@@ -518,5 +530,19 @@ namespace Microsoft.Identity.Abstractions
         /// </example> 
         /// <remarks>If you want to use the default token exchange resource "api://AzureADTokenExchange", don't provide a token exchange url.</remarks>
         public string? TokenExchangeUrl { get; set; }
+
+        /// <summary>
+        /// Extensibility. When used with <see cref="SourceType"/> = <see cref="CredentialSource.CustomSignedAssertion"/>, this property specifies the fully qualified
+        /// named of the extension that will be used to retrieve the signed assertion used as a client credentials.
+        /// </summary>
+        public string? CustomSignedAssertionProviderName { get; set; }
+
+        /// <summary>
+        /// Extensibility. When used with <see cref="SourceType"/> = <see cref="CredentialSource.CustomSignedAssertion"/>, this property specifies 
+        /// additional data that will be passed to the extension computing the signed assertion. This is meant for SDKs extending the credential
+        /// description capabilities.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public Dictionary<string, object>? CustomSignedAssertionProviderData { get; set; }
     }
 }

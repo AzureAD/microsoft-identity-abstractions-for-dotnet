@@ -1,1 +1,6 @@
 #nullable enable
+Microsoft.Identity.Abstractions.CredentialDescription.CustomSignedAssertionProviderData.get -> System.Collections.Generic.Dictionary<string!, object!>?
+Microsoft.Identity.Abstractions.CredentialDescription.CustomSignedAssertionProviderData.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.CustomSignedAssertionProviderName.get -> string?
+Microsoft.Identity.Abstractions.CredentialDescription.CustomSignedAssertionProviderName.set -> void
+Microsoft.Identity.Abstractions.CredentialSource.CustomSignedAssertion = 11 -> Microsoft.Identity.Abstractions.CredentialSource
