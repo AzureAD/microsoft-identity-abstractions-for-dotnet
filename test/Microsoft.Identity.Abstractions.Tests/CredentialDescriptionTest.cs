@@ -441,7 +441,6 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             Assert.Null(credentialDescription.ReferenceOrValue);
         }
 
-        // This is still in the process of being implemented so for now it will return null. This test will need to change once it is fully implemented.
         [Fact]
         public void TestContainerAndValueOrReferenceForCustomSignedAssertion()
         {
