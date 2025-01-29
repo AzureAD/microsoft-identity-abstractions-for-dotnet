@@ -8,7 +8,7 @@ using System.Text;
 namespace Microsoft.Identity.Abstractions
 {
     /// <summary>
-    /// Interface to implement loading of a custom signed assertion providers.
+    /// Interface to implement loading of a custom signed assertion provider.
     /// </summary>
     public interface ICustomSignedAssertionProvider : ICredentialSourceLoader
     {
