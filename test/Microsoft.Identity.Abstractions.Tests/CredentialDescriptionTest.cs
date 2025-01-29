@@ -297,7 +297,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             Assert.Equal(CredentialType.SignedAssertion, credentialDescription.CredentialType);
 
             // Skip a cred in a list of creds (when they are invalid)
-            credentialDescription.Skip= true;
+            credentialDescription.Skip = true;
             Assert.True(credentialDescription.Skip);
         }
 
@@ -328,9 +328,10 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                 SourceType = CredentialSource.AutoDecryptKeys,
                 DecryptKeysAuthenticationOptions = new AuthorizationHeaderProviderOptions
                 {
-                     ProtocolScheme = "Bearer",
-                    AcquireTokenOptions = new AcquireTokenOptions {
-                         Tenant = "mytenant.onmicrosoftonline.com",
+                    ProtocolScheme = "Bearer",
+                    AcquireTokenOptions = new AcquireTokenOptions
+                    {
+                        Tenant = "mytenant.onmicrosoftonline.com",
                     }
                 }
             };
@@ -354,7 +355,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             {
                 SourceType = CredentialSource.CustomSignedAssertion,
                 CustomSignedAssertionProviderName = "MyCustomProvider",
-                CustomSignedAssertionProviderData = new Dictionary<string, object>(){ { "MyCustomProviderData_Key", "MyCustomProviderData_Data" } }
+                CustomSignedAssertionProviderData = new Dictionary<string, object>() { { "MyCustomProviderData_Key", "MyCustomProviderData_Data" } }
 
             };
 
@@ -364,7 +365,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             // Assert
             Assert.Equal(CredentialType.SignedAssertion, credentialDescription.CredentialType);
             Assert.Equal(expectedId, id);
-            Assert.Equal( credentialDescription.CustomSignedAssertionProviderName, credentialDescription.Container);
+            Assert.Equal(credentialDescription.CustomSignedAssertionProviderName, credentialDescription.Container);
             Assert.Null(credentialDescription.ReferenceOrValue);
         }
 
@@ -460,7 +461,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
         [InlineData(CredentialSource.SignedAssertionFilePath)]
         public void TestContainer(CredentialSource credentialSource)
         {
-            CredentialDescription credentialDescription = new CredentialDescription{SourceType = credentialSource};
+            CredentialDescription credentialDescription = new CredentialDescription { SourceType = credentialSource };
             credentialDescription.Container = "container";
             Assert.Equal("container", credentialDescription.Container);
         }
@@ -469,7 +470,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
         [Fact]
         public void TestValueOrReferenceForSignedAssertionManagedIdentity()
         {
-            CredentialDescription credentialDescription = new CredentialDescription 
+            CredentialDescription credentialDescription = new CredentialDescription
             { SourceType = CredentialSource.SignedAssertionFromManagedIdentity };
             credentialDescription.ReferenceOrValue = "referenceOrValue";
             Assert.Equal("referenceOrValue", credentialDescription.ReferenceOrValue);
@@ -517,10 +518,9 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                 "ClientCredentials": [
                 {
                     "SourceType": "SignedAssertionFromManagedIdentity",
-       "SourceType": "SignedAssertionFromManagedIdentity",
-       "ManagedIdentityClientId": "GUID",
-       "TokenExchangeUrl" : “api://AzureADTokenExchangeSomeCloud1”,
-       "TokenExchangeAuthority": “https://login.microsoftonline.cloud2/<tenantid>/v2.0”
+                    "ManagedIdentityClientId": "GUID",
+                    "TokenExchangeUrl" : "api://AzureADTokenExchangeSomeCloud1",
+                    "TokenExchangeAuthority": "https://login.microsoftonline.cloud2/33e01921-4d64-4f8c-a055-5bdaffd5e33d/v2.0"
                 }]
             }
             // </tokenExchangeAuthority_json>
@@ -528,34 +528,25 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
 
             // <tokenExchangeAuthority_csharp>
             // Arrange
-            var credentialDescription = new CredentialDescription();
-            var expectedTokenExchangeAuthority = "https://login.microsoftonline.cloud2/33e01921-4d64-4f8c-a055-5bdaffd5e33d/v2.0";
+            var credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.SignedAssertionFromManagedIdentity,
+                ManagedIdentityClientId = "GUID",
+                TokenExchangeUrl = "api://AzureADTokenExchangeSomeCloud1",
+                TokenExchangeAuthority = "https://login.microsoftonline.cloud2/33e01921-4d64-4f8c-a055-5bdaffd5e33d/v2.0"
+            };
 
             // Act
-            credentialDescription.TokenExchangeAuthority = expectedTokenExchangeAuthority;
             var actualTokenExchangeAuthority = credentialDescription.TokenExchangeAuthority;
             // </tokenExchangeAuthority_csharp>
 
             // Assert
-            Assert.Equal(expectedTokenExchangeAuthority, actualTokenExchangeAuthority);
+            Assert.Equal("https://login.microsoftonline.cloud2/33e01921-4d64-4f8c-a055-5bdaffd5e33d/v2.0", actualTokenExchangeAuthority);
         }
 
         [Fact]
         public void CopyConstructor_ShouldCopyTokenExchangeAuthority()
         {
-            /*
-            // <tokenExchangeAuthority_copy_json>
-            {
-                "ClientCredentials": [
-                {
-                    "SourceType": "SignedAssertionFromManagedIdentity",
-                    "TokenExchangeAuthority": "https://login.microsoftonline.cloud2/33e01921-4d64-4f8c-a055-5bdaffd5e33d/v2.0"
-                }]
-            }
-            // </tokenExchangeAuthority_copy_json>
-            */
-
-            // <tokenExchangeAuthority_copy_csharp>
             // Arrange
             var original = new CredentialDescription
             {
@@ -564,7 +555,6 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
 
             // Act
             var copy = new CredentialDescription(original);
-            // </tokenExchangeAuthority_copy_csharp>
 
             // Assert
             Assert.Equal(original.TokenExchangeAuthority, copy.TokenExchangeAuthority);
