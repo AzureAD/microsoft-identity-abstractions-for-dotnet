@@ -517,7 +517,10 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                 "ClientCredentials": [
                 {
                     "SourceType": "SignedAssertionFromManagedIdentity",
-                    "TokenExchangeAuthority": "https://login.microsoftonline.cloud2/33e01921-4d64-4f8c-a055-5bdaffd5e33d/v2.0"
+       "SourceType": "SignedAssertionFromManagedIdentity",
+       "ManagedIdentityClientId": "GUID",
+       "TokenExchangeUrl" : “api://AzureADTokenExchangeSomeCloud1”,
+       "TokenExchangeAuthority": “https://login.microsoftonline.cloud2/<tenantid>/v2.0”
                 }]
             }
             // </tokenExchangeAuthority_json>
