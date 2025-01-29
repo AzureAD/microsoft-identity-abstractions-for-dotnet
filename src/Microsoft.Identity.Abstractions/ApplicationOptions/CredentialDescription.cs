@@ -57,6 +57,7 @@ namespace Microsoft.Identity.Abstractions
             Skip = other.Skip;
             SourceType = other.SourceType;
             TokenExchangeUrl = other.TokenExchangeUrl;
+            TokenExchangeAuthority = other.TokenExchangeAuthority;
         }
 
         private string? _cachedId;
@@ -363,6 +364,24 @@ namespace Microsoft.Identity.Abstractions
         /// ]]></format>
         /// </example>
         public AuthorizationHeaderProviderOptions? DecryptKeysAuthenticationOptions { get; set; }
+
+        /// <summary>
+        /// When <see cref="SourceType"/> is <see cref="CredentialSource.SignedAssertionFromManagedIdentity"/>, 
+        /// specifies the authority URL to use for token exchange. This is useful in scenarios where the issuer 
+        /// for the token exchange is different from the application's authority.
+        /// </summary>
+        /// <example>
+        /// <format type="text/markdown">
+        /// <![CDATA[
+        /// The JSON fragment below describes a workload identity federation with a user assigned managed identity:
+        /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="tokenExchangeAuthority_json":::
+        /// 
+        /// The code below describes programmatically in C#, the same workload identity federation with a user assigned managed identity.
+        /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="tokenExchangeAuthority_csharp":::
+        /// ]]></format>
+        /// </example>
+        /// <remarks>If you want to use the default authority, don't provide a token exchange authority URL.</remarks>
+        public string? TokenExchangeAuthority { get; set; }
 
         /// <summary>
         /// Reference to the certificate or value. You will normally not use this property directly. It could be used

@@ -507,5 +507,64 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             var cachedId = credentialDescription.Id;
             Assert.Equal(expectedId, cachedId);
         }
+
+        [Fact]
+        public void TokenExchangeAuthority_SetAndGet_ShouldWork()
+        {
+            /*
+            // <tokenExchangeAuthority_json>
+            {
+                "ClientCredentials": [
+                {
+                    "SourceType": "SignedAssertionFromManagedIdentity",
+                    "TokenExchangeAuthority": "https://login.microsoftonline.cloud2/33e01921-4d64-4f8c-a055-5bdaffd5e33d/v2.0"
+                }]
+            }
+            // </tokenExchangeAuthority_json>
+            */
+
+            // <tokenExchangeAuthority_csharp>
+            // Arrange
+            var credentialDescription = new CredentialDescription();
+            var expectedTokenExchangeAuthority = "https://login.microsoftonline.cloud2/33e01921-4d64-4f8c-a055-5bdaffd5e33d/v2.0";
+
+            // Act
+            credentialDescription.TokenExchangeAuthority = expectedTokenExchangeAuthority;
+            var actualTokenExchangeAuthority = credentialDescription.TokenExchangeAuthority;
+            // </tokenExchangeAuthority_csharp>
+
+            // Assert
+            Assert.Equal(expectedTokenExchangeAuthority, actualTokenExchangeAuthority);
+        }
+
+        [Fact]
+        public void CopyConstructor_ShouldCopyTokenExchangeAuthority()
+        {
+            /*
+            // <tokenExchangeAuthority_copy_json>
+            {
+                "ClientCredentials": [
+                {
+                    "SourceType": "SignedAssertionFromManagedIdentity",
+                    "TokenExchangeAuthority": "https://login.microsoftonline.cloud2/33e01921-4d64-4f8c-a055-5bdaffd5e33d/v2.0"
+                }]
+            }
+            // </tokenExchangeAuthority_copy_json>
+            */
+
+            // <tokenExchangeAuthority_copy_csharp>
+            // Arrange
+            var original = new CredentialDescription
+            {
+                TokenExchangeAuthority = "https://login.microsoftonline.cloud2/33e01921-4d64-4f8c-a055-5bdaffd5e33d/v2.0"
+            };
+
+            // Act
+            var copy = new CredentialDescription(original);
+            // </tokenExchangeAuthority_copy_csharp>
+
+            // Assert
+            Assert.Equal(original.TokenExchangeAuthority, copy.TokenExchangeAuthority);
+        }
     }
 }
