@@ -24,7 +24,6 @@ namespace Microsoft.Identity.Abstractions.Tests
             // Assert
             Assert.Equal(testProvider, name);
             Assert.Equal(expectedCredentialSource, credSource);
-
         }
     }
 
