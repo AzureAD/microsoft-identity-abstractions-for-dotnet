@@ -4,3 +4,5 @@ Microsoft.Identity.Abstractions.CredentialDescription.CustomSignedAssertionProvi
 Microsoft.Identity.Abstractions.CredentialDescription.CustomSignedAssertionProviderName.get -> string?
 Microsoft.Identity.Abstractions.CredentialDescription.CustomSignedAssertionProviderName.set -> void
 Microsoft.Identity.Abstractions.CredentialSource.CustomSignedAssertion = 11 -> Microsoft.Identity.Abstractions.CredentialSource
+Microsoft.Identity.Abstractions.ICustomSignedAssertionProvider
+Microsoft.Identity.Abstractions.ICustomSignedAssertionProvider.Name.get -> string!
