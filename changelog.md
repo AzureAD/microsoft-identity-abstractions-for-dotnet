@@ -1,6 +1,14 @@
+8.1.0
+======
+## New features:
+- To support certain Federation identity cases, you need to add an additional parameter called `TokenExchangeAuthority`. This parameter is necessary when the issuer (the entity that issues the token) for the token exchange URL is different from the application's issuer. See [#155](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/155) for details.
+- Added a new interface `ICustomSignedAssertionProvider` for implementing custom signed assertion providers. This interface includes a `Name` property for configuration-friendly naming. See issue [#153](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/153) for details.
+- Added extensibility to the `CredentialDescription` class to support custom signed assertion providers. This includes new properties `CustomSignedAssertionProviderName` and `CustomSignedAssertionProviderData`. See issue [#146](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/146) for details.
+
 8.0.0
 ========
-## Fundamentals:
+## Fundamentals:
+
 - Removed the Container and ValueOrReference from the public API of CredentialDescription. They were technical debt used for compatibility
   with Microsoft.Identity.Web 1.x, no longer necessary. See [PR #151](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/151)
   for details.
