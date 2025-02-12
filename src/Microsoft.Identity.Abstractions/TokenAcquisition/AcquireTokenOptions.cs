@@ -83,7 +83,7 @@ namespace Microsoft.Identity.Abstractions
         public string? Claims { get; set; }
 
         /// <summary>
-        /// Path to the Federation Managed Identity (FMI) file. This is used to acquire a token for a specific FMI.
+        /// Federated Managed Identity (FMI) sub-path.
         /// </summary>
         public string? FmiPath { get; set; }
 

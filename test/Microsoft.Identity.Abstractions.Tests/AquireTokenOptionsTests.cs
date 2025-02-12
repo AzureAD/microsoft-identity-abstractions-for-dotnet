@@ -78,7 +78,7 @@ namespace Microsoft.Identity.Abstractions.Tests
             // <fmipath_json>
             {
                 "AquireTokenOptions": {
-                    "FmiPath": "/path/to/fmi/file"
+                    "FmiPath": "/example.org/service/my-service"
                 }
             }
             // </fmipath_json>
@@ -87,12 +87,12 @@ namespace Microsoft.Identity.Abstractions.Tests
             // <fmipath_csharp>
             AcquireTokenOptions acquireTokenOptions = new AcquireTokenOptions
             {
-                FmiPath = "/path/to/fmi/file"
+                FmiPath = "/example.org/service/my-service"
             };
             // </fmipath_csharp>
 
             Assert.NotNull(acquireTokenOptions.FmiPath);
-            Assert.Equal("/path/to/fmi/file", acquireTokenOptions.FmiPath);
+            Assert.Equal("/example.org/service/my-service", acquireTokenOptions.FmiPath);
         }
     }
 }
