@@ -71,7 +71,7 @@ namespace Microsoft.Identity.Abstractions.Tests
         [Fact]
         public void FmiPathTest()
         {
-            // App token from a Federation Managed Identity (FMI).
+            // App token from a Federated Managed Identity (FMI).
             // -------------------------------------------------
             // https://aka.ms/FederatedIdentityCredentials
             /*

@@ -203,7 +203,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
         [Fact]
         public void SignedAssertionFromMSI()
         {
-            // Signed assertion from Managed identity federation
+            // Signed assertion from Federation Identity Credential (Managed Identity)
             // -------------------------------------------------
             // https://learn.microsoft.com/azure/active-directory/develop/workload-identity-federation
             /*
