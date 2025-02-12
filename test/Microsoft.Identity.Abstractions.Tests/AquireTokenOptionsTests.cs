@@ -67,5 +67,32 @@ namespace Microsoft.Identity.Abstractions.Tests
             Assert.NotNull(acquireTokenOptions.ManagedIdentity);
             Assert.Equal(managedIdentityOptions.UserAssignedClientId, acquireTokenOptions.ManagedIdentity.UserAssignedClientId);
         }
+
+        [Fact]
+        public void FmiPathTest()
+        {
+            // App token from a Federation Managed Identity (FMI).
+            // -------------------------------------------------
+            // https://aka.ms/FederatedIdentityCredentials
+            /*
+            // <fmipath_json>
+            {
+                "AquireTokenOptions": {
+                    "FmiPath": "/path/to/fmi/file"
+                }
+            }
+            // </fmipath_json>
+            */
+
+            // <fmipath_csharp>
+            AcquireTokenOptions acquireTokenOptions = new AcquireTokenOptions
+            {
+                FmiPath = "/path/to/fmi/file"
+            };
+            // </fmipath_csharp>
+
+            Assert.NotNull(acquireTokenOptions.FmiPath);
+            Assert.Equal("/path/to/fmi/file", acquireTokenOptions.FmiPath);
+        }
     }
 }
