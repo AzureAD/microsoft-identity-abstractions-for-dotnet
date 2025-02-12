@@ -81,6 +81,10 @@ Microsoft.Identity.Abstractions.CredentialDescription.ClientSecret.get -> string
 Microsoft.Identity.Abstractions.CredentialDescription.ClientSecret.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.CredentialDescription() -> void
 Microsoft.Identity.Abstractions.CredentialDescription.CredentialType.get -> Microsoft.Identity.Abstractions.CredentialType
+Microsoft.Identity.Abstractions.CredentialDescription.CustomSignedAssertionProviderData.get -> System.Collections.Generic.Dictionary<string!, object!>?
+Microsoft.Identity.Abstractions.CredentialDescription.CustomSignedAssertionProviderData.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.CustomSignedAssertionProviderName.get -> string?
+Microsoft.Identity.Abstractions.CredentialDescription.CustomSignedAssertionProviderName.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.DecryptKeysAuthenticationOptions.get -> Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions?
 Microsoft.Identity.Abstractions.CredentialDescription.DecryptKeysAuthenticationOptions.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.Id.get -> string!
@@ -96,6 +100,8 @@ Microsoft.Identity.Abstractions.CredentialDescription.Skip.get -> bool
 Microsoft.Identity.Abstractions.CredentialDescription.Skip.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.SourceType.get -> Microsoft.Identity.Abstractions.CredentialSource
 Microsoft.Identity.Abstractions.CredentialDescription.SourceType.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.TokenExchangeAuthority.get -> string?
+Microsoft.Identity.Abstractions.CredentialDescription.TokenExchangeAuthority.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.TokenExchangeUrl.get -> string?
 Microsoft.Identity.Abstractions.CredentialDescription.TokenExchangeUrl.set -> void
 Microsoft.Identity.Abstractions.CredentialSource
@@ -103,6 +109,7 @@ Microsoft.Identity.Abstractions.CredentialSource.AutoDecryptKeys = 10 -> Microso
 Microsoft.Identity.Abstractions.CredentialSource.Base64Encoded = 2 -> Microsoft.Identity.Abstractions.CredentialSource
 Microsoft.Identity.Abstractions.CredentialSource.Certificate = 0 -> Microsoft.Identity.Abstractions.CredentialSource
 Microsoft.Identity.Abstractions.CredentialSource.ClientSecret = 6 -> Microsoft.Identity.Abstractions.CredentialSource
+Microsoft.Identity.Abstractions.CredentialSource.CustomSignedAssertion = 11 -> Microsoft.Identity.Abstractions.CredentialSource
 Microsoft.Identity.Abstractions.CredentialSource.KeyVault = 1 -> Microsoft.Identity.Abstractions.CredentialSource
 Microsoft.Identity.Abstractions.CredentialSource.Path = 3 -> Microsoft.Identity.Abstractions.CredentialSource
 Microsoft.Identity.Abstractions.CredentialSource.SignedAssertionFilePath = 8 -> Microsoft.Identity.Abstractions.CredentialSource
@@ -151,6 +158,8 @@ Microsoft.Identity.Abstractions.ICredentialsLoader.ResetCredentials(System.Colle
 Microsoft.Identity.Abstractions.ICredentialSourceLoader
 Microsoft.Identity.Abstractions.ICredentialSourceLoader.CredentialSource.get -> Microsoft.Identity.Abstractions.CredentialSource
 Microsoft.Identity.Abstractions.ICredentialSourceLoader.LoadIfNeededAsync(Microsoft.Identity.Abstractions.CredentialDescription! credentialDescription, Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters? parameters = null) -> System.Threading.Tasks.Task!
+Microsoft.Identity.Abstractions.ICustomSignedAssertionProvider
+Microsoft.Identity.Abstractions.ICustomSignedAssertionProvider.Name.get -> string!
 Microsoft.Identity.Abstractions.IdentityApplicationOptions
 Microsoft.Identity.Abstractions.IdentityApplicationOptions.AllowWebApiToBeAuthorizedByACL.get -> bool
 Microsoft.Identity.Abstractions.IdentityApplicationOptions.AllowWebApiToBeAuthorizedByACL.set -> void
@@ -275,5 +284,3 @@ Microsoft.Identity.Abstractions.AcquireTokenOptions.ExtraParameters.get -> Syste
 Microsoft.Identity.Abstractions.AcquireTokenOptions.ExtraParameters.set -> void
 Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.AppHomeTenantId.get -> string?
 Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.AppHomeTenantId.set -> void
-
-
