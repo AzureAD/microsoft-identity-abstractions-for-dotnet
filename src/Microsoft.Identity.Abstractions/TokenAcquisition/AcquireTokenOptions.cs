@@ -33,6 +33,7 @@ namespace Microsoft.Identity.Abstractions
             ExtraHeadersParameters = other.ExtraHeadersParameters;
             ExtraParameters = other.ExtraParameters;
             ForceRefresh = other.ForceRefresh;
+            FmiPath = other.FmiPath;
             Claims = other.Claims;
             PopPublicKey = other.PopPublicKey;
             PopClaim = other.PopClaim;
@@ -80,6 +81,11 @@ namespace Microsoft.Identity.Abstractions
         /// CA Auth context</see>
         /// </summary>
         public string? Claims { get; set; }
+
+        /// <summary>
+        /// Path to the Federation Managed Identity (FMI) file. This is used to acquire a token for a specific FMI.
+        /// </summary>
+        public string? FmiPath { get; set; }
 
         /// <summary>
         /// Specifies if the token request will ignore the access token in the token cache

@@ -1,4 +1,6 @@
 #nullable enable
+Microsoft.Identity.Abstractions.AcquireTokenOptions.FmiPath.get -> string?
+Microsoft.Identity.Abstractions.AcquireTokenOptions.FmiPath.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.CustomSignedAssertionProviderData.get -> System.Collections.Generic.Dictionary<string!, object!>?
 Microsoft.Identity.Abstractions.CredentialDescription.CustomSignedAssertionProviderData.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.CustomSignedAssertionProviderName.get -> string?
