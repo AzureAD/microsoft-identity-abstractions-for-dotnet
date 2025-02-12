@@ -73,7 +73,6 @@ namespace Microsoft.Identity.Abstractions.Tests
         {
             // App token from a Federated Managed Identity (FMI).
             // -------------------------------------------------
-            // https://aka.ms/FederatedIdentityCredentials
             /*
             // <fmipath_json>
             {
