@@ -12,6 +12,8 @@ Microsoft.Identity.Abstractions.AcquireTokenOptions.ExtraHeadersParameters.get -
 Microsoft.Identity.Abstractions.AcquireTokenOptions.ExtraHeadersParameters.set -> void
 Microsoft.Identity.Abstractions.AcquireTokenOptions.ExtraQueryParameters.get -> System.Collections.Generic.IDictionary<string!, string!>?
 Microsoft.Identity.Abstractions.AcquireTokenOptions.ExtraQueryParameters.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenOptions.FmiPath.get -> string?
+Microsoft.Identity.Abstractions.AcquireTokenOptions.FmiPath.set -> void
 Microsoft.Identity.Abstractions.AcquireTokenOptions.ForceRefresh.get -> bool
 Microsoft.Identity.Abstractions.AcquireTokenOptions.ForceRefresh.set -> void
 Microsoft.Identity.Abstractions.AcquireTokenOptions.LongRunningWebApiSessionKey.get -> string?
