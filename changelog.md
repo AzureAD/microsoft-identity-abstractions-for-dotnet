@@ -1,3 +1,9 @@
+8.2.0
+
+======
+- To support Federated Managed Identities a new parameter `FmiPath` was added to `AcquireTokenOptions`. See [#161](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/161) for details.
+
+
 8.1.1
 ======
 **

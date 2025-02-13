@@ -1,3 +1,1 @@
 #nullable enable
-Microsoft.Identity.Abstractions.AcquireTokenOptions.FmiPath.get -> string?
-Microsoft.Identity.Abstractions.AcquireTokenOptions.FmiPath.set -> void
