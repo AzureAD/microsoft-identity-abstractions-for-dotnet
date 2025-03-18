@@ -1,1 +1,17 @@
 #nullable enable
+Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions
+Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.AppHomeTenantId.get -> string?
+Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.AppHomeTenantId.set -> void
+Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.AzureRegion.get -> string?
+Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.AzureRegion.set -> void
+Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.ClientCapabilities.get -> System.Collections.Generic.IEnumerable<string!>?
+Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.ClientCapabilities.set -> void
+Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.Instance.get -> string?
+Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.Instance.set -> void
+Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.MicrosoftEntraApplicationOptions() -> void
+Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.SendX5C.get -> bool
+Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.SendX5C.set -> void
+Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.TenantId.get -> string?
+Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.TenantId.set -> void
+override Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.Authority.get -> string?
+override Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.Authority.set -> void

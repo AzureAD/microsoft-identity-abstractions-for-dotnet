@@ -217,10 +217,6 @@ Microsoft.Identity.Abstractions.ManagedIdentityOptions.ManagedIdentityOptions() 
 Microsoft.Identity.Abstractions.ManagedIdentityOptions.UserAssignedClientId.get -> string?
 Microsoft.Identity.Abstractions.ManagedIdentityOptions.UserAssignedClientId.set -> void
 Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions
-Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.AzureRegion.get -> string?
-Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.AzureRegion.set -> void
-Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.ClientCapabilities.get -> System.Collections.Generic.IEnumerable<string!>?
-Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.ClientCapabilities.set -> void
 Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.DefaultUserFlow.get -> string?
 Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.Domain.get -> string?
 Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.Domain.set -> void
@@ -228,25 +224,17 @@ Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.EditProfileP
 Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.EditProfilePolicyId.set -> void
 Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.ErrorPath.get -> string?
 Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.ErrorPath.set -> void
-Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.Instance.get -> string?
-Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.Instance.set -> void
 Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.MicrosoftIdentityApplicationOptions() -> void
 Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.ResetPasswordPath.get -> string?
 Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.ResetPasswordPath.set -> void
 Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.ResetPasswordPolicyId.get -> string?
 Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.ResetPasswordPolicyId.set -> void
-Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.SendX5C.get -> bool
-Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.SendX5C.set -> void
 Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.SignUpSignInPolicyId.get -> string?
 Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.SignUpSignInPolicyId.set -> void
-Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.TenantId.get -> string?
-Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.TenantId.set -> void
 Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.WithSpaAuthCode.get -> bool
 Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.WithSpaAuthCode.set -> void
 override Microsoft.Identity.Abstractions.DownstreamApiOptions.CloneInternal() -> Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions!
 override Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod.CloneInternal() -> Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions!
-override Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.Authority.get -> string?
-override Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.Authority.set -> void
 static Microsoft.Identity.Abstractions.AcquireTokenOptions.LongRunningWebApiSessionKeyAuto.get -> string!
 virtual Microsoft.Identity.Abstractions.AcquireTokenOptions.Clone() -> Microsoft.Identity.Abstractions.AcquireTokenOptions!
 virtual Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.CloneInternal() -> Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions!
@@ -256,5 +244,3 @@ virtual Microsoft.Identity.Abstractions.IdentityApplicationOptions.Authority.get
 virtual Microsoft.Identity.Abstractions.IdentityApplicationOptions.Authority.set -> void
 Microsoft.Identity.Abstractions.AcquireTokenOptions.ExtraParameters.get -> System.Collections.Generic.IDictionary<string!, object!>?
 Microsoft.Identity.Abstractions.AcquireTokenOptions.ExtraParameters.set -> void
-Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.AppHomeTenantId.get -> string?
-Microsoft.Identity.Abstractions.MicrosoftIdentityApplicationOptions.AppHomeTenantId.set -> void
