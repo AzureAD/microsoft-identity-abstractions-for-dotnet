@@ -64,8 +64,8 @@ namespace Microsoft.Identity.Abstractions
         /// This saves the application admin from the need to explicitly manage the certificate rollover
         /// (either via the app registration portal or using PowerShell/CLI). 
         /// For details see https://aka.ms/msal-net-sni.
-        /// </summary>
         /// The default is <c>false</c>.
+        /// </summary>
         public bool SendX5C { get; set; }
         #endregion Token Acquisition
     }
