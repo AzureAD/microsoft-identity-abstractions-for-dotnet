@@ -1,0 +1,27 @@
+﻿ApplicationOptions
+- MicrosoftEntraApplicationOptions
+- IdentityApplicationOptions
+- MicrosoftIdentityApplicationOptions
+- CredentialDescription
+- CredentialSource
+- CredentialType
+
+TokenAcquisition
+- AcquireTokenOptions
+- AcquireTokenResult
+- ITokenAcquirer
+- ITokenAcquirerFactory
+- ManagedIdentityOptions
+
+DownstreamApis
+- AuthorizationHeaderProviderOptions
+- IAuthorizationHeaderProvider
+- IDownstreamApi
+- DownstreamApiOptions
+- DownstreamApiOptionsReadOnlyHttpMethod
+
+CredentialsLoaders
+- CredentialSourceLoaderParameters
+- ICredentialSourceLoader
+- ICredentialsLoader
+- ICustomSignedAssertionProvider

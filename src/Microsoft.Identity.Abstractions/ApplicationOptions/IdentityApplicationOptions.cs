@@ -19,8 +19,8 @@ namespace Microsoft.Identity.Abstractions
     {
         /// <summary>
         /// Gets or sets the authority to use when calling the identity provider. 
-        /// For AzureAD or Azure AD B2C, rather use <see cref="MicrosoftIdentityApplicationOptions.Instance"/>
-        /// and <see cref="MicrosoftIdentityApplicationOptions.TenantId"/>. For Microsoft Entra External IDs, use
+        /// For AzureAD or Azure AD B2C, rather use <see cref="MicrosoftEntraApplicationOptions.Instance"/>
+        /// and <see cref="MicrosoftEntraApplicationOptions.TenantId"/>. For Microsoft Entra External IDs, use
         /// the authority of the form <c>https://subdomain.ciamlogin.com</c>.
         /// </summary>
         /// <example>
