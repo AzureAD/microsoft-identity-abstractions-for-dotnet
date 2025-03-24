@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -82,6 +83,10 @@ namespace Microsoft.Identity.Abstractions
                             {
                                 _cachedId = $"Certificate={Certificate.Thumbprint}";
                             }
+                            else
+                            {
+                                _cachedId = $"Certificate=null";
+                            }
                             break;
                         case CredentialSource.KeyVault:
                             _cachedId = $"CertificateFromKeyVault={KeyVaultUrl}/{KeyVaultCertificateName}";
@@ -135,7 +140,7 @@ namespace Microsoft.Identity.Abstractions
 #if !NET8_0_OR_GREATER
             using (SHA256 sha256 = SHA256.Create())
             {
-                digest = sha256.ComputeHash(Encoding.UTF8.GetBytes(secret));
+                digest = sha256.ComputeHash(Encoding.Unicode.GetBytes(secret));
             }
 #else
             digest = SHA256.HashData(Encoding.Unicode.GetBytes(secret));
