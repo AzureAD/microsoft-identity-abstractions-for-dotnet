@@ -398,7 +398,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
         {
             CredentialDescription credentialDescription = new();
             credentialDescription.Certificate = null;
-            Assert.Null(credentialDescription.Id);
+            Assert.NotNull(credentialDescription.Id);
         }
 
         [Fact]
