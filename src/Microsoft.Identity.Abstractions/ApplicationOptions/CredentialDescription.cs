@@ -3,8 +3,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 namespace Microsoft.Identity.Abstractions
 {
@@ -63,17 +67,80 @@ namespace Microsoft.Identity.Abstractions
         private string? _cachedId;
 
         /// <summary>
-        /// Gets a unique identifier for a CredentialDescription based on <see cref="SourceType"/> and <see cref="ReferenceOrValue"/>.
+        /// Gets a unique identifier for a CredentialDescription based on <see cref="SourceType"/>.
         /// </summary>
         public string Id
         {
             get
             {
                 if (_cachedId == null)
-                    _cachedId = $"{SourceType}_{Container}_{ReferenceOrValue}";
-
-                return _cachedId;
+                {
+                    switch (SourceType)
+                    {
+                        case CredentialSource.Certificate:
+                            if (Certificate != null)
+                            {
+                                _cachedId = $"Certificate={Certificate.Thumbprint}";
+                            }
+                            break;
+                        case CredentialSource.KeyVault:
+                            _cachedId = $"CertificateFromKeyVault={KeyVaultUrl}/{KeyVaultCertificateName}";
+                            break;
+                        case CredentialSource.Base64Encoded:
+                            _cachedId = $"CertificateFromBase64Encoded={GenerateHash(Base64EncodedValue)}";
+                            break;
+                        case CredentialSource.Path:
+                            _cachedId = $"CertificateFromPath={CertificateDiskPath}";
+                            break;
+                        case CredentialSource.StoreWithThumbprint:
+                            _cachedId = $"CertificateStoreWithThumbprint={CertificateStorePath}/{CertificateThumbprint}";
+                            break;
+                        case CredentialSource.StoreWithDistinguishedName:
+                            _cachedId = $"CertificateStoreWithDistinguishedName={CertificateStorePath}/{CertificateDistinguishedName}";
+                            break;
+                        case CredentialSource.ClientSecret:
+                            _cachedId = $"ClientSecret={GenerateHash(ClientSecret)}";
+                            break;
+                        case CredentialSource.SignedAssertionFromManagedIdentity:
+                            _cachedId = $"SignedAssertionFromManagedIdentity={ManagedIdentityClientId}";
+                            break;
+                        case CredentialSource.SignedAssertionFilePath:
+                            _cachedId = $"SignedAssertionFilePath={SignedAssertionFileDiskPath}";
+                            break;
+                        case CredentialSource.SignedAssertionFromVault:
+                            _cachedId = $"SignedAssertionFromVault={KeyVaultCertificateName}";
+                            break;
+                        case CredentialSource.AutoDecryptKeys:
+                            _cachedId = $"AutoDecryptKeys";
+                            break;
+                        case CredentialSource.CustomSignedAssertion:
+                            string parameterNames = string.Join(",", (IEnumerable<string>?)CustomSignedAssertionProviderData?.Keys ?? []);
+                            _cachedId = $"CustomSignedAssertion={CustomSignedAssertionProviderName}({parameterNames})";
+                            break;
+                        default:
+                            throw new ArgumentException("Unknown credential source type");
+                    }
+                }
+                return _cachedId!;
             }
+        }
+
+        private string GenerateHash(string? secret)
+        {
+            if (secret == null)
+                return string.Empty;
+
+            byte[] digest;
+
+#if !NET8_0_OR_GREATER
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                digest = sha256.ComputeHash(Encoding.UTF8.GetBytes(secret));
+            }
+#else
+            digest = SHA256.HashData(Encoding.Unicode.GetBytes(secret));
+#endif
+            return Convert.ToBase64String(digest);
         }
 
         /// <summary>
@@ -81,75 +148,6 @@ namespace Microsoft.Identity.Abstractions
         /// to be provided to describe the credential.
         /// </summary>
         public CredentialSource SourceType { get; set; }
-
-        /// <summary>
-        /// Container in which to find the credential. You will normally not use this property directly. It could be used
-        /// by property editors in tools or IDEs. Instead, use the properties that are specific to the <see cref="SourceType"/>.
-        /// </summary>
-        /// <remarks>
-        /// <list type="bullet">
-        /// <item>If <see cref="SourceType"/> equals <see cref="CredentialSource.KeyVault"/>, then
-        /// the container is the Key Vault base URL.</item>
-        /// <item>If <see cref="SourceType"/> equals <see cref="CredentialSource.Base64Encoded"/>, then
-        /// this value is not used.</item>
-        /// <item>If <see cref="SourceType"/> equals <see cref="CredentialSource.Path"/>, then
-        /// this value is the path on disk where to find the credential.</item>
-        /// <item>If <see cref="SourceType"/> equals <see cref="CredentialSource.StoreWithDistinguishedName"/>,
-        /// or <see cref="CredentialSource.StoreWithThumbprint"/>, then
-        /// this value is the path to the credential in the cert store, for instance <c>CurrentUser/My</c>.</item>
-        /// </list>
-        /// </remarks>
-        internal string? Container
-        {
-            get
-            {
-                return SourceType switch
-                {
-                    CredentialSource.Certificate => null,
-                    CredentialSource.KeyVault => KeyVaultUrl,
-                    CredentialSource.Base64Encoded => CertificatePassword,
-                    CredentialSource.Path => CertificateDiskPath,
-                    CredentialSource.StoreWithThumbprint or CredentialSource.StoreWithDistinguishedName => CertificateStorePath,
-                    CredentialSource.SignedAssertionFilePath => SignedAssertionFileDiskPath,
-                    CredentialSource.SignedAssertionFromVault => KeyVaultUrl,
-                    CredentialSource.CustomSignedAssertion => CustomSignedAssertionProviderName,
-                    _ => null
-                };
-            }
-            set
-            {
-                switch (SourceType)
-                {
-                    case CredentialSource.Certificate:
-                        break;
-                    case CredentialSource.KeyVault:
-                    case CredentialSource.SignedAssertionFromVault:
-                        KeyVaultUrl = value;
-                        break;
-                    case CredentialSource.Base64Encoded:
-                        // This is to avoid a breaking change (in v1.0 there was no password for
-                        // base 64 encoded assertion, which was therefore the reference or value.
-                        // We consider the password as a kind of enveloppe, hence being the container
-                        CertificatePassword = value;
-                        break;
-                    case CredentialSource.Path:
-                        CertificateDiskPath = value;
-                        break;
-                    case CredentialSource.StoreWithDistinguishedName:
-                    case CredentialSource.StoreWithThumbprint:
-                        CertificateStorePath = value;
-                        break;
-                    case CredentialSource.SignedAssertionFilePath:
-                        SignedAssertionFileDiskPath = value;
-                        break;
-                    case CredentialSource.CustomSignedAssertion:
-                        CustomSignedAssertionProviderName = value;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
 
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.KeyVault"/>, use this property to specify the
@@ -384,80 +382,6 @@ namespace Microsoft.Identity.Abstractions
         public string? TokenExchangeAuthority { get; set; }
 
         /// <summary>
-        /// Reference to the certificate or value. You will normally not use this property directly. It could be used
-        /// by property editors in tools or IDEs. Instead, use the properties that are specific to the <see cref="SourceType"/>.
-        /// </summary>
-        /// <remarks>
-        /// <list type="bullet">
-        /// <item>If <see cref="SourceType"/> equals <see cref="CredentialSource.KeyVault"/>, then
-        /// the reference is the name of the certificate in Key Vault (maybe the version?).</item>
-        /// <item>If <see cref="SourceType"/> equals <see cref="CredentialSource.Base64Encoded"/>, then
-        /// this value is the base 64 encoded certificate itself.</item>
-        /// <item>If <see cref="SourceType"/> equals <see cref="CredentialSource.Path"/>, then
-        /// this value is the password to access the certificate (if needed).</item>
-        /// <item>If <see cref="SourceType"/> equals <see cref="CredentialSource.StoreWithDistinguishedName"/>,
-        /// this value is the distinguished name.</item>
-        /// <item>If <see cref="SourceType"/> equals <see cref="CredentialSource.StoreWithThumbprint"/>,
-        /// this value is the thumbprint.</item>
-        /// </list>
-        /// </remarks>
-        internal string? ReferenceOrValue
-        {
-            get
-            {
-                return SourceType switch
-                {
-                    CredentialSource.KeyVault => KeyVaultCertificateName,
-                    CredentialSource.SignedAssertionFromVault => KeyVaultCertificateName,
-                    CredentialSource.Path => CertificatePassword,
-                    CredentialSource.StoreWithThumbprint => CertificateThumbprint,
-                    CredentialSource.StoreWithDistinguishedName => CertificateDistinguishedName,
-                    CredentialSource.Certificate or CredentialSource.Base64Encoded => Base64EncodedValue,
-                    CredentialSource.SignedAssertionFromManagedIdentity => ManagedIdentityClientId,
-                    CredentialSource.ClientSecret => "***",
-                    CredentialSource.CustomSignedAssertion => null,
-                    _ => null,
-                };
-            }
-            set
-            {
-                switch (SourceType)
-                {
-                    case CredentialSource.Certificate:
-                        break;
-                    case CredentialSource.KeyVault:
-                        KeyVaultCertificateName = value;
-                        break;
-                    case CredentialSource.SignedAssertionFromVault:
-                        KeyVaultCertificateName = value;
-                        break;
-                    case CredentialSource.Base64Encoded:
-                        Base64EncodedValue = value;
-                        break;
-                    case CredentialSource.Path:
-                        CertificatePassword = value;
-                        break;
-                    case CredentialSource.StoreWithThumbprint:
-                        CertificateThumbprint = value;
-                        break;
-                    case CredentialSource.StoreWithDistinguishedName:
-                        CertificateDistinguishedName = value;
-                        break;
-                    case CredentialSource.ClientSecret:
-                        ClientSecret = value;
-                        break;
-                    case CredentialSource.SignedAssertionFromManagedIdentity:
-                        ManagedIdentityClientId = value;
-                        break;
-                    case CredentialSource.CustomSignedAssertion:
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-
-        /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.Certificate"/>, you will use this property to provide the certificate yourself. 
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.Base64Encoded"/> or <see cref="CredentialSource.KeyVault"/>
         /// or <see cref="CredentialSource.Path"/> or <see cref="CredentialSource.StoreWithDistinguishedName"/> or <see cref="CredentialSource.StoreWithThumbprint"/>
@@ -511,17 +435,17 @@ namespace Microsoft.Identity.Abstractions
             {
                 return SourceType switch
                 {
-                    CredentialSource.KeyVault 
-                    or CredentialSource.Path 
-                    or CredentialSource.StoreWithThumbprint 
-                    or CredentialSource.StoreWithDistinguishedName 
-                    or CredentialSource.Certificate 
+                    CredentialSource.KeyVault
+                    or CredentialSource.Path
+                    or CredentialSource.StoreWithThumbprint
+                    or CredentialSource.StoreWithDistinguishedName
+                    or CredentialSource.Certificate
                     or CredentialSource.Base64Encoded => CredentialType.Certificate,
-                    
+
                     CredentialSource.ClientSecret => CredentialType.Secret,
-                    
-                    CredentialSource.SignedAssertionFromManagedIdentity 
-                    or CredentialSource.SignedAssertionFilePath 
+
+                    CredentialSource.SignedAssertionFromManagedIdentity
+                    or CredentialSource.SignedAssertionFilePath
                     or CredentialSource.SignedAssertionFromVault
                     or CredentialSource.CustomSignedAssertion => CredentialType.SignedAssertion,
 
