@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Identity.Abstractions;
 
 #if NET8_0_OR_GREATER
 using System.Diagnostics.CodeAnalysis;
