@@ -254,6 +254,7 @@ namespace Microsoft.Identity.Abstractions
         /// </example>
         /// <seealso cref="SourceType"/>
         /// <seealso cref="CertificatePassword"/>
+        /// <remarks>Using a certificate from a file is not recommended in production.</remarks>
         public string? CertificateDiskPath { get; set; }
 
         /// <summary>
@@ -272,6 +273,7 @@ namespace Microsoft.Identity.Abstractions
         /// </example>
         /// <seealso cref="SourceType"/>
         /// <seealso cref="CertificateDiskPath"/>
+        /// <remarks>Using a certificate from a file is not recommended in production.</remarks>
         public string? CertificatePassword { get; set; }
 
         /// <summary>
@@ -287,6 +289,7 @@ namespace Microsoft.Identity.Abstractions
         /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="base64_csharp":::
         /// ]]></format>
         /// </example>
+        /// <remarks>Using a certificate from its base64 encoded value is not recommended in production.</remarks>
         public string? Base64EncodedValue { get; set; }
 
         /// <summary>
