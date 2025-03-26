@@ -118,7 +118,7 @@ namespace Microsoft.Identity.Abstractions
         /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="secret_csharp":::
         /// ]]></format>
         /// </example>
-        /// <remarks>Using a client secret recommended in production.</remarks>
+        /// <remarks>Using a client secret is not recommended in production.</remarks>
         ClientSecret = 6,
 
         /// <summary>
