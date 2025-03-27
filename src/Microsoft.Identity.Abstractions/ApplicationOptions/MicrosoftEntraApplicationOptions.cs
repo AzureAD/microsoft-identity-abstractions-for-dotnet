@@ -13,7 +13,7 @@ namespace Microsoft.Identity.Abstractions
         private string? _authority;
 
         /// <summary>
-        /// Gets or sets the name of the options. T
+        /// Gets or sets the name of the options.
         /// This can be used to associate the options with a named options in 
         /// the .NET IOptionsMonitor or IOptionsSnapshot (or ASP.NET Core authentication schemes)
         /// </summary>
