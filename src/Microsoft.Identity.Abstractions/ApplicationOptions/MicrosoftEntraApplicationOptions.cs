@@ -13,6 +13,13 @@ namespace Microsoft.Identity.Abstractions
         private string? _authority;
 
         /// <summary>
+        /// Gets or sets the name of the options.
+        /// This can be used to associate the options with a named options in 
+        /// the .NET IOptionsMonitor or IOptionsSnapshot (or ASP.NET Core authentication schemes)
+        /// </summary>
+        public string? Name { get; set; }
+
+        /// <summary>
         /// Gets or sets the Azure Active Directory instance, e.g. <c>"https://login.microsoftonline.com/"</c>.
         /// </summary>
         public string? Instance { get; set; }

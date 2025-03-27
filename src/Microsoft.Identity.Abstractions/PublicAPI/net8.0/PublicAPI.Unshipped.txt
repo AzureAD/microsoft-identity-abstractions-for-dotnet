@@ -9,6 +9,8 @@ Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.ClientCapabilit
 Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.Instance.get -> string?
 Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.Instance.set -> void
 Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.MicrosoftEntraApplicationOptions() -> void
+Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.Name.get -> string?
+Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.Name.set -> void
 Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.SendX5C.get -> bool
 Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.SendX5C.set -> void
 Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.TenantId.get -> string?
