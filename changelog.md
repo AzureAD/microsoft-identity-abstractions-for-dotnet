@@ -9,7 +9,8 @@
   properties related to web apps and B2C. See [#165](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/165) for details.
 - Added a `Name` property in `MicrosoftEntraApplicationOptions` to allow for dynamic discovery of ASP.NET Core authentication schemes / named options. See [#168](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/168) for details.
 - Changed the way the ID property is computed in ClientCredentials. All sensitive data is also now replaced by a hash. See [#163](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/163) for details.
-- Added XML comments with recommendations on which CredentialSource not to use in production. See [#167](ttps://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/167) for details.
+- Added XML comments with recommendations on which CredentialSource not to use in production. See [#167](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/167) for details.
+
 
 8.2.0
 
