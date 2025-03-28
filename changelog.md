@@ -3,7 +3,8 @@
 ======
 ## New features
 
-- Added a new class named `MicrosoftEntraApplicationOptions` inheriting from `IdentityApplicationOptions` and form which `MicrosoftIdentityApplicationOptions` inherit. Moved the EntraID specific 
+- Added a new class named `MicrosoftEntraApplicationOptions` inheriting from `IdentityApplicationOptions` and from which `MicrosoftIdentityApplicationOptions` inherits. Moved the EntraID specific 
+
   properties related to web APIs from `MicrosoftIdentityApplicationOptions` to `MicrosoftEntraApplicationOptions`. `MicrosoftIdentityApplicationOptions` now only contains the
   properties related to web apps and B2C. See [#165](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/165) for details.
 - Added a `Name` property in `MicrosoftEntraApplicationOptions` to allow for dynamic discovery of ASP.NET Core authentication schemes / named options. See [#168](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/168) for details.
