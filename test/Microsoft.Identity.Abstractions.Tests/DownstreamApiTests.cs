@@ -8,17 +8,31 @@ using System.Net.Http.Headers;
 using System.Text;
 using Xunit;
 
-
 #if NET8_0_OR_GREATER
+
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
+
 #endif
 
 namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
 {
     public partial class DownstreamApiTests
     {
+        private const string AuthorizationDetailsJson = @"
+        {
+          ""authorization_details"": [
+            {
+              ""scope"": ""/subscriptions/ab15ac4b-5d7b-4324-9196-8a4c6d2f7ffd/resourceGroups/testrg/providers/Microsoft.Storage/storageAccounts/testaccount/containers/testContainer"",
+              ""actions"": [
+                { ""id"": ""Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read"", ""isDataAction"": true }
+              ]
+            }
+          ],
+          ""resource"": ""storage.azure.com""
+        }";
+
         [Fact]
         public void CloneClonesAllProperties()
         {
@@ -40,8 +54,9 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
                     PopPublicKey = "PopKey",
                     PopClaim = "jwkClaim",
                     Tenant = "domain.com",
-                    UserFlow = "susi"
-
+                    UserFlow = "susi",
+                    AuthorizationTokenProviderUrl = "https://fakeAuthZ.domain.com/token",
+                    AuthorizationDetails = AuthorizationDetailsJson,
                 },
                 BaseUrl = "https://apitocall.domain.com",
                 CustomizeHttpRequestMessage = message => message.Headers.Add("x-sku", "sku-value"),
@@ -92,12 +107,14 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.PopClaim, downstreamApiClone.AcquireTokenOptions.PopClaim);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.Tenant, downstreamApiClone.AcquireTokenOptions.Tenant);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.UserFlow, downstreamApiClone.AcquireTokenOptions.UserFlow);
+            Assert.Equal(downstreamApiOptions.AcquireTokenOptions.AuthorizationTokenProviderUrl, downstreamApiClone.AcquireTokenOptions.AuthorizationTokenProviderUrl);
+            Assert.Equal(downstreamApiOptions.AcquireTokenOptions.AuthorizationDetails, downstreamApiClone.AcquireTokenOptions.AuthorizationDetails);
             Assert.Equal("application/json", downstreamApiClone.AcceptHeader);
             Assert.Equal("application/json", downstreamApiClone.ContentType);
 
             // If this fails, think of also adding a line to test the new property
             Assert.Equal(12, typeof(DownstreamApiOptions).GetProperties().Length);
-            Assert.Equal(15, typeof(AcquireTokenOptions).GetProperties().Length);
+            Assert.Equal(17, typeof(AcquireTokenOptions).GetProperties().Length);
 
             DownstreamApiOptionsReadOnlyHttpMethod options = new DownstreamApiOptionsReadOnlyHttpMethod(downstreamApiOptions, HttpMethod.Delete.ToString());
             Assert.Equal(HttpMethod.Delete.ToString(), options.HttpMethod);
@@ -130,7 +147,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
         {
             IDownstreamApi downstreamApi = new CustomDownstreamApi();
 
-            // Call a service based on the configuration only. The name "service" maps to a 
+            // Call a service based on the configuration only. The name "service" maps to a
             downstreamApi.CallApiAsync("service");
 
             // Calls a service based on the programmatic description only.
@@ -142,7 +159,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
                     options.RelativePath = "api/values";
                 });
 
-            // Calls a service purely programmatically. 
+            // Calls a service purely programmatically.
             downstreamApi.CallApiAsync(new DownstreamApiOptions { HttpMethod = HttpMethod.Get.ToString(), RequestAppToken = false });
 
             // In the following call, it's not possible to set the HttpMethod in the delegate, as it would no
@@ -150,7 +167,6 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             // The following code does not build (on purpose):
             // downstreamApi.DeleteForAppAsync("serviceName", "todo", options => { options.HttpMethod = HttpMethod.Put });
         }
-
 
         [Theory]
         [InlineData("https://myapi/", "controller/action", "https://myapi/controller/action")]
@@ -167,6 +183,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
         }
 
 #if NET8_0_OR_GREATER
+
         internal class CustomApiResponse
         {
             public int ErrorCode { get; set; }
@@ -196,13 +213,18 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             response = downstreamApi.GetForAppAsync<CustomApiInput, CustomApiResponse>("service", input, CustomApiResponseJsonContext.Default.CustomApiInput, CustomApiResponseJsonContext.Default.CustomApiResponse).Result;
             Assert.Equal(123, response?.ErrorCode);
         }
+
 #endif
     }
 
     internal class CustomAcquireTokenOptions : AcquireTokenOptions
     {
-        public CustomAcquireTokenOptions() : base() { }
+        public CustomAcquireTokenOptions() : base()
+        {
+        }
 
-        public CustomAcquireTokenOptions(CustomAcquireTokenOptions other) : base(other) { }
+        public CustomAcquireTokenOptions(CustomAcquireTokenOptions other) : base(other)
+        {
+        }
     }
 }

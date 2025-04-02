@@ -17,3 +17,7 @@ Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.TenantId.get ->
 Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.TenantId.set -> void
 override Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.Authority.get -> string?
 override Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.Authority.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenOptions.AuthorizationTokenProviderUrl.get -> string?
+Microsoft.Identity.Abstractions.AcquireTokenOptions.AuthorizationTokenProviderUrl.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenOptions.AuthorizationDetails.get -> string?
+Microsoft.Identity.Abstractions.AcquireTokenOptions.AuthorizationDetails.set -> void
