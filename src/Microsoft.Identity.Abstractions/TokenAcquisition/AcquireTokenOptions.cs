@@ -19,7 +19,7 @@ namespace Microsoft.Identity.Abstractions
         public AcquireTokenOptions()
         {
         }
-
+        
         /// <summary>
         /// Copy constructor for <see cref="AcquireTokenOptions"/>
         /// </summary>
@@ -58,13 +58,13 @@ namespace Microsoft.Identity.Abstractions
         public Guid? CorrelationId { get; set; }
 
         /// <summary>
-        /// Sets query parameters for the query string in the HTTP request to the
+        /// Sets query parameters for the query string in the HTTP request to the 
         /// "/token" endpoint.
         /// </summary>
         public IDictionary<string, string>? ExtraQueryParameters { get; set; }
 
         /// <summary>
-        /// An property bag used for extensiblity.
+        /// An property bag used for extensiblity. 
         /// </summary>
         /// <remarks>
         /// Not meant to be used by application developers, but by other SDKs.
@@ -78,7 +78,7 @@ namespace Microsoft.Identity.Abstractions
         /// <summary>
         /// A string with one or multiple claims to request. It's a json blob (encoded or not)
         /// Normally used with Conditional Access. It receives the Claims member of the UiRequiredException.
-        /// It can also be used to request specific optional claims, and for
+        /// It can also be used to request specific optional claims, and for 
         /// <see href="https://learn.microsoft.com/en-us/azure/active-directory/conditional-access/concept-conditional-access-cloud-apps">
         /// CA Auth context</see>
         /// </summary>
@@ -107,7 +107,7 @@ namespace Microsoft.Identity.Abstractions
         public string? PopPublicKey { get; set; }
 
         /// <summary>
-        /// In addition to the <see cref="PopPublicKey"/>, specify the PopClaim when needed in specific POP protocols.
+        /// In addition to the <see cref="PopPublicKey"/>, specify the PopClaim when needed in specific POP protocols. 
         /// </summary>
         public string? PopClaim { get; set; }
 
@@ -125,13 +125,13 @@ namespace Microsoft.Identity.Abstractions
         /// <![CDATA[
         /// The Json fragment below describes how to use a system-assigned Managed Identity for authentication in a confidential client application :
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/AquireTokenOptionsTests.cs" id="managedidentitysystem_json":::
-        ///
+        /// 
         /// The code below describes the same, programmatically in C#.
         /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/AquireTokenOptionsTests.cs" id="managedidentitysystem_csharp":::
-        ///
+        /// 
         /// The Json fragment below describes how to use a user-assigned Managed Identity for authentication in a confidential client application :
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/AquireTokenOptionsTests.cs" id="managedidentityuser_json":::
-        ///
+        /// 
         /// The code below describes the same, programmatically in C#.
         /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/AquireTokenOptionsTests.cs" id="managedidentityuser_csharp":::
         /// ]]></format>
@@ -156,8 +156,8 @@ namespace Microsoft.Identity.Abstractions
 
         /// <summary>
         /// (Microsoft identity specific)
-        /// Enables to override the tenant/account for which to get a token.
-        /// This is useful in multi-tenant apps in the cases where a given user account is a guest
+        /// Enables to override the tenant/account for which to get a token. 
+        /// This is useful in multi-tenant apps in the cases where a given user account is a guest 
         /// in other tenants, and you want to acquire tokens for a specific tenant.
         /// </summary>
         /// <remarks>Can be the tenant ID or domain name.</remarks>
