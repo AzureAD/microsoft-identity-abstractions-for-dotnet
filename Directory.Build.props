@@ -1,7 +1,7 @@
 <Project>
     <PropertyGroup>
         <!-- This should be passed from the VSTS build -->
-        <MicrosoftIdentityAbstractionsVersion Condition="'$(MicrosoftIdentityAbstractionsVersion)' == ''">9.0.1</MicrosoftIdentityAbstractionsVersion>
+        <MicrosoftIdentityAbstractionsVersion Condition="'$(MicrosoftIdentityAbstractionsVersion)' == ''">9.1.0</MicrosoftIdentityAbstractionsVersion>
         <!-- This will generate AssemblyVersion, AssemblyFileVersion and AssemblyInformationVersion -->
         <Version>$(MicrosoftIdentityAbstractionsVersion)</Version>
         <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)\build\35MSSharedLib1024.snk</AssemblyOriginatorKeyFile>
