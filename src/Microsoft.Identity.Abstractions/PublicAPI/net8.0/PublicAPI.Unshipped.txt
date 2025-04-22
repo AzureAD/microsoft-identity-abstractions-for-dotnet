@@ -1,4 +1,6 @@
 #nullable enable
+Microsoft.Identity.Abstractions.CredentialDescriptionJsonConverter
+Microsoft.Identity.Abstractions.CredentialDescriptionJsonConverter.CredentialDescriptionJsonConverter() -> void
 Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider<TResult>
 Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider<TResult>.CreateAuthorizationHeaderAsync(Microsoft.Identity.Abstractions.DownstreamApiOptions! downstreamApiOptions, System.Security.Claims.ClaimsPrincipal? claimsPrincipal = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TResult>!
 Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions
@@ -17,5 +19,7 @@ Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.SendX5C.get -> 
 Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.SendX5C.set -> void
 Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.TenantId.get -> string?
 Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.TenantId.set -> void
+override Microsoft.Identity.Abstractions.CredentialDescriptionJsonConverter.Read(ref System.Text.Json.Utf8JsonReader reader, System.Type! typeToConvert, System.Text.Json.JsonSerializerOptions! options) -> Microsoft.Identity.Abstractions.CredentialDescription!
+override Microsoft.Identity.Abstractions.CredentialDescriptionJsonConverter.Write(System.Text.Json.Utf8JsonWriter! writer, Microsoft.Identity.Abstractions.CredentialDescription! value, System.Text.Json.JsonSerializerOptions! options) -> void
 override Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.Authority.get -> string?
 override Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.Authority.set -> void
