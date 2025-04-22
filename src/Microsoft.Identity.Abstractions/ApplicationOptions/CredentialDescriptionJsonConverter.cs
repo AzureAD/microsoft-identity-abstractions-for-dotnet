@@ -44,7 +44,8 @@ namespace Microsoft.Identity.Abstractions
                 switch (propertyName.ToLowerInvariant())
                 {
                     case "sourcetype":
-                        credentialDescription.SourceType = JsonSerializer.Deserialize<CredentialSource>(ref reader, options);
+                        string sourceType = reader.GetString()!;
+                        credentialDescription.SourceType = Enum.Parse<CredentialSource>(sourceType);
                         break;
                     case "base64encodedvalue":
                         credentialDescription.Base64EncodedValue = reader.GetString();
@@ -113,7 +114,7 @@ namespace Microsoft.Identity.Abstractions
             writer.WriteStartObject();
 
             writer.WritePropertyName("SourceType");
-            JsonSerializer.Serialize(writer, Enum.GetName(typeof(CredentialSource), value.SourceType), options);
+            JsonSerializer.Serialize(writer, Enum.GetName(value.SourceType), options);
 
             switch (value.SourceType)
             {
