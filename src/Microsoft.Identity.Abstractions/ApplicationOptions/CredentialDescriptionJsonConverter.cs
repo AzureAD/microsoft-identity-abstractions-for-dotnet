@@ -43,60 +43,60 @@ namespace Microsoft.Identity.Abstractions
 
                 switch (propertyName.ToLowerInvariant())
                 {
-                    case "sourcetype":
+                    case string _ when propertyName.Equals(nameof(CredentialDescription.SourceType), StringComparison.OrdinalIgnoreCase):
                         string sourceType = reader.GetString()!;
                         credentialDescription.SourceType = Enum.Parse<CredentialSource>(sourceType);
                         break;
-                    case "base64encodedvalue":
+                    case string _ when propertyName.Equals(nameof(CredentialDescription.Base64EncodedValue), StringComparison.OrdinalIgnoreCase):
                         credentialDescription.Base64EncodedValue = reader.GetString();
                         break;
-                    case "certificatestorepath":
+                    case string _ when propertyName.Equals(nameof(CredentialDescription.CertificateStorePath), StringComparison.OrdinalIgnoreCase):
                         credentialDescription.CertificateStorePath = reader.GetString();
                         break;
-                    case "certificatedistinguishedname":
+                    case string _ when propertyName.Equals(nameof(CredentialDescription.CertificateDistinguishedName), StringComparison.OrdinalIgnoreCase):
                         credentialDescription.CertificateDistinguishedName = reader.GetString();
                         break;
-                    case "certificatethumbprint":
+                    case string _ when propertyName.Equals(nameof(CredentialDescription.CertificateThumbprint), StringComparison.OrdinalIgnoreCase):
                         credentialDescription.CertificateThumbprint = reader.GetString();
                         break;
-                    case "certificatediskpath":
+                    case string _ when propertyName.Equals(nameof(CredentialDescription.CertificateDiskPath), StringComparison.OrdinalIgnoreCase):
                         credentialDescription.CertificateDiskPath = reader.GetString();
                         break;
-                    case "certificatepassword":
+                    case string _ when propertyName.Equals(nameof(CredentialDescription.CertificatePassword), StringComparison.OrdinalIgnoreCase):
                         credentialDescription.CertificatePassword = reader.GetString();
                         break;
-                    case "clientsecret":
+                    case string _ when propertyName.Equals(nameof(CredentialDescription.ClientSecret), StringComparison.OrdinalIgnoreCase):
                         credentialDescription.ClientSecret = reader.GetString();
                         break;
-                    case "managedidentityclientid":
+                    case string _ when propertyName.Equals(nameof(CredentialDescription.ManagedIdentityClientId), StringComparison.OrdinalIgnoreCase):
                         credentialDescription.ManagedIdentityClientId = reader.GetString();
                         break;
-                    case "signedassertionfilediskpath":
+                    case string _ when propertyName.Equals(nameof(CredentialDescription.SignedAssertionFileDiskPath), StringComparison.OrdinalIgnoreCase):
                         credentialDescription.SignedAssertionFileDiskPath = reader.GetString();
                         break;
-                    case "keyvaulturl":
+                    case string _ when propertyName.Equals(nameof(CredentialDescription.KeyVaultUrl), StringComparison.OrdinalIgnoreCase):
                         credentialDescription.KeyVaultUrl = reader.GetString();
                         break;
-                    case "keyvaultcertificatename":
+                    case string _ when propertyName.Equals(nameof(CredentialDescription.KeyVaultCertificateName), StringComparison.OrdinalIgnoreCase):
                         credentialDescription.KeyVaultCertificateName = reader.GetString();
                         break;
-                    case "tokenexchangeurl":
+                    case string _ when propertyName.Equals(nameof(CredentialDescription.TokenExchangeUrl), StringComparison.OrdinalIgnoreCase):
                         credentialDescription.TokenExchangeUrl = reader.GetString();
                         break;
-                    case "tokenexchangeauthority":
+                    case string _ when propertyName.Equals(nameof(CredentialDescription.TokenExchangeAuthority), StringComparison.OrdinalIgnoreCase):
                         credentialDescription.TokenExchangeAuthority = reader.GetString();
                         break;
-                    case "skip":
+                    case string _ when propertyName.Equals(nameof(CredentialDescription.Skip), StringComparison.OrdinalIgnoreCase):
                         credentialDescription.Skip = reader.GetBoolean();
                         break;
-                    case "customsignedassertionprovidername":
+                    case string _ when propertyName.Equals(nameof(CredentialDescription.CustomSignedAssertionProviderName), StringComparison.OrdinalIgnoreCase):
                         credentialDescription.CustomSignedAssertionProviderName = reader.GetString();
                         break;
-                    case "customsignedassertionproviderdata":
+                    case string _ when propertyName.Equals(nameof(CredentialDescription.CustomSignedAssertionProviderData), StringComparison.OrdinalIgnoreCase):
                         credentialDescription.CustomSignedAssertionProviderData =
                             JsonSerializer.Deserialize<System.Collections.Generic.Dictionary<string, object>>(ref reader, options);
                         break;
-                    case "decryptkeysauthenticationoptions":
+                    case string _ when propertyName.Equals(nameof(CredentialDescription.DecryptKeysAuthenticationOptions), StringComparison.OrdinalIgnoreCase):
                         credentialDescription.DecryptKeysAuthenticationOptions =
                             JsonSerializer.Deserialize<AuthorizationHeaderProviderOptions>(ref reader, options);
                         break;
@@ -120,70 +120,70 @@ namespace Microsoft.Identity.Abstractions
             {
                 case CredentialSource.Base64Encoded:
                     if (!string.IsNullOrEmpty(value.Base64EncodedValue))
-                        writer.WriteString("Base64EncodedValue", value.Base64EncodedValue);
+                        writer.WriteString(nameof(CredentialDescription.Base64EncodedValue), value.Base64EncodedValue);
                     break;
 
                 case CredentialSource.Path:
                     if (!string.IsNullOrEmpty(value.CertificateDiskPath))
-                        writer.WriteString("CertificateDiskPath", value.CertificateDiskPath);
+                        writer.WriteString(nameof(CredentialDescription.CertificateDiskPath), value.CertificateDiskPath);
                     if (!string.IsNullOrEmpty(value.CertificatePassword))
-                        writer.WriteString("CertificatePassword", value.CertificatePassword);
+                        writer.WriteString(nameof(CredentialDescription.CertificatePassword), value.CertificatePassword);
                     break;
 
                 case CredentialSource.StoreWithThumbprint:
                     if (!string.IsNullOrEmpty(value.CertificateStorePath))
-                        writer.WriteString("CertificateStorePath", value.CertificateStorePath);
+                        writer.WriteString(nameof(CredentialDescription.CertificateStorePath), value.CertificateStorePath);
                     if (!string.IsNullOrEmpty(value.CertificateThumbprint))
-                        writer.WriteString("CertificateThumbprint", value.CertificateThumbprint);
+                        writer.WriteString(nameof(CredentialDescription.CertificateThumbprint), value.CertificateThumbprint);
                     break;
 
                 case CredentialSource.StoreWithDistinguishedName:
                     if (!string.IsNullOrEmpty(value.CertificateStorePath))
-                        writer.WriteString("CertificateStorePath", value.CertificateStorePath);
+                        writer.WriteString(nameof(CredentialDescription.CertificateStorePath), value.CertificateStorePath);
                     if (!string.IsNullOrEmpty(value.CertificateDistinguishedName))
-                        writer.WriteString("CertificateDistinguishedName", value.CertificateDistinguishedName);
+                        writer.WriteString(nameof(CredentialDescription.CertificateDistinguishedName), value.CertificateDistinguishedName);
                     break;
 
                 case CredentialSource.KeyVault:
                     if (!string.IsNullOrEmpty(value.KeyVaultUrl))
-                        writer.WriteString("KeyVaultUrl", value.KeyVaultUrl);
+                        writer.WriteString(nameof(CredentialDescription.KeyVaultUrl), value.KeyVaultUrl);
                     if (!string.IsNullOrEmpty(value.KeyVaultCertificateName))
-                        writer.WriteString("KeyVaultCertificateName", value.KeyVaultCertificateName);
+                        writer.WriteString(nameof(CredentialDescription.KeyVaultCertificateName), value.KeyVaultCertificateName);
                     break;
 
                 case CredentialSource.ClientSecret:
                     if (!string.IsNullOrEmpty(value.ClientSecret))
-                        writer.WriteString("ClientSecret", value.ClientSecret);
+                        writer.WriteString(nameof(CredentialDescription.ClientSecret), value.ClientSecret);
                     break;
 
                 case CredentialSource.SignedAssertionFromManagedIdentity:
                     if (!string.IsNullOrEmpty(value.ManagedIdentityClientId))
-                        writer.WriteString("ManagedIdentityClientId", value.ManagedIdentityClientId);
+                        writer.WriteString(nameof(CredentialDescription.ManagedIdentityClientId), value.ManagedIdentityClientId);
                     if (!string.IsNullOrEmpty(value.TokenExchangeUrl))
-                        writer.WriteString("TokenExchangeUrl", value.TokenExchangeUrl);
+                        writer.WriteString(nameof(CredentialDescription.TokenExchangeUrl), value.TokenExchangeUrl);
                     if (!string.IsNullOrEmpty(value.TokenExchangeAuthority))
-                        writer.WriteString("TokenExchangeAuthority", value.TokenExchangeAuthority);
+                        writer.WriteString(nameof(CredentialDescription.TokenExchangeAuthority), value.TokenExchangeAuthority);
                     break;
 
                 case CredentialSource.SignedAssertionFilePath:
                     if (!string.IsNullOrEmpty(value.SignedAssertionFileDiskPath))
-                        writer.WriteString("SignedAssertionFileDiskPath", value.SignedAssertionFileDiskPath);
+                        writer.WriteString(nameof(CredentialDescription.SignedAssertionFileDiskPath), value.SignedAssertionFileDiskPath);
                     break;
 
                 case CredentialSource.AutoDecryptKeys:
                     if (value.DecryptKeysAuthenticationOptions != null)
                     {
-                        writer.WritePropertyName("DecryptKeysAuthenticationOptions");
+                        writer.WritePropertyName(nameof(CredentialDescription.DecryptKeysAuthenticationOptions));
                         JsonSerializer.Serialize(writer, value.DecryptKeysAuthenticationOptions, options);
                     }
                     break;
 
                 case CredentialSource.CustomSignedAssertion:
                     if (!string.IsNullOrEmpty(value.CustomSignedAssertionProviderName))
-                        writer.WriteString("CustomSignedAssertionProviderName", value.CustomSignedAssertionProviderName);
+                        writer.WriteString(nameof(CredentialDescription.CustomSignedAssertionProviderName), value.CustomSignedAssertionProviderName);
                     if (value.CustomSignedAssertionProviderData != null)
                     {
-                        writer.WritePropertyName("CustomSignedAssertionProviderData");
+                        writer.WritePropertyName(nameof(CredentialDescription.CustomSignedAssertionProviderData));
                         JsonSerializer.Serialize(writer, value.CustomSignedAssertionProviderData, options);
                     }
                     break;
