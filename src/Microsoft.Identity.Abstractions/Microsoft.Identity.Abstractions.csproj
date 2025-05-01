@@ -7,6 +7,8 @@
     <ProjectGuid>{98F57CC8-01A0-49F3-B859-DDC4F8F5CD2F}</ProjectGuid>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <IsTrimmable Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net6.0'))">true</IsTrimmable>
+    <JsonSerializerIsReflectionEnabledByDefault>false</JsonSerializerIsReflectionEnabledByDefault>
   </PropertyGroup>
 
   <ItemGroup>
