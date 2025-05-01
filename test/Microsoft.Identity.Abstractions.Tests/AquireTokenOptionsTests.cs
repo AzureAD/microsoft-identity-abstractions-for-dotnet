@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Linq;
 using Xunit;
 
 namespace Microsoft.Identity.Abstractions.Tests
@@ -92,6 +93,35 @@ namespace Microsoft.Identity.Abstractions.Tests
 
             Assert.NotNull(acquireTokenOptions.FmiPath);
             Assert.Equal("/example.org/service/my-service", acquireTokenOptions.FmiPath);
+        }
+
+        [Fact]
+        public void ClientCapabilities_ArePreservedAndCloneable()
+        {
+            /*
+            // <clientcapabilities_json>
+            {
+              "AcquireTokenOptions": {
+                "ClientCapabilities": [ "cp1", "cp2" ]
+              }
+            }
+            // </clientcapabilities_json>
+            */
+
+            // <clientcapabilities_csharp>
+            var original = new AcquireTokenOptions
+            {
+                ClientCapabilities = [ "cp1", "cp2" ]
+            };
+            // </clientcapabilities_csharp>
+
+            Assert.True(original.ClientCapabilities!.SequenceEqual(["cp1", "cp2" ]));
+
+            // Ensure Clone() keeps the same capabilities but returns a new instance
+            var clone = original.Clone();
+
+            Assert.NotSame(original, clone);
+            Assert.True(clone.ClientCapabilities!.SequenceEqual(original.ClientCapabilities));
         }
     }
 }

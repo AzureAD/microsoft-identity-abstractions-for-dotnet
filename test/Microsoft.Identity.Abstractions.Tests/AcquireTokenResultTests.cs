@@ -8,6 +8,8 @@ namespace Microsoft.Identity.Abstractions.TokenAcquisition.Tests
 {
     public class AcquireTokenResultTests
     {
+        private static readonly string[] _caps = new[] { "cp1", "someExperimentalFlag" };
+
         [Fact]
         public void TestAcquireTokenResult()
         {

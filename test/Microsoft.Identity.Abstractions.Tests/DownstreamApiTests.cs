@@ -40,7 +40,8 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
                     PopPublicKey = "PopKey",
                     PopClaim = "jwkClaim",
                     Tenant = "domain.com",
-                    UserFlow = "susi"
+                    UserFlow = "susi",
+                    ClientCapabilities = [ "cp1", "cp2" ]
 
                 },
                 BaseUrl = "https://apitocall.domain.com",
@@ -92,12 +93,13 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.PopClaim, downstreamApiClone.AcquireTokenOptions.PopClaim);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.Tenant, downstreamApiClone.AcquireTokenOptions.Tenant);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.UserFlow, downstreamApiClone.AcquireTokenOptions.UserFlow);
+            Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ClientCapabilities, downstreamApiClone.AcquireTokenOptions.ClientCapabilities ?? []);
             Assert.Equal("application/json", downstreamApiClone.AcceptHeader);
             Assert.Equal("application/json", downstreamApiClone.ContentType);
 
             // If this fails, think of also adding a line to test the new property
             Assert.Equal(12, typeof(DownstreamApiOptions).GetProperties().Length);
-            Assert.Equal(15, typeof(AcquireTokenOptions).GetProperties().Length);
+            Assert.Equal(16, typeof(AcquireTokenOptions).GetProperties().Length);
 
             DownstreamApiOptionsReadOnlyHttpMethod options = new DownstreamApiOptionsReadOnlyHttpMethod(downstreamApiOptions, HttpMethod.Delete.ToString());
             Assert.Equal(HttpMethod.Delete.ToString(), options.HttpMethod);

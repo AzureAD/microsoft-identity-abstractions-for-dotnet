@@ -41,6 +41,7 @@ namespace Microsoft.Identity.Abstractions
             LongRunningWebApiSessionKey = other.LongRunningWebApiSessionKey;
             Tenant = other.Tenant;
             UserFlow = other.UserFlow;
+            ClientCapabilities = other.ClientCapabilities;
         }
 
         /// <summary>
@@ -81,6 +82,11 @@ namespace Microsoft.Identity.Abstractions
         /// CA Auth context</see>
         /// </summary>
         public string? Claims { get; set; }
+
+        /// <summary>
+        /// A list of client capabilities to be sent in the request to the STS "/token" endpoint.
+        /// </summary>
+        public IEnumerable<string>? ClientCapabilities { get; set; }
 
         /// <summary>
         /// Federated Managed Identity (FMI) sub-path.

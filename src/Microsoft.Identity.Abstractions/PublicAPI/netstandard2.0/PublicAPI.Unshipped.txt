@@ -1,4 +1,6 @@
 #nullable enable
+Microsoft.Identity.Abstractions.AcquireTokenOptions.ClientCapabilities.get -> System.Collections.Generic.IEnumerable<string!>?
+Microsoft.Identity.Abstractions.AcquireTokenOptions.ClientCapabilities.set -> void
 Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider<TResult>
 Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider<TResult>.CreateAuthorizationHeaderAsync(Microsoft.Identity.Abstractions.DownstreamApiOptions! downstreamApiOptions, System.Security.Claims.ClaimsPrincipal? claimsPrincipal = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TResult>!
 Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions

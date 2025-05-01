@@ -1,4 +1,6 @@
 #nullable enable
+Microsoft.Identity.Abstractions.AcquireTokenOptions.ClientCapabilities.get -> System.Collections.Generic.IEnumerable<string!>?
+Microsoft.Identity.Abstractions.AcquireTokenOptions.ClientCapabilities.set -> void
 Microsoft.Identity.Abstractions.CredentialDescriptionJsonConverter
 Microsoft.Identity.Abstractions.CredentialDescriptionJsonConverter.CredentialDescriptionJsonConverter() -> void
 Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider<TResult>
