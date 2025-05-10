@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D5BF0954-2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Identity.Abstractions.Tests", "test\Microsoft.Identity.Abstractions.Tests\Microsoft.Identity.Abstractions.Tests.csproj", "{AC403F8B-5ADB-4037-A62A-73FEC3E7B0E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Identity.Abstractions.AotTests", "test\Microsoft.Identity.Abstractions.AotTests\Microsoft.Identity.Abstractions.AotTests.csproj", "{EC129FAC-AEB8-D0EE-CFE6-028A77191A49}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{AC403F8B-5ADB-4037-A62A-73FEC3E7B0E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC403F8B-5ADB-4037-A62A-73FEC3E7B0E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC403F8B-5ADB-4037-A62A-73FEC3E7B0E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC129FAC-AEB8-D0EE-CFE6-028A77191A49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC129FAC-AEB8-D0EE-CFE6-028A77191A49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC129FAC-AEB8-D0EE-CFE6-028A77191A49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC129FAC-AEB8-D0EE-CFE6-028A77191A49}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -43,6 +49,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{98F57CC8-01A0-49F3-B859-DDC4F8F5CD2F} = {68824A9C-D009-491A-8A76-680A261A8C71}
 		{AC403F8B-5ADB-4037-A62A-73FEC3E7B0E2} = {D5BF0954-25F6-40ED-9896-8EDB99EBEF5A}
+		{EC129FAC-AEB8-D0EE-CFE6-028A77191A49} = {D5BF0954-25F6-40ED-9896-8EDB99EBEF5A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {34D01AD8-BCE0-44B3-9197-439FF4A1D46D}
