@@ -4,6 +4,94 @@ The `CredentialDescription` class is used to describe credentials for Microsoft 
 1. Client Credentials - to prove the identity of the application
 2. Token Decryption Credentials - to decrypt tokens
 
+## When to Use Which Credential Type
+
+### Certificate Credentials
+Best for production environments due to enhanced security. Choose between these options based on your scenario:
+
+1. **Key Vault (`SourceType = KeyVault`)**
+   - **What**: Certificate stored in Azure Key Vault
+   - **When to use**:
+     - Production environments
+     - When you need centralized certificate management
+     - When you require automatic certificate rotation
+     - When you need to share certificates across multiple services
+   - **Advantages**:
+     - Secure storage and access control
+     - Automatic certificate renewal
+     - Audit logging
+     - Managed backup and recovery
+
+2. **Certificate Store (`SourceType = StoreWithThumbprint` or `StoreWithDistinguishedName`)**
+   - **What**: Certificate stored in the Windows Certificate Store
+   - **When to use**:
+     - Production environments
+     - When the application runs on Windows
+     - When you want to use Windows certificate management tools
+   - **Choose between**:
+     - `StoreWithThumbprint`: When you need to target a specific certificate version
+     - `StoreWithDistinguishedName`: When you want automatic certificate rollover
+   - **Advantages**:
+     - Native Windows management
+     - Integration with Windows security features
+     - Support for hardware security modules (HSM)
+
+3. **File Path (`SourceType = Path`)**
+   - **What**: Certificate stored as a PFX/P12 file on disk
+   - **When to use**:
+     - Development/testing environments
+     - Simple deployment scenarios
+     - When filesystem-based configuration is preferred
+   - **Not recommended for production** due to:
+     - Password needs to be in configuration
+     - Manual certificate management
+     - Less secure storage
+
+4. **Base64 Encoded (`SourceType = Base64Encoded`)**
+   - **What**: Certificate encoded as a base64 string
+   - **When to use**:
+     - Development/testing environments
+     - When certificate needs to be embedded in configuration
+   - **Not recommended for production** due to:
+     - Certificate exposed in configuration
+     - Manual certificate management
+     - Less secure storage
+
+### Client Secret (`SourceType = ClientSecret`)
+- **What**: A simple shared secret string
+- **When to use**:
+  - Development/testing environments
+  - Simple applications with basic security requirements
+- **Not recommended for production** due to:
+  - Less secure than certificates
+  - No support for automatic rotation
+  - Secrets can be easily copied/shared
+
+### Federated Identity Credentials with Managed Identity (`SourceType = SignedAssertionFromManagedIdentity`)
+- **What**: Azure Managed Identity integration
+- **When to use**:
+  - Production environments running on Azure
+  - When you want zero secret/certificate management
+  - Modern cloud-native applications
+- **Choose between**:
+  - System-assigned: When the identity is tied to the resource lifecycle
+  - User-assigned: When you need to share identity across resources
+- **Advantages**:
+  - No secret/certificate management required
+  - Automatic credential rotation
+  - Tight integration with Azure services
+  - Enhanced security with no stored credentials
+
+### Auto Decrypt Keys (`SourceType = AutoDecryptKeys`)
+- **What**: Automatic key retrieval for token decryption
+- **When to use**:
+  - When implementing encrypted token scenarios
+  - When the application needs to decrypt tokens automatically
+- **Advantages**:
+  - Automatic key management
+  - Support for key rotation
+  - Simplified token decryption workflow
+
 ## JSON Configuration
 
 ### 1. Certificate-Based Credentials
@@ -205,13 +293,15 @@ var credentialDescription = new CredentialDescription
    - `SignedAssertion`: Only for client credentials
    - `DecryptKeys`: Only for token decryption
 
-2. **Security Recommendations**:
-   - Using client secrets is not recommended in production
-   - Using certificates from file paths or base64 encoded values is not recommended in production
-   - For production scenarios, prefer:
-     - Key Vault certificates
-     - Certificate store
-     - Managed identities
+2. **Security Best Practices**:
+   - For production environments:
+     1. Azure Key Vault (most secure, recommended)
+     2. Managed Identities (when running on Azure)
+     3. Certificate Store (for Windows environments)
+   - For development/testing only:
+     - Client Secrets
+     - File-based certificates
+     - Base64 encoded certificates
 
 3. **Certificate Store Paths**:
    - Format: `{StoreLocation}/{StoreName}`
@@ -227,3 +317,27 @@ var credentialDescription = new CredentialDescription
    - Use `CredentialSource.CustomSignedAssertion` with:
      - `CustomSignedAssertionProviderName`
      - `CustomSignedAssertionProviderData` (Dictionary<string, object>)
+
+## Decision Flow for Choosing Credential Type
+
+1. Are you running on Azure?
+   - Yes: Consider Managed Identity first
+   - No: Continue to next question
+
+2. Is this for production?
+   - Yes: Choose between:
+     1. Key Vault (preferred)
+     2. Certificate Store (Windows environments)
+   - No: You can use any option, including client secrets and file-based certificates
+
+3. Do you need certificate rotation?
+   - Yes: Use Key Vault or Certificate Store with Distinguished Name
+   - No: Any certificate option will work
+
+4. Do you need to share credentials across services?
+   - Yes: Use Key Vault or User-assigned Managed Identity
+   - No: Any option suitable for your environment will work
+
+5. Are you implementing token decryption?
+   - Yes: Use AutoDecryptKeys or Certificate-based options
+   - No: Any client credential option will work
