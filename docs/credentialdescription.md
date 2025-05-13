@@ -4,6 +4,34 @@ The `CredentialDescription` class is used to describe credentials for Microsoft 
 1. Client Credentials - to prove the identity of the application
 2. Token Decryption Credentials - to decrypt tokens
 
+These are typically used int configuration for Entra ID applications:
+
+```json
+{
+    "AzureAd": {
+        "Instance": "https://login.microsoftonline.com/",
+        "TenantId": "msidlab4.onmicrosoft.com",
+        "ClientId": "f6b698c0-140c-448f-8155-4aa9bf77ceba",
+        "ClientCredentials": [
+            {
+                "SourceType": "KeyVault",
+                "KeyVaultUrl": "https://webappsapistests.vault.azure.net",
+                "KeyVaultCertificateName": "MyVerifyCertificate"
+            }
+        ],
+        "TokenDecryptCredentials": [
+            {
+                "SourceType": "KeyVault",
+                "KeyVaultUrl": "https://webappsapistests.vault.azure.net",
+                "KeyVaultCertificateName": "MyVerifyCertificate"
+            }
+        ]
+    }
+}
+```
+
+This document explains the possible client credentials types, as well as when use them, and how to express them, by configuration and by code.
+
 ## App authentication Approaches
 
 ### Client secrets
@@ -144,7 +172,19 @@ This is the case where the client credentials are a certificate.
 
 ## C# Code Usage
 
-### 1. Certificate  Credentials
+
+### 1. Managed Identity Credentials
+```csharp
+var credentialDescription = new CredentialDescription
+{
+    SourceType = CredentialSource.SignedAssertionFromManagedIdentity,
+    ManagedIdentityClientId = "GUID",  // Optional for system-assigned managed identity
+    TokenExchangeUrl = "api://AzureADTokenExchangeSomeCloud1",  // Optional
+    TokenExchangeAuthority = "https://login.microsoftonline.cloud2/33e01921-4d64-4f8c-a055-5bdaffd5e33d/v2.0"  // Optional
+};
+```
+
+### 2. Certificate  Credentials
 
 #### From Key Vault
 ```csharp
@@ -224,23 +264,12 @@ var credentialDescription = CredentialDescription.FromBase64String(
     "MIIDHzCgegA.....r1n8Ta0=");
 ```
 
-### 2. Client Secret
+### 3. Client Secret
 ```csharp
 var credentialDescription = new CredentialDescription
 {
     SourceType = CredentialSource.ClientSecret,
     ClientSecret = "your-secret-here"
-};
-```
-
-### 3. Managed Identity Credentials
-```csharp
-var credentialDescription = new CredentialDescription
-{
-    SourceType = CredentialSource.SignedAssertionFromManagedIdentity,
-    ManagedIdentityClientId = "GUID",  // Optional for system-assigned managed identity
-    TokenExchangeUrl = "api://AzureADTokenExchangeSomeCloud1",  // Optional
-    TokenExchangeAuthority = "https://login.microsoftonline.cloud2/33e01921-4d64-4f8c-a055-5bdaffd5e33d/v2.0"  // Optional
 };
 ```
 
@@ -254,7 +283,7 @@ var credentialDescription = new CredentialDescription
         ProtocolScheme = "Bearer",
         AcquireTokenOptions = new AcquireTokenOptions
         {
-            Tenant = "mytenant.onmicrosoftonline.com"
+            Tenant = "appHomeTenant.onmicrosoftonline.com"
         }
     }
 };
