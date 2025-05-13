@@ -274,13 +274,15 @@ classDiagram
     CredentialDescription *-- "CredentialType" CredentialType : Has
     IdentityApplicationOptions --> "ClientCredentials" CredentialDescription : Has many
     IdentityApplicationOptions --> "TokenDecryptionCredentials" CredentialDescription : Has many
-    
+
    ```
+
+For details about Credentials, see [CredentialDecription](./docs/credentialdescription.md)
 
 ### Credential loaders
    An important part of the application options are the credentials. In addition to the credential descriptions, the
    library offers extensibility mechanisms so that implementers can add their own credential source loaders.
-   
+
    ```mermaid
    classDiagram
    class CredentialSourceLoaderParameters {
@@ -318,9 +320,9 @@ you would probably prefer to call downstream web APIs without having to be preoc
 really want to use the lower level API, you should:
 - get hold of a ITokenAcquirerFactory. Implementations can provide a TokenAcquirerFactory for instance, with a singleton.
 - get a ITokenAcquirer (by its name, for instance). This corresponds to the application options
-- From the token acquirer get a token for on behalf of the user, or the app. If you don't specify any AcquireTokenOptions, 
+- From the token acquirer get a token for on behalf of the user, or the app. If you don't specify any AcquireTokenOptions,
   the implementation should do its best effort. The AcquireTokenOptions enable you to override the defaults.
-  
+
 ```mermaid
 classDiagram
    class AcquireTokenOptions {
@@ -496,8 +498,8 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 ## Trademarks
 
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
-trademarks or logos is subject to and must follow 
+This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft
+trademarks or logos is subject to and must follow
 [Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
 Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
 Any use of third-party trademarks or logos are subject to those third-party's policies.
