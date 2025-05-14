@@ -148,7 +148,7 @@ namespace Microsoft.Identity.Abstractions
         /// <summary>
         /// Algorithm used to create signing credentials.
         /// </summary>
-        public string Algorithm { get; set; }
+        public string? Algorithm { get; set; }
 
         /// <summary>
         /// Type of the source of the credential. This property is used to determine which other properties need
