@@ -5,6 +5,21 @@
 Microsoft.Identity.Abstractions contain interfaces and POCO classes used in the Microsoft .NET authentication
 libraries (Microsoft.IdentityModel, MSAL.NET and Microsoft.Identity.Web). It exposes concepts in three domains:
 
+## Nuget package
+
+[![NuGet](https://img.shields.io/nuget/v/Microsoft.Identity.Abstractions.svg?style=flat-square&label=nuget&colorB=00b200)](https://www.nuget.org/packages/Microsoft.Identity.Abstractions/)
+
+## Version Lifecycle and Support Matrix
+
+See [Long Term Support policy](./supportPolicy.md) for details.
+
+The following table lists IdentityWeb versions currently supported and receiving security fixes.
+
+| Major Version | Last Release | Patch release date  | Support phase|End of support |
+| --------------|--------------|--------|------------|--------|
+| 9.x           | [![NuGet](https://img.shields.io/nuget/v/Microsoft.Identity.Abstractions.svg?style=flat-square&label=nuget&colorB=00b200)](https://www.nuget.org/packages/Microsoft.Identity.Abstractions/)    |Monthly| Active | Not planned.<br/>✅Supported versions: from 9.0.0 to [![NuGet](https://img.shields.io/nuget/v/Microsoft.Identity.Abstractions.svg?style=flat-square&label=nuget&colorB=00b200)](https://www.nuget.org/packages/Microsoft.Identity.Abstractions/) <br/>⚠️Unsupported versions `< 9.0.0`.|
+
+
 ## Concepts
 
 ### Overview of the data classes
