@@ -40,6 +40,7 @@ namespace Microsoft.Identity.Abstractions
             if (other == null)
                 throw new ArgumentNullException(nameof(other));
 #endif
+            Algorithm = other.Algorithm;
             Base64EncodedValue = other.Base64EncodedValue;
             CachedValue = other.CachedValue;
             Certificate = other.Certificate;
