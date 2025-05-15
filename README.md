@@ -13,7 +13,7 @@ libraries (Microsoft.IdentityModel, MSAL.NET and Microsoft.Identity.Web). It exp
 
 See [Long Term Support policy](./supportPolicy.md) for details.
 
-The following table lists IdentityWeb versions currently supported and receiving security fixes.
+The following table lists Microsoft.Identity.Abstractions versions currently supported and receiving security fixes.
 
 | Major Version | Last Release | Patch release date  | Support phase|End of support |
 | --------------|--------------|--------|------------|--------|
