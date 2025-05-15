@@ -5,7 +5,7 @@
 Microsoft.Identity.Abstractions contain interfaces and POCO classes used in the Microsoft .NET authentication
 libraries (Microsoft.IdentityModel, MSAL.NET and Microsoft.Identity.Web). It exposes concepts in three domains:
 
-## Nuget package
+## NuGet Package
 
 [![NuGet](https://img.shields.io/nuget/v/Microsoft.Identity.Abstractions.svg?style=flat-square&label=nuget&colorB=00b200)](https://www.nuget.org/packages/Microsoft.Identity.Abstractions/)
 
