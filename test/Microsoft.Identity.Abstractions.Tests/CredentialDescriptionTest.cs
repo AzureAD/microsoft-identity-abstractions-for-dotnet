@@ -458,6 +458,18 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
         [Fact]
         public void Algorithm_SetAndGet_ShouldWork()
         {
+            /*
+            // <algorithm_json>
+            {
+                "ClientCredentials": [
+                {
+                    "Algorithm": "RS256",
+                }]
+            }
+            // </algorithm_json>
+            */
+
+            // <algorithm_csharp>
             // Arrange
             var credentialDescription = new CredentialDescription
             {
@@ -466,6 +478,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
 
             // Act
             var actualAlgorithm = credentialDescription.Algorithm;
+            // </algorithm_csharp>
 
             // Assert
             Assert.Equal("RS256", actualAlgorithm);
