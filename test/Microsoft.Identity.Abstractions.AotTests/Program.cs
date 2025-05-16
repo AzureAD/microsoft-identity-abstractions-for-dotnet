@@ -21,7 +21,11 @@ class Program
             {
                 var azureAdSection = context.Configuration.GetSection("AzureAd");
                 services.Configure<MicrosoftIdentityApplicationOptions>("scheme", options => azureAdSection.Bind(options));
+                services.Configure<DownstreamApisOptions>(
+                    options => context.Configuration.GetSection("DownstreamApis").Bind(options)
+                    );
             });
+
 
         IHost host = hostBuilder.Build();
 
@@ -37,6 +41,23 @@ class Program
         {
             Console.WriteLine($"ClientId: {optionsInstance.ClientId}");
             Console.WriteLine($"ClientCredentials: {optionsInstance.ClientCredentials!.First().Id}");
+        }
+
+        IOptionsMonitor<DownstreamApisOptions> downstreamApisOptions = host.Services.GetRequiredService<IOptionsMonitor<DownstreamApisOptions>>();
+        int count = downstreamApisOptions.CurrentValue.Count;
+        if (count == 0)
+        {
+            throw new InvalidOperationException("could not bind downstream apis");
+        }
+        else
+        {
+            Console.WriteLine($"DownstreamApis count: {count}");
+            foreach (var option in downstreamApisOptions.CurrentValue)
+            {
+                Console.WriteLine($"DownstreamApi: {option.Key}");
+                Console.WriteLine($"DownstreamApi: {option.Value.BaseUrl}");
+
+            }
         }
     }
 }
