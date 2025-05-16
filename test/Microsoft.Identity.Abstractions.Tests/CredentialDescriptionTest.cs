@@ -476,7 +476,10 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             // Arrange
             var credentialDescription = new CredentialDescription
             {
-                Algorithm = "RS256"
+                SourceType = CredentialSource.KeyVault,
+                Algorithm = "RS256",
+                KeyVaultCertificateName = "MicrosoftIdentitySamplesCert",
+                KeyVaultUrl = "https://msidentitywebsamples.vault.azure.net",
             };
 
             // Act
