@@ -258,16 +258,15 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             // <cert_csharp>
             CredentialDescription credentialDescription = new CredentialDescription
             {
-                SourceType = CredentialSource.Certificate,
-                Certificate = new System.Security.Cryptography.X509Certificates.X509Certificate2()
-            };
+                SourceType = CredentialSource.Certificate
+            }.SetCertificate(new System.Security.Cryptography.X509Certificates.X509Certificate2());
             // </cert_csharp>
 
-            credentialDescription.CachedValue = credentialDescription.Certificate;
+            credentialDescription.CachedValue = credentialDescription.GetCertificate();
             Assert.NotNull(credentialDescription.CachedValue);
 #pragma warning restore SYSLIB0026 // Type or member is obsolete
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
-            Assert.NotNull(credentialDescription.Certificate);
+            Assert.NotNull(credentialDescription.GetCertificate());
         }
 
         [Fact]
@@ -396,7 +395,6 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
         public void TestNullCertificate()
         {
             CredentialDescription credentialDescription = new();
-            credentialDescription.Certificate = null;
             Assert.NotNull(credentialDescription.Id);
         }
 

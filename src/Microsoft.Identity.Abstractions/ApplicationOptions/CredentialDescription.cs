@@ -392,7 +392,31 @@ namespace Microsoft.Identity.Abstractions
         /// or <see cref="CredentialSource.Path"/> or <see cref="CredentialSource.StoreWithDistinguishedName"/> or <see cref="CredentialSource.StoreWithThumbprint"/>
         /// after the certificate is retrieved by a <see cref="ICredentialsLoader"/>, it will be stored in this property and also in the <see cref="CachedValue"/>.
         /// </summary>
-        public X509Certificate2? Certificate { get; set; }
+        private X509Certificate2? Certificate { get; set; }
+
+        /// <summary>
+        /// When <see cref="SourceType"/> is <see cref="CredentialSource.Certificate"/>, you will use this property to provide the certificate yourself. 
+        /// When <see cref="SourceType"/> is <see cref="CredentialSource.Base64Encoded"/> or <see cref="CredentialSource.KeyVault"/>
+        /// or <see cref="CredentialSource.Path"/> or <see cref="CredentialSource.StoreWithDistinguishedName"/> or <see cref="CredentialSource.StoreWithThumbprint"/>
+        /// after the certificate is retrieved by a <see cref="ICredentialsLoader"/>, it will be stored in this property and also in the <see cref="CachedValue"/>.
+        /// </summary>
+#pragma warning disable CA1024 // Use properties where appropriate (because it's not AoT compatible)
+        public X509Certificate2? GetCertificate() => Certificate;
+
+        /// <summary>
+        /// When <see cref="SourceType"/> is <see cref="CredentialSource.Certificate"/>, you will use this property to provide the certificate yourself. 
+        /// When <see cref="SourceType"/> is <see cref="CredentialSource.Base64Encoded"/> or <see cref="CredentialSource.KeyVault"/>
+        /// or <see cref="CredentialSource.Path"/> or <see cref="CredentialSource.StoreWithDistinguishedName"/> or <see cref="CredentialSource.StoreWithThumbprint"/>
+        /// after the certificate is retrieved by a <see cref="ICredentialsLoader"/>, it will be stored in this property and also in the <see cref="CachedValue"/>.
+        /// </summary>
+        /// <paramref name="certificate"> is the certificate to set.</paramref>
+        /// <returns>the CredentialDescription itself to chain initialization calls.</returns>
+        public CredentialDescription SetCertificate(X509Certificate2 certificate)
+        {
+            Certificate = certificate;
+            return this;
+        }
+#pragma warning restore CA1024 // Use properties where appropriate (because it's not AoT compatible)
 
         /// <summary>
         /// When the credential is retrieved by a <see cref="ICredentialsLoader"/>, it will be stored in this property, where you can retrieve it. If the credential is a certificate,

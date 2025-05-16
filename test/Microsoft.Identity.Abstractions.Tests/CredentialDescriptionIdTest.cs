@@ -38,9 +38,8 @@ namespace Microsoft.Identity.Abstractions.Tests
                             new CredentialDescription
                             {
                                 SourceType = CredentialSource.Certificate,
-                                Certificate = new X509Certificate2(Convert.FromBase64String(base64encoded)), // "path/to/certificate.pfx"
                                 CertificatePassword = "password"
-                            }
+                            }.SetCertificate(new X509Certificate2(Convert.FromBase64String(base64encoded))) // "path/to/certificate.pfx"
                         },
                         
                         // KeyVault

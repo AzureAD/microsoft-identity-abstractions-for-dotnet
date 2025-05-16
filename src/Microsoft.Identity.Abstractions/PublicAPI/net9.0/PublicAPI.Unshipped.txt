@@ -1,4 +1,6 @@
 #nullable enable
+Microsoft.Identity.Abstractions.CredentialDescription.GetCertificate() -> System.Security.Cryptography.X509Certificates.X509Certificate2?
+Microsoft.Identity.Abstractions.CredentialDescription.SetCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2! certificate) -> Microsoft.Identity.Abstractions.CredentialDescription!
 Microsoft.Identity.Abstractions.CredentialDescriptionJsonConverter
 Microsoft.Identity.Abstractions.CredentialDescriptionJsonConverter.CredentialDescriptionJsonConverter() -> void
 Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider<TResult>

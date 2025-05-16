@@ -67,8 +67,6 @@ Microsoft.Identity.Abstractions.CredentialDescription
 Microsoft.Identity.Abstractions.CredentialDescription.CredentialDescription(Microsoft.Identity.Abstractions.CredentialDescription! other) -> void
 Microsoft.Identity.Abstractions.CredentialDescription.Base64EncodedValue.get -> string?
 Microsoft.Identity.Abstractions.CredentialDescription.Base64EncodedValue.set -> void
-Microsoft.Identity.Abstractions.CredentialDescription.Certificate.get -> System.Security.Cryptography.X509Certificates.X509Certificate2?
-Microsoft.Identity.Abstractions.CredentialDescription.Certificate.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.CertificateDiskPath.get -> string?
 Microsoft.Identity.Abstractions.CredentialDescription.CertificateDiskPath.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.CertificateDistinguishedName.get -> string?

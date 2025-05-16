@@ -1,4 +1,6 @@
 #nullable enable
+Microsoft.Identity.Abstractions.CredentialDescription.GetCertificate() -> System.Security.Cryptography.X509Certificates.X509Certificate2?
+Microsoft.Identity.Abstractions.CredentialDescription.SetCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2! certificate) -> Microsoft.Identity.Abstractions.CredentialDescription!
 Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider<TResult>
 Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider<TResult>.CreateAuthorizationHeaderAsync(Microsoft.Identity.Abstractions.DownstreamApiOptions! downstreamApiOptions, System.Security.Claims.ClaimsPrincipal? claimsPrincipal = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TResult>!
 Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions
