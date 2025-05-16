@@ -463,6 +463,9 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             {
                 "ClientCredentials": [
                 {
+                    "SourceType": "KeyVault",
+                    "KeyVaultUrl": "https://msidentitywebsamples.vault.azure.net",
+                    "KeyVaultCertificateName": "MicrosoftIdentitySamplesCert"
                     "Algorithm": "RS256",
                 }]
             }
