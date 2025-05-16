@@ -41,7 +41,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
         [Fact]
         public void CertificateFromPath()
         {
-            // Certificate from path 
+            // Certificate from path
             // ---------------------
             /*
             // <path_json>
@@ -93,7 +93,6 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                 SourceType = CredentialSource.StoreWithThumbprint,
                 CertificateStorePath = "LocalMachine/My",
                 CertificateThumbprint = "962D129A...D18EFEB6961684"
-
             };
             // </thumbprint_csharp>
 
@@ -124,13 +123,11 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                 SourceType = CredentialSource.StoreWithDistinguishedName,
                 CertificateStorePath = "LocalMachine/My",
                 CertificateDistinguishedName = "CN=WebAppCallingWebApiCert"
-
             };
             // </distinguishedname_csharp>
 
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
         }
-
 
         [Fact]
         public void CertificateFromKeyVault()
@@ -156,7 +153,6 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                 SourceType = CredentialSource.KeyVault,
                 KeyVaultUrl = "https://msidentitywebsamples.vault.azure.net",
                 KeyVaultCertificateName = "MicrosoftIdentitySamplesCert"
-
             };
             // </keyvault_csharp>
 
@@ -220,7 +216,6 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
 
             Assert.Equal(CredentialType.SignedAssertion, credentialDescription.CredentialType);
         }
-
 
         [Fact]
         public void SignedAssertionFromFilePath()
@@ -339,7 +334,6 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                 SourceType = CredentialSource.CustomSignedAssertion,
                 CustomSignedAssertionProviderName = "MyCustomProvider",
                 CustomSignedAssertionProviderData = new Dictionary<string, object>() { { "MyCustomProviderData_Key", "MyCustomProviderData_Data" } }
-
             };
 
             // Act
@@ -388,7 +382,6 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             credentialDescription.SourceType = (CredentialSource)(-1);
             Assert.Equal(default(CredentialType), credentialDescription.CredentialType);
             Assert.Throws<ArgumentException>(() => credentialDescription.Id);
-
         }
 
         [Fact]
@@ -458,6 +451,57 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             // Act & Assert
             _ = Assert.Throws<ArgumentNullException>(() => new CredentialDescription(original!));
 #pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+        }
+
+        [Fact]
+        public void Algorithm_SetAndGet_ShouldWork()
+        {
+            /*
+            // <algorithm_json>
+            {
+                "ClientCredentials": [
+                {
+                    "SourceType": "KeyVault",
+                    "KeyVaultUrl": "https://msidentitywebsamples.vault.azure.net",
+                    "KeyVaultCertificateName": "MicrosoftIdentitySamplesCert"
+                    "Algorithm": "RS256",
+                }]
+            }
+            // </algorithm_json>
+            */
+
+            // <algorithm_csharp>
+            // Arrange
+            var credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.KeyVault,
+                Algorithm = "RS256",
+                KeyVaultCertificateName = "MicrosoftIdentitySamplesCert",
+                KeyVaultUrl = "https://msidentitywebsamples.vault.azure.net",
+            };
+
+            // Act
+            var actualAlgorithm = credentialDescription.Algorithm;
+            // </algorithm_csharp>
+
+            // Assert
+            Assert.Equal("RS256", actualAlgorithm);
+        }
+
+        [Fact]
+        public void CopyConstructor_ShouldCopyAlgorithm()
+        {
+            // Arrange
+            var original = new CredentialDescription
+            {
+                Algorithm = "RS256"
+            };
+
+            // Act
+            var copy = new CredentialDescription(original);
+
+            // Assert
+            Assert.Equal(original.Algorithm, copy.Algorithm);
         }
     }
 }

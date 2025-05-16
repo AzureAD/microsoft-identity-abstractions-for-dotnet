@@ -40,6 +40,7 @@ namespace Microsoft.Identity.Abstractions
             if (other == null)
                 throw new ArgumentNullException(nameof(other));
 #endif
+            Algorithm = other.Algorithm;
             Base64EncodedValue = other.Base64EncodedValue;
             CachedValue = other.CachedValue;
             Certificate = other.Certificate;
@@ -144,6 +145,11 @@ namespace Microsoft.Identity.Abstractions
 #endif
             return Convert.ToBase64String(digest);
         }
+
+        /// <summary>
+        /// Algorithm used to create signing credentials.
+        /// </summary>
+        public string? Algorithm { get; set; }
 
         /// <summary>
         /// Type of the source of the credential. This property is used to determine which other properties need
