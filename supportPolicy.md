@@ -5,7 +5,7 @@ _Last updated May 14, 2025_
 ## Supported versions
 The following table lists Microsoft.Identity.Abstractions versions currently supported and receiving security fixes.
 
-| Major Version | Last Release | Patch release date  | Support phase|End of support |
+| Major Version | Last Release | Patch Release Date  | Support Phase|End of Support |
 | --------------|--------------|--------|------------|--------|
 | 9.x           | [![NuGet](https://img.shields.io/nuget/v/Microsoft.Identity.Abstractions.svg?style=flat-square&label=nuget&colorB=00b200)](https://www.nuget.org/packages/Microsoft.Identity.Abstractions/)   |Monthly| Active | Not planned.<br/>✅Supported versions: from 9.0.0 to [![NuGet](https://img.shields.io/nuget/v/Microsoft.Identity.Abstractions.svg?style=flat-square&label=nuget&colorB=00b200)](https://www.nuget.org/packages/Microsoft.Identity.Abstractions/)<br/>⚠️Unsupported versions `< 9.0.0`.|
 
@@ -14,14 +14,14 @@ The following table lists Microsoft.Identity.Abstractions versions no longer sup
 
 | Major Version | Latest Patch Version| Patch Release Date | End of Support Date|
 | --------------|--------------|--------|--------|
-| 8.x           | <= 8.2.0       | February 14, 2025      | March 31, 2025  |
-| 7.x           | <= 7.2.1       | January 21, 2025       | March 31, 2025  |
-| 6.x           | <= 6.0.0       | June 21, 2024          | March 31, 2025  |
-| 5.x           | <= 5.3.0       | April 22, 2024         | March 31, 2025  |
-| 4.x           | <= 4.1.0       | September 7, 2023      | March 31, 2025  |
-| 3.x           | <= 3.2.1       | May 29, 2023           | March 31, 2025  |
-| 2.x           | <= 2.1.0       | March 12, 2023         | March 31, 2025  |
-| 1.x           | <= 1.2.0       | January 6, 2023        | March 31, 2025  |
+| 8.x           |    8.2.0       | February 14, 2025      | March 31, 2025  |
+| 7.x           |    7.2.1       | January 21, 2025       | March 31, 2025  |
+| 6.x           |    6.0.0       | June 21, 2024          | March 31, 2025  |
+| 5.x           |    5.3.0       | April 22, 2024         | March 31, 2025  |
+| 4.x           |    4.1.0       | September 7, 2023      | March 31, 2025  |
+| 3.x           |    3.2.1       | May 29, 2023           | March 31, 2025  |
+| 2.x           |    2.1.0       | March 12, 2023         | March 31, 2025  |
+| 1.x           |    1.2.0       | January 6, 2023        | March 31, 2025  |
 
 ## Overview
 
