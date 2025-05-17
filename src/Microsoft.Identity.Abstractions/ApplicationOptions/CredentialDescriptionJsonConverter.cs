@@ -3,6 +3,7 @@
 
 #if NET8_0_OR_GREATER
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -14,6 +15,8 @@ namespace Microsoft.Identity.Abstractions
     /// </summary>
     /// <remarks>BE CAREFUL when you serialize a credential description. The secrets it contains
     /// will be serialized too depending on the CredentialSource (ClientSecret, Base64Encoded, and Password)</remarks>
+    [RequiresDynamicCode("Uses JsonSerializer which may require dynamic code generation for certain types.")]
+    [RequiresUnreferencedCode("Uses JsonSerializer which may require dynamic code generation for certain types.")]
     public class CredentialDescriptionJsonConverter : JsonConverter<CredentialDescription>
     {
         /// <inheritdoc/>
