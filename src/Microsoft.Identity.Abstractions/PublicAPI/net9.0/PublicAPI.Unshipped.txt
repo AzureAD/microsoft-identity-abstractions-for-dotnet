@@ -2,7 +2,7 @@
 Microsoft.Identity.Abstractions.CredentialDescription.Algorithm.get -> string?
 Microsoft.Identity.Abstractions.CredentialDescription.Algorithm.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.GetCertificate() -> System.Security.Cryptography.X509Certificates.X509Certificate2?
-Microsoft.Identity.Abstractions.CredentialDescription.SetCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2! certificate) -> Microsoft.Identity.Abstractions.CredentialDescription!
+Microsoft.Identity.Abstractions.CredentialDescription.SetCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2? certificate) -> Microsoft.Identity.Abstractions.CredentialDescription!
 Microsoft.Identity.Abstractions.CredentialDescriptionJsonConverter
 Microsoft.Identity.Abstractions.CredentialDescriptionJsonConverter.CredentialDescriptionJsonConverter() -> void
 Microsoft.Identity.Abstractions.DownstreamApisOptions

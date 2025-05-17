@@ -417,7 +417,7 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <paramref name="certificate"> is the certificate to set.</paramref>
         /// <returns>the CredentialDescription itself to chain initialization calls.</returns>
-        public CredentialDescription SetCertificate(X509Certificate2 certificate)
+        public CredentialDescription SetCertificate(X509Certificate2? certificate)
         {
             Certificate = certificate;
             return this;
