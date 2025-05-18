@@ -1,3 +1,16 @@
+9.1.0
+======
+## New features
+* Add a new generic IAuthorizationHeaderProvider<TResult> to have the possiblity of returning authorization header and metadata or error instead of throwing. For details see [#172](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/172)
+* Add Algorithm property to CredentialDescription to describe signing credentials. For details see [#182](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/182)
+* Adding serializer for CredentialDescription in .NET 8+. See [#176](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/176)
+
+## Foundamentals
+* Add dev container to work in Code Spaces. See PR [#175](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/175)
+* Adding a doc about CredentialDescription. See PR [#181](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/181)
+* Fixing AoT warnings: part 1 - non breaking. See PR [#187](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/187)
+* update Readme.md to explain the support policy for the library and the notion of LTS. See PRs [171](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/171), [183](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/184), , [185](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/185) 
+
 9.0.0
 ======
 ## New features
