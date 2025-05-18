@@ -1,4 +1,4 @@
-9.0.0
+9.1.0
 ======
 ## New features
 * Add a new generic IAuthorizationHeaderProvider<TResult> to have the possiblity of returning authorization header and metadata or error instead of throwing. For details see [#172](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/172)
