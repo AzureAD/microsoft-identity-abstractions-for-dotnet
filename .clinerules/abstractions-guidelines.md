@@ -4,12 +4,10 @@ Microsoft.Identity.Abstractions Guidelines
 
 Microsoft.Identity.Abstractions is a core authentication and authorization library that provides essential interfaces and base classes for implementing identity and access management in .NET applications. The library specializes in:
 
-- Authentication and authorization abstractions
-- Token acquisition and management interfaces
+- Abstractions and options for applications using Microsoft Entra ID
+- Token acquisition options and interfaces
 - Credential handling abstractions
-- Client configuration interfaces
 - Protocol-agnostic identity concepts
-- High-performance authentication middleware support
 
 Through its well-designed abstractions and interfaces, Microsoft.Identity.Abstractions enables consistent authentication patterns across different authentication providers and scenarios.
 
@@ -17,34 +15,22 @@ Through its well-designed abstractions and interfaces, Microsoft.Identity.Abstra
 
 ### Core Directories
 - `/src` - Contains all source code for the Microsoft.Identity.Abstractions package
-  - Authentication - Core authentication interfaces
-  - Authorization - Authorization abstractions
-  - Credentials - Credential management interfaces
-  - Configuration - Authentication configuration abstractions
-  - TokenAcquisition - Token handling interfaces
-- `/tests` - Unit tests, integration tests, and test utilities
-- `/samples` - Example implementations and usage patterns
+  - ApplicationOptions - Options decribing the authentication part of applications
+  - Credentials - Option describing credentials (secrets, certificate, signed assertions)
+  - TokenAcquisition - Options and interfaces to acquire tokens, and creating Authorization headers
+- `/tests` - Unit tests
 - `/build` - Build configuration and scripts
 
 ## Key Components
 
 ### Core Abstractions
-- IAuthenticationClientFactory - Factory for creating authentication clients
-- ICredentialProvider - Interface for credential management
+- CredentialDescription - describes a credential
+- MicrosoftIdentityApplicationOptions - describes an application
+- ICredentialProvider - Interface to bring your own credential loaders
 - ITokenAcquirer - Core interface for token acquisition
-- IAuthenticationConfiguration - Authentication configuration interface
-
-### Authentication Support
-- AuthenticationOptionsBase - Base class for authentication options
-- AuthenticationClientBase - Base implementation for authentication clients
-- TokenRequestContext - Context for token requests
-- CredentialDescription - Credential information abstraction
-
-### Configuration and Integration
-- AuthenticationClientOptions - Client configuration options
-- CredentialSourceOptions - Credential source configuration
-- TokenAcquirerOptions - Token acquisition settings
-- AuthenticationProtocolOptions - Protocol configuration abstractions
+- ITokenAcquirerFactory - Factory of Token acquirers
+- IAuthorizationHeaderProvider - creates authorization headers (getting tokens and building the protocol string)
+- IDownstreamApi - call downstream APIs in an authenticated way.
 
 ## Development Guidelines
 
