@@ -15,7 +15,7 @@ Through its well-designed abstractions and interfaces, Microsoft.Identity.Abstra
 
 ### Core Directories
 - `/src` - Contains all source code for the Microsoft.Identity.Abstractions package
-  - ApplicationOptions - Options decribing the authentication part of applications
+  - ApplicationOptions - Options describing the authentication part of applications
   - Credentials - Option describing credentials (secrets, certificate, signed assertions)
   - TokenAcquisition - Options and interfaces to acquire tokens, and creating Authorization headers
 - `/tests` - Unit tests
@@ -62,13 +62,14 @@ Through its well-designed abstractions and interfaces, Microsoft.Identity.Abstra
 - Test configuration patterns
 - Validate integration scenarios
 
-### Public API Changes
+### Public and Internal API Changes
 - The project uses Microsoft.CodeAnalysis.PublicApiAnalyzers
-- For any public API changes:
-  1. Update PublicAPI.Unshipped.txt in the package directory
-  2. Include complete interface and abstract class signatures
-  3. Consider backward compatibility impacts
-  4. Document breaking changes clearly
+- For any public and internal API (i.e. public and internal member) changes:
+  1. Update PublicAPI.Unshipped.txt in the relevant package directory for a public API change
+  2. Update InternalAPI.Unshipped.txt in the relevant package directory for an internal API change
+  3. Include complete API signatures
+  4. Consider backward compatibility impacts
+  5. Document breaking changes clearly
 
 Example format:
 ```diff
@@ -80,4 +81,4 @@ Example format:
 -Microsoft.Identity.Abstractions.ObsoleteAuthenticationMethod() -> void
 ```
 
-The analyzer enforces documentation of all public API changes in PublicAPI.Unshipped.txt and will fail the build if changes are not properly reflected.
+The analyzer enforces documentation of all public API changes in PublicAPI.Unshipped.txt and all internal API changes in InternalAPI.Unshipped.txt and will fail the build if changes are not properly reflected.
