@@ -27,8 +27,8 @@
         <LangVersion>12</LangVersion>
         <EnablePackageValidation>true</EnablePackageValidation>
         <PackageValidationBaselineVersion>8.0.0</PackageValidationBaselineVersion>
-        <BannedApiAnalyzersVersion>3.3.4</BannedApiAnalyzersVersion>
-        <MicrosoftCodeAnalysisPublicApiAnalyzers>3.3.4</MicrosoftCodeAnalysisPublicApiAnalyzers>
+        <BannedApiAnalyzersVersion>4.14.0</BannedApiAnalyzersVersion>
+        <MicrosoftCodeAnalysisPublicApiAnalyzers>4.14.0</MicrosoftCodeAnalysisPublicApiAnalyzers>
         <MicrosoftCodeAnalysisNetAnalyzersVersion>8.0.0</MicrosoftCodeAnalysisNetAnalyzersVersion>
     </PropertyGroup>
 
