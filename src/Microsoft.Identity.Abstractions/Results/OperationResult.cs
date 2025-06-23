@@ -18,7 +18,6 @@ namespace Microsoft.Identity.Abstractions
     /// It ensures that either a valid result or an error is available, but never both.
     /// This pattern helps with clear error handling and propagation.
     /// </remarks>
-
     public readonly record struct OperationResult<TResult, TError>
             where TResult : class
             where TError : OperationError
