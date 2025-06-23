@@ -21,3 +21,18 @@ Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.TenantId.get ->
 Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.TenantId.set -> void
 override Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.Authority.get -> string?
 override Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.Authority.set -> void
+Microsoft.Identity.Abstractions.OperationResult<TResult, TError>
+~override Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.ToString() -> string
+~static Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.operator !=(Microsoft.Identity.Abstractions.OperationResult<TResult, TError> left, Microsoft.Identity.Abstractions.OperationResult<TResult, TError> right) -> bool
+~static Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.operator ==(Microsoft.Identity.Abstractions.OperationResult<TResult, TError> left, Microsoft.Identity.Abstractions.OperationResult<TResult, TError> right) -> bool
+override Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.GetHashCode() -> int
+~override Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.Equals(object obj) -> bool
+~Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.Equals(Microsoft.Identity.Abstractions.OperationResult<TResult, TError> other) -> bool
+Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.OperationResult() -> void
+Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.OperationResult(TResult! result) -> void
+Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.OperationResult(TError! error) -> void
+Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.Succeeded.get -> bool
+Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.Error.get -> TError?
+Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.Result.get -> TResult?
+Microsoft.Identity.Abstractions.OperationError
+Microsoft.Identity.Abstractions.OperationError.OperationError() -> void
