@@ -130,49 +130,8 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
         }
 
         [Fact]
-        public void ExtraParametersWorkCorrectly()
+        public void ExerciseApi()
         {
-            var downstreamApiOptions = new DownstreamApiOptions
-            {
-                ExtraHeaderParameters = new Dictionary<string, string>
-                {
-                    { "OData-Version", "4.0" },
-                    { "Accept-Language", "en-US" }
-                },
-                ExtraQueryParameters = new Dictionary<string, string>
-                {
-                    { "filter", "name eq 'test'" },
-                    { "top", "10" }
-                }
-            };
-
-            // Test that properties are set correctly
-            Assert.NotNull(downstreamApiOptions.ExtraHeaderParameters);
-            Assert.Equal(2, downstreamApiOptions.ExtraHeaderParameters.Count);
-            Assert.Equal("4.0", downstreamApiOptions.ExtraHeaderParameters["OData-Version"]);
-            Assert.Equal("en-US", downstreamApiOptions.ExtraHeaderParameters["Accept-Language"]);
-
-            Assert.NotNull(downstreamApiOptions.ExtraQueryParameters);
-            Assert.Equal(2, downstreamApiOptions.ExtraQueryParameters.Count);
-            Assert.Equal("name eq 'test'", downstreamApiOptions.ExtraQueryParameters["filter"]);
-            Assert.Equal("10", downstreamApiOptions.ExtraQueryParameters["top"]);
-
-            // Test cloning preserves the properties
-            var clonedOptions = downstreamApiOptions.Clone();
-            Assert.NotNull(clonedOptions.ExtraHeaderParameters);
-            Assert.Equal(downstreamApiOptions.ExtraHeaderParameters, clonedOptions.ExtraHeaderParameters);
-            Assert.NotNull(clonedOptions.ExtraQueryParameters);
-            Assert.Equal(downstreamApiOptions.ExtraQueryParameters, clonedOptions.ExtraQueryParameters);
-
-            // Test null values work
-            var emptyOptions = new DownstreamApiOptions();
-            Assert.Null(emptyOptions.ExtraHeaderParameters);
-            Assert.Null(emptyOptions.ExtraQueryParameters);
-
-            var clonedEmptyOptions = emptyOptions.Clone();
-            Assert.Null(clonedEmptyOptions.ExtraHeaderParameters);
-            Assert.Null(clonedEmptyOptions.ExtraQueryParameters);
-        }
             IDownstreamApi downstreamApi = new CustomDownstreamApi();
 
             // Call a service based on the configuration only. The name "service" maps to a 
@@ -241,6 +200,52 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             response = downstreamApi.GetForAppAsync<CustomApiInput, CustomApiResponse>("service", input, CustomApiResponseJsonContext.Default.CustomApiInput, CustomApiResponseJsonContext.Default.CustomApiResponse).Result;
             Assert.Equal(123, response?.ErrorCode);
         }
+
+        [Fact]
+        public void ExtraParametersWorkCorrectly()
+        {
+            var downstreamApiOptions = new DownstreamApiOptions
+            {
+                ExtraHeaderParameters = new Dictionary<string, string>
+                {
+                    { "OData-Version", "4.0" },
+                    { "Accept-Language", "en-US" }
+                },
+                ExtraQueryParameters = new Dictionary<string, string>
+                {
+                    { "filter", "name eq 'test'" },
+                    { "top", "10" }
+                }
+            };
+
+            // Test that properties are set correctly
+            Assert.NotNull(downstreamApiOptions.ExtraHeaderParameters);
+            Assert.Equal(2, downstreamApiOptions.ExtraHeaderParameters.Count);
+            Assert.Equal("4.0", downstreamApiOptions.ExtraHeaderParameters["OData-Version"]);
+            Assert.Equal("en-US", downstreamApiOptions.ExtraHeaderParameters["Accept-Language"]);
+
+            Assert.NotNull(downstreamApiOptions.ExtraQueryParameters);
+            Assert.Equal(2, downstreamApiOptions.ExtraQueryParameters.Count);
+            Assert.Equal("name eq 'test'", downstreamApiOptions.ExtraQueryParameters["filter"]);
+            Assert.Equal("10", downstreamApiOptions.ExtraQueryParameters["top"]);
+
+            // Test cloning preserves the properties
+            var clonedOptions = downstreamApiOptions.Clone();
+            Assert.NotNull(clonedOptions.ExtraHeaderParameters);
+            Assert.Equal(downstreamApiOptions.ExtraHeaderParameters, clonedOptions.ExtraHeaderParameters);
+            Assert.NotNull(clonedOptions.ExtraQueryParameters);
+            Assert.Equal(downstreamApiOptions.ExtraQueryParameters, clonedOptions.ExtraQueryParameters);
+
+            // Test null values work
+            var emptyOptions = new DownstreamApiOptions();
+            Assert.Null(emptyOptions.ExtraHeaderParameters);
+            Assert.Null(emptyOptions.ExtraQueryParameters);
+
+            var clonedEmptyOptions = emptyOptions.Clone();
+            Assert.Null(clonedEmptyOptions.ExtraHeaderParameters);
+            Assert.Null(clonedEmptyOptions.ExtraQueryParameters);
+        }
+
 #endif
     }
 

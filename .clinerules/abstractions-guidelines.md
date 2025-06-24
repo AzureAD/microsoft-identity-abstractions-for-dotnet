@@ -70,6 +70,7 @@ Through its well-designed abstractions and interfaces, Microsoft.Identity.Abstra
   3. Include complete API signatures
   4. Consider backward compatibility impacts
   5. Document breaking changes clearly
+  6. Update the mermaid diagrams in the Readme.md file to reflect the changes to the public API.
 
 Example format:
 ```diff

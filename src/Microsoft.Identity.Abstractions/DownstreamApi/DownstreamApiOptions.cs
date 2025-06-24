@@ -141,13 +141,18 @@ namespace Microsoft.Identity.Abstractions
         public string ContentType { get; set; } = "application/json";
 
         /// <summary>
-        /// Sets extra headers in the HTTP request to the downstream web API.
+        /// Sets extra headers in the HTTP request to the downstream web API. This should
+        /// not be confounded with another option to set the headers in the request to the 
+        /// Identity Provider. See <see cref="AcquireTokenOptions.ExtraHeadersParameters"/> for 
+        /// that scenario.
         /// </summary>
         public IDictionary<string, string>? ExtraHeaderParameters { get; set; }
 
         /// <summary>
         /// Sets query parameters for the query string in the HTTP request to the 
-        /// downstream web API.
+        /// downstream web API. This should not be confounded with another option to set the 
+        /// query parameters in the request to the Identity Provider. See 
+        /// <see cref="AcquireTokenOptions.ExtraQueryParameters"/> for that scenario.
         /// </summary>
         public IDictionary<string, string>? ExtraQueryParameters { get; set; }
     }
