@@ -142,7 +142,7 @@ namespace Microsoft.Identity.Abstractions
 
         /// <summary>
         /// Sets extra headers in the HTTP request to the downstream web API. This should
-        /// not be confounded with another option to set the headers in the request to the 
+        /// not be confused with another option to set the headers in the request to the 
         /// Identity Provider. See <see cref="AcquireTokenOptions.ExtraHeadersParameters"/> for 
         /// that scenario.
         /// </summary>
@@ -150,7 +150,7 @@ namespace Microsoft.Identity.Abstractions
 
         /// <summary>
         /// Sets query parameters for the query string in the HTTP request to the 
-        /// downstream web API. This should not be confounded with another option to set the 
+        /// downstream web API. This should not be confused with another option to set the 
         /// query parameters in the request to the Identity Provider. See 
         /// <see cref="AcquireTokenOptions.ExtraQueryParameters"/> for that scenario.
         /// </summary>
