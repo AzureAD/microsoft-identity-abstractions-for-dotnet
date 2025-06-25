@@ -29,10 +29,13 @@ override Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.GetHas
 ~override Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.Equals(object obj) -> bool
 ~Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.Equals(Microsoft.Identity.Abstractions.OperationResult<TResult, TError> other) -> bool
 Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.OperationResult() -> void
-Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.OperationResult(TResult! result) -> void
+static Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.implicit operator Microsoft.Identity.Abstractions.OperationResult<TResult, TError>(TError error) -> Microsoft.Identity.Abstractions.OperationResult<TResult, TError>
+static Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.implicit operator Microsoft.Identity.Abstractions.OperationResult<TResult, TError>(TResult result) -> Microsoft.Identity.Abstractions.OperationResult<TResult, TError>
+Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.OperationResult(TResult result) -> void
 Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.OperationResult(TError! error) -> void
 Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.Succeeded.get -> bool
 Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.Error.get -> TError?
 Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.Result.get -> TResult?
+Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.ToOperationResult() -> Microsoft.Identity.Abstractions.OperationResult<TResult, TError>
 Microsoft.Identity.Abstractions.OperationError
 Microsoft.Identity.Abstractions.OperationError.OperationError() -> void

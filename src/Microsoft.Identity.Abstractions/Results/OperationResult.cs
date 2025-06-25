@@ -6,6 +6,8 @@ using System.Diagnostics.CodeAnalysis;
 #endif
 
 #nullable enable
+using System;
+
 namespace Microsoft.Identity.Abstractions
 {
     /// <summary>
@@ -19,7 +21,6 @@ namespace Microsoft.Identity.Abstractions
     /// This pattern helps with clear error handling and propagation.
     /// </remarks>
     public readonly record struct OperationResult<TResult, TError>
-            where TResult : class
             where TError : OperationError
     {
         /// <summary>
@@ -47,6 +48,14 @@ namespace Microsoft.Identity.Abstractions
         }
 
         /// <summary>
+        /// Empty constructor implementation to prevent creating an empty result.
+        /// </summary>
+        /// <remarks>Throws an <see cref="InvalidOperationException"/> when called as this should never be used. Always initialize Result with either a value or error.</remarks>
+        /// <exception cref="InvalidOperationException">Thrown when called.</exception>
+        [Obsolete("Cannot create an empty operation result", true)]
+        public OperationResult() => throw new InvalidOperationException("Cannot create an empty operation result");
+
+        /// <summary>
         /// Gets a value indicating whether the operation succeeded.
         /// </summary>
         /// <value>
@@ -72,6 +81,28 @@ namespace Microsoft.Identity.Abstractions
         /// <returns>The result associated with the operation result.</returns>
         /// <remarks>This property is only valid if the result type is valid.</remarks>
         public readonly TResult? Result { get; }
+
+#pragma warning disable RS0036 // Annotate nullability of public types and members in the declared API
+        /// <summary>
+        /// Creates an <see cref="OperationResult{TResult, TError}"/>, successful result implicitly from the value.
+        /// </summary>
+        /// <param name="result">The value to be stored in the result.</param>
+        public static implicit operator OperationResult<TResult, TError>(TResult result) => new(result);
+
+        /// <summary>
+        /// Creates an <see cref="OperationResult{TResult, TError}"/> result implicitly from the error value.
+        /// </summary>
+        /// <param name=""></param>
+        /// <param name="error">The error to be stored in the result.</param>
+        public static implicit operator OperationResult<TResult, TError>(TError error) => new(error);
+
+        /// <summary>
+        /// Casts the result to a <see cref="OperationResult{TResult, TError}"/>.
+        /// </summary>
+        /// <remarks>Required for compatibility, see CA2225 for more information</remarks>
+        /// <returns>The existing instance.</returns>
+        public OperationResult<TResult, TError> ToOperationResult() => this;
+#pragma warning restore RS0036 // Annotate nullability of public types and members in the declared API
     }
 }
 #nullable restore
