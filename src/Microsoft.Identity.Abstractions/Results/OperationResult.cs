@@ -21,7 +21,7 @@ namespace Microsoft.Identity.Abstractions
     /// This pattern helps with clear error handling and propagation.
     /// </remarks>
     public readonly record struct OperationResult<TResult, TError>
-            where TError : OperationError
+        where TError : OperationError
     {
         /// <summary>
         /// Creates a new instance of <see cref="OperationResult{TResult, TError}"/> indicating a successful operation
@@ -82,7 +82,6 @@ namespace Microsoft.Identity.Abstractions
         /// <remarks>This property is only valid if the result type is valid.</remarks>
         public readonly TResult? Result { get; }
 
-#pragma warning disable RS0036 // Annotate nullability of public types and members in the declared API
         /// <summary>
         /// Creates an <see cref="OperationResult{TResult, TError}"/>, successful result implicitly from the value.
         /// </summary>
@@ -92,7 +91,6 @@ namespace Microsoft.Identity.Abstractions
         /// <summary>
         /// Creates an <see cref="OperationResult{TResult, TError}"/> result implicitly from the error value.
         /// </summary>
-        /// <param name=""></param>
         /// <param name="error">The error to be stored in the result.</param>
         public static implicit operator OperationResult<TResult, TError>(TError error) => new(error);
 
@@ -102,7 +100,6 @@ namespace Microsoft.Identity.Abstractions
         /// <remarks>Required for compatibility, see CA2225 for more information</remarks>
         /// <returns>The existing instance.</returns>
         public OperationResult<TResult, TError> ToOperationResult() => this;
-#pragma warning restore RS0036 // Annotate nullability of public types and members in the declared API
     }
 }
 #nullable restore
