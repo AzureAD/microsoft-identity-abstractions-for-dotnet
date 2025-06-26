@@ -22,7 +22,13 @@ namespace Microsoft.Identity.Abstractions
     ///     "MyProfile": {
     ///        "BaseUrl": "https://graph.microsoft.com/v1.0",
     ///        "RelativePath": "/me/profile",
-    ///         "Scopes": [ "user.read"]
+    ///         "Scopes": [ "user.read"],
+    ///         "ExtraHeaderParameters": {
+    ///           "OData-Version": "4.0"
+    ///         },
+    ///         "ExtraQueryParameters": {
+    ///           "filter": "displayName eq 'John'"
+    ///         }
     ///     }
     ///   ]
     /// ```
@@ -36,7 +42,13 @@ namespace Microsoft.Identity.Abstractions
     ///        "RelativePath": "/books/all",
     ///        "RequestAppToken": true,
     ///        "ProtocolScheme": "Pop",
-    ///         "Scopes": ["https://mylibrary.com/.default"]
+    ///         "Scopes": ["https://mylibrary.com/.default"],
+    ///         "ExtraHeaderParameters": {
+    ///           "X-API-Version": "v2"
+    ///         },
+    ///         "ExtraQueryParameters": {
+    ///           "format": "json"
+    ///         }
     ///     }
     ///   ]
     /// ```
@@ -62,6 +74,8 @@ namespace Microsoft.Identity.Abstractions
             Deserializer = other.Deserializer;
             AcceptHeader = other.AcceptHeader;
             ContentType = other.ContentType;
+            ExtraHeaderParameters = other.ExtraHeaderParameters;
+            ExtraQueryParameters = other.ExtraQueryParameters;
         }
 
         /// <summary>
@@ -125,5 +139,21 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <default>application/json</default>
         public string ContentType { get; set; } = "application/json";
+
+        /// <summary>
+        /// Sets extra headers in the HTTP request to the downstream web API. This should
+        /// not be confused with another option to set the headers in the request to the 
+        /// Identity Provider. See <see cref="AcquireTokenOptions.ExtraHeadersParameters"/> for 
+        /// that scenario.
+        /// </summary>
+        public IDictionary<string, string>? ExtraHeaderParameters { get; set; }
+
+        /// <summary>
+        /// Sets query parameters for the query string in the HTTP request to the 
+        /// downstream web API. This should not be confused with another option to set the 
+        /// query parameters in the request to the Identity Provider. See 
+        /// <see cref="AcquireTokenOptions.ExtraQueryParameters"/> for that scenario.
+        /// </summary>
+        public IDictionary<string, string>? ExtraQueryParameters { get; set; }
     }
 }

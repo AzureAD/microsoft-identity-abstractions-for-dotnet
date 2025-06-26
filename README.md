@@ -167,6 +167,8 @@ classDiagram
     &lt;&lt;rw&gt;&gt; +Func&lt;HttpContent, Object&gt; Deserializer
     &lt;&lt;rw&gt;&gt; +string AcceptHeader
     &lt;&lt;rw&gt;&gt; +string ContentType
+    &lt;&lt;rw&gt;&gt; +string ExtraQueryParameters
+    &lt;&lt;rw&gt;&gt; +string ExtraHeadersParameters
     }
     class DownstreamApiOptionsReadOnlyHttpMethod {
     +DownstreamApiOptionsReadOnlyHttpMethod Clone()
@@ -419,6 +421,8 @@ It's also possible (and recommended) to use higher level APIs:
     &lt;&lt;rw&gt;&gt; +Func&lt;HttpContent, Object&gt; Deserializer
     &lt;&lt;rw&gt;&gt; +string AcceptHeader
     &lt;&lt;rw&gt;&gt; +string ContentType
+    &lt;&lt;rw&gt;&gt; +IDictionary&lt;string, string&gt; ExtraQueryParameters
+    &lt;&lt;rw&gt;&gt; +IDictionary&lt;string, string&gt; ExtraHeadersParameters
     }
     class DownstreamApiOptionsReadOnlyHttpMethod {
     +DownstreamApiOptionsReadOnlyHttpMethod Clone()
