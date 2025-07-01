@@ -19,6 +19,16 @@ namespace Microsoft.Identity.Abstractions.OperationResult.Tests
         }
 
         [Fact]
+        public void ValidResultValueType()
+        {
+            var result = new OperationResult<bool, OperationError>(true);
+
+            Assert.True(result.Succeeded);
+            Assert.True(result.Result);
+            Assert.Null(result.Error);
+        }
+
+        [Fact]
         public void ErrorResult()
         {
             var expectedError = new CustomError();
@@ -27,6 +37,17 @@ namespace Microsoft.Identity.Abstractions.OperationResult.Tests
             Assert.False(result.Succeeded);
             Assert.Equal(expectedError, result.Error);
             Assert.Null(result.Result);
+        }
+
+        [Fact]
+        public void ErrorResultValueType()
+        {
+            var expectedError = new CustomError();
+            var result = new OperationResult<bool, OperationError>(expectedError);
+
+            Assert.False(result.Succeeded);
+            Assert.Equal(expectedError, result.Error);
+            Assert.Equal(default, result.Result);
         }
 
         [Fact]
