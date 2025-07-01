@@ -1,8 +1,11 @@
-#nullable enable
 Microsoft.Identity.Abstractions.CredentialDescription.Algorithm.get -> string?
 Microsoft.Identity.Abstractions.CredentialDescription.Algorithm.set -> void
 Microsoft.Identity.Abstractions.CredentialDescriptionJsonConverter
 Microsoft.Identity.Abstractions.CredentialDescriptionJsonConverter.CredentialDescriptionJsonConverter() -> void
+Microsoft.Identity.Abstractions.DownstreamApiOptions.ExtraHeaderParameters.get -> System.Collections.Generic.IDictionary<string!, string!>?
+Microsoft.Identity.Abstractions.DownstreamApiOptions.ExtraHeaderParameters.set -> void
+Microsoft.Identity.Abstractions.DownstreamApiOptions.ExtraQueryParameters.get -> System.Collections.Generic.IDictionary<string!, string!>?
+Microsoft.Identity.Abstractions.DownstreamApiOptions.ExtraQueryParameters.set -> void
 Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider<TResult>
 Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider<TResult>.CreateAuthorizationHeaderAsync(Microsoft.Identity.Abstractions.DownstreamApiOptions! downstreamApiOptions, System.Security.Claims.ClaimsPrincipal? claimsPrincipal = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TResult>!
 Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions
@@ -21,25 +24,25 @@ Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.SendX5C.get -> 
 Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.SendX5C.set -> void
 Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.TenantId.get -> string?
 Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.TenantId.set -> void
+Microsoft.Identity.Abstractions.OperationError
+Microsoft.Identity.Abstractions.OperationError.OperationError() -> void
+Microsoft.Identity.Abstractions.OperationResult<TResult, TError>
+Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.Error.get -> TError?
+Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.OperationResult() -> void
+Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.OperationResult(TError! error) -> void
+Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.OperationResult(TResult result) -> void
+Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.Result.get -> TResult?
+Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.Succeeded.get -> bool
+Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.ToOperationResult() -> Microsoft.Identity.Abstractions.OperationResult<TResult, TError!>
 override Microsoft.Identity.Abstractions.CredentialDescriptionJsonConverter.Read(ref System.Text.Json.Utf8JsonReader reader, System.Type! typeToConvert, System.Text.Json.JsonSerializerOptions! options) -> Microsoft.Identity.Abstractions.CredentialDescription!
 override Microsoft.Identity.Abstractions.CredentialDescriptionJsonConverter.Write(System.Text.Json.Utf8JsonWriter! writer, Microsoft.Identity.Abstractions.CredentialDescription! value, System.Text.Json.JsonSerializerOptions! options) -> void
 override Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.Authority.get -> string?
 override Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.Authority.set -> void
-Microsoft.Identity.Abstractions.OperationResult<TResult, TError>
+override Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.GetHashCode() -> int
+static Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.implicit operator Microsoft.Identity.Abstractions.OperationResult<TResult, TError!>(TError! error) -> Microsoft.Identity.Abstractions.OperationResult<TResult, TError!>
+static Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.implicit operator Microsoft.Identity.Abstractions.OperationResult<TResult, TError!>(TResult result) -> Microsoft.Identity.Abstractions.OperationResult<TResult, TError!>
+~Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.Equals(Microsoft.Identity.Abstractions.OperationResult<TResult, TError> other) -> bool
+~override Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.Equals(object obj) -> bool
 ~override Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.ToString() -> string
 ~static Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.operator !=(Microsoft.Identity.Abstractions.OperationResult<TResult, TError> left, Microsoft.Identity.Abstractions.OperationResult<TResult, TError> right) -> bool
 ~static Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.operator ==(Microsoft.Identity.Abstractions.OperationResult<TResult, TError> left, Microsoft.Identity.Abstractions.OperationResult<TResult, TError> right) -> bool
-override Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.GetHashCode() -> int
-~override Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.Equals(object obj) -> bool
-~Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.Equals(Microsoft.Identity.Abstractions.OperationResult<TResult, TError> other) -> bool
-static Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.implicit operator Microsoft.Identity.Abstractions.OperationResult<TResult, TError!>(TError! error) -> Microsoft.Identity.Abstractions.OperationResult<TResult, TError!>
-static Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.implicit operator Microsoft.Identity.Abstractions.OperationResult<TResult, TError!>(TResult result) -> Microsoft.Identity.Abstractions.OperationResult<TResult, TError!>
-Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.OperationResult() -> void
-Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.OperationResult(TResult result) -> void
-Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.OperationResult(TError! error) -> void
-Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.Succeeded.get -> bool
-Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.Error.get -> TError?
-Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.Result.get -> TResult?
-Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.ToOperationResult() -> Microsoft.Identity.Abstractions.OperationResult<TResult, TError!>
-Microsoft.Identity.Abstractions.OperationError
-Microsoft.Identity.Abstractions.OperationError.OperationError() -> void
