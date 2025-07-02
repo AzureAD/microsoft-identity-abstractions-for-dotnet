@@ -1,3 +1,36 @@
+## Unreleased
+
+### New features
+
+* **OperationResult and OperationError abstractions:**  
+  Introduced a new `OperationResult<TResult, TError>` struct and `OperationError` base class. These provide a discriminated union for representing either a result or an error, improving error handling and propagation.  
+  See implementation in [`src/Microsoft.Identity.Abstractions/Results/OperationResult.cs`](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/blob/main/src/Microsoft.Identity.Abstractions/Results/OperationResult.cs) and [`OperationError.cs`](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/blob/main/src/Microsoft.Identity.Abstractions/Results/OperationError.cs).
+
+* **DownstreamApiOptions extensibility:**  
+  Added two new properties to `DownstreamApiOptions`:
+  - `ExtraHeaderParameters` (`IDictionary<string, string>?`): Set extra headers in HTTP requests to downstream APIs.
+  - `ExtraQueryParameters` (`IDictionary<string, string>?`): Set extra query parameters in HTTP requests to downstream APIs.
+  This enables more flexible API calls and improved integration scenarios.
+
+### Fundamentals
+
+* **Development guidelines and Copilot integration:**  
+  - Introduced `.clinerules/abstractions-guidelines.md`, `.clinerules/csharp-guidelines.md`, `.clinerules/ai-guidelines.md`, and `.github/copilot-instructions.md` to formalize and document development, AI assistant, and C# code standards for contributors and tooling.
+  - Solution file and README updated to reference these guidelines.
+
+* **Analyzer and dependency updates:**  
+  - Bumped analyzer versions in `Directory.Build.props` for better static analysis (BannedApiAnalyzers and MicrosoftCodeAnalysisPublicApiAnalyzers updated from 3.3.4 to 4.14.0).
+
+### Tests
+
+* **Expanded test coverage:**  
+  - Added comprehensive unit tests for the new `OperationResult` and `OperationError` abstractions in `test/Microsoft.Identity.Abstractions.Tests/OperationResultTests.cs`.
+  - Extended `DownstreamApiOptions` tests to cover new properties and cloning behavior.
+
+---
+
+**Full diff, including all file and API changes, can be viewed [here](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/compare/0c64bf8...main).**
+
 9.1.0
 ======
 ## New features
