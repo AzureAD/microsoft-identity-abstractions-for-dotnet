@@ -1,5 +1,5 @@
-## Unreleased
-
+9.2.0
+======
 ### New features
 
 * **OperationResult and OperationError abstractions:**  
@@ -20,16 +20,6 @@
 
 * **Analyzer and dependency updates:**  
   - Bumped analyzer versions in `Directory.Build.props` for better static analysis (BannedApiAnalyzers and MicrosoftCodeAnalysisPublicApiAnalyzers updated from 3.3.4 to 4.14.0).
-
-### Tests
-
-* **Expanded test coverage:**  
-  - Added comprehensive unit tests for the new `OperationResult` and `OperationError` abstractions in `test/Microsoft.Identity.Abstractions.Tests/OperationResultTests.cs`.
-  - Extended `DownstreamApiOptions` tests to cover new properties and cloning behavior.
-
----
-
-**Full diff, including all file and API changes, can be viewed [here](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/compare/0c64bf8...main).**
 
 9.1.0
 ======
