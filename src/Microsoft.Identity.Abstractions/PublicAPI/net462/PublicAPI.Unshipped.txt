@@ -1,1 +1,3 @@
 #nullable enable
+Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.ClientCapabilities.get -> System.Collections.Generic.IReadOnlyCollection<string!>!
+Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.CredentialSourceLoaderParameters(string! clientId, string! authority, System.Collections.Generic.IEnumerable<string!>! clientCapabilities) -> void

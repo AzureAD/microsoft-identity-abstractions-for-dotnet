@@ -1,6 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Microsoft.Identity.Abstractions
 {
     /// <summary>
@@ -21,6 +24,27 @@ namespace Microsoft.Identity.Abstractions
         {
             ClientId = clientId;
             Authority = authority;
+            ClientCapabilities = [];
+        }
+
+        /// <summary>
+        /// Initialize the CredentialSourceLoaderParameters from the application ID and authority.
+        /// </summary>
+        /// <param name="clientId">Application ID of the confidential client application that
+        /// wants to use these credentials as client credentials</param>
+        /// <param name="authority">Authority (Cloud instance and tenant) to which the credential will be presented.</param>
+        /// <param name="clientCapabilities">Client capabilities that the application supports.</param>
+        public CredentialSourceLoaderParameters(
+            string clientId,
+            string authority,
+            IEnumerable<string> clientCapabilities)
+        {
+            ClientId = clientId;
+            Authority = authority;
+
+            ClientCapabilities = (clientCapabilities?.Any() == true)
+                ? clientCapabilities.ToArray()
+                : [];
         }
 
         /// <summary>
@@ -32,5 +56,10 @@ namespace Microsoft.Identity.Abstractions
         /// Authority (Cloud instance and tenant) to which the credential will be presented.
         /// </summary>
         public string Authority { get; set; }
+
+        /// <summary>
+        /// Client capabilities that the application supports. 
+        /// </summary>
+        public IReadOnlyCollection<string> ClientCapabilities { get; }
     }
 }

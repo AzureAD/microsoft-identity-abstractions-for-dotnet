@@ -7,16 +7,33 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
 {
     public class CredentialSourceLoaderParametersTest
     {
-        const string clientId = "ClientId-from-app-registration";
-        const string authority = "https://login.microsoftonline.com/common/v2.0";
+        const string ClientId = "ClientId-from-app-registration";
+        const string Authority = "https://login.microsoftonline.com/common/v2.0";
         
         [Fact]
         public void CredentialSourceLoaderParametersProperties()
         {
-            CredentialSourceLoaderParameters parameters = new(clientId, authority);
+            CredentialSourceLoaderParameters parameters = new(ClientId, Authority);
 
-            Assert.Equal(clientId, parameters.ClientId);
-            Assert.Equal(authority, parameters.Authority);
+            Assert.Equal(ClientId, parameters.ClientId);
+            Assert.Equal(Authority, parameters.Authority);
+            Assert.NotNull(parameters.ClientCapabilities);
+            Assert.Empty(parameters.ClientCapabilities);
+        }
+
+        [Fact]
+        public void CredentialSourceLoaderParametersProperties_WithCapabilities()
+        {
+            // Arrange
+            var caps = new[] { "cp1", "llt" };
+
+            // Act
+            CredentialSourceLoaderParameters parameters = new(ClientId, Authority, caps);
+
+            // Assert
+            Assert.Equal(ClientId, parameters.ClientId);
+            Assert.Equal(Authority, parameters.Authority);
+            Assert.Equal(caps, parameters.ClientCapabilities);
         }
     }
 }
