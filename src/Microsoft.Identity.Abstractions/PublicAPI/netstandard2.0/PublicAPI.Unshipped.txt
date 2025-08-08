@@ -1,1 +1,3 @@
 #nullable enable
+Microsoft.Identity.Abstractions.IAuthenticationSchemeInformationProvider
+Microsoft.Identity.Abstractions.IAuthenticationSchemeInformationProvider.GetEffectiveAuthenticationScheme(string? authenticationScheme) -> string!
