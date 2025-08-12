@@ -17,9 +17,15 @@
         <DefineConstants>$(DefineConstants);WEB</DefineConstants>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     </PropertyGroup>
-	
+    
+    <!-- TargetNetNext must be set to True to build with NET 10.0 locally, you can uncomment this PropertyGroup or set it in a CLI arg -->
+    <!-- <PropertyGroup>
+        <TargetNetNext>True</TargetNetNext>
+    </PropertyGroup> -->
+
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;netstandard2.1;net462;net8.0;net9.0</TargetFrameworks>
+        <TargetFrameworks Condition="'$(TargetNetNext)' == 'True'">$(TargetFrameworks);net10.0</TargetFrameworks>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>../../build/MSAL.snk</AssemblyOriginatorKeyFile>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>

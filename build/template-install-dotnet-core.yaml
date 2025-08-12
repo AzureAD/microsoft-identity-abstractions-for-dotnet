@@ -4,6 +4,13 @@
 steps:
 
 - task: UseDotNet@2
+  displayName: 'Use .Net Core SDK 10'
+  condition: eq(variables['TargetNetNext'], 'True')
+  inputs:
+    version: 10.0.x
+
+- task: UseDotNet@2
   displayName: 'Use .Net Core SDK 8'
+  condition: ne(variables['TargetNetNext'], 'True')
   inputs:
     version: 8.0.x 
