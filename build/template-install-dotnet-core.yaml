@@ -11,6 +11,5 @@ steps:
 
 - task: UseDotNet@2
   displayName: 'Use .Net Core SDK 8'
-  condition: ne(variables['TargetNetNext'], 'True')
   inputs:
     version: 8.0.x 
