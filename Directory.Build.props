@@ -23,6 +23,14 @@
         <!-- <TargetNetNext>True</TargetNetNext>
     </PropertyGroup> -->
 
+    <PropertyGroup Condition="'$(TargetNetNext)' == 'True'">
+        <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+        <CheckEolTargetFramework>false</CheckEolTargetFramework>
+        <!-- For NU5104 it prevents us from packing release packages with prerelease dependencies. But we want to do that so customers can get a preview of running with .NET 10. -->
+        <WarningsNotAsErrors>$(WarningsNotAsErrors);NU5104</WarningsNotAsErrors>
+        <NoWarn>$(NoWarn);NU5104</NoWarn>
+    </PropertyGroup>
+
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;netstandard2.1;net462;net8.0;net9.0</TargetFrameworks>
         <TargetFrameworks Condition="'$(TargetNetNext)' == 'True'">$(TargetFrameworks);net10.0</TargetFrameworks>
