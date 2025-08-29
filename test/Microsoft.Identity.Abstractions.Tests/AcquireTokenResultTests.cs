@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Security.Cryptography.X509Certificates;
 using Xunit;
 
 namespace Microsoft.Identity.Abstractions.TokenAcquisition.Tests
@@ -27,6 +28,15 @@ namespace Microsoft.Identity.Abstractions.TokenAcquisition.Tests
             Assert.Equal(scopes, result.Scopes!);
             Assert.Equal(correlationId, result.CorrelationId);
             Assert.Equal(tokenType, result.TokenType);
+
+            Assert.Null(result.BindingCertificate);
+            Assert.Null(result.AdditionalResponseParameters);
+
+            result.AdditionalResponseParameters = new System.Collections.Generic.Dictionary<string, string>
+            {
+                { "param1", "value1" },
+                { "param2", "value2" }
+            };
         }
     }
 }
