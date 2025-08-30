@@ -1,3 +1,7 @@
 #nullable enable
+Microsoft.Identity.Abstractions.AcquireTokenResult.AdditionalResponseParameters.get -> System.Collections.Generic.IReadOnlyDictionary<string!, string!>?
+Microsoft.Identity.Abstractions.AcquireTokenResult.AdditionalResponseParameters.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenResult.BindingCertificate.get -> System.Security.Cryptography.X509Certificates.X509Certificate2?
+Microsoft.Identity.Abstractions.AcquireTokenResult.BindingCertificate.set -> void
 Microsoft.Identity.Abstractions.IAuthenticationSchemeInformationProvider
 Microsoft.Identity.Abstractions.IAuthenticationSchemeInformationProvider.GetEffectiveAuthenticationScheme(string? authenticationScheme) -> string!
