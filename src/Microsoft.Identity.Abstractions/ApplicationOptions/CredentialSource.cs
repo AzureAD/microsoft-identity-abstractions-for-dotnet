@@ -187,7 +187,8 @@ namespace Microsoft.Identity.Abstractions
         CustomSignedAssertion = 11,
 
         /// <summary>
-        /// Use this value to indicate that the credential is a managed certificate, which is a certificate that is automatically
+        /// Use this value to indicate that the credential is a managed certificate.
+        /// This is currently a Microsoft-Internal concept which has no meaning outside of Microsoft.
         /// </summary>
         ManagedCertificate = 12,
     }
