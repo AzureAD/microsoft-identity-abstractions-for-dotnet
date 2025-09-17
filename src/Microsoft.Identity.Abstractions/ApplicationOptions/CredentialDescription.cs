@@ -64,6 +64,8 @@ namespace Microsoft.Identity.Abstractions
         }
 
         private string? _cachedId;
+        private X509Certificate2? _certificate;
+        private object? _cachedValue;
 
         /// <summary>
         /// Gets a unique identifier for a CredentialDescription based on <see cref="SourceType"/>.
@@ -119,6 +121,16 @@ namespace Microsoft.Identity.Abstractions
                         case CredentialSource.CustomSignedAssertion:
                             string parameterNames = string.Join(",", (IEnumerable<string>?)CustomSignedAssertionProviderData?.Keys ?? []);
                             _cachedId = $"CustomSignedAssertion={CustomSignedAssertionProviderName}({parameterNames})";
+                            break;
+                        case CredentialSource.ManagedCertificate:
+                            if (CachedValue != null)
+                            {
+                                _cachedId = $"ManagedCertificate={CachedValue}";
+                            }
+                            else
+                            {
+                                _cachedId = $"ManagedCertificate=null";
+                            }
                             break;
                         default:
                             throw new ArgumentException("Unknown credential source type");
@@ -398,13 +410,33 @@ namespace Microsoft.Identity.Abstractions
         /// or <see cref="CredentialSource.Path"/> or <see cref="CredentialSource.StoreWithDistinguishedName"/> or <see cref="CredentialSource.StoreWithThumbprint"/>
         /// after the certificate is retrieved by a <see cref="ICredentialsLoader"/>, it will be stored in this property and also in the <see cref="CachedValue"/>.
         /// </summary>
-        public X509Certificate2? Certificate { get; set; }
+        public X509Certificate2? Certificate
+        {
+            get => _certificate;
+            set
+            {
+                _certificate = value;
+
+                // CachedID can depend on the certificate thumbprint. Set it to null so that it will be recomputed.
+                _cachedId = null;
+            }
+        }
 
         /// <summary>
         /// When the credential is retrieved by a <see cref="ICredentialsLoader"/>, it will be stored in this property, where you can retrieve it. If the credential is a certificate,
         /// it will also be stored in the <see cref="Certificate"/> property.
         /// </summary>
-        public virtual object? CachedValue { get; set; }
+        public virtual object? CachedValue
+        {
+            get => _cachedValue;
+            set
+            {
+                _cachedValue = value;
+
+                // CachedID can depend on the cached value. Set it to null so that it will be recomputed.
+                _cachedId = null;
+            }
+        }
 
         /// <summary>
         /// Skip this credential description. This is useful when, you specify a list of
@@ -451,7 +483,8 @@ namespace Microsoft.Identity.Abstractions
                     or CredentialSource.StoreWithThumbprint
                     or CredentialSource.StoreWithDistinguishedName
                     or CredentialSource.Certificate
-                    or CredentialSource.Base64Encoded => CredentialType.Certificate,
+                    or CredentialSource.Base64Encoded
+                    or CredentialSource.ManagedCertificate => CredentialType.Certificate,
 
                     CredentialSource.ClientSecret => CredentialType.Secret,
 
