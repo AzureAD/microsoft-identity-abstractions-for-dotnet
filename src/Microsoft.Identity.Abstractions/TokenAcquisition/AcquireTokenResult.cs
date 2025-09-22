@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Microsoft.Identity.Abstractions
 {
@@ -83,5 +84,15 @@ namespace Microsoft.Identity.Abstractions
         /// Gets the protocol (Bearer or Pop).
         /// </summary>
         public string? TokenType { get; set; }
+
+        /// <summary>
+        /// Exposes response parameters returned by the token issuer on the token endpoint, alongside the access token and its expiration time.
+        /// </summary>
+        public IReadOnlyDictionary<string, string>? AdditionalResponseParameters { get; set; }
+
+        /// <summary>
+        /// The certificate bound to the access token, specific to mTLS POP tokens.
+        /// </summary>
+        public X509Certificate2? BindingCertificate { get; set; }
     }
 }

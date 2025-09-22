@@ -1,8 +1,13 @@
 <Project>
 
-  <PropertyGroup>
-    <GenerateDocumentationFile>false</GenerateDocumentationFile>
-  </PropertyGroup>
+	<PropertyGroup>
+		<GenerateDocumentationFile>false</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<!-- TargetNetNext must be set to True to build/test with NET 10.0 locally, you can uncomment this PropertyGroup or set TargetNetNext it in a CLI arg  (`/p:TargetNetNext=true`), or set an environment
+	variable (`Set TargetNetNext=true`) -->
+		<!-- <TargetNetNext>True</TargetNetNext>
+	</PropertyGroup> -->
 
 	<PropertyGroup>
 		<MicrosoftNetTestSdkVersion>17.3.2</MicrosoftNetTestSdkVersion>

@@ -184,6 +184,12 @@ namespace Microsoft.Identity.Abstractions
         /// Use this value in order to utilize a credential provider that is not part of the Microsoft.Identity.Abstractions library.
         /// This is an extension point, which goes along with <see cref = "CredentialDescription.CustomSignedAssertionProviderName" />
         /// </summary>
-        CustomSignedAssertion = 11
+        CustomSignedAssertion = 11,
+
+        /// <summary>
+        /// Use this value to indicate that the credential is a managed certificate.
+        /// This is currently a Microsoft-Internal concept which has no meaning outside of Microsoft.
+        /// </summary>
+        ManagedCertificate = 12,
     }
 }
