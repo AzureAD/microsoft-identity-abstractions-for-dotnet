@@ -1,3 +1,9 @@
+9.3.0
+======
+### New features
+
+Added a new interface `IAuthenticationSchemeInformationProvider` to get the effective authentication scheme corresponding to an option name, depending on the platform. For details, see [PR #200](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/200)
+
 9.2.0
 ======
 ### New features
@@ -213,3 +219,4 @@
 2.0.0
 ==========
 Initial release of Microsoft.Identity.Abstractions which brings interfaces and POCO classes used in all the Microsoft .NET authentication libraries provided by Identity and Network Access (IDNA) see ReadME.md for details.
+
