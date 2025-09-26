@@ -1,3 +1,18 @@
+9.4.0
+======
+# New features
+* Add AdditionalResponseParameters and BindingCertificate to AcquireTokenResult. For details see [PR 203](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/203)
+* Add conditional targeting for NET 10. See [PR 202](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/202)
+* Add enum value for managed certificate in SourceType. For details, see [PR 204](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/204)
+
+Thanks @tlupes made your first contribution in https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/204
+
+9.3.0
+======
+### New features
+
+Added a new interface `IAuthenticationSchemeInformationProvider` to get the effective authentication scheme corresponding to an option name, depending on the platform. For details, see [PR #200](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/200)
+
 9.2.0
 ======
 ### New features
@@ -213,3 +228,5 @@
 2.0.0
 ==========
 Initial release of Microsoft.Identity.Abstractions which brings interfaces and POCO classes used in all the Microsoft .NET authentication libraries provided by Identity and Network Access (IDNA) see ReadME.md for details.
+
+

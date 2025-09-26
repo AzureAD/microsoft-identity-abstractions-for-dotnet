@@ -505,5 +505,23 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             // Assert
             Assert.Equal(original.Algorithm, copy.Algorithm);
         }
+
+        [Fact]
+        public void ManagedCertificateCredential()
+        {
+            // Example value of what the managed certificate string will likely look like.
+            string exampleManagedCertId = "Keyvault::myvault.vault.core.windows.net/secrets/mycert::11111-2222-3333-4444";
+            CredentialDescription credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.ManagedCertificate,
+                CachedValue = exampleManagedCertId
+            };
+            // </managedcertificate_csharp>
+
+            Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
+            Assert.Equal($"ManagedCertificate={exampleManagedCertId}", credentialDescription.Id);
+            credentialDescription.CachedValue = null;
+            Assert.Equal("ManagedCertificate=null", credentialDescription.Id);
+        }
     }
 }

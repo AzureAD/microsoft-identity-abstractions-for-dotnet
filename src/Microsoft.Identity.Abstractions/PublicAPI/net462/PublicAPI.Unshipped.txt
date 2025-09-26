@@ -3,5 +3,6 @@ Microsoft.Identity.Abstractions.AcquireTokenResult.AdditionalResponseParameters.
 Microsoft.Identity.Abstractions.AcquireTokenResult.AdditionalResponseParameters.set -> void
 Microsoft.Identity.Abstractions.AcquireTokenResult.BindingCertificate.get -> System.Security.Cryptography.X509Certificates.X509Certificate2?
 Microsoft.Identity.Abstractions.AcquireTokenResult.BindingCertificate.set -> void
+Microsoft.Identity.Abstractions.CredentialSource.ManagedCertificate = 12 -> Microsoft.Identity.Abstractions.CredentialSource
 Microsoft.Identity.Abstractions.IAuthenticationSchemeInformationProvider
 Microsoft.Identity.Abstractions.IAuthenticationSchemeInformationProvider.GetEffectiveAuthenticationScheme(string? authenticationScheme) -> string!
