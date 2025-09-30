@@ -25,4 +25,3 @@ namespace Microsoft.Identity.Abstractions
         public X509Certificate2? BindingCertificate { get; set; }
     }
 }
-}
