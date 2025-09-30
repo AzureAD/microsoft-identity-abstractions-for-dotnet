@@ -10,8 +10,6 @@ Microsoft.Identity.Abstractions.AuthorizationHeaderError.Exception.set -> void
 Microsoft.Identity.Abstractions.AuthorizationHeaderError.Message.get -> string!
 Microsoft.Identity.Abstractions.AuthorizationHeaderError.Message.set -> void
 Microsoft.Identity.Abstractions.AuthorizationHeaderInformation
-Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.AdditionalHeaders.get -> System.Collections.Generic.IDictionary<string!, string!>?
-Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.AdditionalHeaders.set -> void
 Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.AuthorizationHeaderInformation() -> void
 Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.AuthorizationHeaderValue.get -> string?
 Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.AuthorizationHeaderValue.set -> void

@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using Xunit;
 
@@ -23,7 +22,6 @@ namespace Microsoft.Identity.Abstractions.Tests
             // Assert
             Assert.Null(info.AuthorizationHeaderValue);
             Assert.Null(info.BindingCertificate);
-            Assert.Null(info.AdditionalHeaders);
         }
 
         [Fact]
@@ -31,18 +29,15 @@ namespace Microsoft.Identity.Abstractions.Tests
         {
             // Arrange
             const string headerValue = "Bearer token123";
-            var additionalHeaders = new Dictionary<string, string> { { "X-Custom", "Value" } };
 
             // Act
             var info = new AuthorizationHeaderInformation
             {
-                AuthorizationHeaderValue = headerValue,
-                AdditionalHeaders = additionalHeaders
+                AuthorizationHeaderValue = headerValue
             };
 
             // Assert
             Assert.Equal(headerValue, info.AuthorizationHeaderValue);
-            Assert.Equal(additionalHeaders, info.AdditionalHeaders);
         }
 
         [Fact]
@@ -280,28 +275,6 @@ namespace Microsoft.Identity.Abstractions.Tests
 
             // Assert
             Assert.Null(info.BindingCertificate);
-        }
-
-        [Fact]
-        public void AuthorizationHeaderInformation_WithAdditionalHeaders_WorksCorrectly()
-        {
-            // Arrange
-            var headers = new Dictionary<string, string>
-            {
-                { "X-API-Version", "2.0" },
-                { "X-Client-Id", "test-client" }
-            };
-
-            // Act
-            var info = new AuthorizationHeaderInformation
-            {
-                AdditionalHeaders = headers
-            };
-
-            // Assert
-            Assert.Equal(headers, info.AdditionalHeaders);
-            Assert.Equal("2.0", info.AdditionalHeaders["X-API-Version"]);
-            Assert.Equal("test-client", info.AdditionalHeaders["X-Client-Id"]);
         }
     }
 }
