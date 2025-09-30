@@ -19,8 +19,8 @@ Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.AdditionalHeaders
 Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.AuthorizationHeaderInformation() -> void
 Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.AuthorizationHeaderValue.get -> string?
 Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.AuthorizationHeaderValue.set -> void
-Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.MTlsCertificate.get -> System.Security.Cryptography.X509Certificates.X509Certificate2?
-Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.MTlsCertificate.set -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.BindingCertificate.get -> System.Security.Cryptography.X509Certificates.X509Certificate2?
+Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.BindingCertificate.set -> void
 Microsoft.Identity.Abstractions.AuthorizationHeaderResult
 Microsoft.Identity.Abstractions.AuthorizationHeaderResult.AuthorizationHeaderResult(Microsoft.Identity.Abstractions.AuthorizationHeaderError! error) -> void
 Microsoft.Identity.Abstractions.AuthorizationHeaderResult.AuthorizationHeaderResult(Microsoft.Identity.Abstractions.AuthorizationHeaderInformation! info) -> void

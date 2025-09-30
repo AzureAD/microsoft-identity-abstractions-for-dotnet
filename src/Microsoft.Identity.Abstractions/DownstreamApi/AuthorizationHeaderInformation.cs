@@ -19,10 +19,11 @@ namespace Microsoft.Identity.Abstractions
         public string? AuthorizationHeaderValue { get; set; }
 
         /// <summary>
-        /// Gets or sets the mTLS (mutual TLS) certificate for client authentication.
-        /// This certificate is used for mutual TLS authentication scenarios.
+        /// Gets or sets the binding certificate for client authentication.
+        /// This certificate is used to bind the authorization header to the client,
+        /// commonly used in mutual TLS (mTLS) authentication scenarios and Proof-of-Possession (PoP) protocols.
         /// </summary>
-        public X509Certificate2? MTlsCertificate { get; set; }
+        public X509Certificate2? BindingCertificate { get; set; }
 
         /// <summary>
         /// Gets or sets additional headers that should be included with the request.

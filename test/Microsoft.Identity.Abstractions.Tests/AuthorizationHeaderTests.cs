@@ -22,7 +22,7 @@ namespace Microsoft.Identity.Abstractions.Tests
 
             // Assert
             Assert.Null(info.AuthorizationHeaderValue);
-            Assert.Null(info.MTlsCertificate);
+            Assert.Null(info.BindingCertificate);
             Assert.Null(info.AdditionalHeaders);
         }
 
@@ -268,7 +268,7 @@ namespace Microsoft.Identity.Abstractions.Tests
         }
 
         [Fact]
-        public void AuthorizationHeaderInformation_WithMTlsCertificate_WorksCorrectly()
+        public void AuthorizationHeaderInformation_WithBindingCertificate_WorksCorrectly()
         {
             // Arrange
             var info = new AuthorizationHeaderInformation();
@@ -276,10 +276,10 @@ namespace Microsoft.Identity.Abstractions.Tests
             // Act
             // Note: We can't create a real X509Certificate2 in tests easily,
             // so we just test that the property can be set to null
-            info.MTlsCertificate = null;
+            info.BindingCertificate = null;
 
             // Assert
-            Assert.Null(info.MTlsCertificate);
+            Assert.Null(info.BindingCertificate);
         }
 
         [Fact]
