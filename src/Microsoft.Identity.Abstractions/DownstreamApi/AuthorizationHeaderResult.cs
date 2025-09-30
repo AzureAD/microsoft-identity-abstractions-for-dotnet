@@ -104,10 +104,14 @@ namespace Microsoft.Identity.Abstractions
         /// </remarks>
         public static implicit operator string(AuthorizationHeaderResult result)
         {
+#if NET8_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(result);
+#else
             if (result is null)
             {
                 throw new ArgumentNullException(nameof(result));
             }
+#endif
 
             if (!result.Succeeded)
             {
