@@ -39,6 +39,10 @@ Microsoft.Identity.Abstractions.AcquireTokenResult
 Microsoft.Identity.Abstractions.AcquireTokenResult.AccessToken.get -> string?
 Microsoft.Identity.Abstractions.AcquireTokenResult.AccessToken.set -> void
 Microsoft.Identity.Abstractions.AcquireTokenResult.AcquireTokenResult(string! accessToken, System.DateTimeOffset expiresOn, string! tenantId, string! idToken, System.Collections.Generic.IEnumerable<string!>! scopes, System.Guid correlationId, string! tokenType) -> void
+Microsoft.Identity.Abstractions.AcquireTokenResult.AdditionalResponseParameters.get -> System.Collections.Generic.IReadOnlyDictionary<string!, string!>?
+Microsoft.Identity.Abstractions.AcquireTokenResult.AdditionalResponseParameters.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenResult.BindingCertificate.get -> System.Security.Cryptography.X509Certificates.X509Certificate2?
+Microsoft.Identity.Abstractions.AcquireTokenResult.BindingCertificate.set -> void
 Microsoft.Identity.Abstractions.AcquireTokenResult.CorrelationId.get -> System.Guid
 Microsoft.Identity.Abstractions.AcquireTokenResult.CorrelationId.set -> void
 Microsoft.Identity.Abstractions.AcquireTokenResult.ExpiresOn.get -> System.DateTimeOffset
@@ -51,6 +55,22 @@ Microsoft.Identity.Abstractions.AcquireTokenResult.TenantId.get -> string?
 Microsoft.Identity.Abstractions.AcquireTokenResult.TenantId.set -> void
 Microsoft.Identity.Abstractions.AcquireTokenResult.TokenType.get -> string?
 Microsoft.Identity.Abstractions.AcquireTokenResult.TokenType.set -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderError
+Microsoft.Identity.Abstractions.AuthorizationHeaderError.AuthorizationHeaderError() -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderError.AuthorizationHeaderError(string! code, string! message, System.Exception? exception) -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderError.AuthorizationHeaderError(string! code, string! message) -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderError.Code.get -> string!
+Microsoft.Identity.Abstractions.AuthorizationHeaderError.Code.set -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderError.Exception.get -> System.Exception?
+Microsoft.Identity.Abstractions.AuthorizationHeaderError.Exception.set -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderError.Message.get -> string!
+Microsoft.Identity.Abstractions.AuthorizationHeaderError.Message.set -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderInformation
+Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.AuthorizationHeaderInformation() -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.AuthorizationHeaderValue.get -> string?
+Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.AuthorizationHeaderValue.set -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.BindingCertificate.get -> System.Security.Cryptography.X509Certificates.X509Certificate2?
+Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.BindingCertificate.set -> void
 Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions
 Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.AcquireTokenOptions.get -> Microsoft.Identity.Abstractions.AcquireTokenOptions!
 Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.AcquireTokenOptions.set -> void
@@ -70,6 +90,13 @@ Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.RelativePath.
 Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.RelativePath.set -> void
 Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.RequestAppToken.get -> bool
 Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.RequestAppToken.set -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderResult
+Microsoft.Identity.Abstractions.AuthorizationHeaderResult.AuthorizationHeaderResult(Microsoft.Identity.Abstractions.AuthorizationHeaderError! error) -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderResult.AuthorizationHeaderResult(Microsoft.Identity.Abstractions.AuthorizationHeaderInformation! info) -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderResult.AuthorizationHeaderResult(Microsoft.Identity.Abstractions.AuthorizationHeaderInformation? info, Microsoft.Identity.Abstractions.AuthorizationHeaderError? error) -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderResult.Error.get -> Microsoft.Identity.Abstractions.AuthorizationHeaderError?
+Microsoft.Identity.Abstractions.AuthorizationHeaderResult.Result.get -> Microsoft.Identity.Abstractions.AuthorizationHeaderInformation?
+Microsoft.Identity.Abstractions.AuthorizationHeaderResult.Succeeded.get -> bool
 Microsoft.Identity.Abstractions.CredentialDescription
 Microsoft.Identity.Abstractions.CredentialDescription.Algorithm.get -> string?
 Microsoft.Identity.Abstractions.CredentialDescription.Algorithm.set -> void
@@ -122,6 +149,7 @@ Microsoft.Identity.Abstractions.CredentialSource.Certificate = 0 -> Microsoft.Id
 Microsoft.Identity.Abstractions.CredentialSource.ClientSecret = 6 -> Microsoft.Identity.Abstractions.CredentialSource
 Microsoft.Identity.Abstractions.CredentialSource.CustomSignedAssertion = 11 -> Microsoft.Identity.Abstractions.CredentialSource
 Microsoft.Identity.Abstractions.CredentialSource.KeyVault = 1 -> Microsoft.Identity.Abstractions.CredentialSource
+Microsoft.Identity.Abstractions.CredentialSource.ManagedCertificate = 12 -> Microsoft.Identity.Abstractions.CredentialSource
 Microsoft.Identity.Abstractions.CredentialSource.Path = 3 -> Microsoft.Identity.Abstractions.CredentialSource
 Microsoft.Identity.Abstractions.CredentialSource.SignedAssertionFilePath = 8 -> Microsoft.Identity.Abstractions.CredentialSource
 Microsoft.Identity.Abstractions.CredentialSource.SignedAssertionFromManagedIdentity = 7 -> Microsoft.Identity.Abstractions.CredentialSource
@@ -161,6 +189,8 @@ Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod
 Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod.Clone() -> Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod!
 Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod.DownstreamApiOptionsReadOnlyHttpMethod(Microsoft.Identity.Abstractions.DownstreamApiOptions! options, string! httpMethod) -> void
 Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod.HttpMethod.get -> string!
+Microsoft.Identity.Abstractions.IAuthenticationSchemeInformationProvider
+Microsoft.Identity.Abstractions.IAuthenticationSchemeInformationProvider.GetEffectiveAuthenticationScheme(string? authenticationScheme) -> string!
 Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider
 Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider.CreateAuthorizationHeaderAsync(System.Collections.Generic.IEnumerable<string!>! scopes, Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions? options = null, System.Security.Claims.ClaimsPrincipal? claimsPrincipal = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<string!>!
 Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider.CreateAuthorizationHeaderForAppAsync(string! scopes, Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions? downstreamApiOptions = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<string!>!
@@ -284,6 +314,9 @@ override Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.Author
 override Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.Authority.set -> void
 override Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.GetHashCode() -> int
 static Microsoft.Identity.Abstractions.AcquireTokenOptions.LongRunningWebApiSessionKeyAuto.get -> string!
+static Microsoft.Identity.Abstractions.AuthorizationHeaderResult.implicit operator Microsoft.Identity.Abstractions.AuthorizationHeaderResult!(Microsoft.Identity.Abstractions.AuthorizationHeaderError! error) -> Microsoft.Identity.Abstractions.AuthorizationHeaderResult!
+static Microsoft.Identity.Abstractions.AuthorizationHeaderResult.implicit operator Microsoft.Identity.Abstractions.AuthorizationHeaderResult!(Microsoft.Identity.Abstractions.AuthorizationHeaderInformation! info) -> Microsoft.Identity.Abstractions.AuthorizationHeaderResult!
+static Microsoft.Identity.Abstractions.AuthorizationHeaderResult.implicit operator string!(Microsoft.Identity.Abstractions.AuthorizationHeaderResult! result) -> string!
 static Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.implicit operator Microsoft.Identity.Abstractions.OperationResult<TResult, TError!>(TError! error) -> Microsoft.Identity.Abstractions.OperationResult<TResult, TError!>
 static Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.implicit operator Microsoft.Identity.Abstractions.OperationResult<TResult, TError!>(TResult result) -> Microsoft.Identity.Abstractions.OperationResult<TResult, TError!>
 virtual Microsoft.Identity.Abstractions.AcquireTokenOptions.Clone() -> Microsoft.Identity.Abstractions.AcquireTokenOptions!
