@@ -1,3 +1,11 @@
+9.5.0
+======
+## New features
+* Expand Authorization header to support binding certificate for mTLS scenarios. For Details see [#209](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/209)
+
+## Fundamentals
+* Migrate repository agent rules from .clinerules to agents.md. For details, see [#206](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/206)
+
 9.4.0
 ======
 # New features
@@ -228,5 +236,6 @@ Added a new interface `IAuthenticationSchemeInformationProvider` to get the effe
 2.0.0
 ==========
 Initial release of Microsoft.Identity.Abstractions which brings interfaces and POCO classes used in all the Microsoft .NET authentication libraries provided by Identity and Network Access (IDNA) see ReadME.md for details.
+
 
 
