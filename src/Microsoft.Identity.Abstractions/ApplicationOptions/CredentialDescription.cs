@@ -66,6 +66,7 @@ namespace Microsoft.Identity.Abstractions
         private string? _cachedId;
         private X509Certificate2? _certificate;
         private object? _cachedValue;
+        private string? _clientSecret;
 
         /// <summary>
         /// Gets a unique identifier for a CredentialDescription based on <see cref="SourceType"/>.
@@ -76,6 +77,8 @@ namespace Microsoft.Identity.Abstractions
             {
                 if (_cachedId == null)
                 {
+                    string certificateThumbprint = Certificate?.Thumbprint ?? "null";
+
                     switch (SourceType)
                     {
                         case CredentialSource.Certificate:
@@ -89,19 +92,19 @@ namespace Microsoft.Identity.Abstractions
                             }
                             break;
                         case CredentialSource.KeyVault:
-                            _cachedId = $"CertificateFromKeyVault={KeyVaultUrl}/{KeyVaultCertificateName}";
+                            _cachedId = $"CertificateFromKeyVault={KeyVaultUrl}/{KeyVaultCertificateName};Thumbprint={certificateThumbprint}";
                             break;
                         case CredentialSource.Base64Encoded:
-                            _cachedId = $"CertificateFromBase64Encoded={GenerateHash(Base64EncodedValue)}";
+                            _cachedId = $"CertificateFromBase64Encoded={GenerateHash(Base64EncodedValue)};Thumbprint={certificateThumbprint}";
                             break;
                         case CredentialSource.Path:
-                            _cachedId = $"CertificateFromPath={CertificateDiskPath}";
+                            _cachedId = $"CertificateFromPath={CertificateDiskPath};Thumbprint={certificateThumbprint}";
                             break;
                         case CredentialSource.StoreWithThumbprint:
                             _cachedId = $"CertificateStoreWithThumbprint={CertificateStorePath}/{CertificateThumbprint}";
                             break;
                         case CredentialSource.StoreWithDistinguishedName:
-                            _cachedId = $"CertificateStoreWithDistinguishedName={CertificateStorePath}/{CertificateDistinguishedName}";
+                            _cachedId = $"CertificateStoreWithDistinguishedName={CertificateStorePath}/{CertificateDistinguishedName};Thumbprint={certificateThumbprint}";
                             break;
                         case CredentialSource.ClientSecret:
                             _cachedId = $"ClientSecret={GenerateHash(ClientSecret)}";
@@ -125,11 +128,11 @@ namespace Microsoft.Identity.Abstractions
                         case CredentialSource.ManagedCertificate:
                             if (CachedValue != null)
                             {
-                                _cachedId = $"ManagedCertificate={CachedValue}";
+                                _cachedId = $"ManagedCertificate={CachedValue};Thumbprint={certificateThumbprint}";
                             }
                             else
                             {
-                                _cachedId = $"ManagedCertificate=null";
+                                _cachedId = $"ManagedCertificate=null;Thumbprint={certificateThumbprint}";
                             }
                             break;
                         default:
@@ -324,7 +327,17 @@ namespace Microsoft.Identity.Abstractions
         /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="secret_csharp":::
         /// ]]></format>
         /// </example>
-        public string? ClientSecret { get; set; }
+        public string? ClientSecret
+        {
+            get => _clientSecret;
+            set
+            {
+                _clientSecret = value;
+
+                // CachedID can depend on the client secret. Set it to null so that it will be recomputed.
+                _cachedId = null;
+            }
+        }
 
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.SignedAssertionFromManagedIdentity"/>, it specifies the client ID of the Azure user-assigned managed identity 
