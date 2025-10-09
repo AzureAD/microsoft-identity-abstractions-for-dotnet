@@ -5,6 +5,10 @@
 
 ## Fundamentals
 * Migrate repository agent rules from .clinerules to agents.md. For details, see [#206](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/206)
+* Update to .NET 10 RC 1 (10.0.100-rc.1.25451.107) with explicit SDK version.
+  - Updated GitHub Actions workflow to use explicit .NET 10 RC 1 SDK version instead of wildcard
+  - Updated Azure DevOps pipeline template to use explicit .NET 10 RC 1 SDK version
+  - Verified compatibility with .NET 10 RC 1 breaking changes
 
 9.4.0
 ======
