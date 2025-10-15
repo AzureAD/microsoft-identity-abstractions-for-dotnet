@@ -53,7 +53,7 @@ classDiagram
             <<ro>> +CredentialType CredentialType
             <<rw>> +string TokenExchangeUrl
             <<rw>> +string CustomSignedAssertionProviderName
-            <<rw>> +Dictionary<string,object> CustomSignedAssertionProviderData
+            <<rw>> +Dictionary&lt;string, Object&gt; CustomSignedAssertionProviderData
             <<rw>> +string Algorithm
         }
     class CredentialSource { <<enum>>
@@ -80,7 +80,7 @@ classDiagram
             <<rw>> +string Authority
             <<rw>> +string ClientId
             <<rw>> +bool EnablePiiLogging
-            <<rw>> +IDictionary<string,string> ExtraQueryParameters
+            <<rw>> +IDictionary&lt;string, string&gt; ExtraQueryParameters
             <<rw>> +IEnumerable<CredentialDescription> ClientCredentials
             <<rw>> +string Audience
             <<rw>> +IEnumerable<string> Audiences
@@ -114,9 +114,9 @@ namespace TokenAcquisition {
            +AcquireTokenOptions Clone()
             <<rw>> +string AuthenticationOptionsName
             <<rw>> +Nullable<Guid> CorrelationId
-            <<rw>> +IDictionary<string,string> ExtraQueryParameters
-            <<rw>> +IDictionary<string,object> ExtraParameters
-            <<rw>> +IDictionary<string,string> ExtraHeaderParameters
+            <<rw>> +IDictionary&lt;string, string&gt; ExtraQueryParameters
+            <<rw>> +IDictionary&lt;string, Object&gt; ExtraParameters
+            <<rw>> +IDictionary&lt;string, string&gt; ExtraHeaderParameters
             <<rw>> +string Claims
             <<rw>> +string FmiPath
             <<rw>> +bool ForceRefresh
@@ -136,7 +136,7 @@ namespace TokenAcquisition {
             <<rw>> +IEnumerable<string> Scopes
             <<rw>> +Guid CorrelationId
             <<rw>> +string TokenType
-            <<rw>> +IReadOnlyDictionary<string,string> AdditionalResponseParameters
+            <<rw>> +IReadOnlyDictionary&lt;string, string&gt; AdditionalResponseParameters
             <<rw>> +X509Certificate2 BindingCertificate
     }
     class ITokenAcquirer { <<interface>>
@@ -174,8 +174,8 @@ namespace TokenAcquisition {
             <<rw>> +Func<HttpContent?,object?> Deserializer
             <<rw>> +string AcceptHeader
             <<rw>> +string ContentType
-            <<rw>> +IDictionary<string,string> ExtraQueryParameters
-            <<rw>> +IDictionary<string,string> ExtraHeaderParameters
+            <<rw>> +IDictionary&lt;string, string&gt; ExtraQueryParameters
+            <<rw>> +IDictionary&lt;string, string&gt; ExtraHeaderParameters
     }
     class DownstreamApiOptionsReadOnlyHttpMethod {
     +DownstreamApiOptionsReadOnlyHttpMethod Clone()
@@ -389,7 +389,7 @@ classDiagram
     <<rw>> +IEnumerable&lt;string&gt; Scopes
     <<rw>> +Guid CorrelationId
     <<rw>> +string TokenType
-    <<rw>> +IReadOnlyDictionary<string,string> AdditionalResponseParameters
+    <<rw>> +IReadOnlyDictionary&lt;string, string&gt; AdditionalResponseParameters
     <<rw>> +X509Certificate2 BindingCertificate
     }
     class ITokenAcquirer { <<interface>>
