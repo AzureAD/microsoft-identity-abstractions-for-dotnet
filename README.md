@@ -169,7 +169,7 @@ namespace TokenAcquisition {
     class DownstreamApiOptions {
     +DownstreamApiOptions Clone()
     #AuthorizationHeaderProviderOptions CloneInternal()
-         &lt;&lt;rw&gt;&gt; +IEnumerable<string> Scopes
+         &lt;&lt;rw&gt;&gt; +IEnumerable&lt;string&gt; Scopes
             &lt;&lt;rw&gt;&gt; +Func&lt;object?,HttpContent?&gt; Serializer
             &lt;&lt;rw&gt;&gt; +Func&lt;HttpContent?,object?&gt; Deserializer
             &lt;&lt;rw&gt;&gt; +string AcceptHeader
@@ -543,7 +543,7 @@ classDiagram
     class ICredentialsLoader { <<interface>>
         +IDictionary&lt;CredentialSource, ICredentialSourceLoader&gt; CredentialSourceLoaders
         +Task LoadCredentialsIfNeededAsync(CredentialDescription, CredentialSourceLoaderParameters?)
-        +Task<CredentialDescription?> LoadFirstValidCredentialsAsync(IEnumerable&lt;CredentialDescription&gt;, CredentialSourceLoaderParameters?)
+        +Task &lt;CredentialDescription?&gt; LoadFirstValidCredentialsAsync(IEnumerable&lt;CredentialDescription&gt;, CredentialSourceLoaderParameters?)
         +void ResetCredentials(IEnumerable<CredentialDescription>)
     }
     ICredentialSourceLoader <|-- ICustomSignedAssertionProvider : Inherits
