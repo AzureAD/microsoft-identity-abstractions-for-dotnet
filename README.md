@@ -30,6 +30,7 @@ the following diagram provides an overview of the data classes exposed by Micros
 
 ```mermaid
 classDiagram
+direction TB
    namespace ApplicationOptions {
       class CredentialDescription {
             &lt;&lt;ro&gt;&gt; +string Id
@@ -184,7 +185,7 @@ namespace TokenAcquisition {
     }
 
         class IAuthorizationHeaderProvider { <<interface>> }
-        class IAuthorizationHeaderProvider~TResult~ { <<interface>> }
+        class IAuthorizationHeaderProvider&lt;TResult&gt; { <<interface>> }
         class IDownstreamApi { <<interface>>
                +CallApiAsync(...)
                +CallApiForUserAsync(...)
@@ -519,7 +520,7 @@ It's also possible (and recommended) to use higher level APIs:
     AcquireTokenOptions --> "ManagedIdentity" ManagedIdentityOptions : Has
     IDownstreamApi ..> DownstreamApiOptions : Uses
     IAuthorizationHeaderProvider ..> AuthorizationHeaderProviderOptions : Uses
-    IAuthorizationHeaderProvider~TResult~ { <<interface>> }
+    IAuthorizationHeaderProvider&lt;TResult&gt; { <<interface>> }
 
 ```
 
