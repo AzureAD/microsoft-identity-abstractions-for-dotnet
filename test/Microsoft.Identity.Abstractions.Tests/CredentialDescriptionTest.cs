@@ -519,9 +519,9 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             // </managedcertificate_csharp>
 
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
-            Assert.Equal($"ManagedCertificate={exampleManagedCertId}", credentialDescription.Id);
+            Assert.Equal($"ManagedCertificate={exampleManagedCertId};Thumbprint=null", credentialDescription.Id);
             credentialDescription.CachedValue = null;
-            Assert.Equal("ManagedCertificate=null", credentialDescription.Id);
+            Assert.Equal("ManagedCertificate=null;Thumbprint=null", credentialDescription.Id);
         }
     }
 }
