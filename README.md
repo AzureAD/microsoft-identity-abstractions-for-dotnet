@@ -32,29 +32,29 @@ the following diagram provides an overview of the data classes exposed by Micros
 classDiagram
    namespace ApplicationOptions {
       class CredentialDescription {
-            <<ro>> +string Id
-            <<rw>> +CredentialSource SourceType
-            <<rw>> +string KeyVaultUrl
-            <<rw>> +string CertificateStorePath
-            <<rw>> +string CertificateDistinguishedName
-            <<rw>> +string KeyVaultCertificateName
-            <<rw>> +string CertificateThumbprint
-            <<rw>> +string CertificateDiskPath
-            <<rw>> +string CertificatePassword
-            <<rw>> +string Base64EncodedValue
-            <<rw>> +string ClientSecret
-            <<rw>> +string ManagedIdentityClientId
-            <<rw>> +string SignedAssertionFileDiskPath
-            <<rw>> +AuthorizationHeaderProviderOptions DecryptKeysAuthenticationOptions
-            <<rw>> +string TokenExchangeAuthority
-            <<rw>> +X509Certificate2 Certificate
-            <<rw>> +object CachedValue
-            <<rw>> +bool Skip
-            <<ro>> +CredentialType CredentialType
-            <<rw>> +string TokenExchangeUrl
-            <<rw>> +string CustomSignedAssertionProviderName
-            <<rw>> +Dictionary&lt;string, Object&gt; CustomSignedAssertionProviderData
-            <<rw>> +string Algorithm
+            &gt;&gt;ro&gt;&gt; +string Id
+            &gt;&gt;rw&gt;&gt; +CredentialSource SourceType
+            &gt;&gt;rw&gt;&gt; +string KeyVaultUrl
+            &gt;&gt;rw&gt;&gt; +string CertificateStorePath
+            &gt;&gt;rw&gt;&gt; +string CertificateDistinguishedName
+            &gt;&gt;rw&gt;&gt; +string KeyVaultCertificateName
+            &gt;&gt;rw&gt;&gt; +string CertificateThumbprint
+            &gt;&gt;rw&gt;&gt; +string CertificateDiskPath
+            &gt;&gt;rw&gt;&gt; +string CertificatePassword
+            &gt;&gt;rw&gt;&gt; +string Base64EncodedValue
+            &gt;&gt;rw&gt;&gt; +string ClientSecret
+            &gt;&gt;rw&gt;&gt; +string ManagedIdentityClientId
+            &gt;&gt;rw&gt;&gt; +string SignedAssertionFileDiskPath
+            &gt;&gt;rw&gt;&gt; +AuthorizationHeaderProviderOptions DecryptKeysAuthenticationOptions
+            &gt;&gt;rw&gt;&gt; +string TokenExchangeAuthority
+            &gt;&gt;rw&gt;&gt; +X509Certificate2 Certificate
+            &gt;&gt;rw&gt;&gt; +object CachedValue
+            &gt;&gt;rw&gt;&gt; +bool Skip
+            &gt;&gt;ro&gt;&gt; +CredentialType CredentialType
+            &gt;&gt;rw&gt;&gt; +string TokenExchangeUrl
+            &gt;&gt;rw&gt;&gt; +string CustomSignedAssertionProviderName
+            &gt;&gt;rw&gt;&gt; +Dictionary&lt;string, Object&gt; CustomSignedAssertionProviderData
+            &gt;&gt;rw&gt;&gt; +string Algorithm
         }
     class CredentialSource { <<enum>>
     Certificate = 0
@@ -77,67 +77,67 @@ classDiagram
     DecryptKeys = 3
     }
     class IdentityApplicationOptions {
-            <<rw>> +string Authority
-            <<rw>> +string ClientId
-            <<rw>> +bool EnablePiiLogging
-            <<rw>> +IDictionary&lt;string, string&gt; ExtraQueryParameters
-            <<rw>> +IEnumerable&lt;CredentialDescription&gt; ClientCredentials
-            <<rw>> +string Audience
-            <<rw>> +IEnumerable&lt;string&gt; Audiences
-            <<rw>> +IEnumerable&lt;CredentialDescription&gt; TokenDecryptionCredentials
-            <<rw>> +bool AllowWebApiToBeAuthorizedByACL
+            &gt;&gt;rw&gt;&gt; +string Authority
+            &gt;&gt;rw&gt;&gt; +string ClientId
+            &gt;&gt;rw&gt;&gt; +bool EnablePiiLogging
+            &gt;&gt;rw&gt;&gt; +IDictionary&lt;string, string&gt; ExtraQueryParameters
+            &gt;&gt;rw&gt;&gt; +IEnumerable&lt;CredentialDescription&gt; ClientCredentials
+            &gt;&gt;rw&gt;&gt; +string Audience
+            &gt;&gt;rw&gt;&gt; +IEnumerable&lt;string&gt; Audiences
+            &gt;&gt;rw&gt;&gt; +IEnumerable&lt;CredentialDescription&gt; TokenDecryptionCredentials
+            &gt;&gt;rw&gt;&gt; +bool AllowWebApiToBeAuthorizedByACL
     }
     class MicrosoftEntraApplicationOptions {
-            <<rw>> +string Name
-            <<rw>> +string Instance
-            <<rw>> +string TenantId
-            <<rw>> +string Authority
-            <<rw>> +string AppHomeTenantId
-            <<rw>> +string AzureRegion
-            <<rw>> +IEnumerable&lt;string&gt; ClientCapabilities
-            <<rw>> +bool SendX5C
+            &gt;&gt;rw&gt;&gt; +string Name
+            &gt;&gt;rw&gt;&gt; +string Instance
+            &gt;&gt;rw&gt;&gt; +string TenantId
+            &gt;&gt;rw&gt;&gt; +string Authority
+            &gt;&gt;rw&gt;&gt; +string AppHomeTenantId
+            &gt;&gt;rw&gt;&gt; +string AzureRegion
+            &gt;&gt;rw&gt;&gt; +IEnumerable&lt;string&gt; ClientCapabilities
+            &gt;&gt;rw&gt;&gt; +bool SendX5C
     }
     class MicrosoftIdentityApplicationOptions {
-            <<rw>> +bool WithSpaAuthCode
-            <<rw>> +string Domain
-            <<rw>> +string EditProfilePolicyId
-            <<rw>> +string SignUpSignInPolicyId
-            <<rw>> +string ResetPasswordPolicyId
-            <<ro>> +string DefaultUserFlow
-            <<rw>> +string ResetPasswordPath
-            <<rw>> +string ErrorPath
+            &gt;&gt;rw&gt;&gt; +bool WithSpaAuthCode
+            &gt;&gt;rw&gt;&gt; +string Domain
+            &gt;&gt;rw&gt;&gt; +string EditProfilePolicyId
+            &gt;&gt;rw&gt;&gt; +string SignUpSignInPolicyId
+            &gt;&gt;rw&gt;&gt; +string ResetPasswordPolicyId
+            &gt;&gt;ro&gt;&gt; +string DefaultUserFlow
+            &gt;&gt;rw&gt;&gt; +string ResetPasswordPath
+            &gt;&gt;rw&gt;&gt; +string ErrorPath
     }
  }
 
 namespace TokenAcquisition {
     class AcquireTokenOptions {
            +AcquireTokenOptions Clone()
-            <<rw>> +string AuthenticationOptionsName
-            <<rw>> +Nullable&lt;Guid&gt; CorrelationId
-            <<rw>> +IDictionary&lt;string, string&gt; ExtraQueryParameters
-            <<rw>> +IDictionary&lt;string, Object&gt; ExtraParameters
-            <<rw>> +IDictionary&lt;string, string&gt; ExtraHeaderParameters
-            <<rw>> +string Claims
-            <<rw>> +string FmiPath
-            <<rw>> +bool ForceRefresh
-            <<rw>> +string PopPublicKey
-            <<rw>> +string PopClaim
-            <<rw>> +ManagedIdentityOptions ManagedIdentity
-            <<rw>> +string LongRunningWebApiSessionKey
-            <<ro>> +string LongRunningWebApiSessionKeyAuto
-            <<rw>> +string Tenant
-            <<rw>> +string UserFlow
+            &gt;&gt;rw&gt;&gt; +string AuthenticationOptionsName
+            &gt;&gt;rw&gt;&gt; +Nullable&lt;Guid&gt; CorrelationId
+            &gt;&gt;rw&gt;&gt; +IDictionary&lt;string, string&gt; ExtraQueryParameters
+            &gt;&gt;rw&gt;&gt; +IDictionary&lt;string, Object&gt; ExtraParameters
+            &gt;&gt;rw&gt;&gt; +IDictionary&lt;string, string&gt; ExtraHeaderParameters
+            &gt;&gt;rw&gt;&gt; +string Claims
+            &gt;&gt;rw&gt;&gt; +string FmiPath
+            &gt;&gt;rw&gt;&gt; +bool ForceRefresh
+            &gt;&gt;rw&gt;&gt; +string PopPublicKey
+            &gt;&gt;rw&gt;&gt; +string PopClaim
+            &gt;&gt;rw&gt;&gt; +ManagedIdentityOptions ManagedIdentity
+            &gt;&gt;rw&gt;&gt; +string LongRunningWebApiSessionKey
+            &gt;&gt;ro&gt;&gt; +string LongRunningWebApiSessionKeyAuto
+            &gt;&gt;rw&gt;&gt; +string Tenant
+            &gt;&gt;rw&gt;&gt; +string UserFlow
     }
     class AcquireTokenResult {
-            <<rw>> +string AccessToken
-            <<rw>> +DateTimeOffset ExpiresOn
-            <<rw>> +string TenantId
-            <<rw>> +string IdToken
-            <<rw>> +IEnumerable&lt;string&gt; Scopes
-            <<rw>> +Guid CorrelationId
-            <<rw>> +string TokenType
-            <<rw>> +IReadOnlyDictionary&lt;string, string&gt; AdditionalResponseParameters
-            <<rw>> +X509Certificate2 BindingCertificate
+            &gt;&gt;rw&gt;&gt; +string AccessToken
+            &gt;&gt;rw&gt;&gt; +DateTimeOffset ExpiresOn
+            &gt;&gt;rw&gt;&gt; +string TenantId
+            &gt;&gt;rw&gt;&gt; +string IdToken
+            &gt;&gt;rw&gt;&gt; +IEnumerable&lt;string&gt; Scopes
+            &gt;&gt;rw&gt;&gt; +Guid CorrelationId
+            &gt;&gt;rw&gt;&gt; +string TokenType
+            &gt;&gt;rw&gt;&gt; +IReadOnlyDictionary&lt;string, string&gt; AdditionalResponseParameters
+            &gt;&gt;rw&gt;&gt; +X509Certificate2 BindingCertificate
     }
     class ITokenAcquirer { <<interface>>
     +Task&lt;AcquireTokenResult&gt; GetTokenForUserAsync(IEnumerable&lt;string&gt; scopes, AcquireTokenOptions tokenAcquisitionOptions, ClaimsPrincipal user, CancellationToken cancellationToken)
@@ -149,7 +149,7 @@ namespace TokenAcquisition {
     }
     class ManagedIdentityOptions {
     +ManagedIdentityOptions Clone()
-    <<rw>> +string UserAssignedClientId
+    &gt;&gt;rw&gt;&gt; +string UserAssignedClientId
     }
  }
 
@@ -158,29 +158,29 @@ namespace TokenAcquisition {
     +AuthorizationHeaderProviderOptions Clone()
     #AuthorizationHeaderProviderOptions CloneInternal()
     +string GetApiUrl()
-            <<rw>> +string BaseUrl
-            <<rw>> +string RelativePath
-            <<rw>> +string HttpMethod
-            <<rw>> +Action&lt;HttpRequestMessage&gt; CustomizeHttpRequestMessage
-            <<rw>> +AcquireTokenOptions AcquireTokenOptions
-            <<rw>> +string ProtocolScheme
-            <<rw>> +bool RequestAppToken
+            &gt;&gt;rw&gt;&gt; +string BaseUrl
+            &gt;&gt;rw&gt;&gt; +string RelativePath
+            &gt;&gt;rw&gt;&gt; +string HttpMethod
+            &gt;&gt;rw&gt;&gt; +Action&lt;HttpRequestMessage&gt; CustomizeHttpRequestMessage
+            &gt;&gt;rw&gt;&gt; +AcquireTokenOptions AcquireTokenOptions
+            &gt;&gt;rw&gt;&gt; +string ProtocolScheme
+            &gt;&gt;rw&gt;&gt; +bool RequestAppToken
     }
     class DownstreamApiOptions {
     +DownstreamApiOptions Clone()
     #AuthorizationHeaderProviderOptions CloneInternal()
-         <<rw>> +IEnumerable<string> Scopes
-            <<rw>> +Func&lt;object?,HttpContent?&gt; Serializer
-            <<rw>> +Func&lt;HttpContent?,object?&gt; Deserializer
-            <<rw>> +string AcceptHeader
-            <<rw>> +string ContentType
-            <<rw>> +IDictionary&lt;string, string&gt; ExtraQueryParameters
-            <<rw>> +IDictionary&lt;string, string&gt; ExtraHeaderParameters
+         &gt;&gt;rw&gt;&gt; +IEnumerable<string> Scopes
+            &gt;&gt;rw&gt;&gt; +Func&lt;object?,HttpContent?&gt; Serializer
+            &gt;&gt;rw&gt;&gt; +Func&lt;HttpContent?,object?&gt; Deserializer
+            &gt;&gt;rw&gt;&gt; +string AcceptHeader
+            &gt;&gt;rw&gt;&gt; +string ContentType
+            &gt;&gt;rw&gt;&gt; +IDictionary&lt;string, string&gt; ExtraQueryParameters
+            &gt;&gt;rw&gt;&gt; +IDictionary&lt;string, string&gt; ExtraHeaderParameters
     }
     class DownstreamApiOptionsReadOnlyHttpMethod {
     +DownstreamApiOptionsReadOnlyHttpMethod Clone()
     #AuthorizationHeaderProviderOptions CloneInternal()
-    <<ro>> +string HttpMethod
+    &gt;&gt;ro&gt;&gt; +string HttpMethod
     }
 
         class IAuthorizationHeaderProvider { <<interface>> }
@@ -228,28 +228,28 @@ Note:
   classDiagram
    class CredentialDescription {
     &lt;&lt;ro&gt;&gt; +string Id
-    <<rw>> +CredentialSource SourceType
-    <<rw>> +string KeyVaultUrl
-    <<rw>> +string CertificateStorePath
-    <<rw>> +string CertificateDistinguishedName
-    <<rw>> +string KeyVaultCertificateName
-    <<rw>> +string CertificateThumbprint
-    <<rw>> +string CertificateDiskPath
-    <<rw>> +string CertificatePassword
-    <<rw>> +string Base64EncodedValue
-    <<rw>> +string ClientSecret
-    <<rw>> +string ManagedIdentityClientId
-    <<rw>> +string SignedAssertionFileDiskPath
-    <<rw>> +AuthorizationHeaderProviderOptions DecryptKeysAuthenticationOptions
-    <<rw>> +string TokenExchangeAuthority
-    <<rw>> +X509Certificate2 Certificate
-    <<rw>> +Object CachedValue
-    <<rw>> +bool Skip
+    &gt;&gt;rw&gt;&gt; +CredentialSource SourceType
+    &gt;&gt;rw&gt;&gt; +string KeyVaultUrl
+    &gt;&gt;rw&gt;&gt; +string CertificateStorePath
+    &gt;&gt;rw&gt;&gt; +string CertificateDistinguishedName
+    &gt;&gt;rw&gt;&gt; +string KeyVaultCertificateName
+    &gt;&gt;rw&gt;&gt; +string CertificateThumbprint
+    &gt;&gt;rw&gt;&gt; +string CertificateDiskPath
+    &gt;&gt;rw&gt;&gt; +string CertificatePassword
+    &gt;&gt;rw&gt;&gt; +string Base64EncodedValue
+    &gt;&gt;rw&gt;&gt; +string ClientSecret
+    &gt;&gt;rw&gt;&gt; +string ManagedIdentityClientId
+    &gt;&gt;rw&gt;&gt; +string SignedAssertionFileDiskPath
+    &gt;&gt;rw&gt;&gt; +AuthorizationHeaderProviderOptions DecryptKeysAuthenticationOptions
+    &gt;&gt;rw&gt;&gt; +string TokenExchangeAuthority
+    &gt;&gt;rw&gt;&gt; +X509Certificate2 Certificate
+    &gt;&gt;rw&gt;&gt; +Object CachedValue
+    &gt;&gt;rw&gt;&gt; +bool Skip
     &lt;&lt;ro&gt;&gt; +CredentialType CredentialType
-    <<rw>> +string TokenExchangeUrl
-    <<rw>> +string CustomSignedAssertionProviderName
-    <<rw>> +Dictionary&lt;string, Object&gt; CustomSignedAssertionProviderData
-    <<rw>> +string Algorithm
+    &gt;&gt;rw&gt;&gt; +string TokenExchangeUrl
+    &gt;&gt;rw&gt;&gt; +string CustomSignedAssertionProviderName
+    &gt;&gt;rw&gt;&gt; +Dictionary&lt;string, Object&gt; CustomSignedAssertionProviderData
+    &gt;&gt;rw&gt;&gt; +string Algorithm
     }
     class CredentialSource { <<enum>>
     Certificate = 0
@@ -272,35 +272,35 @@ Note:
     DecryptKeys = 3
     }
     class IdentityApplicationOptions {
-    <<rw>> +string Authority
-    <<rw>> +string ClientId
-    <<rw>> +bool EnablePiiLogging
-    <<rw>> +IDictionary&lt;string, string&gt; ExtraQueryParameters
-    <<rw>> +IEnumerable&lt;CredentialDescription&gt; ClientCredentials
-    <<rw>> +string Audience
-    <<rw>> +IEnumerable&lt;string&gt; Audiences
-    <<rw>> +IEnumerable&lt;CredentialDescription&gt; TokenDecryptionCredentials
-    <<rw>> +bool AllowWebApiToBeAuthorizedByACL
+    &gt;&gt;rw&gt;&gt; +string Authority
+    &gt;&gt;rw&gt;&gt; +string ClientId
+    &gt;&gt;rw&gt;&gt; +bool EnablePiiLogging
+    &gt;&gt;rw&gt;&gt; +IDictionary&lt;string, string&gt; ExtraQueryParameters
+    &gt;&gt;rw&gt;&gt; +IEnumerable&lt;CredentialDescription&gt; ClientCredentials
+    &gt;&gt;rw&gt;&gt; +string Audience
+    &gt;&gt;rw&gt;&gt; +IEnumerable&lt;string&gt; Audiences
+    &gt;&gt;rw&gt;&gt; +IEnumerable&lt;CredentialDescription&gt; TokenDecryptionCredentials
+    &gt;&gt;rw&gt;&gt; +bool AllowWebApiToBeAuthorizedByACL
     }
     class MicrosoftEntraApplicationOptions {
-    <<rw>> +string Name
-    <<rw>> +string Instance
-    <<rw>> +string TenantId
-    <<rw>> +string Authority
-    <<rw>> +string AppHomeTenantId
-    <<rw>> +string AzureRegion
-    <<rw>> +IEnumerable&lt;string&gt; ClientCapabilities
-    <<rw>> +bool SendX5C
+    &gt;&gt;rw&gt;&gt; +string Name
+    &gt;&gt;rw&gt;&gt; +string Instance
+    &gt;&gt;rw&gt;&gt; +string TenantId
+    &gt;&gt;rw&gt;&gt; +string Authority
+    &gt;&gt;rw&gt;&gt; +string AppHomeTenantId
+    &gt;&gt;rw&gt;&gt; +string AzureRegion
+    &gt;&gt;rw&gt;&gt; +IEnumerable&lt;string&gt; ClientCapabilities
+    &gt;&gt;rw&gt;&gt; +bool SendX5C
     }
     class MicrosoftIdentityApplicationOptions {
-    <<rw>> +bool WithSpaAuthCode
-    <<rw>> +string Domain
-    <<rw>> +string EditProfilePolicyId
-    <<rw>> +string SignUpSignInPolicyId
-    <<rw>> +string ResetPasswordPolicyId
+    &gt;&gt;rw&gt;&gt; +bool WithSpaAuthCode
+    &gt;&gt;rw&gt;&gt; +string Domain
+    &gt;&gt;rw&gt;&gt; +string EditProfilePolicyId
+    &gt;&gt;rw&gt;&gt; +string SignUpSignInPolicyId
+    &gt;&gt;rw&gt;&gt; +string ResetPasswordPolicyId
     &lt;&lt;ro&gt;&gt; +string DefaultUserFlow
-    <<rw>> +string ResetPasswordPath
-    <<rw>> +string ErrorPath
+    &gt;&gt;rw&gt;&gt; +string ResetPasswordPath
+    &gt;&gt;rw&gt;&gt; +string ErrorPath
     }
 
     IdentityApplicationOptions <|-- MicrosoftEntraApplicationOptions : Inherits
@@ -324,8 +324,8 @@ For details about Credentials, see [CredentialDecription](./docs/credentialdescr
    ```mermaid
    classDiagram
    class CredentialSourceLoaderParameters {
-    <<rw>> +string ClientId
-    <<rw>> +string Authority
+    &gt;&gt;rw&gt;&gt; +string ClientId
+    &gt;&gt;rw&gt;&gt; +string Authority
     }
     class ICredentialsLoader { <<interface>>
     +Task LoadCredentialsIfNeededAsync(CredentialDescription credentialDescription, CredentialSourceLoaderParameters parameters)
@@ -365,32 +365,32 @@ really want to use the lower level API, you should:
 classDiagram
    class AcquireTokenOptions {
     +AcquireTokenOptions Clone()
-    <<rw>> +string AuthenticationOptionsName
-    <<rw>> +Nullable&lt;Guid&gt; CorrelationId
-    <<rw>> +IDictionary&lt;string, string&gt; ExtraQueryParameters
-    <<rw>> +IDictionary&lt;string, Object&gt; ExtraParameters
-    <<rw>> +IDictionary&lt;string, string&gt; ExtraHeaderParameters
-    <<rw>> +string Claims
-    <<rw>> +string FmiPath
-    <<rw>> +bool ForceRefresh
-    <<rw>> +string PopPublicKey
-    <<rw>> +string PopClaim
-    <<rw>> +ManagedIdentityOptions ManagedIdentity
-    <<rw>> +string LongRunningWebApiSessionKey
+    &gt;&gt;rw&gt;&gt; +string AuthenticationOptionsName
+    &gt;&gt;rw&gt;&gt; +Nullable&lt;Guid&gt; CorrelationId
+    &gt;&gt;rw&gt;&gt; +IDictionary&lt;string, string&gt; ExtraQueryParameters
+    &gt;&gt;rw&gt;&gt; +IDictionary&lt;string, Object&gt; ExtraParameters
+    &gt;&gt;rw&gt;&gt; +IDictionary&lt;string, string&gt; ExtraHeaderParameters
+    &gt;&gt;rw&gt;&gt; +string Claims
+    &gt;&gt;rw&gt;&gt; +string FmiPath
+    &gt;&gt;rw&gt;&gt; +bool ForceRefresh
+    &gt;&gt;rw&gt;&gt; +string PopPublicKey
+    &gt;&gt;rw&gt;&gt; +string PopClaim
+    &gt;&gt;rw&gt;&gt; +ManagedIdentityOptions ManagedIdentity
+    &gt;&gt;rw&gt;&gt; +string LongRunningWebApiSessionKey
     &lt;&lt;ro&gt;&gt; +string LongRunningWebApiSessionKeyAuto
-    <<rw>> +string Tenant
-    <<rw>> +string UserFlow
+    &gt;&gt;rw&gt;&gt; +string Tenant
+    &gt;&gt;rw&gt;&gt; +string UserFlow
     }
     class AcquireTokenResult {
-    <<rw>> +string AccessToken
-    <<rw>> +DateTimeOffset ExpiresOn
-    <<rw>> +string TenantId
-    <<rw>> +string IdToken
-    <<rw>> +IEnumerable&lt;string&gt; Scopes
-    <<rw>> +Guid CorrelationId
-    <<rw>> +string TokenType
-    <<rw>> +IReadOnlyDictionary&lt;string, string&gt; AdditionalResponseParameters
-    <<rw>> +X509Certificate2 BindingCertificate
+    &gt;&gt;rw&gt;&gt; +string AccessToken
+    &gt;&gt;rw&gt;&gt; +DateTimeOffset ExpiresOn
+    &gt;&gt;rw&gt;&gt; +string TenantId
+    &gt;&gt;rw&gt;&gt; +string IdToken
+    &gt;&gt;rw&gt;&gt; +IEnumerable&lt;string&gt; Scopes
+    &gt;&gt;rw&gt;&gt; +Guid CorrelationId
+    &gt;&gt;rw&gt;&gt; +string TokenType
+    &gt;&gt;rw&gt;&gt; +IReadOnlyDictionary&lt;string, string&gt; AdditionalResponseParameters
+    &gt;&gt;rw&gt;&gt; +X509Certificate2 BindingCertificate
     }
     class ITokenAcquirer { <<interface>>
     +Task&lt;AcquireTokenResult&gt; GetTokenForUserAsync(IEnumerable&lt;string&gt; scopes, AcquireTokenOptions tokenAcquisitionOptions, ClaimsPrincipal user, CancellationToken cancellationToken)
@@ -402,7 +402,7 @@ classDiagram
     }
     class ManagedIdentityOptions {
     +ManagedIdentityOptions Clone()
-    <<rw>> +string UserAssignedClientId
+    &gt;&gt;rw&gt;&gt; +string UserAssignedClientId
     }
 
    ITokenAcquirerFactory ..> ITokenAcquirer : produces
@@ -428,29 +428,29 @@ It's also possible (and recommended) to use higher level APIs:
     +AuthorizationHeaderProviderOptions Clone()
     #AuthorizationHeaderProviderOptions CloneInternal()
     +string GetApiUrl()
-    <<rw>> +string BaseUrl
-    <<rw>> +string RelativePath
-    <<rw>> +string HttpMethod
-    <<rw>> +Action&lt;HttpRequestMessage&gt; CustomizeHttpRequestMessage
-    <<rw>> +AcquireTokenOptions AcquireTokenOptions
-    <<rw>> +string ProtocolScheme
-    <<rw>> +bool RequestAppToken
+    &gt;&gt;rw&gt;&gt; +string BaseUrl
+    &gt;&gt;rw&gt;&gt; +string RelativePath
+    &gt;&gt;rw&gt;&gt; +string HttpMethod
+    &gt;&gt;rw&gt;&gt; +Action&lt;HttpRequestMessage&gt; CustomizeHttpRequestMessage
+    &gt;&gt;rw&gt;&gt; +AcquireTokenOptions AcquireTokenOptions
+    &gt;&gt;rw&gt;&gt; +string ProtocolScheme
+    &gt;&gt;rw&gt;&gt; +bool RequestAppToken
     }
     class DownstreamApiOptions {
     +DownstreamApiOptions Clone()
     #AuthorizationHeaderProviderOptions CloneInternal()
-    <<rw>> +IEnumerable&lt;string&gt; Scopes
-    <<rw>> +Func&lt;Object, HttpContent&gt; Serializer
-    <<rw>> +Func&lt;HttpContent, Object&gt; Deserializer
-    <<rw>> +string AcceptHeader
-    <<rw>> +string ContentType
-    <<rw>> +IDictionary&lt;string, string&gt; ExtraQueryParameters
-    <<rw>> +IDictionary&lt;string, string&gt; ExtraHeaderParameters
+    &gt;&gt;rw&gt;&gt; +IEnumerable&lt;string&gt; Scopes
+    &gt;&gt;rw&gt;&gt; +Func&lt;Object, HttpContent&gt; Serializer
+    &gt;&gt;rw&gt;&gt; +Func&lt;HttpContent, Object&gt; Deserializer
+    &gt;&gt;rw&gt;&gt; +string AcceptHeader
+    &gt;&gt;rw&gt;&gt; +string ContentType
+    &gt;&gt;rw&gt;&gt; +IDictionary&lt;string, string&gt; ExtraQueryParameters
+    &gt;&gt;rw&gt;&gt; +IDictionary&lt;string, string&gt; ExtraHeaderParameters
     }
     class DownstreamApiOptionsReadOnlyHttpMethod {
     +DownstreamApiOptionsReadOnlyHttpMethod Clone()
     #AuthorizationHeaderProviderOptions CloneInternal()
-    <<ro>> +string HttpMethod
+    &gt;&gt;ro&gt;&gt; +string HttpMethod
     }
     class IAuthorizationHeaderProvider { <<interface>>
     +Task&lt;string&gt; CreateAuthorizationHeaderForUserAsync(IEnumerable&lt;string&gt; scopes, AuthorizationHeaderProviderOptions authorizationHeaderProviderOptions, ClaimsPrincipal claimsPrincipal, CancellationToken cancellationToken)
