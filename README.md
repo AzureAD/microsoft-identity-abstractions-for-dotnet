@@ -185,7 +185,7 @@ namespace TokenAcquisition {
     }
 
         class IAuthorizationHeaderProvider { <<interface>> }
-        class IAuthorizationHeaderProvider&lt;TResult&gt; { <<interface>> }
+        class IAuthorizationHeaderProvider_TResult_ { <<interface>> }
         class IDownstreamApi { <<interface>>
                +CallApiAsync(...)
                +CallApiForUserAsync(...)
@@ -520,7 +520,7 @@ It's also possible (and recommended) to use higher level APIs:
     AcquireTokenOptions --> "ManagedIdentity" ManagedIdentityOptions : Has
     IDownstreamApi ..> DownstreamApiOptions : Uses
     IAuthorizationHeaderProvider ..> AuthorizationHeaderProviderOptions : Uses
-    IAuthorizationHeaderProvider&lt;TResult&gt; { <<interface>> }
+    IAuthorizationHeaderProvider_TResult_ { <<interface>> }
 
 ```
 
