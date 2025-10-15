@@ -520,7 +520,6 @@ It's also possible (and recommended) to use higher level APIs:
     AcquireTokenOptions --> "ManagedIdentity" ManagedIdentityOptions : Has
     IDownstreamApi ..> DownstreamApiOptions : Uses
     IAuthorizationHeaderProvider ..> AuthorizationHeaderProviderOptions : Uses
-    IAuthorizationHeaderProvider_TResult_ { <<interface>> }
 
 ```
 
