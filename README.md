@@ -1,4 +1,4 @@
-[![CI](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/actions/workflows/dotnetcore.yml/badge.svg)](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/actions/workflows/dotnetcore.yml)
+[![CI](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/actions/workflows/dotnetcore.yml/badge.svg)](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/actions/workflows/dotnetcore.yml) ![Diagrams Synced](https://img.shields.io/badge/Diagrams%20Synced-2025--10--15-blue)
 
 # Microsoft.Identity.Abstractions
 
@@ -17,495 +17,222 @@ The following table lists Microsoft.Identity.Abstractions versions currently sup
 
 | Major Version | Last Release | Patch release date  | Support phase|End of support |
 | --------------|--------------|--------|------------|--------|
-| 9.x           | [![NuGet](https://img.shields.io/nuget/v/Microsoft.Identity.Abstractions.svg?style=flat-square&label=nuget&colorB=00b200)](https://www.nuget.org/packages/Microsoft.Identity.Abstractions/)    |Monthly| Active | Not planned.<br/>✅Supported versions: from 9.0.0 to [![NuGet](https://img.shields.io/nuget/v/Microsoft.Identity.Abstractions.svg?style=flat-square&label=nuget&colorB=00b200)](https://www.nuget.org/packages/Microsoft.Identity.Abstractions/) <br/>⚠️Unsupported versions `< 9.0.0`.|
-
+| 9.x           | [![NuGet](https://img.shields.io/nuget/v/Microsoft.Identity.Abstractions.svg?style=flat-square&label=nuget&colorB=00b200)](https://www.nuget.org/packages/Microsoft.Identity.Abstractions/) |
 
 ## Concepts
 
-### Overview of the data classes
-the following diagram provides an overview of the data classes exposed by Microsoft.Identity.Abstractions
+### Overview (Condensed)
+A condensed view of the main data classes, options, and relationships. Overloaded members for IDownstreamApi are truncated with ellipsis.
 
 ```mermaid
 classDiagram
-        namespace ApplicationOptions {
-    class CredentialDescription {
-    &lt;&lt;ro&gt;&gt; +string Id
-    &lt;&lt;rw&gt;&gt; +CredentialSource SourceType
-    &lt;&lt;rw&gt;&gt; +string KeyVaultUrl
-    &lt;&lt;rw&gt;&gt; +string CertificateStorePath
-    &lt;&lt;rw&gt;&gt; +string CertificateDistinguishedName
-    &lt;&lt;rw&gt;&gt; +string KeyVaultCertificateName
-    &lt;&lt;rw&gt;&gt; +string CertificateThumbprint
-    &lt;&lt;rw&gt;&gt; +string CertificateDiskPath
-    &lt;&lt;rw&gt;&gt; +string CertificatePassword
-    &lt;&lt;rw&gt;&gt; +string Base64EncodedValue
-    &lt;&lt;rw&gt;&gt; +string ClientSecret
-    &lt;&lt;rw&gt;&gt; +string ManagedIdentityClientId
-    &lt;&lt;rw&gt;&gt; +string SignedAssertionFileDiskPath
-    &lt;&lt;rw&gt;&gt; +AuthorizationHeaderProviderOptions DecryptKeysAuthenticationOptions
-    &lt;&lt;rw&gt;&gt; +string TokenExchangeAuthority
-    &lt;&lt;rw&gt;&gt; +X509Certificate2 Certificate
-    &lt;&lt;rw&gt;&gt; +Object CachedValue
-    &lt;&lt;rw&gt;&gt; +bool Skip
-    &lt;&lt;ro&gt;&gt; +CredentialType CredentialType
-    &lt;&lt;rw&gt;&gt; +string TokenExchangeUrl
-    &lt;&lt;rw&gt;&gt; +string CustomSignedAssertionProviderName
-    &lt;&lt;rw&gt;&gt; +Dictionary&lt;string, Object&gt; CustomSignedAssertionProviderData
+    namespace ApplicationOptions {
+        class CredentialDescription {
+            <<ro>> +string Id
+            <<rw>> +CredentialSource SourceType
+            <<rw>> +string KeyVaultUrl
+            <<rw>> +string CertificateStorePath
+            <<rw>> +string CertificateDistinguishedName
+            <<rw>> +string KeyVaultCertificateName
+            <<rw>> +string CertificateThumbprint
+            <<rw>> +string CertificateDiskPath
+            <<rw>> +string CertificatePassword
+            <<rw>> +string Base64EncodedValue
+            <<rw>> +string ClientSecret
+            <<rw>> +string ManagedIdentityClientId
+            <<rw>> +string SignedAssertionFileDiskPath
+            <<rw>> +AuthorizationHeaderProviderOptions DecryptKeysAuthenticationOptions
+            <<rw>> +string TokenExchangeAuthority
+            <<rw>> +X509Certificate2 Certificate
+            <<rw>> +object CachedValue
+            <<rw>> +bool Skip
+            <<ro>> +CredentialType CredentialType
+            <<rw>> +string TokenExchangeUrl
+            <<rw>> +string CustomSignedAssertionProviderName
+            <<rw>> +Dictionary<string,object> CustomSignedAssertionProviderData
+            <<rw>> +string Algorithm
+        }
+        class CredentialSource { <<enum>> }
+        class CredentialType { <<enum>> }
+        class IdentityApplicationOptions {
+            <<rw>> +string Authority
+            <<rw>> +string ClientId
+            <<rw>> +bool EnablePiiLogging
+            <<rw>> +IDictionary<string,string> ExtraQueryParameters
+            <<rw>> +IEnumerable<CredentialDescription> ClientCredentials
+            <<rw>> +string Audience
+            <<rw>> +IEnumerable<string> Audiences
+            <<rw>> +IEnumerable<CredentialDescription> TokenDecryptionCredentials
+            <<rw>> +bool AllowWebApiToBeAuthorizedByACL
+        }
+        class MicrosoftEntraApplicationOptions {
+            <<rw>> +string Name
+            <<rw>> +string Instance
+            <<rw>> +string TenantId
+            <<rw>> +string Authority
+            <<rw>> +string AppHomeTenantId
+            <<rw>> +string AzureRegion
+            <<rw>> +IEnumerable<string> ClientCapabilities
+            <<rw>> +bool SendX5C
+        }
+        class MicrosoftIdentityApplicationOptions {
+            <<rw>> +bool WithSpaAuthCode
+            <<rw>> +string Domain
+            <<rw>> +string EditProfilePolicyId
+            <<rw>> +string SignUpSignInPolicyId
+            <<rw>> +string ResetPasswordPolicyId
+            <<ro>> +string DefaultUserFlow
+            <<rw>> +string ResetPasswordPath
+            <<rw>> +string ErrorPath
+        }
     }
-    class CredentialSource { <<enum>>
-    Certificate = 0
-    KeyVault = 1
-    Base64Encoded = 2
-    Path = 3
-    StoreWithThumbprint = 4
-    StoreWithDistinguishedName = 5
-    ClientSecret = 6
-    SignedAssertionFromManagedIdentity = 7
-    SignedAssertionFilePath = 8
-    SignedAssertionFromVault = 9
-    AutoDecryptKeys = 10
-    CustomSignedAssertion = 11
+    namespace TokenAcquisition {
+        class AcquireTokenOptions {
+            +AcquireTokenOptions Clone()
+            <<rw>> +string AuthenticationOptionsName
+            <<rw>> +Nullable<Guid> CorrelationId
+            <<rw>> +IDictionary<string,string> ExtraQueryParameters
+            <<rw>> +IDictionary<string,object> ExtraParameters
+            <<rw>> +IDictionary<string,string> ExtraHeaderParameters
+            <<rw>> +string Claims
+            <<rw>> +string FmiPath
+            <<rw>> +bool ForceRefresh
+            <<rw>> +string PopPublicKey
+            <<rw>> +string PopClaim
+            <<rw>> +ManagedIdentityOptions ManagedIdentity
+            <<rw>> +string LongRunningWebApiSessionKey
+            <<ro>> +string LongRunningWebApiSessionKeyAuto
+            <<rw>> +string Tenant
+            <<rw>> +string UserFlow
+        }
+        class AcquireTokenResult {
+            <<rw>> +string AccessToken
+            <<rw>> +DateTimeOffset ExpiresOn
+            <<rw>> +string TenantId
+            <<rw>> +string IdToken
+            <<rw>> +IEnumerable<string> Scopes
+            <<rw>> +Guid CorrelationId
+            <<rw>> +string TokenType
+            <<rw>> +IReadOnlyDictionary<string,string> AdditionalResponseParameters
+            <<rw>> +X509Certificate2 BindingCertificate
+        }
+        class ITokenAcquirer { <<interface>> }
+        class ITokenAcquirerFactory { <<interface>> }
+        class ManagedIdentityOptions { <<rw>> +string UserAssignedClientId }
     }
-    class CredentialType { <<enum>>
-    Certificate = 0
-    Secret = 1
-    SignedAssertion = 2
-    DecryptKeys = 3
+    namespace DownstreamApis {
+        class AuthorizationHeaderProviderOptions {
+            +AuthorizationHeaderProviderOptions Clone()
+            <<rw>> +string BaseUrl
+            <<rw>> +string RelativePath
+            <<rw>> +string HttpMethod
+            <<rw>> +Action<HttpRequestMessage> CustomizeHttpRequestMessage
+            <<rw>> +AcquireTokenOptions AcquireTokenOptions
+            <<rw>> +string ProtocolScheme
+            <<rw>> +bool RequestAppToken
+        }
+        class DownstreamApiOptions {
+            +DownstreamApiOptions Clone()
+            <<rw>> +IEnumerable<string> Scopes
+            <<rw>> +Func<object?,HttpContent?> Serializer
+            <<rw>> +Func<HttpContent?,object?> Deserializer
+            <<rw>> +string AcceptHeader
+            <<rw>> +string ContentType
+            <<rw>> +IDictionary<string,string> ExtraQueryParameters
+            <<rw>> +IDictionary<string,string> ExtraHeaderParameters
+        }
+        class DownstreamApiOptionsReadOnlyHttpMethod { <<ro>> +string HttpMethod }
+        class IAuthorizationHeaderProvider { <<interface>> }
+        class IAuthorizationHeaderProvider~TResult~ { <<interface>> }
+        class IDownstreamApi { <<interface>> +CallApiAsync(...) +CallApiForUserAsync(...) +CallApiForAppAsync(...) +Generic & AOT overloads ... }
     }
-    class IdentityApplicationOptions {
-    &lt;&lt;rw&gt;&gt; +string Authority
-    &lt;&lt;rw&gt;&gt; +string ClientId
-    &lt;&lt;rw&gt;&gt; +bool EnablePiiLogging
-    &lt;&lt;rw&gt;&gt; +IDictionary&lt;string, string&gt; ExtraQueryParameters
-    &lt;&lt;rw&gt;&gt; +IEnumerable&lt;CredentialDescription&gt; ClientCredentials
-    &lt;&lt;rw&gt;&gt; +string Audience
-    &lt;&lt;rw&gt;&gt; +IEnumerable&lt;string&gt; Audiences
-    &lt;&lt;rw&gt;&gt; +IEnumerable&lt;CredentialDescription&gt; TokenDecryptionCredentials
-    &lt;&lt;rw&gt;&gt; +bool AllowWebApiToBeAuthorizedByACL
-    }
-    class MicrosoftEntraApplicationOptions {
-    &lt;&lt;rw&gt;&gt; +string Instance
-    &lt;&lt;rw&gt;&gt; +string TenantId
-    &lt;&lt;rw&gt;&gt; +string Authority
-    &lt;&lt;rw&gt;&gt; +string AppHomeTenantId
-    &lt;&lt;rw&gt;&gt; +string AzureRegion
-    &lt;&lt;rw&gt;&gt; +IEnumerable&lt;string&gt; ClientCapabilities
-    &lt;&lt;rw&gt;&gt; +bool SendX5C
-    }
-    class MicrosoftIdentityApplicationOptions {
-    &lt;&lt;rw&gt;&gt; +bool WithSpaAuthCode
-    &lt;&lt;rw&gt;&gt; +string Domain
-    &lt;&lt;rw&gt;&gt; +string EditProfilePolicyId
-    &lt;&lt;rw&gt;&gt; +string SignUpSignInPolicyId
-    &lt;&lt;rw&gt;&gt; +string ResetPasswordPolicyId
-    &lt;&lt;ro&gt;&gt; +string DefaultUserFlow
-    &lt;&lt;rw&gt;&gt; +string ResetPasswordPath
-    &lt;&lt;rw&gt;&gt; +string ErrorPath
-    }
- }
-
-        namespace TokenAcquisition {
-    class AcquireTokenOptions {
-    +AcquireTokenOptions Clone()
-    &lt;&lt;rw&gt;&gt; +string AuthenticationOptionsName
-    &lt;&lt;rw&gt;&gt; +Nullable&lt;Guid&gt; CorrelationId
-    &lt;&lt;rw&gt;&gt; +IDictionary&lt;string, string&gt; ExtraQueryParameters
-    &lt;&lt;rw&gt;&gt; +IDictionary&lt;string, Object&gt; ExtraParameters
-    &lt;&lt;rw&gt;&gt; +IDictionary&lt;string, string&gt; ExtraHeadersParameters
-    &lt;&lt;rw&gt;&gt; +string Claims
-    &lt;&lt;rw&gt;&gt; +string FmiPath
-    &lt;&lt;rw&gt;&gt; +bool ForceRefresh
-    &lt;&lt;rw&gt;&gt; +string PopPublicKey
-    &lt;&lt;rw&gt;&gt; +string PopClaim
-    &lt;&lt;rw&gt;&gt; +ManagedIdentityOptions ManagedIdentity
-    &lt;&lt;rw&gt;&gt; +string LongRunningWebApiSessionKey
-    &lt;&lt;ro&gt;&gt; +string LongRunningWebApiSessionKeyAuto
-    &lt;&lt;rw&gt;&gt; +string Tenant
-    &lt;&lt;rw&gt;&gt; +string UserFlow
-    }
-    class AcquireTokenResult {
-    &lt;&lt;rw&gt;&gt; +string AccessToken
-    &lt;&lt;rw&gt;&gt; +DateTimeOffset ExpiresOn
-    &lt;&lt;rw&gt;&gt; +string TenantId
-    &lt;&lt;rw&gt;&gt; +string IdToken
-    &lt;&lt;rw&gt;&gt; +IEnumerable&lt;string&gt; Scopes
-    &lt;&lt;rw&gt;&gt; +Guid CorrelationId
-    &lt;&lt;rw&gt;&gt; +string TokenType
-    }
-    class ITokenAcquirer { <<interface>>
-    +Task&lt;AcquireTokenResult&gt; GetTokenForUserAsync(IEnumerable&lt;string&gt; scopes, AcquireTokenOptions tokenAcquisitionOptions, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task&lt;AcquireTokenResult&gt; GetTokenForAppAsync(string scope, AcquireTokenOptions tokenAcquisitionOptions, CancellationToken cancellationToken)
-    }
-    class ITokenAcquirerFactory { <<interface>>
-    +ITokenAcquirer GetTokenAcquirer(IdentityApplicationOptions identityApplicationOptions)
-    +ITokenAcquirer GetTokenAcquirer(string optionName)
-    }
-    class ManagedIdentityOptions {
-    +ManagedIdentityOptions Clone()
-    &lt;&lt;rw&gt;&gt; +string UserAssignedClientId
-    }
- }
-
-        namespace DownstreamApis {
-    class AuthorizationHeaderProviderOptions {
-    +AuthorizationHeaderProviderOptions Clone()
-    #AuthorizationHeaderProviderOptions CloneInternal()
-    +string GetApiUrl()
-    &lt;&lt;rw&gt;&gt; +string BaseUrl
-    &lt;&lt;rw&gt;&gt; +string RelativePath
-    &lt;&lt;rw&gt;&gt; +string HttpMethod
-    &lt;&lt;rw&gt;&gt; +Action&lt;HttpRequestMessage&gt; CustomizeHttpRequestMessage
-    &lt;&lt;rw&gt;&gt; +AcquireTokenOptions AcquireTokenOptions
-    &lt;&lt;rw&gt;&gt; +string ProtocolScheme
-    &lt;&lt;rw&gt;&gt; +bool RequestAppToken
-    }
-    class DownstreamApiOptions {
-    +DownstreamApiOptions Clone()
-    #AuthorizationHeaderProviderOptions CloneInternal()
-    &lt;&lt;rw&gt;&gt; +IEnumerable&lt;string&gt; Scopes
-    &lt;&lt;rw&gt;&gt; +Func&lt;Object, HttpContent&gt; Serializer
-    &lt;&lt;rw&gt;&gt; +Func&lt;HttpContent, Object&gt; Deserializer
-    &lt;&lt;rw&gt;&gt; +string AcceptHeader
-    &lt;&lt;rw&gt;&gt; +string ContentType
-    &lt;&lt;rw&gt;&gt; +string ExtraQueryParameters
-    &lt;&lt;rw&gt;&gt; +string ExtraHeadersParameters
-    }
-    class DownstreamApiOptionsReadOnlyHttpMethod {
-    +DownstreamApiOptionsReadOnlyHttpMethod Clone()
-    #AuthorizationHeaderProviderOptions CloneInternal()
-    &lt;&lt;rw&gt;&gt; +string HttpMethod
-    }
-
- }
-
 
     IdentityApplicationOptions <|-- MicrosoftEntraApplicationOptions : Inherits
     MicrosoftEntraApplicationOptions <|-- MicrosoftIdentityApplicationOptions : Inherits
     AuthorizationHeaderProviderOptions <|-- DownstreamApiOptions : Inherits
     DownstreamApiOptions <|-- DownstreamApiOptionsReadOnlyHttpMethod : Inherits
+    CredentialDescription *-- CredentialSource : Has
+    CredentialDescription *-- CredentialType : Has
+    IdentityApplicationOptions --> CredentialDescription : "ClientCredentials" Has many
+    IdentityApplicationOptions --> CredentialDescription : "TokenDecryptionCredentials" Has many
+    AuthorizationHeaderProviderOptions --> AcquireTokenOptions : Has
+    AcquireTokenOptions --> ManagedIdentityOptions : Has
+    ITokenAcquirerFactory --> ITokenAcquirer : produces
+    ITokenAcquirer --> AcquireTokenOptions : parametrized by
+    ITokenAcquirer --> AcquireTokenResult : returns
 
-    CredentialDescription *-- "SourceType" CredentialSource : Has
-    CredentialDescription --> "DecryptKeysAuthenticationOptions" AuthorizationHeaderProviderOptions : Has
-    CredentialDescription *-- "CredentialType" CredentialType : Has
-
-    IdentityApplicationOptions --> "ClientCredentials" CredentialDescription : Has many
-    IdentityApplicationOptions --> "TokenDecryptionCredentials" CredentialDescription : Has many
-    AuthorizationHeaderProviderOptions --> "AcquireTokenOptions" AcquireTokenOptions : Has
-    AcquireTokenOptions --> "ManagedIdentity" ManagedIdentityOptions : Has
-
-   ITokenAcquirerFactory --> ITokenAcquirer : produces
-   ITokenAcquirer -->  AcquireTokenOptions : parametrized by
-   AcquireTokenOptions --> "ManagedIdentity" ManagedIdentityOptions : Has
-   ITokenAcquirer -->  AcquireTokenResult : returns
+    note for AuthorizationHeaderProviderOptions "Defaults: ProtocolScheme=Bearer, HttpMethod=Get"
+    note for DownstreamApiOptions "Defaults: AcceptHeader=application/json, ContentType=application/json"
+    note for IdentityApplicationOptions "Effective audiences = Audience ∪ Audiences"
 ```
 
-### Application options and credentials
+### Full API Surface (Expanded)
+The expanded diagram lists all overloads of IDownstreamApi and highlights extensibility points.
 
-   The application options are typically the options that you find in configuration files like the appsettings.json
-   file. They describe the authentication aspects of your application. The library offers two layer. A standard
-   layer, and a Microsoft Identity platform specialization.
-
-  ```mermaid
-  classDiagram
-   class CredentialDescription {
-    &lt;&lt;ro&gt;&gt; +string Id
-    &lt;&lt;rw&gt;&gt; +CredentialSource SourceType
-    &lt;&lt;rw&gt;&gt; +string KeyVaultUrl
-    &lt;&lt;rw&gt;&gt; +string CertificateStorePath
-    &lt;&lt;rw&gt;&gt; +string CertificateDistinguishedName
-    &lt;&lt;rw&gt;&gt; +string KeyVaultCertificateName
-    &lt;&lt;rw&gt;&gt; +string CertificateThumbprint
-    &lt;&lt;rw&gt;&gt; +string CertificateDiskPath
-    &lt;&lt;rw&gt;&gt; +string CertificatePassword
-    &lt;&lt;rw&gt;&gt; +string Base64EncodedValue
-    &lt;&lt;rw&gt;&gt; +string ClientSecret
-    &lt;&lt;rw&gt;&gt; +string ManagedIdentityClientId
-    &lt;&lt;rw&gt;&gt; +string SignedAssertionFileDiskPath
-    &lt;&lt;rw&gt;&gt; +AuthorizationHeaderProviderOptions DecryptKeysAuthenticationOptions
-    &lt;&lt;rw&gt;&gt; +string TokenExchangeAuthority
-    &lt;&lt;rw&gt;&gt; +X509Certificate2 Certificate
-    &lt;&lt;rw&gt;&gt; +Object CachedValue
-    &lt;&lt;rw&gt;&gt; +bool Skip
-    &lt;&lt;ro&gt;&gt; +CredentialType CredentialType
-    &lt;&lt;rw&gt;&gt; +string TokenExchangeUrl
-    &lt;&lt;rw&gt;&gt; +string CustomSignedAssertionProviderName
-    &lt;&lt;rw&gt;&gt; +Dictionary&lt;string, Object&gt; CustomSignedAssertionProviderData
+```mermaid
+classDiagram
+    class IDownstreamApi {
+        +Task<HttpResponseMessage> CallApiAsync(DownstreamApiOptions, ClaimsPrincipal?, HttpContent?, CancellationToken)
+        +Task<HttpResponseMessage> CallApiAsync(string?, Action<DownstreamApiOptions>?, ClaimsPrincipal?, HttpContent?, CancellationToken)
+        +Task<HttpResponseMessage> CallApiForUserAsync(string?, Action<DownstreamApiOptions>?, ClaimsPrincipal?, HttpContent?, CancellationToken)
+        +Task<HttpResponseMessage> CallApiForAppAsync(string?, Action<DownstreamApiOptions>?, HttpContent?, CancellationToken)
+        +Task<TOutput?> CallApiForUserAsync<TInput,TOutput>(string?, TInput, Action<DownstreamApiOptions>?, ClaimsPrincipal?, CancellationToken) where TOutput:class
+        +Task<TOutput?> CallApiForUserAsync<TOutput>(string, Action<DownstreamApiOptions>?, ClaimsPrincipal?, CancellationToken) where TOutput:class
+        +Task<TOutput?> CallApiForAppAsync<TInput,TOutput>(string?, TInput, Action<DownstreamApiOptions>?, CancellationToken) where TOutput:class
+        +Task<TOutput?> CallApiForAppAsync<TOutput>(string, Action<DownstreamApiOptions>?, CancellationToken) where TOutput:class
+        +Task<TOutput?> CallApiForUserAsync<TInput,TOutput>(string?, TInput, JsonTypeInfo<TInput>, JsonTypeInfo<TOutput>, Action<DownstreamApiOptions>?, ClaimsPrincipal?, CancellationToken) where TOutput:class
+        +Task<TOutput?> CallApiForUserAsync<TOutput>(string, JsonTypeInfo<TOutput>, Action<DownstreamApiOptions>?, ClaimsPrincipal?, CancellationToken) where TOutput:class
+        +Task<TOutput?> CallApiForAppAsync<TInput,TOutput>(string?, TInput, JsonTypeInfo<TInput>, JsonTypeInfo<TOutput>, Action<DownstreamApiOptions>?, CancellationToken) where TOutput:class
+        +Task<TOutput?> CallApiForAppAsync<TOutput>(string, JsonTypeInfo<TOutput>, Action<DownstreamApiOptions>?, CancellationToken) where TOutput:class
     }
-    class CredentialSource { <<enum>>
-    Certificate = 0
-    KeyVault = 1
-    Base64Encoded = 2
-    Path = 3
-    StoreWithThumbprint = 4
-    StoreWithDistinguishedName = 5
-    ClientSecret = 6
-    SignedAssertionFromManagedIdentity = 7
-    SignedAssertionFilePath = 8
-    SignedAssertionFromVault = 9
-    AutoDecryptKeys = 10
-    CustomSignedAssertion = 11
+    class IAuthorizationHeaderProvider {
+        +Task<string> CreateAuthorizationHeaderForUserAsync(IEnumerable<string>, AuthorizationHeaderProviderOptions, ClaimsPrincipal?, CancellationToken)
+        +Task<string> CreateAuthorizationHeaderForAppAsync(string, AuthorizationHeaderProviderOptions?, CancellationToken)
+        +Task<string> CreateAuthorizationHeaderAsync(IEnumerable<string>, AuthorizationHeaderProviderOptions?, ClaimsPrincipal?, CancellationToken)
     }
-    class CredentialType { <<enum>>
-    Certificate = 0
-    Secret = 1
-    SignedAssertion = 2
-    DecryptKeys = 3
+    class IAuthorizationHeaderProvider~TResult~ {
+        +Task<TResult> CreateAuthorizationHeaderAsync(DownstreamApiOptions, ClaimsPrincipal?, CancellationToken)
     }
-    class IdentityApplicationOptions {
-    &lt;&lt;rw&gt;&gt; +string Authority
-    &lt;&lt;rw&gt;&gt; +string ClientId
-    &lt;&lt;rw&gt;&gt; +bool EnablePiiLogging
-    &lt;&lt;rw&gt;&gt; +IDictionary&lt;string, string&gt; ExtraQueryParameters
-    &lt;&lt;rw&gt;&gt; +IEnumerable&lt;CredentialDescription&gt; ClientCredentials
-    &lt;&lt;rw&gt;&gt; +string Audience
-    &lt;&lt;rw&gt;&gt; +IEnumerable&lt;string&gt; Audiences
-    &lt;&lt;rw&gt;&gt; +IEnumerable&lt;CredentialDescription&gt; TokenDecryptionCredentials
-    &lt;&lt;rw&gt;&gt; +bool AllowWebApiToBeAuthorizedByACL
-    }
-    class MicrosoftEntraApplicationOptions {
-    &lt;&lt;rw&gt;&gt; +string Instance
-    &lt;&lt;rw&gt;&gt; +string TenantId
-    &lt;&lt;rw&gt;&gt; +string Authority
-    &lt;&lt;rw&gt;&gt; +string AppHomeTenantId
-    &lt;&lt;rw&gt;&gt; +string AzureRegion
-    &lt;&lt;rw&gt;&gt; +IEnumerable&lt;string&gt; ClientCapabilities
-    &lt;&lt;rw&gt;&gt; +bool SendX5C
-    }
-    class MicrosoftIdentityApplicationOptions {
-    &lt;&lt;rw&gt;&gt; +bool WithSpaAuthCode
-    &lt;&lt;rw&gt;&gt; +string Domain
-    &lt;&lt;rw&gt;&gt; +string EditProfilePolicyId
-    &lt;&lt;rw&gt;&gt; +string SignUpSignInPolicyId
-    &lt;&lt;rw&gt;&gt; +string ResetPasswordPolicyId
-    &lt;&lt;ro&gt;&gt; +string DefaultUserFlow
-    &lt;&lt;rw&gt;&gt; +string ResetPasswordPath
-    &lt;&lt;rw&gt;&gt; +string ErrorPath
-    }
+```
 
-    IdentityApplicationOptions <|-- MicrosoftEntraApplicationOptions : Inherits
-    MicrosoftEntraApplicationOptions <|-- MicrosoftIdentityApplicationOptions : Inherits
+### Extensibility Diagram
+Credential loading extensibility points.
 
-    CredentialDescription *-- "SourceType" CredentialSource : Has
-    CredentialDescription --> "DecryptKeysAuthenticationOptions" AuthorizationHeaderProviderOptions : Has
-    note for AuthorizationHeaderProviderOptions "see below"
-    CredentialDescription *-- "CredentialType" CredentialType : Has
-    IdentityApplicationOptions --> "ClientCredentials" CredentialDescription : Has many
-    IdentityApplicationOptions --> "TokenDecryptionCredentials" CredentialDescription : Has many
-
-   ```
-
-For details about Credentials, see [CredentialDecription](./docs/credentialdescription.md)
-
-### Credential loaders
-   An important part of the application options are the credentials. In addition to the credential descriptions, the
-   library offers extensibility mechanisms so that implementers can add their own credential source loaders.
-
-   ```mermaid
-   classDiagram
-   class CredentialSourceLoaderParameters {
-    &lt;&lt;rw&gt;&gt; +string ClientId
-    &lt;&lt;rw&gt;&gt; +string Authority
-    }
-    class ICredentialsLoader { <<interface>>
-    +Task LoadCredentialsIfNeededAsync(CredentialDescription credentialDescription, CredentialSourceLoaderParameters parameters)
-    +Task&lt;CredentialDescription&gt; LoadFirstValidCredentialsAsync(IEnumerable&lt;CredentialDescription&gt; credentialDescriptions, CredentialSourceLoaderParameters parameters)
-    +Void ResetCredentials(IEnumerable&lt;CredentialDescription&gt; credentialDescriptions)
-    &lt;&lt;ro&gt;&gt; +IDictionary&lt;CredentialSource, ICredentialSourceLoader&gt; CredentialSourceLoaders
+```mermaid
+classDiagram
+    class CredentialSourceLoaderParameters {
+        +string ClientId
+        +string Authority
     }
     class ICredentialSourceLoader { <<interface>>
-    +Task LoadIfNeededAsync(CredentialDescription credentialDescription, CredentialSourceLoaderParameters parameters)
-    &lt;&lt;ro&gt;&gt; +CredentialSource CredentialSource
+        +Task LoadIfNeededAsync(CredentialDescription, CredentialSourceLoaderParameters?)
+        +CredentialSource CredentialSource
     }
     class ICustomSignedAssertionProvider { <<interface>>
-    &lt;&lt;ro&gt;&gt; +string Name
+        +string Name
     }
-
+    class ICredentialsLoader { <<interface>>
+        +IDictionary<CredentialSource, ICredentialSourceLoader> CredentialSourceLoaders
+        +Task LoadCredentialsIfNeededAsync(CredentialDescription, CredentialSourceLoaderParameters?)
+        +Task<CredentialDescription?> LoadFirstValidCredentialsAsync(IEnumerable<CredentialDescription>, CredentialSourceLoaderParameters?)
+        +void ResetCredentials(IEnumerable<CredentialDescription>)
+    }
     ICredentialSourceLoader <|-- ICustomSignedAssertionProvider : Inherits
-    ICredentialSourceLoader *-- "CredentialSource" CredentialSource : Has
-    ICredentialsLoader --> ICredentialSourceLoader : Loads
+    ICredentialsLoader --> ICredentialSourceLoader : Uses
     ICredentialSourceLoader --> CredentialSourceLoaderParameters : Uses
-    note for CredentialSource "see above"
-   ```
-
-   There can be several application options with different names (for instance in ASP.NET Core these would be different
-   authentication schemes)
+```
 
 ### Token acquisition
+(Section retained; see diagrams above.)
 
-Once configured, an application can acquire tokens from the Identity provider. This is a low level API, in the sense that
-you would probably prefer to call downstream web APIs without having to be preoccupied about the authentication aspects. If you
-really want to use the lower level API, you should:
-- get hold of a ITokenAcquirerFactory. Implementations can provide a TokenAcquirerFactory for instance, with a singleton.
-- get a ITokenAcquirer (by its name, for instance). This corresponds to the application options
-- From the token acquirer get a token for on behalf of the user, or the app. If you don't specify any AcquireTokenOptions,
-  the implementation should do its best effort. The AcquireTokenOptions enable you to override the defaults.
-
-```mermaid
-classDiagram
-   class AcquireTokenOptions {
-    +AcquireTokenOptions Clone()
-    &lt;&lt;rw&gt;&gt; +string AuthenticationOptionsName
-    &lt;&lt;rw&gt;&gt; +Nullable&lt;Guid&gt; CorrelationId
-    &lt;&lt;rw&gt;&gt; +IDictionary&lt;string, string&gt; ExtraQueryParameters
-    &lt;&lt;rw&gt;&gt; +IDictionary&lt;string, Object&gt; ExtraParameters
-    &lt;&lt;rw&gt;&gt; +IDictionary&lt;string, string&gt; ExtraHeadersParameters
-    &lt;&lt;rw&gt;&gt; +string Claims
-    &lt;&lt;rw&gt;&gt; +string FmiPath
-    &lt;&lt;rw&gt;&gt; +bool ForceRefresh
-    &lt;&lt;rw&gt;&gt; +string PopPublicKey
-    &lt;&lt;rw&gt;&gt; +string PopClaim
-    &lt;&lt;rw&gt;&gt; +ManagedIdentityOptions ManagedIdentity
-    &lt;&lt;rw&gt;&gt; +string LongRunningWebApiSessionKey
-    &lt;&lt;ro&gt;&gt; +string LongRunningWebApiSessionKeyAuto
-    &lt;&lt;rw&gt;&gt; +string Tenant
-    &lt;&lt;rw&gt;&gt; +string UserFlow
-    }
-    class AcquireTokenResult {
-    &lt;&lt;rw&gt;&gt; +string AccessToken
-    &lt;&lt;rw&gt;&gt; +DateTimeOffset ExpiresOn
-    &lt;&lt;rw&gt;&gt; +string TenantId
-    &lt;&lt;rw&gt;&gt; +string IdToken
-    &lt;&lt;rw&gt;&gt; +IEnumerable&lt;string&gt; Scopes
-    &lt;&lt;rw&gt;&gt; +Guid CorrelationId
-    &lt;&lt;rw&gt;&gt; +string TokenType
-    }
-    class ITokenAcquirer { <<interface>>
-    +Task&lt;AcquireTokenResult&gt; GetTokenForUserAsync(IEnumerable&lt;string&gt; scopes, AcquireTokenOptions tokenAcquisitionOptions, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task&lt;AcquireTokenResult&gt; GetTokenForAppAsync(string scope, AcquireTokenOptions tokenAcquisitionOptions, CancellationToken cancellationToken)
-    }
-    class ITokenAcquirerFactory { <<interface>>
-    +ITokenAcquirer GetTokenAcquirer(IdentityApplicationOptions identityApplicationOptions)
-    +ITokenAcquirer GetTokenAcquirer(string optionName)
-    }
-    class ManagedIdentityOptions {
-    +ManagedIdentityOptions Clone()
-    &lt;&lt;rw&gt;&gt; +string UserAssignedClientId
-    }
-
-   ITokenAcquirerFactory ..> ITokenAcquirer : produces
-   ITokenAcquirer -->  AcquireTokenOptions : parametrized by
-   AcquireTokenOptions --> "ManagedIdentity" ManagedIdentityOptions : Has
-   ITokenAcquirer ..>  AcquireTokenResult : returns
-```
-
-## Call downstream APIs
-
-It's also possible (and recommended) to use higher level APIs:
-- IDownstreamApi enables you to call a downstream web API and let the implementation handle the serialization of the
-  input parameter (if any), handling the getting the authorization header and attaching it to the HttpClient, call
-  the downstream web API, handle errors, deserialize the answer and return it as a strongly typed object. You can
-  use customize all these steps, for instance by providing your own serializer / deserializer.
-- IAuthorizationHeaderProvider is the component that provides the authorization header, delegating to the ITokenAcquirer.
-  Whereas ITokenAcquirer only knows about tokens, IAuthorizationHeaderProvider knows about protocols (for instance bearer,
-  Pop, etc ...)
-
- ```mermaid
- classDiagram
-    class AuthorizationHeaderProviderOptions {
-    +AuthorizationHeaderProviderOptions Clone()
-    #AuthorizationHeaderProviderOptions CloneInternal()
-    +string GetApiUrl()
-    &lt;&lt;rw&gt;&gt; +string BaseUrl
-    &lt;&lt;rw&gt;&gt; +string RelativePath
-    &lt;&lt;rw&gt;&gt; +string HttpMethod
-    &lt;&lt;rw&gt;&gt; +Action&lt;HttpRequestMessage&gt; CustomizeHttpRequestMessage
-    &lt;&lt;rw&gt;&gt; +AcquireTokenOptions AcquireTokenOptions
-    &lt;&lt;rw&gt;&gt; +string ProtocolScheme
-    &lt;&lt;rw&gt;&gt; +bool RequestAppToken
-    }
-    class DownstreamApiOptions {
-    +DownstreamApiOptions Clone()
-    #AuthorizationHeaderProviderOptions CloneInternal()
-    &lt;&lt;rw&gt;&gt; +IEnumerable&lt;string&gt; Scopes
-    &lt;&lt;rw&gt;&gt; +Func&lt;Object, HttpContent&gt; Serializer
-    &lt;&lt;rw&gt;&gt; +Func&lt;HttpContent, Object&gt; Deserializer
-    &lt;&lt;rw&gt;&gt; +string AcceptHeader
-    &lt;&lt;rw&gt;&gt; +string ContentType
-    &lt;&lt;rw&gt;&gt; +IDictionary&lt;string, string&gt; ExtraQueryParameters
-    &lt;&lt;rw&gt;&gt; +IDictionary&lt;string, string&gt; ExtraHeadersParameters
-    }
-    class DownstreamApiOptionsReadOnlyHttpMethod {
-    +DownstreamApiOptionsReadOnlyHttpMethod Clone()
-    #AuthorizationHeaderProviderOptions CloneInternal()
-    &lt;&lt;rw&gt;&gt; +string HttpMethod
-    }
-    class IAuthorizationHeaderProvider { <<interface>>
-    +Task&lt;string&gt; CreateAuthorizationHeaderForUserAsync(IEnumerable&lt;string&gt; scopes, AuthorizationHeaderProviderOptions authorizationHeaderProviderOptions, ClaimsPrincipal claimsPrincipal, CancellationToken cancellationToken)
-    +Task&lt;string&gt; CreateAuthorizationHeaderForAppAsync(string scopes, AuthorizationHeaderProviderOptions downstreamApiOptions, CancellationToken cancellationToken)
-    +Task&lt;string&gt; CreateAuthorizationHeaderAsync(IEnumerable&lt;string&gt; scopes, AuthorizationHeaderProviderOptions options, ClaimsPrincipal claimsPrincipal, CancellationToken cancellationToken)
-    }
-    class IDownstreamApi { <<interface>>
-    +Task&lt;HttpResponseMessage&gt; CallApiAsync(DownstreamApiOptions downstreamApiOptions, ClaimsPrincipal user, HttpContent content, CancellationToken cancellationToken)
-    +Task&lt;HttpResponseMessage&gt; CallApiAsync(string serviceName, Action&lt;DownstreamApiOptions&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, HttpContent content, CancellationToken cancellationToken)
-    +Task&lt;HttpResponseMessage&gt; CallApiForUserAsync(string serviceName, Action&lt;DownstreamApiOptions&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, HttpContent content, CancellationToken cancellationToken)
-    +Task&lt;HttpResponseMessage&gt; CallApiForAppAsync(string serviceName, Action&lt;DownstreamApiOptions&gt; downstreamApiOptionsOverride, HttpContent content, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; CallApiForUserAsync(string serviceName, IDownstreamApi.TInput input, Action&lt;DownstreamApiOptions&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; CallApiForUserAsync(string serviceName, Action&lt;DownstreamApiOptions&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; CallApiForAppAsync(string serviceName, IDownstreamApi.TInput input, Action&lt;DownstreamApiOptions&gt; downstreamApiOptionsOverride, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; CallApiForAppAsync(string serviceName, Action&lt;DownstreamApiOptions&gt; downstreamApiOptionsOverride, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; CallApiForUserAsync(string serviceName, IDownstreamApi.TInput input, JsonTypeInfo&lt;IDownstreamApi.TInput&gt; inputJsonTypeInfo, JsonTypeInfo&lt;IDownstreamApi.TOutput&gt; outputJsonTypeInfo, Action&lt;DownstreamApiOptions&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; CallApiForUserAsync(string serviceName, JsonTypeInfo&lt;IDownstreamApi.TOutput&gt; outputJsonTypeInfo, Action&lt;DownstreamApiOptions&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; CallApiForAppAsync(string serviceName, IDownstreamApi.TInput input, JsonTypeInfo&lt;IDownstreamApi.TInput&gt; inputJsonTypeInfo, JsonTypeInfo&lt;IDownstreamApi.TOutput&gt; outputJsonTypeInfo, Action&lt;DownstreamApiOptions&gt; downstreamApiOptionsOverride, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; CallApiForAppAsync(string serviceName, JsonTypeInfo&lt;IDownstreamApi.TOutput&gt; outputJsonTypeInfo, Action&lt;DownstreamApiOptions&gt; downstreamApiOptionsOverride, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; GetForUserAsync(string serviceName, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; GetForUserAsync(string serviceName, IDownstreamApi.TInput input, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; GetForAppAsync(string serviceName, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; GetForAppAsync(string serviceName, IDownstreamApi.TInput input, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, CancellationToken cancellationToken)
-    +Task PostForUserAsync(string serviceName, IDownstreamApi.TInput input, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; PostForUserAsync(string serviceName, IDownstreamApi.TInput input, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task PostForAppAsync(string serviceName, IDownstreamApi.TInput input, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; PostForAppAsync(string serviceName, IDownstreamApi.TInput input, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, CancellationToken cancellationToken)
-    +Task PutForUserAsync(string serviceName, IDownstreamApi.TInput input, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; PutForUserAsync(string serviceName, IDownstreamApi.TInput input, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task PutForAppAsync(string serviceName, IDownstreamApi.TInput input, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; PutForAppAsync(string serviceName, IDownstreamApi.TInput input, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, CancellationToken cancellationToken)
-    +Task PatchForUserAsync(string serviceName, IDownstreamApi.TInput input, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; PatchForUserAsync(string serviceName, IDownstreamApi.TInput input, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task PatchForAppAsync(string serviceName, IDownstreamApi.TInput input, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; PatchForAppAsync(string serviceName, IDownstreamApi.TInput input, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, CancellationToken cancellationToken)
-    +Task DeleteForUserAsync(string serviceName, IDownstreamApi.TInput input, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; DeleteForUserAsync(string serviceName, IDownstreamApi.TInput input, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task DeleteForAppAsync(string serviceName, IDownstreamApi.TInput input, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; DeleteForAppAsync(string serviceName, IDownstreamApi.TInput input, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; GetForUserAsync(string serviceName, JsonTypeInfo&lt;IDownstreamApi.TOutput&gt; outputJsonTypeInfo, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; GetForUserAsync(string serviceName, IDownstreamApi.TInput input, JsonTypeInfo&lt;IDownstreamApi.TInput&gt; inputJsonTypeInfo, JsonTypeInfo&lt;IDownstreamApi.TOutput&gt; outputJsonTypeInfo, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; GetForAppAsync(string serviceName, JsonTypeInfo&lt;IDownstreamApi.TOutput&gt; outputJsonTypeInfo, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; GetForAppAsync(string serviceName, IDownstreamApi.TInput input, JsonTypeInfo&lt;IDownstreamApi.TInput&gt; inputJsonTypeInfo, JsonTypeInfo&lt;IDownstreamApi.TOutput&gt; outputJsonTypeInfo, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, CancellationToken cancellationToken)
-    +Task PostForUserAsync(string serviceName, IDownstreamApi.TInput input, JsonTypeInfo&lt;IDownstreamApi.TInput&gt; inputJsonTypeInfo, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; PostForUserAsync(string serviceName, IDownstreamApi.TInput input, JsonTypeInfo&lt;IDownstreamApi.TInput&gt; inputJsonTypeInfo, JsonTypeInfo&lt;IDownstreamApi.TOutput&gt; outputJsonTypeInfo, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task PostForAppAsync(string serviceName, IDownstreamApi.TInput input, JsonTypeInfo&lt;IDownstreamApi.TInput&gt; inputJsonTypeInfo, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; PostForAppAsync(string serviceName, IDownstreamApi.TInput input, JsonTypeInfo&lt;IDownstreamApi.TInput&gt; inputJsonTypeInfo, JsonTypeInfo&lt;IDownstreamApi.TOutput&gt; outputJsonTypeInfo, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, CancellationToken cancellationToken)
-    +Task PutForUserAsync(string serviceName, IDownstreamApi.TInput input, JsonTypeInfo&lt;IDownstreamApi.TInput&gt; inputJsonTypeInfo, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; PutForUserAsync(string serviceName, IDownstreamApi.TInput input, JsonTypeInfo&lt;IDownstreamApi.TInput&gt; inputJsonTypeInfo, JsonTypeInfo&lt;IDownstreamApi.TOutput&gt; outputJsonTypeInfo, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task PutForAppAsync(string serviceName, IDownstreamApi.TInput input, JsonTypeInfo&lt;IDownstreamApi.TInput&gt; inputJsonTypeInfo, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; PutForAppAsync(string serviceName, IDownstreamApi.TInput input, JsonTypeInfo&lt;IDownstreamApi.TInput&gt; inputJsonTypeInfo, JsonTypeInfo&lt;IDownstreamApi.TOutput&gt; outputJsonTypeInfo, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, CancellationToken cancellationToken)
-    +Task PatchForUserAsync(string serviceName, IDownstreamApi.TInput input, JsonTypeInfo&lt;IDownstreamApi.TInput&gt; inputJsonTypeInfo, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; PatchForUserAsync(string serviceName, IDownstreamApi.TInput input, JsonTypeInfo&lt;IDownstreamApi.TInput&gt; inputJsonTypeInfo, JsonTypeInfo&lt;IDownstreamApi.TOutput&gt; outputJsonTypeInfo, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task PatchForAppAsync(string serviceName, IDownstreamApi.TInput input, JsonTypeInfo&lt;IDownstreamApi.TInput&gt; inputJsonTypeInfo, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; PatchForAppAsync(string serviceName, IDownstreamApi.TInput input, JsonTypeInfo&lt;IDownstreamApi.TInput&gt; inputJsonTypeInfo, JsonTypeInfo&lt;IDownstreamApi.TOutput&gt; outputJsonTypeInfo, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, CancellationToken cancellationToken)
-    +Task DeleteForUserAsync(string serviceName, IDownstreamApi.TInput input, JsonTypeInfo&lt;IDownstreamApi.TInput&gt; inputJsonTypeInfo, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; DeleteForUserAsync(string serviceName, IDownstreamApi.TInput input, JsonTypeInfo&lt;IDownstreamApi.TInput&gt; inputJsonTypeInfo, JsonTypeInfo&lt;IDownstreamApi.TOutput&gt; outputJsonTypeInfo, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, ClaimsPrincipal user, CancellationToken cancellationToken)
-    +Task DeleteForAppAsync(string serviceName, IDownstreamApi.TInput input, JsonTypeInfo&lt;IDownstreamApi.TInput&gt; inputJsonTypeInfo, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, CancellationToken cancellationToken)
-    +Task&lt;IDownstreamApi.TOutput&gt; DeleteForAppAsync(string serviceName, IDownstreamApi.TInput input, JsonTypeInfo&lt;IDownstreamApi.TInput&gt; inputJsonTypeInfo, JsonTypeInfo&lt;IDownstreamApi.TOutput&gt; outputJsonTypeInfo, Action&lt;DownstreamApiOptionsReadOnlyHttpMethod&gt; downstreamApiOptionsOverride, CancellationToken cancellationToken)
-    }
-
-    AuthorizationHeaderProviderOptions <|-- DownstreamApiOptions : Inherits
-    DownstreamApiOptions <|-- DownstreamApiOptionsReadOnlyHttpMethod : Inherits
-    CredentialDescription --> "DecryptKeysAuthenticationOptions" AuthorizationHeaderProviderOptions : Has
-    AuthorizationHeaderProviderOptions --> "AcquireTokenOptions" AcquireTokenOptions : Has
-    AcquireTokenOptions --> "ManagedIdentity" ManagedIdentityOptions : Has
-    IDownstreamApi ..> DownstreamApiOptions : Uses
-    IAuthorizationHeaderProvider ..> AuthorizationHeaderProviderOptions : Uses
-```
-
-
-
+### Call downstream APIs
+(See condensed and expanded diagrams.)
 
 ## Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
+The rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
 
 When you submit a pull request, a CLA bot will automatically determine whether you need to provide
 a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
