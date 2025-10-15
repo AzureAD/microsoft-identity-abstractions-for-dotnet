@@ -541,9 +541,9 @@ classDiagram
         +string Name
     }
     class ICredentialsLoader { <<interface>>
-        +IDictionary<CredentialSource, ICredentialSourceLoader> CredentialSourceLoaders
+        +IDictionary&lt;CredentialSource, ICredentialSourceLoader&gt; CredentialSourceLoaders
         +Task LoadCredentialsIfNeededAsync(CredentialDescription, CredentialSourceLoaderParameters?)
-        +Task<CredentialDescription?> LoadFirstValidCredentialsAsync(IEnumerable<CredentialDescription>, CredentialSourceLoaderParameters?)
+        +Task<CredentialDescription?> LoadFirstValidCredentialsAsync(IEnumerable&lt;CredentialDescription&gt;, CredentialSourceLoaderParameters?)
         +void ResetCredentials(IEnumerable<CredentialDescription>)
     }
     ICredentialSourceLoader <|-- ICustomSignedAssertionProvider : Inherits
