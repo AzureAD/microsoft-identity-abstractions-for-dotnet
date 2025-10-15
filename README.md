@@ -81,10 +81,10 @@ classDiagram
             <<rw>> +string ClientId
             <<rw>> +bool EnablePiiLogging
             <<rw>> +IDictionary&lt;string, string&gt; ExtraQueryParameters
-            <<rw>> +IEnumerable<CredentialDescription> ClientCredentials
+            <<rw>> +IEnumerable&lt;CredentialDescription&gt; ClientCredentials
             <<rw>> +string Audience
-            <<rw>> +IEnumerable<string> Audiences
-            <<rw>> +IEnumerable<CredentialDescription> TokenDecryptionCredentials
+            <<rw>> +IEnumerable&lt;string&gt; Audiences
+            <<rw>> +IEnumerable&lt;CredentialDescription&gt; TokenDecryptionCredentials
             <<rw>> +bool AllowWebApiToBeAuthorizedByACL
     }
     class MicrosoftEntraApplicationOptions {
@@ -94,7 +94,7 @@ classDiagram
             <<rw>> +string Authority
             <<rw>> +string AppHomeTenantId
             <<rw>> +string AzureRegion
-            <<rw>> +IEnumerable<string> ClientCapabilities
+            <<rw>> +IEnumerable&lt;string&gt; ClientCapabilities
             <<rw>> +bool SendX5C
     }
     class MicrosoftIdentityApplicationOptions {
@@ -113,7 +113,7 @@ namespace TokenAcquisition {
     class AcquireTokenOptions {
            +AcquireTokenOptions Clone()
             <<rw>> +string AuthenticationOptionsName
-            <<rw>> +Nullable<Guid> CorrelationId
+            <<rw>> +Nullable&lt;Guid&gt; CorrelationId
             <<rw>> +IDictionary&lt;string, string&gt; ExtraQueryParameters
             <<rw>> +IDictionary&lt;string, Object&gt; ExtraParameters
             <<rw>> +IDictionary&lt;string, string&gt; ExtraHeaderParameters
@@ -133,7 +133,7 @@ namespace TokenAcquisition {
             <<rw>> +DateTimeOffset ExpiresOn
             <<rw>> +string TenantId
             <<rw>> +string IdToken
-            <<rw>> +IEnumerable<string> Scopes
+            <<rw>> +IEnumerable&lt;string&gt; Scopes
             <<rw>> +Guid CorrelationId
             <<rw>> +string TokenType
             <<rw>> +IReadOnlyDictionary&lt;string, string&gt; AdditionalResponseParameters
@@ -161,7 +161,7 @@ namespace TokenAcquisition {
             <<rw>> +string BaseUrl
             <<rw>> +string RelativePath
             <<rw>> +string HttpMethod
-            <<rw>> +Action<HttpRequestMessage> CustomizeHttpRequestMessage
+            <<rw>> +Action&lt;HttpRequestMessage&gt; CustomizeHttpRequestMessage
             <<rw>> +AcquireTokenOptions AcquireTokenOptions
             <<rw>> +string ProtocolScheme
             <<rw>> +bool RequestAppToken
@@ -170,8 +170,8 @@ namespace TokenAcquisition {
     +DownstreamApiOptions Clone()
     #AuthorizationHeaderProviderOptions CloneInternal()
          <<rw>> +IEnumerable<string> Scopes
-            <<rw>> +Func<object?,HttpContent?> Serializer
-            <<rw>> +Func<HttpContent?,object?> Deserializer
+            <<rw>> +Func&lt;object?,HttpContent?&gt; Serializer
+            <<rw>> +Func&lt;HttpContent?,object?&gt; Deserializer
             <<rw>> +string AcceptHeader
             <<rw>> +string ContentType
             <<rw>> +IDictionary&lt;string, string&gt; ExtraQueryParameters
@@ -189,7 +189,7 @@ namespace TokenAcquisition {
                +CallApiAsync(...)
                +CallApiForUserAsync(...)
                +CallApiForAppAsync(...)
-                +Generic & AOT overloads ... }
+               +Generic overloads() ... }
  }
 
 
