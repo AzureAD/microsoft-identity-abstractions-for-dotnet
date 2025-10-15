@@ -17,7 +17,7 @@ The following table lists Microsoft.Identity.Abstractions versions currently sup
 
 | Major Version | Last Release | Patch release date  | Support phase|End of support |
 | --------------|--------------|--------|------------|--------|
-| 9.x           | [![NuGet](https://img.shields.io/nuget/v/Microsoft.Identity.Abstractions.svg?style=flat-square&label=nuget&colorB=00b200)](https://www.nuget.org/packages/Microsoft.Identity.Abstractions/) |
+| 9.x           | [![NuGet](https://img.shields.io/nuget/v/Microsoft.Identity.Abstractions.svg?style=flat-square&label=nuget&colorB=00b200)](https://www.nuget.org/packages/Microsoft.Identity.Abstractions/)    |Monthly| Active | Not planned.<br/>✅Supported versions: from 9.0.0 to [![NuGet](https://img.shields.io/nuget/v/Microsoft.Identity.Abstractions.svg?style=flat-square&label=nuget&colorB=00b200)](https://www.nuget.org/packages/Microsoft.Identity.Abstractions/) <br/>⚠️Unsupported versions `< 9.0.0`.|
 
 ## Concepts
 
