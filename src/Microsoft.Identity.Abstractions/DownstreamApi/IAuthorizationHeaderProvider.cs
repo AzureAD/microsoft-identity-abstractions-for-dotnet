@@ -24,10 +24,10 @@ namespace Microsoft.Identity.Abstractions
         /// daemon applications. In Microsoft.Identity.Web you rarely need to provide this parameter as it's inferred from the
         /// context.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>A string containing the authorization header, that is protocol and tokens
-        /// (for instance: "Bearer token", "PoP token", etc ...).
+        /// <returns>A result which contains authorization header with protocol and token, e.g., "Bearer _token_", as well
+        /// as certificate which is bound to the token (if any).
         /// </returns>
-        Task<string> CreateAuthorizationHeaderForUserAsync(
+        Task<AuthorizationHeaderInformation> CreateAuthorizationHeaderForUserAsync(
             IEnumerable<string> scopes, 
             AuthorizationHeaderProviderOptions? authorizationHeaderProviderOptions = null,
             ClaimsPrincipal? claimsPrincipal = default,
@@ -45,7 +45,7 @@ namespace Microsoft.Identity.Abstractions
         /// <returns>A string containing the authorization header, that is protocol and tokens
         /// (for instance: "Bearer token", "PoP token", etc ...).
         /// </returns>
-        Task<string> CreateAuthorizationHeaderForAppAsync(
+        Task<AuthorizationHeaderInformation> CreateAuthorizationHeaderForAppAsync(
             string scopes,
             AuthorizationHeaderProviderOptions? downstreamApiOptions = null,
             CancellationToken cancellationToken = default);
@@ -63,7 +63,7 @@ namespace Microsoft.Identity.Abstractions
         /// context.</param>
         /// <param name="cancellationToken">A token to cancel the operation.</param>
         /// <returns>A string containing the authorization header, such as "Bearer token" or "PoP token".</returns>
-        Task<string> CreateAuthorizationHeaderAsync(
+        Task<AuthorizationHeaderInformation> CreateAuthorizationHeaderAsync(
             IEnumerable<string> scopes,
             AuthorizationHeaderProviderOptions? options = null,
             ClaimsPrincipal? claimsPrincipal = null,
