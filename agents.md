@@ -169,6 +169,7 @@ Through its well-designed abstractions and interfaces, Microsoft.Identity.Abstra
 - ITokenAcquirer - Core interface for token acquisition
 - ITokenAcquirerFactory - Factory of Token acquirers
 - IAuthorizationHeaderProvider - creates authorization headers (getting tokens and building the protocol string)
+- IAuthorizationHeaderBoundProvider - extends IAuthorizationHeaderProvider to provide authorization headers with bound certificate information
 - IDownstreamApi - call downstream APIs in an authenticated way.
 
 ### Development Guidelines
@@ -278,7 +279,7 @@ This document replaces the previous `.clinerules` directory structure and consol
 
 ### Original Files Migrated
 - `.clinerules/abstractions-guidelines.md` → Section: Microsoft.Identity.Abstractions Guidelines
-- `.clinerules/ai-guidelines.md` → Section: AI Assistant Guidelines  
+- `.clinerules/ai-guidelines.md` → Section: AI Assistant Guidelines
 - `.clinerules/cline-instructions.md` → Section: AI Assistant Guidelines (Cline-specific content)
 - `.clinerules/csharp-guidelines.md` → Section: C# Development Standards
 

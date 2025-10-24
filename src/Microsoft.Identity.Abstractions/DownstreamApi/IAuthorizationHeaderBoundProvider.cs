@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
@@ -10,8 +10,10 @@ namespace Microsoft.Identity.Abstractions
 {
     /// <summary>
     /// Creates the value of an authorization header that the caller can use to call a protected web API.
+    /// This interface extends <see cref="IAuthorizationHeaderProvider"/> to provide methods that return
+    /// authorization header information along with bound certificate details.
     /// </summary>
-    public interface IAuthorizationHeaderProvider
+    public interface IAuthorizationHeaderBoundProvider : IAuthorizationHeaderProvider
     {
         /// <summary>
         /// Creates the authorization header used to call a protected web API on behalf of a user.
@@ -24,10 +26,10 @@ namespace Microsoft.Identity.Abstractions
         /// daemon applications. In Microsoft.Identity.Web you rarely need to provide this parameter as it's inferred from the
         /// context.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>A string containing the authorization header, that is protocol and tokens
-        /// (for instance: "Bearer token", "PoP token", etc ...).
+        /// <returns>A result which contains authorization header with protocol and token, e.g., "Bearer _token_", as well
+        /// as certificate which is bound to the token (if any).
         /// </returns>
-        Task<string> CreateAuthorizationHeaderForUserAsync(
+        Task<AuthorizationHeaderInformation> CreateAuthorizationHeaderBoundForUserAsync(
             IEnumerable<string> scopes,
             AuthorizationHeaderProviderOptions? authorizationHeaderProviderOptions = null,
             ClaimsPrincipal? claimsPrincipal = default,
@@ -42,10 +44,10 @@ namespace Microsoft.Identity.Abstractions
         /// protocols like Pop), and token acquisition options. Optional. If not provided, the
         /// authentication header will be for a bearer token.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>A string containing the authorization header, that is protocol and tokens
-        /// (for instance: "Bearer token", "PoP token", etc ...).
+        /// <returns>A result which contains authorization header with protocol and token, e.g., "Bearer _token_", as well
+        /// as certificate which is bound to the token (if any).
         /// </returns>
-        Task<string> CreateAuthorizationHeaderForAppAsync(
+        Task<AuthorizationHeaderInformation> CreateAuthorizationHeaderBoundForAppAsync(
             string scopes,
             AuthorizationHeaderProviderOptions? downstreamApiOptions = null,
             CancellationToken cancellationToken = default);
@@ -62,8 +64,10 @@ namespace Microsoft.Identity.Abstractions
         /// daemon applications. In Microsoft.Identity.Web you rarely need to provide this parameter as it's inferred from the
         /// context.</param>
         /// <param name="cancellationToken">A token to cancel the operation.</param>
-        /// <returns>A string containing the authorization header, such as "Bearer token" or "PoP token".</returns>
-        Task<string> CreateAuthorizationHeaderAsync(
+        /// <returns>A result which contains authorization header with protocol and token, e.g., "Bearer _token_", as well
+        /// as certificate which is bound to the token (if any).
+        /// </returns>
+        Task<AuthorizationHeaderInformation> CreateAuthorizationHeaderBoundAsync(
             IEnumerable<string> scopes,
             AuthorizationHeaderProviderOptions? options = null,
             ClaimsPrincipal? claimsPrincipal = null,
