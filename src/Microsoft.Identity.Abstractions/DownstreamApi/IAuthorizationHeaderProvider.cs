@@ -28,7 +28,7 @@ namespace Microsoft.Identity.Abstractions
         /// (for instance: "Bearer token", "PoP token", etc ...).
         /// </returns>
         Task<string> CreateAuthorizationHeaderForUserAsync(
-            IEnumerable<string> scopes, 
+            IEnumerable<string> scopes,
             AuthorizationHeaderProviderOptions? authorizationHeaderProviderOptions = null,
             ClaimsPrincipal? claimsPrincipal = default,
             CancellationToken cancellationToken = default);
@@ -53,7 +53,7 @@ namespace Microsoft.Identity.Abstractions
         /// <summary>
         /// Creates an authorization header for calling a protected web API on behalf of a user or the application.
         /// </summary>
-        /// <param name="scopes">The scopes for which to request the authorization header. 
+        /// <param name="scopes">The scopes for which to request the authorization header.
         /// Provide a single scope if the header needs to be created on behalf of an application.</param>
         /// <param name="options">The <see cref="AuthorizationHeaderProviderOptions"/> containing information about the API
         /// to be called and token acquisition settings. If not provided, the header will be for a bearer token.</param>
