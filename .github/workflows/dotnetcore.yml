@@ -14,20 +14,20 @@ jobs:
       uses: actions/setup-dotnet@v5
       with:
         dotnet-version: 8.0.x
+
+    - name: Setup .NET 10.0.100
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: 10.0.100
   
     # Run the tests  
     - name: Build with .NET 8.0.x
       run: dotnet test -v m --configuration Release Microsoft.Identity.Abstractions.sln
 
-    - name: Setup .NET 10.0.100-rc.1
-      uses: actions/setup-dotnet@v5
-      with:
-        dotnet-version: 10.0.100-rc.1.25451.107
-
     # Run the tests  
-    - name: Build with .NET 10.0.100-rc.1
-      run: dotnet test -p:TargetNetNext=True -v m --configuration Release Microsoft.Identity.Abstractions.sln
+    - name: Build with .NET 10.0.100
+      run: dotnet test -v m --configuration Release Microsoft.Identity.Abstractions.sln
 
     # Pack the library
     - name: Pack
-      run: dotnet pack -p:TargetNetNext=True --configuration Release --no-restore --no-build -v m Microsoft.Identity.Abstractions.sln
+      run: dotnet pack --configuration Release --no-restore --no-build -v m Microsoft.Identity.Abstractions.sln
