@@ -7,7 +7,7 @@ namespace Microsoft.Identity.Abstractions
     /// Creates an authorization header value that the caller can use to access a protected web API, which supports either unbound or
     /// bound to a certificate (for example, in an mTLS PoP scenario) tokens.
     /// </summary>
-    public interface IAuthorizationHeaderBoundProvider : IAuthorizationHeaderProvider<OperationResult<AuthorizationHeaderInformation, AuthorizationHeaderError>>
+    public interface IAuthorizationHeaderProvider1 : IAuthorizationHeaderProvider<OperationResult<AuthorizationHeaderInformation, AuthorizationHeaderError>>
     {
     }
 }

@@ -16,7 +16,7 @@ TokenAcquisition
 DownstreamApis
 - AuthorizationHeaderProviderOptions
 - IAuthorizationHeaderProvider
-- IAuthorizationHeaderBoundProvider
+- IAuthorizationHeaderProvider1
 - IDownstreamApi
 - DownstreamApiOptions
 - DownstreamApiOptionsReadOnlyHttpMethod
