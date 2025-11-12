@@ -1,2 +1,2 @@
 #nullable enable
-Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider1
+Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider2
