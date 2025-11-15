@@ -4,12 +4,7 @@
 		<GenerateDocumentationFile>false</GenerateDocumentationFile>
 	</PropertyGroup>
 
-	<!-- TargetNetNext must be set to True to build/test with NET 10.0 locally, you can uncomment this PropertyGroup or set TargetNetNext it in a CLI arg  (`/p:TargetNetNext=true`), or set an environment
-	variable (`Set TargetNetNext=true`) -->
-		<!-- <TargetNetNext>True</TargetNetNext>
-	</PropertyGroup> -->
-
-	<PropertyGroup>
+<PropertyGroup>
 		<MicrosoftNetTestSdkVersion>18.0.0</MicrosoftNetTestSdkVersion>
 		<!-- GHSA-5crp-9r3c-p9vr - Updated to 13.0.3 for .NET 10 compatibility -->
 		<NewtonsoftJsonVersion>13.0.3</NewtonsoftJsonVersion>

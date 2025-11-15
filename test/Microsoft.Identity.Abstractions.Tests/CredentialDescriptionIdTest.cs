@@ -38,7 +38,11 @@ namespace Microsoft.Identity.Abstractions.Tests
                             new CredentialDescription
                             {
                                 SourceType = CredentialSource.Certificate,
+#if NET10_0_OR_GREATER
+                                Certificate = X509CertificateLoader.LoadCertificate(Convert.FromBase64String(base64encoded)), // "path/to/certificate.pfx"
+#else
                                 Certificate = new X509Certificate2(Convert.FromBase64String(base64encoded)), // "path/to/certificate.pfx"
+#endif
                                 CertificatePassword = "password"
                             }
                         },
