@@ -1,84 +1,97 @@
 <Project>
-    <PropertyGroup>
-        <!-- This should be passed from the VSTS build -->
-        <MicrosoftIdentityAbstractionsVersion Condition="'$(MicrosoftIdentityAbstractionsVersion)' == ''">9.5.0</MicrosoftIdentityAbstractionsVersion>
-        <!-- This will generate AssemblyVersion, AssemblyFileVersion and AssemblyInformationVersion -->
-        <Version>$(MicrosoftIdentityAbstractionsVersion)</Version>
-        <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)\build\35MSSharedLib1024.snk</AssemblyOriginatorKeyFile>
-        <RepositoryType>git</RepositoryType>
-        <Authors>Microsoft</Authors>
-        <Company>Microsoft Corporation</Company>
-        <Copyright>© Microsoft Corporation. All rights reserved.</Copyright>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageProjectUrl>https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet</RepositoryUrl>
-        <PackageReleaseNotes>The release notes are available at https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/releases and the roadmap at https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/wiki#roadmap </PackageReleaseNotes>
-        <PackageTags>Microsoft Identity Abstractions for dotnet;Microsoft identity platform;Microsoft Identity Web;.NET;ASP.NET Core;Web App;Web API;B2C;Azure Active Directory;AAD;Identity;Authentication;Authorization</PackageTags>
-        <DefineConstants>$(DefineConstants);WEB</DefineConstants>
-        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    </PropertyGroup>
-    
+  <PropertyGroup>
+    <!-- This should be passed from the VSTS build -->
+    <MicrosoftIdentityAbstractionsVersion Condition="'$(MicrosoftIdentityAbstractionsVersion)' == ''">9.5.0</MicrosoftIdentityAbstractionsVersion>
+    <!-- This will generate AssemblyVersion, AssemblyFileVersion and AssemblyInformationVersion -->
+    <Version>$(MicrosoftIdentityAbstractionsVersion)</Version>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)\build\35MSSharedLib1024.snk</AssemblyOriginatorKeyFile>
+    <RepositoryType>git</RepositoryType>
+    <Authors>Microsoft</Authors>
+    <Company>Microsoft Corporation</Company>
+    <Copyright>© Microsoft Corporation. All rights reserved.</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet</RepositoryUrl>
+    <PackageReleaseNotes>The release notes are available at https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/releases and the roadmap at https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/wiki#roadmap </PackageReleaseNotes>
+    <PackageTags>Microsoft Identity Abstractions for dotnet;Microsoft identity platform;Microsoft Identity Web;.NET;ASP.NET Core;Web App;Web API;B2C;Azure Active Directory;AAD;Identity;Authentication;Authorization</PackageTags>
+    <DefineConstants>$(DefineConstants);WEB</DefineConstants>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
 
+  <!-- TargetNetNext must be set to True to build/test with .NET preview versions locally, you can uncomment this PropertyGroup or set TargetNetNext it in a CLI arg  (`/p:TargetNetNext=true`), or set an environment
+	variable (`Set TargetNetNext=true`)
+  <PropertyGroup>
+    <TargetNetNext>True</TargetNetNext>
+  </PropertyGroup> -->
 
-    <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;netstandard2.1;net462;net8.0;net9.0;net10.0</TargetFrameworks>
-        <SignAssembly>true</SignAssembly>
-        <AssemblyOriginatorKeyFile>../../build/MSAL.snk</AssemblyOriginatorKeyFile>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <Nullable>enable</Nullable>
-        <LangVersion>12</LangVersion>
-        <EnablePackageValidation>true</EnablePackageValidation>
-        <PackageValidationBaselineVersion>8.0.0</PackageValidationBaselineVersion>
-        <BannedApiAnalyzersVersion>4.14.0</BannedApiAnalyzersVersion>
-        <MicrosoftCodeAnalysisPublicApiAnalyzers>4.14.0</MicrosoftCodeAnalysisPublicApiAnalyzers>
-        <MicrosoftCodeAnalysisNetAnalyzersVersion>8.0.0</MicrosoftCodeAnalysisNetAnalyzersVersion>
-    </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetNetNext)' == 'True'">
+    <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+    <!-- For NU5104 it prevents us from packing release packages with prerelease dependencies. But we want to do that so customers can get a preview of running with .NET 10. -->
+    <WarningsNotAsErrors>$(WarningsNotAsErrors);NU5104</WarningsNotAsErrors>
+    <NoWarn>$(NoWarn);NU5104</NoWarn>
+  </PropertyGroup>
 
-    <PropertyGroup Label="Source Link">
-        <PublishRepositoryUrl>true</PublishRepositoryUrl>
-        <EmbedUntrackedSources>true</EmbedUntrackedSources>
-        <!-- Build symbol package (.snupkg) to distribute the PDB containing Source Link -->
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <!-- The MSAL.snk has both private and public keys -->
-        <DelaySign>false</DelaySign>
-        <EnableNETAnalyzers>true</EnableNETAnalyzers>
-        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-    </PropertyGroup>
-    
-    <PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
-        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net462;net8.0;net9.0;net10.0</TargetFrameworks>
+    <TargetFrameworks Condition="'$(TargetNetNext)' == 'True'">$(TargetFrameworks);</TargetFrameworks>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>../../build/MSAL.snk</AssemblyOriginatorKeyFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Nullable>enable</Nullable>
+    <LangVersion>12</LangVersion>
+    <EnablePackageValidation>true</EnablePackageValidation>
+    <PackageValidationBaselineVersion>8.0.0</PackageValidationBaselineVersion>
+    <BannedApiAnalyzersVersion>4.14.0</BannedApiAnalyzersVersion>
+    <MicrosoftCodeAnalysisPublicApiAnalyzers>4.14.0</MicrosoftCodeAnalysisPublicApiAnalyzers>
+    <MicrosoftCodeAnalysisNetAnalyzersVersion>8.0.0</MicrosoftCodeAnalysisNetAnalyzersVersion>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <None Include="..\..\LICENSE">
-            <Pack>True</Pack>
-            <PackagePath />
-        </None>
-    </ItemGroup>
+  <PropertyGroup Label="Source Link">
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <!-- Build symbol package (.snupkg) to distribute the PDB containing Source Link -->
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <!-- The MSAL.snk has both private and public keys -->
+    <DelaySign>false</DelaySign>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
 
-    <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
-        <Reference Include="System.Net.Http" />
-    </ItemGroup>
+  <PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
 
-    <ItemGroup Label="Build Tools"
-               Condition="$([MSBuild]::IsOsPlatform('Windows'))">
-        <PackageReference Include="Microsoft.SourceLink.GitHub"
-                          Version="1.0.0"
-                          PrivateAssets="All" />
-    </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath />
+    </None>
+  </ItemGroup>
 
-    <ItemGroup>
-        <!-- Protects against sync-over-async: https://github.com/microsoft/vs-threading/blob/main/doc/analyzers/index.md. -->
-        <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers"
-                          Version="17.11.20"
-                          PrivateAssets="all" />
+  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
 
-		<!-- Help understand public API changes -->				  
-        <PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers"
-                          Version="$(MicrosoftCodeAnalysisPublicApiAnalyzers)">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-        </PackageReference>
-    </ItemGroup>
+  <ItemGroup Label="Build Tools"
+             Condition="$([MSBuild]::IsOsPlatform('Windows'))">
+    <PackageReference Include="Microsoft.SourceLink.GitHub"
+                      Version="1.0.0"
+                      PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Protects against sync-over-async: https://github.com/microsoft/vs-threading/blob/main/doc/analyzers/index.md. -->
+    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers"
+                      Version="17.11.20"
+                      PrivateAssets="all" />
+
+    <!-- Help understand public API changes -->
+    <PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers"
+                      Version="$(MicrosoftCodeAnalysisPublicApiAnalyzers)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 </Project>

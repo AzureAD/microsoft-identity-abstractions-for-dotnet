@@ -2,11 +2,14 @@ name: .NET Core
 
 on: [push]
 
+env:
+  TargetNetNext: False
+
 jobs:
   build:
     runs-on: windows-latest
     continue-on-error: true
-    name: Abstractions GitHub Action Test
+    name: Run tests and pack
     steps:
     - name: Checkout repository
       uses: actions/checkout@v5
@@ -23,8 +26,8 @@ jobs:
   
     # Run the tests  
     - name: Build and test
-      run: dotnet test -v m --configuration Release Microsoft.Identity.Abstractions.sln
+      run: dotnet test -p:TargetNetNext=${{ env.TargetNetNext }} -v m --configuration Release Microsoft.Identity.Abstractions.sln
 
     # Pack the library
     - name: Pack
-      run: dotnet pack --configuration Release --no-restore --no-build -v m Microsoft.Identity.Abstractions.sln
+      run: dotnet pack -p:TargetNetNext=${{ env.TargetNetNext }} --configuration Release --no-restore --no-build -v m Microsoft.Identity.Abstractions.sln

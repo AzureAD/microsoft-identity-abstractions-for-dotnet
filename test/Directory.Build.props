@@ -1,20 +1,26 @@
 <Project>
 
-	<PropertyGroup>
-		<GenerateDocumentationFile>false</GenerateDocumentationFile>
-	</PropertyGroup>
+  <PropertyGroup>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
 
-<PropertyGroup>
-		<MicrosoftNetTestSdkVersion>18.0.0</MicrosoftNetTestSdkVersion>
-		<!-- GHSA-5crp-9r3c-p9vr - Updated to 13.0.3 for .NET 10 compatibility -->
-		<NewtonsoftJsonVersion>13.0.3</NewtonsoftJsonVersion>
-		<XunitVersion>2.9.3</XunitVersion>
-		<XunitRunnerVisualStudioVersion>2.8.2</XunitRunnerVisualStudioVersion>
-		<CoverletCollectorVersion>6.0.4</CoverletCollectorVersion>
-	</PropertyGroup>
+  <PropertyGroup>
+    <MicrosoftNetTestSdkVersion>18.0.0</MicrosoftNetTestSdkVersion>
+    <!-- GHSA-5crp-9r3c-p9vr - Updated to 13.0.3 for .NET 10 compatibility -->
+    <NewtonsoftJsonVersion>13.0.3</NewtonsoftJsonVersion>
+    <XunitVersion>2.9.3</XunitVersion>
+    <XunitRunnerVisualStudioVersion>2.8.2</XunitRunnerVisualStudioVersion>
+    <CoverletCollectorVersion>6.0.4</CoverletCollectorVersion>
+  </PropertyGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net462'">
-		<Reference Include="System.Net.Http" />
-	</ItemGroup>
+  <!-- TargetNetNext must be set to True to build/test with .NET preview versions locally, you can uncomment this PropertyGroup or set TargetNetNext it in a CLI arg  (`/p:TargetNetNext=true`), or set an environment
+	variable (`Set TargetNetNext=true`)
+  <PropertyGroup>
+    <TargetNetNext>True</TargetNetNext>
+  </PropertyGroup> -->
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
 
 </Project>

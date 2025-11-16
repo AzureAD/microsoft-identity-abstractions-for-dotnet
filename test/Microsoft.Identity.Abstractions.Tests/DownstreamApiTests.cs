@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 using Xunit;
+
 
 
 #if NET8_0_OR_GREATER
@@ -164,9 +166,9 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
         [InlineData("https://myapi", null, "https://myapi/")]
         [InlineData(null, "/controller/action", "/controller/action")]
         [InlineData(null, "controller/action", "/controller/action")]
-        public void ComputeUrl(string baseUrl, string relativePath, string expectedUrl)
+        public void ComputeUrl(string? baseUrl, string? relativePath, string expectedUrl)
         {
-            DownstreamApiOptions options = new DownstreamApiOptions { BaseUrl = baseUrl, RelativePath = relativePath };
+            DownstreamApiOptions options = new DownstreamApiOptions { BaseUrl = baseUrl, RelativePath = relativePath! };
             Assert.Equal(expectedUrl, options.GetApiUrl());
         }
 
@@ -188,16 +190,16 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
         }
 
         [Fact]
-        public void ExerciseApiAotOverloads()
+        public async Task ExerciseApiAotOverloads()
         {
             // Test that the AOT Json serialzation overloads work
 
             IDownstreamApi downstreamApi = new CustomDownstreamApi();
-            CustomApiResponse? response = downstreamApi.CallApiForUserAsync<CustomApiResponse>("service", CustomApiResponseJsonContext.Default.CustomApiResponse).Result;
+            CustomApiResponse? response = await downstreamApi.CallApiForUserAsync<CustomApiResponse>("service", CustomApiResponseJsonContext.Default.CustomApiResponse);
             Assert.Equal(200, response?.ErrorCode);
 
             CustomApiInput input = new CustomApiInput { ErrorCode = 123 };
-            response = downstreamApi.GetForAppAsync<CustomApiInput, CustomApiResponse>("service", input, CustomApiResponseJsonContext.Default.CustomApiInput, CustomApiResponseJsonContext.Default.CustomApiResponse).Result;
+            response = await downstreamApi.GetForAppAsync<CustomApiInput, CustomApiResponse>("service", input, CustomApiResponseJsonContext.Default.CustomApiInput, CustomApiResponseJsonContext.Default.CustomApiResponse);
             Assert.Equal(123, response?.ErrorCode);
         }
 
