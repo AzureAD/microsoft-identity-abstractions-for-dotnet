@@ -2,8 +2,9 @@
 ======
 ## New features
 
-* Added new authorization header provider interface supporting token return with binding certificate, expanding certificate-based authentication scenarios. For details, see <a href="https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/223">PR #223</a>.
-* Renamed interface `IAuthorizationHeaderBoundProvider` to `IAuthorizationHeaderProvider2` to better reflect its capabilities and improve clarity. For details, see <a href="https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/228">PR #228</a>.
+* Added new authorization header provider interface  `IAuthorizationHeaderProvider2` supporting token return with binding certificate, expanding certificate-based authentication scenarios. For details, see <a href="https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/223">PR #223</a> and <a href="https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/228">PR #228</a>.
+* In the ID property of CredentialDescription, renamed ClientSecret to RedactedClientSecret to be more precise about what this is. For details, see <a href="https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/224">PR #224</a>.
+* Added "Thumbprint" to the ID property in CredentialDescription, enhancing traceability for credentials. For details, see <a href="https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/212">PR #212</a>.
 
 ## Improvements and fundamentals
 
@@ -11,13 +12,6 @@
 * Upgraded GitHub Actions workflows to v5 for both checkout and setup-dotnet, improving CI reliability and consistency. For details, see <a href="https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/222">PR #222</a>.
 * Synchronized README.md diagrams with the current public API surface to keep documentation up to date. See <a href="https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/220">PR #220</a>.
 * Fixed tests affected by recent internal changes. See <a href="https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/221">PR #221</a>.
-
-## Refactoring
-
-* Refactored credential description ID logic to further redact client secrets, strengthening credential privacy and internal consistency. For details, see <a href="https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/224">PR #224</a>.
-* Added "Thumbprint" to all ID fields in CredentialDescription, enhancing traceability for credentials. For details, see <a href="https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/212">PR #212</a>.
-
-Many thanks to all contributors!
 
 9.5.0
 ======
@@ -261,6 +255,7 @@ Added a new interface `IAuthenticationSchemeInformationProvider` to get the effe
 2.0.0
 ==========
 Initial release of Microsoft.Identity.Abstractions which brings interfaces and POCO classes used in all the Microsoft .NET authentication libraries provided by Identity and Network Access (IDNA) see ReadME.md for details.
+
 
 
 
