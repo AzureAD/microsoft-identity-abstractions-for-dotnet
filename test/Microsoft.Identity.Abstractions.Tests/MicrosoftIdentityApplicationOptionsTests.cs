@@ -102,7 +102,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
         [InlineData("Instance", "Tenant", null, "Instance/Tenant/v2.0")]
         [InlineData("Instance/", "Tenant", null, "Instance/Tenant/v2.0")]
         [InlineData("Instance/", "Tenant", "Authority", "Authority")]
-        public void AuthorityDefaultValues(string instance, string tenant, string authorityIn, string authorityOut)
+        public void AuthorityDefaultValues(string? instance, string? tenant, string? authorityIn, string authorityOut)
         {
             MicrosoftIdentityApplicationOptions identityApplicationOptions = new()
             {

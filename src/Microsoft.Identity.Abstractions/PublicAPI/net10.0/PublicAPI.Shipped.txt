@@ -39,6 +39,10 @@ Microsoft.Identity.Abstractions.AcquireTokenResult
 Microsoft.Identity.Abstractions.AcquireTokenResult.AccessToken.get -> string?
 Microsoft.Identity.Abstractions.AcquireTokenResult.AccessToken.set -> void
 Microsoft.Identity.Abstractions.AcquireTokenResult.AcquireTokenResult(string! accessToken, System.DateTimeOffset expiresOn, string! tenantId, string! idToken, System.Collections.Generic.IEnumerable<string!>! scopes, System.Guid correlationId, string! tokenType) -> void
+Microsoft.Identity.Abstractions.AcquireTokenResult.AdditionalResponseParameters.get -> System.Collections.Generic.IReadOnlyDictionary<string!, string!>?
+Microsoft.Identity.Abstractions.AcquireTokenResult.AdditionalResponseParameters.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenResult.BindingCertificate.get -> System.Security.Cryptography.X509Certificates.X509Certificate2?
+Microsoft.Identity.Abstractions.AcquireTokenResult.BindingCertificate.set -> void
 Microsoft.Identity.Abstractions.AcquireTokenResult.CorrelationId.get -> System.Guid
 Microsoft.Identity.Abstractions.AcquireTokenResult.CorrelationId.set -> void
 Microsoft.Identity.Abstractions.AcquireTokenResult.ExpiresOn.get -> System.DateTimeOffset
