@@ -2,16 +2,16 @@
 ======
 ## New features
 
-* Added new authorization header provider interface  `IAuthorizationHeaderProvider2` supporting token return with binding certificate, expanding certificate-based authentication scenarios. For details, see <a href="https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/223">PR #223</a> and <a href="https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/228">PR #228</a>.
-* In the ID property of CredentialDescription, renamed ClientSecret to RedactedClientSecret to be more precise about what this is. For details, see <a href="https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/224">PR #224</a>.
-* Added "Thumbprint" to the ID property in CredentialDescription, enhancing traceability for credentials. For details, see <a href="https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/212">PR #212</a>.
+* Added new authorization header provider interface  `IAuthorizationHeaderProvider2` supporting token return with binding certificate, expanding certificate-based authentication scenarios. For details, see [PR #223](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/223) and [PR #228](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/228).
+* In the ID property of CredentialDescription, renamed ClientSecret to RedactedClientSecret to be more precise about what this is. For details, see [PR #224](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/224).
+* Added "Thumbprint" to the ID property in CredentialDescription, enhancing traceability for credentials. For details, see [PR #212](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/212).
 
 ## Improvements and fundamentals
 
-* Updated support to .NET 10 GA, ensuring compatibility and access to latest platform features. For details, see <a href="https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/226">PR #226</a>.
-* Upgraded GitHub Actions workflows to v5 for both checkout and setup-dotnet, improving CI reliability and consistency. For details, see <a href="https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/222">PR #222</a>.
-* Synchronized README.md diagrams with the current public API surface to keep documentation up to date. See <a href="https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/220">PR #220</a>.
-* Fixed tests affected by recent internal changes. See <a href="https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/221">PR #221</a>.
+* Updated support to .NET 10 GA, ensuring compatibility and access to latest platform features. For details, see [PR #226](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/226).
+* Upgraded GitHub Actions workflows to v5 for both checkout and setup-dotnet, improving CI reliability and consistency. For details, see [PR #222](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/222).
+* Synchronized README.md diagrams with the current public API surface to keep documentation up to date. See [PR #220](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/220).
+* Fixed tests affected by recent internal changes. See [PR #221](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/221).
 
 9.5.0
 ======
