@@ -42,8 +42,8 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
                     PopPublicKey = "PopKey",
                     PopClaim = "jwkClaim",
                     Tenant = "domain.com",
-                    UserFlow = "susi"
-
+                    UserFlow = "susi",
+                    ClientAssertionClaims = new Dictionary<string, string> { { "clientClaim", "claim" } },
                 },
                 BaseUrl = "https://apitocall.domain.com",
                 CustomizeHttpRequestMessage = message => message.Headers.Add("x-sku", "sku-value"),
@@ -96,6 +96,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.PopClaim, downstreamApiClone.AcquireTokenOptions.PopClaim);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.Tenant, downstreamApiClone.AcquireTokenOptions.Tenant);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.UserFlow, downstreamApiClone.AcquireTokenOptions.UserFlow);
+            Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ClientAssertionClaims, downstreamApiClone.AcquireTokenOptions.ClientAssertionClaims);
             Assert.Equal("application/json", downstreamApiClone.AcceptHeader);
             Assert.Equal("application/json", downstreamApiClone.ContentType);
             Assert.Equal(downstreamApiOptions.ExtraHeaderParameters, downstreamApiClone.ExtraHeaderParameters);

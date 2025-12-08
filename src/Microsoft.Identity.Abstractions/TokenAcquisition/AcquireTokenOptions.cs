@@ -41,6 +41,7 @@ namespace Microsoft.Identity.Abstractions
             LongRunningWebApiSessionKey = other.LongRunningWebApiSessionKey;
             Tenant = other.Tenant;
             UserFlow = other.UserFlow;
+            ClientAssertionClaims = other.ClientAssertionClaims;
         }
 
         /// <summary>
@@ -81,6 +82,14 @@ namespace Microsoft.Identity.Abstractions
         /// CA Auth context</see>
         /// </summary>
         public string? Claims { get; set; }
+
+        /// <summary>
+        /// Gets or sets the claims used to create the client assertion for authentication.
+        /// </summary>
+        /// <remarks>The client assertion claims are typically used in scenarios where client
+        /// authentication requires a signed JWT (JSON Web Token). Ensure the claims are properly formatted and encoded
+        /// as a JSON string before setting this property.</remarks>
+        public IDictionary<string, string>? ClientAssertionClaims { get; set; }
 
         /// <summary>
         /// Federated Managed Identity (FMI) sub-path.
