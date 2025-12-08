@@ -1,4 +1,4 @@
 #nullable enable
-Microsoft.Identity.Abstractions.AcquireTokenOptions.ClientAssertionClaims.get -> System.Collections.Generic.IDictionary<string!, string!>?
-Microsoft.Identity.Abstractions.AcquireTokenOptions.ClientAssertionClaims.set -> void
 Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider2
+Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.ClientAssertionClaims.get -> System.Collections.Generic.IDictionary<string!, string!>?
+Microsoft.Identity.Abstractions.MicrosoftEntraApplicationOptions.ClientAssertionClaims.set -> void

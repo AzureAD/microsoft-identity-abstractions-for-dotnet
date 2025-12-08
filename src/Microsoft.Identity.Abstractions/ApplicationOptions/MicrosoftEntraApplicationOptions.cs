@@ -74,6 +74,14 @@ namespace Microsoft.Identity.Abstractions
         /// The default is <c>false</c>.
         /// </summary>
         public bool SendX5C { get; set; }
+
+        /// <summary>
+        /// Gets or sets the claims used to create the client assertion for authentication.
+        /// </summary>
+        /// <remarks>The client assertion claims are typically used in scenarios where client
+        /// authentication requires a signed JWT (JSON Web Token). Ensure the claims are properly formatted and encoded
+        /// as a JSON string before setting this property.</remarks>
+        public IDictionary<string, string>? ClientAssertionClaims { get; set; }
         #endregion Token Acquisition
     }
 }
