@@ -185,8 +185,8 @@ namespace TokenAcquisition {
     }
 
         class IAuthorizationHeaderProvider { <<interface>> }
-        class IAuthorizationHeaderProvider2 { <<interface>> }
         class IAuthorizationHeaderProvider_TResult_ { <<interface>> }
+        class IBoundAuthorizationHeaderProvider { <<interface>> }
         class IDownstreamApi { <<interface>>
                +CallApiAsync(...)
                +CallApiForUserAsync(...)
@@ -423,8 +423,8 @@ It's also possible (and recommended) to use higher level APIs:
 - IAuthorizationHeaderProvider is the component that provides the authorization header, delegating to the ITokenAcquirer.
   Whereas ITokenAcquirer only knows about tokens, IAuthorizationHeaderProvider knows about protocols (for instance bearer,
   Pop, etc ...)
-- IAuthorizationHeaderProvider2 extends IAuthorizationHeaderProvider to provide authorization headers along with
-  bound certificate information, useful for scenarios requiring certificate binding details.
+- IBoundAuthorizationHeaderProvider returns authorization headers along with bound certificate information, useful for
+  scenarios requiring certificate binding details.
 
  ```mermaid
  classDiagram
@@ -461,10 +461,8 @@ It's also possible (and recommended) to use higher level APIs:
     +Task&lt;string&gt; CreateAuthorizationHeaderForAppAsync(string scopes, AuthorizationHeaderProviderOptions downstreamApiOptions, CancellationToken cancellationToken)
     +Task&lt;string&gt; CreateAuthorizationHeaderAsync(IEnumerable&lt;string&gt; scopes, AuthorizationHeaderProviderOptions options, ClaimsPrincipal claimsPrincipal, CancellationToken cancellationToken)
     }
-    class IAuthorizationHeaderProvider2 { <<interface>>
-    +Task&lt;AuthorizationHeaderInformation&gt; CreateAuthorizationHeaderBoundForUserAsync(IEnumerable&lt;string&gt; scopes, AuthorizationHeaderProviderOptions authorizationHeaderProviderOptions, ClaimsPrincipal claimsPrincipal, CancellationToken cancellationToken)
-    +Task&lt;AuthorizationHeaderInformation&gt; CreateAuthorizationHeaderBoundForAppAsync(string scopes, AuthorizationHeaderProviderOptions downstreamApiOptions, CancellationToken cancellationToken)
-    +Task&lt;AuthorizationHeaderInformation&gt; CreateAuthorizationHeaderBoundAsync(IEnumerable&lt;string&gt; scopes, AuthorizationHeaderProviderOptions options, ClaimsPrincipal claimsPrincipal, CancellationToken cancellationToken)
+    class IBoundAuthorizationHeaderProvider { <<interface>>
+    +Task&lt;OperationResult&lt;AuthorizationHeaderInformation, AuthorizationHeaderError&gt;&gt; CreateBoundAuthorizationHeaderAsync(DownstreamApiOptions downstreamApiOptions, ClaimsPrincipal claimsPrincipal, CancellationToken cancellationToken)
     }
     class IDownstreamApi { <<interface>>
     +Task&lt;HttpResponseMessage&gt; CallApiAsync(DownstreamApiOptions downstreamApiOptions, ClaimsPrincipal user, HttpContent content, CancellationToken cancellationToken)
