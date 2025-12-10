@@ -169,7 +169,7 @@ Through its well-designed abstractions and interfaces, Microsoft.Identity.Abstra
 - ITokenAcquirer - Core interface for token acquisition
 - ITokenAcquirerFactory - Factory of Token acquirers
 - IAuthorizationHeaderProvider - creates authorization headers (getting tokens and building the protocol string)
-- IAuthorizationHeaderProvider2 - extends IAuthorizationHeaderProvider to provide authorization headers with bound certificate information
+- IBoundAuthorizationHeaderProvider - creates authorization headers with token, which is optionally bound to a certififcate
 - IDownstreamApi - call downstream APIs in an authenticated way.
 
 ### Development Guidelines
