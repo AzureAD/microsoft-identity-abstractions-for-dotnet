@@ -53,6 +53,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                 ResetPasswordPolicyId = "ResetPasswordPolicyId",
                 ResetPasswordPath = "ResetPasswordPath",
                 ErrorPath = "ErrorPath",
+                ClientAssertionClaims = new Dictionary<string, string> { { "claim1", "value1" } }
             };
 
             Assert.Equal("https://login.microsoftonline.com/common/v2.0", microsoftIdentityApplicationOptions.Authority);
@@ -81,6 +82,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             Assert.Equal(nameof(microsoftIdentityApplicationOptions.ErrorPath), microsoftIdentityApplicationOptions.ErrorPath);
             Assert.Equal(nameof(microsoftIdentityApplicationOptions.SignUpSignInPolicyId), microsoftIdentityApplicationOptions.DefaultUserFlow);
             Assert.NotEmpty(microsoftIdentityApplicationOptions.ExtraQueryParameters);
+            Assert.Equal(microsoftIdentityApplicationOptions.ClientAssertionClaims, microsoftIdentityApplicationOptions.ClientAssertionClaims);
         }
 
 
