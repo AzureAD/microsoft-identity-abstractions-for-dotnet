@@ -79,7 +79,7 @@ namespace Microsoft.Identity.Abstractions
         /// Gets or sets the claims used to create the client assertion for authentication.
         /// </summary>
         /// <remarks>The client assertion claims are typically used in scenarios where client
-        /// authentication requires a signed JWT (JSON Web Token). Ensure the claims are properly formatted and encoded
+        /// authentication requires a signed assertion as a JWT (JSON Web Token). Ensure the claims are properly formatted and encoded
         /// as a JSON string before setting this property.</remarks>
         public IDictionary<string, string>? ClientAssertionClaims { get; set; }
         #endregion Token Acquisition
