@@ -43,7 +43,6 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
                     PopClaim = "jwkClaim",
                     Tenant = "domain.com",
                     UserFlow = "susi"
-
                 },
                 BaseUrl = "https://apitocall.domain.com",
                 CustomizeHttpRequestMessage = message => message.Headers.Add("x-sku", "sku-value"),
