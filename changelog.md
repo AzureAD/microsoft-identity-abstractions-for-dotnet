@@ -1,3 +1,10 @@
+10.0.0
+=======
+## Breaking changes
+Rename `IAuthorizationHeaderProvider2` to `BoundAuthorizationHeaderProvider`. This interface extends `IAuthorizationHeaderProvider` to  create authorization headers with a token which is optionally bound to a certificate (for mTLS Pop). For details, see [PR #232](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/232)
+
+In practice, it's unlikely that this breaking change affects anybody as the renamed interface was new in 9.6.0, and not yet used to the team's knowledge.
+
 9.6.0
 ======
 ## New features
@@ -255,6 +262,7 @@ Added a new interface `IAuthenticationSchemeInformationProvider` to get the effe
 2.0.0
 ==========
 Initial release of Microsoft.Identity.Abstractions which brings interfaces and POCO classes used in all the Microsoft .NET authentication libraries provided by Identity and Network Access (IDNA) see ReadME.md for details.
+
 
 
 
