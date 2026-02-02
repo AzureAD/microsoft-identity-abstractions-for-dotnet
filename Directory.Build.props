@@ -39,7 +39,9 @@
     <AssemblyOriginatorKeyFile>../../build/MSAL.snk</AssemblyOriginatorKeyFile>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Nullable>enable</Nullable>
-    <!-- LangVersion set to preview to enable C# 15 extension properties for .NET 10+ AOT compatibility -->
+    <!-- LangVersion set to preview to enable C# 15 extension properties for .NET 10+ AOT compatibility.
+         Extension properties are required to make CredentialDescription AOT-safe while maintaining source compatibility.
+         Once C# 15 is finalized, this should be updated to the specific version number (e.g., 15). -->
     <LangVersion>preview</LangVersion>
     <EnablePackageValidation>true</EnablePackageValidation>
     <PackageValidationBaselineVersion>8.0.0</PackageValidationBaselineVersion>
