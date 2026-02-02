@@ -42,8 +42,14 @@ namespace Microsoft.Identity.Abstractions
 #endif
             Algorithm = other.Algorithm;
             Base64EncodedValue = other.Base64EncodedValue;
+#if NET10_0_OR_GREATER
+            // For .NET 10+, copy the backing fields directly
+            _cachedValue = other._cachedValue;
+            _certificate = other._certificate;
+#else
             CachedValue = other.CachedValue;
             Certificate = other.Certificate;
+#endif
             CertificateStorePath = other.CertificateStorePath;
             CertificateDistinguishedName = other.CertificateDistinguishedName;
             CertificateThumbprint = other.CertificateThumbprint;
@@ -77,14 +83,15 @@ namespace Microsoft.Identity.Abstractions
             {
                 if (_cachedId == null)
                 {
-                    string certificateThumbprint = Certificate?.Thumbprint ?? "null";
+                    // Use backing field directly to work in both .NET 10+ and older TFMs
+                    string certificateThumbprint = _certificate?.Thumbprint ?? "null";
 
                     switch (SourceType)
                     {
                         case CredentialSource.Certificate:
-                            if (Certificate != null)
+                            if (_certificate != null)
                             {
-                                _cachedId = $"Certificate={Certificate.Thumbprint}";
+                                _cachedId = $"Certificate={_certificate.Thumbprint}";
                             }
                             else
                             {
@@ -126,9 +133,9 @@ namespace Microsoft.Identity.Abstractions
                             _cachedId = $"CustomSignedAssertion={CustomSignedAssertionProviderName}({parameterNames})";
                             break;
                         case CredentialSource.ManagedCertificate:
-                            if (CachedValue != null)
+                            if (_cachedValue != null)
                             {
-                                _cachedId = $"ManagedCertificate={CachedValue};Thumbprint={certificateThumbprint}";
+                                _cachedId = $"ManagedCertificate={_cachedValue};Thumbprint={certificateThumbprint}";
                             }
                             else
                             {
@@ -417,6 +424,40 @@ namespace Microsoft.Identity.Abstractions
         /// <remarks>If you want to use the default authority, don't provide a token exchange authority URL.</remarks>
         public string? TokenExchangeAuthority { get; set; }
 
+#if NET10_0_OR_GREATER
+        // For .NET 10+, use internal methods to avoid AOT issues with configuration binders
+        // Extension properties (defined in CredentialDescriptionExtensions.cs) provide property-style access
+
+        /// <summary>
+        /// Internal method to get the certificate. For .NET 10+, use the Certificate extension property instead.
+        /// </summary>
+        internal X509Certificate2? GetCertificateInternal() => _certificate;
+
+        /// <summary>
+        /// Internal method to set the certificate. For .NET 10+, use the Certificate extension property instead.
+        /// </summary>
+        internal void SetCertificateInternal(X509Certificate2? value)
+        {
+            _certificate = value;
+            // CachedID can depend on the certificate thumbprint. Set it to null so that it will be recomputed.
+            _cachedId = null;
+        }
+
+        /// <summary>
+        /// Internal method to get the cached value. For .NET 10+, use the CachedValue extension property instead.
+        /// </summary>
+        internal object? GetCachedValueInternal() => _cachedValue;
+
+        /// <summary>
+        /// Internal method to set the cached value. For .NET 10+, use the CachedValue extension property instead.
+        /// </summary>
+        internal void SetCachedValueInternal(object? value)
+        {
+            _cachedValue = value;
+            // CachedID can depend on the cached value. Set it to null so that it will be recomputed.
+            _cachedId = null;
+        }
+#else
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.Certificate"/>, you will use this property to provide the certificate yourself.
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.Base64Encoded"/> or <see cref="CredentialSource.KeyVault"/>
@@ -450,6 +491,7 @@ namespace Microsoft.Identity.Abstractions
                 _cachedId = null;
             }
         }
+#endif
 
         /// <summary>
         /// Skip this credential description. This is useful when, you specify a list of

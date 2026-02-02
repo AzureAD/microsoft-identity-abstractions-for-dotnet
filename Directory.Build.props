@@ -39,7 +39,7 @@
     <AssemblyOriginatorKeyFile>../../build/MSAL.snk</AssemblyOriginatorKeyFile>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Nullable>enable</Nullable>
-    <LangVersion>12</LangVersion>
+    <LangVersion>preview</LangVersion>
     <EnablePackageValidation>true</EnablePackageValidation>
     <PackageValidationBaselineVersion>8.0.0</PackageValidationBaselineVersion>
     <BannedApiAnalyzersVersion>4.14.0</BannedApiAnalyzersVersion>

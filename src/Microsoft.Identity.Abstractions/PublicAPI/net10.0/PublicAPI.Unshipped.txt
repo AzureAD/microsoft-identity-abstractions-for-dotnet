@@ -1,3 +1,11 @@
 #nullable enable
+*REMOVED*Microsoft.Identity.Abstractions.CredentialDescription.Certificate.get -> System.Security.Cryptography.X509Certificates.X509Certificate2?
+*REMOVED*Microsoft.Identity.Abstractions.CredentialDescription.Certificate.set -> void
+*REMOVED*virtual Microsoft.Identity.Abstractions.CredentialDescription.CachedValue.get -> object?
+*REMOVED*virtual Microsoft.Identity.Abstractions.CredentialDescription.CachedValue.set -> void
+~extension Microsoft.Identity.Abstractions.CredentialDescriptionExtensions(Microsoft.Identity.Abstractions.CredentialDescription! credential).CachedValue.get -> object?
+~extension Microsoft.Identity.Abstractions.CredentialDescriptionExtensions(Microsoft.Identity.Abstractions.CredentialDescription! credential).CachedValue.set -> void
+~extension Microsoft.Identity.Abstractions.CredentialDescriptionExtensions(Microsoft.Identity.Abstractions.CredentialDescription! credential).Certificate.get -> System.Security.Cryptography.X509Certificates.X509Certificate2?
+~extension Microsoft.Identity.Abstractions.CredentialDescriptionExtensions(Microsoft.Identity.Abstractions.CredentialDescription! credential).Certificate.set -> void
 Microsoft.Identity.Abstractions.IBoundAuthorizationHeaderProvider
 Microsoft.Identity.Abstractions.IBoundAuthorizationHeaderProvider.CreateBoundAuthorizationHeaderAsync(Microsoft.Identity.Abstractions.DownstreamApiOptions! downstreamApiOptions, System.Security.Claims.ClaimsPrincipal? claimsPrincipal = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Microsoft.Identity.Abstractions.OperationResult<Microsoft.Identity.Abstractions.AuthorizationHeaderInformation!, Microsoft.Identity.Abstractions.AuthorizationHeaderError!>>!
