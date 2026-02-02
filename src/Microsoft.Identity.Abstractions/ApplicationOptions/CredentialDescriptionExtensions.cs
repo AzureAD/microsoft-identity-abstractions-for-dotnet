@@ -7,7 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 namespace Microsoft.Identity.Abstractions
 {
     /// <summary>
-    /// Extension properties for <see cref="CredentialDescription"/> (.NET 10+ only).
+    /// Provides extension properties for <see cref="CredentialDescription"/> instances (.NET 10+ only).
     /// These extension properties provide property-style access to Certificate and CachedValue
     /// while keeping them hidden from AOT/NativeAOT configuration binders.
     /// </summary>
