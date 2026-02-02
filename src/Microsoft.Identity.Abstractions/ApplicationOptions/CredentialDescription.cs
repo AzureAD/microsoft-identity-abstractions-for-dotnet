@@ -439,7 +439,7 @@ namespace Microsoft.Identity.Abstractions
         internal void SetCertificateInternal(X509Certificate2? value)
         {
             _certificate = value;
-            // CachedID can depend on the certificate thumbprint. Set it to null so that it will be recomputed.
+            // Cached Id can depend on the certificate thumbprint. Set it to null so that it will be recomputed.
             _cachedId = null;
         }
 
@@ -454,7 +454,7 @@ namespace Microsoft.Identity.Abstractions
         internal void SetCachedValueInternal(object? value)
         {
             _cachedValue = value;
-            // CachedID can depend on the cached value. Set it to null so that it will be recomputed.
+            // Cached Id can depend on the cached value. Set it to null so that it will be recomputed.
             _cachedId = null;
         }
 #else
