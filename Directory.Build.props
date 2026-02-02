@@ -39,6 +39,7 @@
     <AssemblyOriginatorKeyFile>../../build/MSAL.snk</AssemblyOriginatorKeyFile>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Nullable>enable</Nullable>
+    <!-- LangVersion set to preview to enable C# 15 extension properties for .NET 10+ AOT compatibility -->
     <LangVersion>preview</LangVersion>
     <EnablePackageValidation>true</EnablePackageValidation>
     <PackageValidationBaselineVersion>8.0.0</PackageValidationBaselineVersion>
