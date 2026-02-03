@@ -8,11 +8,11 @@ libraries (Microsoft.IdentityModel, MSAL.NET and Microsoft.Identity.Web). It exp
 - Acquire tokens, get authorization headers and call downstream APIs
 - Extensibility to bring your own credential providers
 
-## NuGet Package
+## NuGet package
 
 [![NuGet](https://img.shields.io/nuget/v/Microsoft.Identity.Abstractions.svg?style=flat-square&label=nuget&colorB=00b200)](https://www.nuget.org/packages/Microsoft.Identity.Abstractions/)
 
-## Version Lifecycle and Support Matrix
+## Version lifecycle and support matrix
 
 See [Long Term Support policy](./supportPolicy.md) for details.
 
@@ -25,9 +25,9 @@ The following table lists Microsoft.Identity.Abstractions versions currently sup
 
 ## Concepts
 
-### For Contributors & Agents
+### For contributors & agents
 
-#### Repository Layout
+#### Repository layout
 
 ```
 ├── src/Microsoft.Identity.Abstractions/
@@ -42,14 +42,14 @@ The following table lists Microsoft.Identity.Abstractions versions currently sup
 └── agents.md                   # AI agent guidelines
 ```
 
-#### Key Design Principles
+#### Key design principles
 
 1. **Interfaces only** — No implementations in this package
 2. **POCO classes for options** — Serializable from `appsettings.json`
 3. **Clone pattern** — All options implement `Clone()` for safe overrides
 4. **Extensibility via interfaces** — `ICredentialSourceLoader`, `ICustomSignedAssertionProvider`
 
-#### Making Changes
+#### Making changes
 
 | Change Type | Files to Update |
 |-------------|-----------------|
@@ -58,13 +58,13 @@ The following table lists Microsoft.Identity.Abstractions versions currently sup
 | New HTTP method variant | `IDownstreamApi.HttpMethods.tt` (template!) |
 | README diagrams | Update Mermaid in `README.md` |
 
-#### Running Tests
+#### Running tests
 
 ```bash
 dotnet test Microsoft.Identity.Abstractions.sln
 ```
 
-#### Conceptual Dependency Graph
+#### Conceptual dependency graph
 
 ```mermaid
 graph LR
