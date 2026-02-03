@@ -18,6 +18,7 @@ namespace Microsoft.Identity.Abstractions
     /// </remarks>
     public static class CredentialDescriptionExtensions
     {
+#pragma warning disable CA1034 // Do not nest type - this is intentional C# 14 extension block syntax
         // C# 14 extension block syntax - defines extension properties on CredentialDescription
         extension(CredentialDescription credential)
         {
@@ -25,7 +26,7 @@ namespace Microsoft.Identity.Abstractions
             /// When <see cref="CredentialDescription.SourceType"/> is <see cref="CredentialSource.Certificate"/>, you will use this property to provide the certificate yourself.
             /// When <see cref="CredentialDescription.SourceType"/> is <see cref="CredentialSource.Base64Encoded"/> or <see cref="CredentialSource.KeyVault"/>
             /// or <see cref="CredentialSource.Path"/> or <see cref="CredentialSource.StoreWithDistinguishedName"/> or <see cref="CredentialSource.StoreWithThumbprint"/>
-            /// after the certificate is retrieved by a <see cref="ICredentialsLoader"/>, it will be stored in this property and also in the <see cref="CachedValue"/>.
+            /// after the certificate is retrieved by a <see cref="ICredentialsLoader"/>, it will be stored in this property and also in the <b>CachedValue</b> property.
             /// </summary>
             public X509Certificate2? Certificate
             {
@@ -35,7 +36,7 @@ namespace Microsoft.Identity.Abstractions
 
             /// <summary>
             /// When the credential is retrieved by a <see cref="ICredentialsLoader"/>, it will be stored in this property, where you can retrieve it. If the credential is a certificate,
-            /// it will also be stored in the <see cref="Certificate"/> property.
+            /// it will also be stored in the <b>Certificate</b> property.
             /// </summary>
             public object? CachedValue
             {
@@ -43,6 +44,7 @@ namespace Microsoft.Identity.Abstractions
                 set => credential.SetCachedValueInternal(value);
             }
         }
+#pragma warning restore CA1034
     }
 }
 #endif

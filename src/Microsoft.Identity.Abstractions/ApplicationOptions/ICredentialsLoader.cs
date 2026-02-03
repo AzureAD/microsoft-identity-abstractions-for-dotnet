@@ -9,7 +9,7 @@ namespace Microsoft.Identity.Abstractions
     /// <summary>
     /// Contract for credential loaders, implemented by classes like the DefaultCertificateLoader or the DefaultCredentialLoader 
     /// in Microsoft.Identity.Web. Credential loaders are used to load credentials from a <see cref="CredentialDescription"/>, the result
-    /// is then in the <see cref="CredentialDescription.CachedValue"/> property.
+    /// is then in the <b>CredentialDescription.CachedValue</b> property.
     /// Credential loaders constitute an extensibility point. They delegate to credential source loaders, which are specified in the <see cref="CredentialSourceLoaders"/>
     /// collection, choosing the one which <see cref="ICredentialSourceLoader.CredentialSource"/> matches the credential source of the
     /// credential description to load.
