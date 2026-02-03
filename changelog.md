@@ -2,12 +2,18 @@
 =======
 ## Breaking changes
 
+If you build code with the .NET 10 target framework and get this error:
+```txt
+error CS9260: Feature 'extensions' is not available in C# 13.0. Please use language version 14.0 or greater.
+```
+make sure you update the `LangVersion` property in your project to 14 or later. 
+
 ### AOT/NativeAOT Compatibility for .NET 10+
 
 Made `CredentialDescription` AOT-compatible for .NET 10+ by using C# 14 extension properties. This is a **binary breaking change** (though source compatible) for .NET 10+ targets:
 - Removes `Certificate` and `CachedValue` as public properties from `CredentialDescription` when targeting .NET 10+
 - Adds extension properties with the same names and signatures for .NET 10+, providing property-style access
-- Maintains full source compatibility - no code changes required for consumers
+- Maintains full source compatibility - no code changes required for consumers provided the .NET 10 code is built with C#14 or later.
 - Prevents AOT/NativeAOT configuration binding issues with reference-typed properties
 - Keeps existing behavior for older target frameworks (netstandard2.0, netstandard2.1, net462, net8.0, net9.0)
 
