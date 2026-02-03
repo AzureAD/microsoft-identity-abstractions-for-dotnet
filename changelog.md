@@ -9,7 +9,7 @@ In practice, it's unlikely that this breaking change affects anybody as the rena
 
 ### AOT/NativeAOT Compatibility for .NET 10+
 
-Made `CredentialDescription` AOT-compatible for .NET 10+ by using C# 15 extension properties. This change:
+Made `CredentialDescription` AOT-compatible for .NET 10+ by using C# 14 extension properties. This change:
 - Removes `Certificate` and `CachedValue` as public properties from `CredentialDescription` when targeting .NET 10+
 - Adds extension properties with the same names and signatures for .NET 10+, providing property-style access
 - Maintains full source compatibility - no code changes required for consumers
@@ -19,7 +19,7 @@ Made `CredentialDescription` AOT-compatible for .NET 10+ by using C# 15 extensio
 **Technical details:**
 - For .NET 10+: `Certificate` and `CachedValue` are implemented as extension properties (not visible to config binders)
 - For older TFMs: `Certificate` and `CachedValue` remain as regular public properties
-- LangVersion updated to `preview` to enable C# 15 extension property syntax
+- LangVersion updated to `14` to enable C# 14 extension property syntax
 - Internal accessor methods (`GetCertificateInternal`, `SetCertificateInternal`, etc.) support extension properties
 
 This enhancement ensures `CredentialDescription` works seamlessly in AOT/NativeAOT compilation scenarios while maintaining backward compatibility.

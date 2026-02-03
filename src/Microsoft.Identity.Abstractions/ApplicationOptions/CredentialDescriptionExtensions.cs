@@ -12,13 +12,13 @@ namespace Microsoft.Identity.Abstractions
     /// while keeping them hidden from AOT/NativeAOT configuration binders.
     /// </summary>
     /// <remarks>
-    /// This uses C# 15 extension property syntax. The extension block defines properties that appear
+    /// This uses C# 14 extension property syntax. The extension block defines properties that appear
     /// as instance properties on CredentialDescription but are not part of the type's public API surface
     /// visible to reflection-based tools like configuration binders.
     /// </remarks>
     public static class CredentialDescriptionExtensions
     {
-        // C# 15 extension block syntax - defines extension properties on CredentialDescription
+        // C# 14 extension block syntax - defines extension properties on CredentialDescription
         extension(CredentialDescription credential)
         {
             /// <summary>
