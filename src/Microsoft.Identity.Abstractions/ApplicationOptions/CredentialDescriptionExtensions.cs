@@ -12,7 +12,7 @@ namespace Microsoft.Identity.Abstractions
     /// while keeping them hidden from AOT/NativeAOT configuration binders.
     /// </summary>
     /// <remarks>
-    /// This uses C# 14 extension property syntax. The extension block defines properties that appear
+    /// This uses C# 14 extension property syntax. This language feature is only available on .NET10, and the AOT build is based on .NET 10. The extension block defines properties that appear
     /// as instance properties on CredentialDescription but are not part of the type's public API surface
     /// visible to reflection-based tools like configuration binders.
     /// </remarks>

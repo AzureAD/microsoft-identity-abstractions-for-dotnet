@@ -42,14 +42,9 @@ namespace Microsoft.Identity.Abstractions
 #endif
             Algorithm = other.Algorithm;
             Base64EncodedValue = other.Base64EncodedValue;
-#if NET10_0_OR_GREATER
-            // For .NET 10+, copy the backing fields directly
+            // Copy the backing fields directly. This is safe to do in a copy-constructor, because the ID is NULL initially.
             _cachedValue = other._cachedValue;
             _certificate = other._certificate;
-#else
-            CachedValue = other.CachedValue;
-            Certificate = other.Certificate;
-#endif
             CertificateStorePath = other.CertificateStorePath;
             CertificateDistinguishedName = other.CertificateDistinguishedName;
             CertificateThumbprint = other.CertificateThumbprint;
@@ -433,7 +428,9 @@ namespace Microsoft.Identity.Abstractions
         /// Gets the certificate. For .NET 10+, use the Certificate extension property instead.
         /// This method is protected internal to allow derived classes to access the certificate.
         /// </summary>
+#pragma warning disable CA1024 // Use properties where appropriate
         protected internal X509Certificate2? GetCertificateInternal() => _certificate;
+#pragma warning restore CA1024 // Use properties where appropriate
 
         /// <summary>
         /// Sets the certificate. For .NET 10+, use the Certificate extension property instead.
@@ -450,7 +447,9 @@ namespace Microsoft.Identity.Abstractions
         /// Gets the cached value. For .NET 10+, use the CachedValue extension property instead.
         /// This method is protected internal to allow derived classes to access the cached value.
         /// </summary>
+#pragma warning disable CA1024 // Use properties where appropriate
         protected internal object? GetCachedValueInternal() => _cachedValue;
+#pragma warning restore CA1024 // Use properties where appropriate
 
         /// <summary>
         /// Sets the cached value. For .NET 10+, use the CachedValue extension property instead.
