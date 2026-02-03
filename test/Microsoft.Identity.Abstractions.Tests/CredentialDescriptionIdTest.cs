@@ -431,24 +431,25 @@ namespace Microsoft.Identity.Abstractions.Tests
         public void CachedId_InvalidatedWhen_Certificate_Changes()
         {
 #pragma warning disable SYSLIB0026 // Type or member is obsolete
-            var cert1 = new X509Certificate2(Convert.FromBase64String(base64encoded));
-            var cert2 = new X509Certificate2(Convert.FromBase64String(base64encoded));
+            var cert = new X509Certificate2(Convert.FromBase64String(base64encoded));
 
             var credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.Certificate,
-                Certificate = cert1
+                Certificate = cert
             };
 
             var initialId = credentialDescription.Id;
-            Assert.Contains(cert1.Thumbprint, initialId, StringComparison.Ordinal);
+            Assert.Contains(cert.Thumbprint, initialId, StringComparison.Ordinal);
+            Assert.DoesNotContain("null", initialId, StringComparison.Ordinal);
 
-            credentialDescription.Certificate = cert2;
+            // Change certificate to null to verify cache invalidation
+            credentialDescription.Certificate = null;
             var updatedId = credentialDescription.Id;
 
-            // Even though thumbprints are the same, the cached ID should be recomputed
-            Assert.Equal(initialId, updatedId); // Same cert, same thumbprint
-            Assert.Contains(cert2.Thumbprint, updatedId, StringComparison.Ordinal);
+            // The ID should change to reflect the null certificate
+            Assert.NotEqual(initialId, updatedId);
+            Assert.Equal("Certificate=null", updatedId);
 #pragma warning restore SYSLIB0026 // Type or member is obsolete
         }
 
