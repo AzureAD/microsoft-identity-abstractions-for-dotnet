@@ -1,15 +1,10 @@
-10.0.0
+11.0.0
 =======
 ## Breaking changes
-Rename `IAuthorizationHeaderProvider2` to `BoundAuthorizationHeaderProvider`. This interface extends `IAuthorizationHeaderProvider` to  create authorization headers with a token which is optionally bound to a certificate (for mTLS Pop). For details, see [PR #232](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/232)
-
-In practice, it's unlikely that this breaking change affects anybody as the renamed interface was new in 9.6.0, and not yet used to the team's knowledge.
-
-## Improvements and fundamentals
 
 ### AOT/NativeAOT Compatibility for .NET 10+
 
-Made `CredentialDescription` AOT-compatible for .NET 10+ by using C# 14 extension properties. This change:
+Made `CredentialDescription` AOT-compatible for .NET 10+ by using C# 14 extension properties. This is a **binary breaking change** (though source compatible) for .NET 10+ targets:
 - Removes `Certificate` and `CachedValue` as public properties from `CredentialDescription` when targeting .NET 10+
 - Adds extension properties with the same names and signatures for .NET 10+, providing property-style access
 - Maintains full source compatibility - no code changes required for consumers
@@ -23,6 +18,15 @@ Made `CredentialDescription` AOT-compatible for .NET 10+ by using C# 14 extensio
 - Internal accessor methods (`GetCertificateInternal`, `SetCertificateInternal`, etc.) support extension properties
 
 This enhancement ensures `CredentialDescription` works seamlessly in AOT/NativeAOT compilation scenarios while maintaining backward compatibility.
+
+10.0.0
+=======
+## Breaking changes
+Rename `IAuthorizationHeaderProvider2` to `BoundAuthorizationHeaderProvider`. This interface extends `IAuthorizationHeaderProvider` to  create authorization headers with a token which is optionally bound to a certificate (for mTLS Pop). For details, see [PR #232](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/232)
+
+In practice, it's unlikely that this breaking change affects anybody as the renamed interface was new in 9.6.0, and not yet used to the team's knowledge.
+
+## Improvements and fundamentals
 
 9.6.0
 ======
