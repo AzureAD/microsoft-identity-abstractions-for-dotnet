@@ -5,7 +5,7 @@
     <TargetFrameworks Condition="'$(TargetNetNext)' == 'True'">$(TargetFrameworks);</TargetFrameworks>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
-	<LangVersion>12</LangVersion>
+	<LangVersion>14</LangVersion>
 	<SignAssembly>True</SignAssembly>
 	<AssemblyOriginatorKeyFile>../../build/MSAL.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>

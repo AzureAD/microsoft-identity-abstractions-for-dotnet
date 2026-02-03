@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <!-- This should be passed from the VSTS build -->
-    <MicrosoftIdentityAbstractionsVersion Condition="'$(MicrosoftIdentityAbstractionsVersion)' == ''">10.0.0</MicrosoftIdentityAbstractionsVersion>
+    <MicrosoftIdentityAbstractionsVersion Condition="'$(MicrosoftIdentityAbstractionsVersion)' == ''">11.0.0</MicrosoftIdentityAbstractionsVersion>
     <!-- This will generate AssemblyVersion, AssemblyFileVersion and AssemblyInformationVersion -->
     <Version>$(MicrosoftIdentityAbstractionsVersion)</Version>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)\build\35MSSharedLib1024.snk</AssemblyOriginatorKeyFile>
@@ -39,7 +39,9 @@
     <AssemblyOriginatorKeyFile>../../build/MSAL.snk</AssemblyOriginatorKeyFile>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Nullable>enable</Nullable>
-    <LangVersion>12</LangVersion>
+    <!-- LangVersion set to 14 to enable C# 14 extension properties for .NET 10+ AOT compatibility.
+         Extension properties are required to make CredentialDescription AOT-safe while maintaining source compatibility. -->
+    <LangVersion>14</LangVersion>
     <EnablePackageValidation>true</EnablePackageValidation>
     <PackageValidationBaselineVersion>8.0.0</PackageValidationBaselineVersion>
     <BannedApiAnalyzersVersion>4.14.0</BannedApiAnalyzersVersion>

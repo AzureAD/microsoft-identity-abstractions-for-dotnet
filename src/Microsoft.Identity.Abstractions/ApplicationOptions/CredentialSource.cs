@@ -15,7 +15,7 @@ namespace Microsoft.Identity.Abstractions
     {
         /// <summary>
         /// Use this value if you provide a certificate yourself. When setting the <see cref="CredentialDescription.SourceType"/> property to this value,
-        /// you will also provide the <see cref="CredentialDescription.Certificate"/>.
+        /// you will also provide the <b>CredentialDescription.Certificate</b>.
         /// </summary>
         Certificate = 0,
 
