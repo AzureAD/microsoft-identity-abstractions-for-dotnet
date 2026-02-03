@@ -12,8 +12,9 @@ namespace Microsoft.Identity.Abstractions
     /// while keeping them hidden from AOT/NativeAOT configuration binders.
     /// </summary>
     /// <remarks>
-    /// This uses C# 14 extension property syntax. While C# 14 features are available on all target frameworks,
-    /// we only use extension properties on .NET 10+ to avoid binary breaking changes on older frameworks.
+    /// This uses C# 14 extension property syntax. While C# 14 extension properties as a language feature
+    /// are available on any target framework, for this library they are only exposed on .NET 10+ by design
+    /// to avoid binary breaking changes on older frameworks.
     /// The extension block defines properties that appear as instance properties on CredentialDescription
     /// but are not part of the type's public API surface visible to reflection-based tools like configuration binders.
     /// </remarks>
