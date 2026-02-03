@@ -25,6 +25,70 @@ The following table lists Microsoft.Identity.Abstractions versions currently sup
 
 ## Concepts
 
+## For Contributors & Agents
+
+### Repository Layout
+
+```
+├── src/Microsoft.Identity.Abstractions/
+│   ├── ApplicationOptions/     # App config, credentials, loaders
+│   ├── TokenAcquisition/       # Token interfaces & options
+│   ├── DownstreamApi/          # API calling abstractions
+│   ├── Results/                # OperationResult pattern
+│   └── PublicAPI/              # API tracking (don't edit manually)
+├── test/                       # xUnit tests
+├── docs/                       # Additional documentation
+├── build/                      # Build scripts, signing keys
+└── agents.md                   # AI agent guidelines
+```
+
+### Key Design Principles
+
+1. **Interfaces only** — No implementations in this package
+2. **POCO classes for options** — Serializable from `appsettings.json`
+3. **Clone pattern** — All options implement `Clone()` for safe overrides
+4. **Extensibility via interfaces** — `ICredentialSourceLoader`, `ICustomSignedAssertionProvider`
+
+### Making Changes
+
+| Change Type | Files to Update |
+|-------------|-----------------|
+| New public API | Source file + `PublicAPI/$(TFM)/PublicAPI.Unshipped.txt` |
+| New credential source | `CredentialSource.cs` + `CredentialDescription.cs` + docs |
+| New HTTP method variant | `IDownstreamApi.HttpMethods.tt` (template!) |
+| README diagrams | Update Mermaid in `README.md` |
+
+### Running Tests
+
+```bash
+dotnet test Microsoft.Identity.Abstractions.sln
+```
+
+### Conceptual Dependency Graph
+
+```mermaid
+graph LR
+    subgraph "Configuration Layer"
+        A[appsettings.json] --> B[IdentityApplicationOptions]
+        B --> C[CredentialDescription]
+    end
+    
+    subgraph "Token Layer"
+        D[ITokenAcquirerFactory] --> E[ITokenAcquirer]
+        E --> F[AcquireTokenResult]
+    end
+    
+    subgraph "API Layer"
+        G[IAuthorizationHeaderProvider] --> H[AuthorizationHeaderResult]
+        I[IDownstreamApi] --> J[HttpResponseMessage]
+    end
+    
+    B --> D
+    C --> E
+    E --> G
+    G --> I
+```
+
 ### Overview of the data classes
 the following diagram provides an overview of the data classes exposed by Microsoft.Identity.Abstractions
 
