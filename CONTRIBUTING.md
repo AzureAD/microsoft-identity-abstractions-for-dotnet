@@ -50,7 +50,7 @@ This file is generated from a T4 template. To make changes:
 1. Edit `src/.../DownstreamApi/IDownstreamApi.HttpMethods.tt`
 2. Regenerate: 
    - Visual Studio: Right-click the `.tt` file → "Run Custom Tool"
-   - Command line: `dotnet build` will regenerate
+   - Command line / CI: T4 templates are not executed as part of `dotnet build` for this project; regenerate in Visual Studio and commit the updated `IDownstreamApi.HttpMethods.cs`.
 3. Review the generated output in `IDownstreamApi.HttpMethods.cs`
 4. Update `PublicAPI/$(TFM)/PublicAPI.Unshipped.txt` for new public APIs
 
@@ -59,7 +59,7 @@ This file is generated from a T4 template. To make changes:
 | File | Reason | Edit Instead |
 |------|--------|--------------|
 | `IDownstreamApi.HttpMethods.cs` | Generated from T4 template | `IDownstreamApi.HttpMethods.tt` |
-| `PublicAPI.Shipped.txt` | Historical release record | `PublicAPI.Unshipped.txt` |
+| `src/Microsoft.Identity.Abstractions/PublicAPI/<TFM>/PublicAPI.Shipped.txt` | Historical release record | `src/Microsoft.Identity.Abstractions/PublicAPI/<TFM>/PublicAPI.Unshipped.txt` |
 | `CompatibilitySuppressions.xml` | Auto-managed by analyzer | Let the build process handle it |
 
 ## Pull Request Guidelines
@@ -81,7 +81,7 @@ This file is generated from a T4 template. To make changes:
 ## Contributor License Agreement
 
 Please visit [https://cla.microsoft.com/](https://cla.microsoft.com/) and sign the Contributor License
-Agreement. You only need to do that once. We can not look at your code until you've submitted this request.
+Agreement. You only need to do that once. We cannot look at your code until you've submitted this request.
 
 ## Finding an Issue to Work On
 

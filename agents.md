@@ -166,12 +166,12 @@ Through its well-designed abstractions and interfaces, Microsoft.Identity.Abstra
 
 | I want to... | Look in | Key files |
 |--------------|---------|-----------|
-| Understand app configuration options | `src/.../ApplicationOptions/` | `IdentityApplicationOptions.cs`, `MicrosoftIdentityApplicationOptions.cs` |
-| Add a new credential source | `src/.../ApplicationOptions/` | `CredentialSource.cs` (enum), `ICredentialSourceLoader.cs` (interface) |
-| Modify token acquisition | `src/.../TokenAcquisition/` | `ITokenAcquirer.cs`, `AcquireTokenOptions.cs` |
-| Change downstream API calling | `src/.../DownstreamApi/` | `IDownstreamApi.cs`, `DownstreamApiOptions.cs` |
-| Add HTTP method variants | `src/.../DownstreamApi/` | `IDownstreamApi.HttpMethods.tt` (T4 template!) |
-| Work with result patterns | `src/.../Results/` | `OperationResult.cs`, `OperationError.cs` |
+| Understand app configuration options | `src/ApplicationOptions/` | `IdentityApplicationOptions.cs`, `MicrosoftIdentityApplicationOptions.cs` |
+| Add a new credential source | `src/Credentials/` | `CredentialSource.cs` (enum), `ICredentialSourceLoader.cs` (interface) |
+| Modify token acquisition | `src/TokenAcquisition/` | `ITokenAcquirer.cs`, `AcquireTokenOptions.cs` |
+| Change downstream API calling | `src/DownstreamApi/` | `IDownstreamApi.cs`, `DownstreamApiOptions.cs` |
+| Add HTTP method variants | `src/DownstreamApi/` | `IDownstreamApi.HttpMethods.tt` (T4 template!) |
+| Work with result patterns | `src/Results/` | `OperationResult.cs`, `OperationError.cs` |
 
 ### ⚠️ Important: Generated Files
 
@@ -213,7 +213,7 @@ When implementing these interfaces, you must:
 **Context:** Credentials can come from many *sources* (KeyVault, file, managed identity) but are fundamentally only a few *types* (certificate, secret, signed assertion).
 
 **Decision:** Two enums:
-- `CredentialSource` (12 values) — *where* the credential comes from
+- `CredentialSource` — *where* the credential comes from
 - `CredentialType` (4 values) — *what* the credential fundamentally is
 
 **Consequence:** `CredentialDescription.CredentialType` is derived from `CredentialSource`, not set independently.
