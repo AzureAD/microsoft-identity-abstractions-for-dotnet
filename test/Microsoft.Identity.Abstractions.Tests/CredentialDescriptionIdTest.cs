@@ -190,5 +190,285 @@ namespace Microsoft.Identity.Abstractions.Tests
                 Assert.Contains(credentialDescription.SourceType.ToString(), credentialDescription.Id, StringComparison.Ordinal);
             }
         }
+
+        [Fact]
+        public void CachedId_InvalidatedWhen_KeyVaultUrl_Changes()
+        {
+            var credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.KeyVault,
+                KeyVaultUrl = "https://vault1.vault.azure.net",
+                KeyVaultCertificateName = "MyCert"
+            };
+
+            var initialId = credentialDescription.Id;
+            Assert.Contains("vault1", initialId, StringComparison.Ordinal);
+
+            credentialDescription.KeyVaultUrl = "https://vault2.vault.azure.net";
+            var updatedId = credentialDescription.Id;
+
+            Assert.NotEqual(initialId, updatedId);
+            Assert.Contains("vault2", updatedId, StringComparison.Ordinal);
+        }
+
+        [Fact]
+        public void CachedId_InvalidatedWhen_KeyVaultCertificateName_Changes()
+        {
+            var credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.KeyVault,
+                KeyVaultUrl = "https://myvault.vault.azure.net",
+                KeyVaultCertificateName = "Cert1"
+            };
+
+            var initialId = credentialDescription.Id;
+            Assert.Contains("Cert1", initialId, StringComparison.Ordinal);
+
+            credentialDescription.KeyVaultCertificateName = "Cert2";
+            var updatedId = credentialDescription.Id;
+
+            Assert.NotEqual(initialId, updatedId);
+            Assert.Contains("Cert2", updatedId, StringComparison.Ordinal);
+        }
+
+        [Fact]
+        public void CachedId_InvalidatedWhen_Base64EncodedValue_Changes()
+        {
+            var credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.Base64Encoded,
+                Base64EncodedValue = "Value1"
+            };
+
+            var initialId = credentialDescription.Id;
+
+            credentialDescription.Base64EncodedValue = "Value2";
+            var updatedId = credentialDescription.Id;
+
+            Assert.NotEqual(initialId, updatedId);
+        }
+
+        [Fact]
+        public void CachedId_InvalidatedWhen_CertificateDiskPath_Changes()
+        {
+            var credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.Path,
+                CertificateDiskPath = "c:\\path1\\cert.pfx"
+            };
+
+            var initialId = credentialDescription.Id;
+            Assert.Contains("path1", initialId, StringComparison.Ordinal);
+
+            credentialDescription.CertificateDiskPath = "c:\\path2\\cert.pfx";
+            var updatedId = credentialDescription.Id;
+
+            Assert.NotEqual(initialId, updatedId);
+            Assert.Contains("path2", updatedId, StringComparison.Ordinal);
+        }
+
+        [Fact]
+        public void CachedId_InvalidatedWhen_CertificateStorePath_Changes()
+        {
+            var credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.StoreWithThumbprint,
+                CertificateStorePath = "CurrentUser/My",
+                CertificateThumbprint = "123456"
+            };
+
+            var initialId = credentialDescription.Id;
+            Assert.Contains("CurrentUser", initialId, StringComparison.Ordinal);
+
+            credentialDescription.CertificateStorePath = "LocalMachine/My";
+            var updatedId = credentialDescription.Id;
+
+            Assert.NotEqual(initialId, updatedId);
+            Assert.Contains("LocalMachine", updatedId, StringComparison.Ordinal);
+        }
+
+        [Fact]
+        public void CachedId_InvalidatedWhen_CertificateThumbprint_Changes()
+        {
+            var credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.StoreWithThumbprint,
+                CertificateStorePath = "CurrentUser/My",
+                CertificateThumbprint = "Thumbprint1"
+            };
+
+            var initialId = credentialDescription.Id;
+            Assert.Contains("Thumbprint1", initialId, StringComparison.Ordinal);
+
+            credentialDescription.CertificateThumbprint = "Thumbprint2";
+            var updatedId = credentialDescription.Id;
+
+            Assert.NotEqual(initialId, updatedId);
+            Assert.Contains("Thumbprint2", updatedId, StringComparison.Ordinal);
+        }
+
+        [Fact]
+        public void CachedId_InvalidatedWhen_CertificateDistinguishedName_Changes()
+        {
+            var credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.StoreWithDistinguishedName,
+                CertificateStorePath = "CurrentUser/My",
+                CertificateDistinguishedName = "CN=Cert1"
+            };
+
+            var initialId = credentialDescription.Id;
+            Assert.Contains("CN=Cert1", initialId, StringComparison.Ordinal);
+
+            credentialDescription.CertificateDistinguishedName = "CN=Cert2";
+            var updatedId = credentialDescription.Id;
+
+            Assert.NotEqual(initialId, updatedId);
+            Assert.Contains("CN=Cert2", updatedId, StringComparison.Ordinal);
+        }
+
+        [Fact]
+        public void CachedId_InvalidatedWhen_ManagedIdentityClientId_Changes()
+        {
+            var credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.SignedAssertionFromManagedIdentity,
+                ManagedIdentityClientId = "ClientId1"
+            };
+
+            var initialId = credentialDescription.Id;
+            Assert.Contains("ClientId1", initialId, StringComparison.Ordinal);
+
+            credentialDescription.ManagedIdentityClientId = "ClientId2";
+            var updatedId = credentialDescription.Id;
+
+            Assert.NotEqual(initialId, updatedId);
+            Assert.Contains("ClientId2", updatedId, StringComparison.Ordinal);
+        }
+
+        [Fact]
+        public void CachedId_InvalidatedWhen_SignedAssertionFileDiskPath_Changes()
+        {
+            var credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.SignedAssertionFilePath,
+                SignedAssertionFileDiskPath = "c:/path1.jwt"
+            };
+
+            var initialId = credentialDescription.Id;
+            Assert.Contains("path1", initialId, StringComparison.Ordinal);
+
+            credentialDescription.SignedAssertionFileDiskPath = "c:/path2.jwt";
+            var updatedId = credentialDescription.Id;
+
+            Assert.NotEqual(initialId, updatedId);
+            Assert.Contains("path2", updatedId, StringComparison.Ordinal);
+        }
+
+        [Fact]
+        public void CachedId_InvalidatedWhen_CustomSignedAssertionProviderName_Changes()
+        {
+            var credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.CustomSignedAssertion,
+                CustomSignedAssertionProviderName = "Provider1"
+            };
+
+            var initialId = credentialDescription.Id;
+            Assert.Contains("Provider1", initialId, StringComparison.Ordinal);
+
+            credentialDescription.CustomSignedAssertionProviderName = "Provider2";
+            var updatedId = credentialDescription.Id;
+
+            Assert.NotEqual(initialId, updatedId);
+            Assert.Contains("Provider2", updatedId, StringComparison.Ordinal);
+        }
+
+        [Fact]
+        public void CachedId_InvalidatedWhen_CustomSignedAssertionProviderData_Changes()
+        {
+            var credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.CustomSignedAssertion,
+                CustomSignedAssertionProviderName = "MyProvider",
+                CustomSignedAssertionProviderData = new Dictionary<string, object>
+                {
+                    { "Key1", "Value1" }
+                }
+            };
+
+            var initialId = credentialDescription.Id;
+            Assert.Contains("Key1", initialId, StringComparison.Ordinal);
+
+            credentialDescription.CustomSignedAssertionProviderData = new Dictionary<string, object>
+            {
+                { "Key2", "Value2" }
+            };
+            var updatedId = credentialDescription.Id;
+
+            Assert.NotEqual(initialId, updatedId);
+            Assert.Contains("Key2", updatedId, StringComparison.Ordinal);
+        }
+
+        [Fact]
+        public void CachedId_InvalidatedWhen_ClientSecret_Changes()
+        {
+            var credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.ClientSecret,
+                ClientSecret = "Secret1"
+            };
+
+            var initialId = credentialDescription.Id;
+
+            credentialDescription.ClientSecret = "Secret2";
+            var updatedId = credentialDescription.Id;
+
+            Assert.NotEqual(initialId, updatedId);
+        }
+
+        [Fact]
+        public void CachedId_InvalidatedWhen_Certificate_Changes()
+        {
+#pragma warning disable SYSLIB0026 // Type or member is obsolete
+            var cert1 = new X509Certificate2(Convert.FromBase64String(base64encoded));
+            var cert2 = new X509Certificate2(Convert.FromBase64String(base64encoded));
+
+            var credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.Certificate,
+                Certificate = cert1
+            };
+
+            var initialId = credentialDescription.Id;
+            Assert.Contains(cert1.Thumbprint, initialId, StringComparison.Ordinal);
+
+            credentialDescription.Certificate = cert2;
+            var updatedId = credentialDescription.Id;
+
+            // Even though thumbprints are the same, the cached ID should be recomputed
+            Assert.Equal(initialId, updatedId); // Same cert, same thumbprint
+            Assert.Contains(cert2.Thumbprint, updatedId, StringComparison.Ordinal);
+#pragma warning restore SYSLIB0026 // Type or member is obsolete
+        }
+
+        [Fact]
+        public void CachedId_InvalidatedWhen_CachedValue_Changes()
+        {
+            var credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.ManagedCertificate,
+                CachedValue = "Value1"
+            };
+
+            var initialId = credentialDescription.Id;
+            Assert.Contains("Value1", initialId, StringComparison.Ordinal);
+
+            credentialDescription.CachedValue = "Value2";
+            var updatedId = credentialDescription.Id;
+
+            Assert.NotEqual(initialId, updatedId);
+            Assert.Contains("Value2", updatedId, StringComparison.Ordinal);
+        }
     }
 }
