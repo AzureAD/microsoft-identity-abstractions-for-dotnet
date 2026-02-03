@@ -190,7 +190,16 @@ namespace Microsoft.Identity.Abstractions
         /// </example>
         /// <seealso cref="SourceType"/>
         /// <seealso cref="KeyVaultCertificateName"/>
-        public string? KeyVaultUrl { get; set; }
+        public string? KeyVaultUrl
+        {
+            get => _keyVaultUrl;
+            set
+            {
+                _keyVaultUrl = value;
+                _cachedId = null;
+            }
+        }
+        private string? _keyVaultUrl;
 
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.StoreWithDistinguishedName"/> or
@@ -203,7 +212,16 @@ namespace Microsoft.Identity.Abstractions
         /// <seealso cref="CertificateStorePath"/>
         /// <seealso cref="CertificateDistinguishedName"/>
         /// <seealso cref="CertificateThumbprint"/>
-        public string? CertificateStorePath { get; set; }
+        public string? CertificateStorePath
+        {
+            get => _certificateStorePath;
+            set
+            {
+                _certificateStorePath = value;
+                _cachedId = null;
+            }
+        }
+        private string? _certificateStorePath;
 
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.StoreWithDistinguishedName"/>, specifies the distinguished name of
@@ -222,7 +240,16 @@ namespace Microsoft.Identity.Abstractions
         /// <seealso cref="SourceType"/>
         /// <seealso cref="CertificateStorePath"/>
         /// <seealso cref="CertificateThumbprint"/>
-        public string? CertificateDistinguishedName { get; set; }
+        public string? CertificateDistinguishedName
+        {
+            get => _certificateDistinguishedName;
+            set
+            {
+                _certificateDistinguishedName = value;
+                _cachedId = null;
+            }
+        }
+        private string? _certificateDistinguishedName;
 
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.KeyVault"/>, use this property to specify the
@@ -238,7 +265,16 @@ namespace Microsoft.Identity.Abstractions
         /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="keyvault_csharp":::
         /// ]]></format>
         /// </example>
-        public string? KeyVaultCertificateName { get; set; }
+        public string? KeyVaultCertificateName
+        {
+            get => _keyVaultCertificateName;
+            set
+            {
+                _keyVaultCertificateName = value;
+                _cachedId = null;
+            }
+        }
+        private string? _keyVaultCertificateName;
 
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.StoreWithThumbprint"/> specifies the thumbprint of the certificate to extract from
@@ -258,7 +294,16 @@ namespace Microsoft.Identity.Abstractions
         /// <seealso cref="SourceType"/>
         /// <seealso cref="CertificateDistinguishedName"/>
         /// <seealso cref="CertificateStorePath"/>
-        public string? CertificateThumbprint { get; set; }
+        public string? CertificateThumbprint
+        {
+            get => _certificateThumbprint;
+            set
+            {
+                _certificateThumbprint = value;
+                _cachedId = null;
+            }
+        }
+        private string? _certificateThumbprint;
 
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.Path"/>, specifies the path to the certificate on disk. You can
@@ -278,7 +323,16 @@ namespace Microsoft.Identity.Abstractions
         /// <seealso cref="SourceType"/>
         /// <seealso cref="CertificatePassword"/>
         /// <remarks>Using a certificate from a file is not recommended in production.</remarks>
-        public string? CertificateDiskPath { get; set; }
+        public string? CertificateDiskPath
+        {
+            get => _certificateDiskPath;
+            set
+            {
+                _certificateDiskPath = value;
+                _cachedId = null;
+            }
+        }
+        private string? _certificateDiskPath;
 
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.Path"/>, specifies the password to use to access the certificate which
@@ -313,7 +367,16 @@ namespace Microsoft.Identity.Abstractions
         /// ]]></format>
         /// </example>
         /// <remarks>Using a certificate from its base64 encoded value is not recommended in production.</remarks>
-        public string? Base64EncodedValue { get; set; }
+        public string? Base64EncodedValue
+        {
+            get => _base64EncodedValue;
+            set
+            {
+                _base64EncodedValue = value;
+                _cachedId = null;
+            }
+        }
+        private string? _base64EncodedValue;
 
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.ClientSecret"/>, describes the client secret to use as a client credential in a confidential client application.
@@ -358,7 +421,16 @@ namespace Microsoft.Identity.Abstractions
         /// </example>
         /// <remarks>If you want to use the system-assigned managed identity, just use <see cref="SourceType"/> = <see cref="CredentialSource.SignedAssertionFromManagedIdentity"/> and
         /// don't provide a managed identity client ID.</remarks>
-        public string? ManagedIdentityClientId { get; set; }
+        public string? ManagedIdentityClientId
+        {
+            get => _managedIdentityClientId;
+            set
+            {
+                _managedIdentityClientId = value;
+                _cachedId = null;
+            }
+        }
+        private string? _managedIdentityClientId;
 
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.SignedAssertionFilePath"/>, optionally specifies the path on disk of a file
@@ -380,7 +452,16 @@ namespace Microsoft.Identity.Abstractions
         /// <remarks>When deployed to AKS, if you specify <see cref="SourceType"/> = <see cref="CredentialSource.SignedAssertionFilePath"/> but don't provide
         /// the signed assertion file disk path, the file will be searched based on the content of two environment variables:
         /// <b>AZURE_FEDERATED_TOKEN_FILE</b> and <b>AZURE_ACCESS_TOKEN_FILE</b>.</remarks>
-        public string? SignedAssertionFileDiskPath { get; set; }
+        public string? SignedAssertionFileDiskPath
+        {
+            get => _signedAssertionFileDiskPath;
+            set
+            {
+                _signedAssertionFileDiskPath = value;
+                _cachedId = null;
+            }
+        }
+        private string? _signedAssertionFileDiskPath;
 
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.AutoDecryptKeys"/>, this property describes the authority to use
@@ -581,7 +662,16 @@ namespace Microsoft.Identity.Abstractions
         /// Extensibility. When used with <see cref="SourceType"/> = <see cref="CredentialSource.CustomSignedAssertion"/>, this property specifies the fully qualified
         /// named of the extension that will be used to retrieve the signed assertion used as a client credentials.
         /// </summary>
-        public string? CustomSignedAssertionProviderName { get; set; }
+        public string? CustomSignedAssertionProviderName
+        {
+            get => _customSignedAssertionProviderName;
+            set
+            {
+                _customSignedAssertionProviderName = value;
+                _cachedId = null;
+            }
+        }
+        private string? _customSignedAssertionProviderName;
 
         /// <summary>
         /// Extensibility. When used with <see cref="SourceType"/> = <see cref="CredentialSource.CustomSignedAssertion"/>, this property specifies
@@ -589,6 +679,15 @@ namespace Microsoft.Identity.Abstractions
         /// description capabilities.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public Dictionary<string, object>? CustomSignedAssertionProviderData { get; set; }
+        public Dictionary<string, object>? CustomSignedAssertionProviderData
+        {
+            get => _customSignedAssertionProviderData;
+            set
+            {
+                _customSignedAssertionProviderData = value;
+                _cachedId = null;
+            }
+        }
+        private Dictionary<string, object>? _customSignedAssertionProviderData;
     }
 }
