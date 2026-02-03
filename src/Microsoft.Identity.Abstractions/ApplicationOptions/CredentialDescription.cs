@@ -425,18 +425,21 @@ namespace Microsoft.Identity.Abstractions
         public string? TokenExchangeAuthority { get; set; }
 
 #if NET10_0_OR_GREATER
-        // For .NET 10+, use internal methods to avoid AOT issues with configuration binders
+        // For .NET 10+, use protected internal methods to avoid AOT issues with configuration binders
         // Extension properties (defined in CredentialDescriptionExtensions.cs) provide property-style access
+        // Methods are protected internal to allow derived classes to access them
 
         /// <summary>
-        /// Internal method to get the certificate. For .NET 10+, use the Certificate extension property instead.
+        /// Gets the certificate. For .NET 10+, use the Certificate extension property instead.
+        /// This method is protected internal to allow derived classes to access the certificate.
         /// </summary>
-        internal X509Certificate2? GetCertificateInternal() => _certificate;
+        protected internal X509Certificate2? GetCertificateInternal() => _certificate;
 
         /// <summary>
-        /// Internal method to set the certificate. For .NET 10+, use the Certificate extension property instead.
+        /// Sets the certificate. For .NET 10+, use the Certificate extension property instead.
+        /// This method is protected internal to allow derived classes to set the certificate.
         /// </summary>
-        internal void SetCertificateInternal(X509Certificate2? value)
+        protected internal void SetCertificateInternal(X509Certificate2? value)
         {
             _certificate = value;
             // Cached Id can depend on the certificate thumbprint. Set it to null so that it will be recomputed.
@@ -444,14 +447,16 @@ namespace Microsoft.Identity.Abstractions
         }
 
         /// <summary>
-        /// Internal method to get the cached value. For .NET 10+, use the CachedValue extension property instead.
+        /// Gets the cached value. For .NET 10+, use the CachedValue extension property instead.
+        /// This method is protected internal to allow derived classes to access the cached value.
         /// </summary>
-        internal object? GetCachedValueInternal() => _cachedValue;
+        protected internal object? GetCachedValueInternal() => _cachedValue;
 
         /// <summary>
-        /// Internal method to set the cached value. For .NET 10+, use the CachedValue extension property instead.
+        /// Sets the cached value. For .NET 10+, use the CachedValue extension property instead.
+        /// This method is protected internal to allow derived classes to set the cached value.
         /// </summary>
-        internal void SetCachedValueInternal(object? value)
+        protected internal void SetCachedValueInternal(object? value)
         {
             _cachedValue = value;
             // Cached Id can depend on the cached value. Set it to null so that it will be recomputed.

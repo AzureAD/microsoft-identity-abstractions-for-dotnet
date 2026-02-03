@@ -3,6 +3,10 @@
 *REMOVED*Microsoft.Identity.Abstractions.CredentialDescription.Certificate.set -> void
 *REMOVED*virtual Microsoft.Identity.Abstractions.CredentialDescription.CachedValue.get -> object?
 *REMOVED*virtual Microsoft.Identity.Abstractions.CredentialDescription.CachedValue.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.GetCachedValueInternal() -> object?
+Microsoft.Identity.Abstractions.CredentialDescription.GetCertificateInternal() -> System.Security.Cryptography.X509Certificates.X509Certificate2?
+Microsoft.Identity.Abstractions.CredentialDescription.SetCachedValueInternal(object? value) -> void
+Microsoft.Identity.Abstractions.CredentialDescription.SetCertificateInternal(System.Security.Cryptography.X509Certificates.X509Certificate2? value) -> void
 Microsoft.Identity.Abstractions.CredentialDescriptionExtensions
 Microsoft.Identity.Abstractions.CredentialDescriptionExtensions.extension(Microsoft.Identity.Abstractions.CredentialDescription!)
 Microsoft.Identity.Abstractions.CredentialDescriptionExtensions.extension(Microsoft.Identity.Abstractions.CredentialDescription!).CachedValue.get -> object?
