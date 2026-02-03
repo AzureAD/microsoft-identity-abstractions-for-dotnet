@@ -11,6 +11,8 @@ namespace Microsoft.Identity.Abstractions.AotTests;
 
 class Program
 {
+    private const string ApiName = "Api1";
+
     static void Main()
     {
         // For each change, you need to run the following
@@ -21,8 +23,8 @@ class Program
             {
                 var azureAdSection = context.Configuration.GetSection("AzureAd");
                 services.Configure<MicrosoftIdentityApplicationOptions>("scheme", options => azureAdSection.Bind(options));
-                services.Configure<DownstreamApisOptions>(
-                    options => context.Configuration.GetSection("DownstreamApis").Bind(options)
+                services.Configure<DownstreamApiOptions>(ApiName,
+                    options => context.Configuration.GetSection($"DownstreamApis:{ApiName}").Bind(options)
                     );
             });
 
@@ -43,22 +45,9 @@ class Program
             Console.WriteLine($"ClientCredentials: {optionsInstance.ClientCredentials!.First().Id}");
         }
 
-        IOptionsMonitor<DownstreamApisOptions> downstreamApisOptions = host.Services.GetRequiredService<IOptionsMonitor<DownstreamApisOptions>>();
-        int count = downstreamApisOptions.CurrentValue.Count;
-        if (count == 0)
-        {
-            throw new InvalidOperationException("could not bind downstream apis");
-        }
-        else
-        {
-            Console.WriteLine($"DownstreamApis count: {count}");
-            foreach (var option in downstreamApisOptions.CurrentValue)
-            {
-                Console.WriteLine($"DownstreamApi: {option.Key}");
-                Console.WriteLine($"DownstreamApi: {option.Value.BaseUrl}");
-
-            }
-        }
+        IOptionsMonitor<DownstreamApiOptions> downstreamApisOptions = host.Services.GetRequiredService<IOptionsMonitor<DownstreamApiOptions>>();
+        var option = downstreamApisOptions.Get(ApiName);
+        Console.WriteLine($"DownstreamApi: {option.BaseUrl}");
 
         Console.WriteLine("AOT test completed successfully!");
     }
