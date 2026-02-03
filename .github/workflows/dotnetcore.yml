@@ -28,6 +28,14 @@ jobs:
     - name: Build and test
       run: dotnet test -p:TargetNetNext=${{ env.TargetNetNext }} -v m --configuration Release Microsoft.Identity.Abstractions.sln
 
+    # Run AOT tests to validate no reflection warnings (requires .NET 10)
+    - name: Publish and run AOT tests
+      run: |
+        cd test/Microsoft.Identity.Abstractions.AotTests
+        dotnet publish --runtime win-x64 -f net10.0 --configuration Release -v m
+        .\bin\Release\net10.0\win-x64\publish\Microsoft.Identity.Abstractions.AotTests.exe
+      shell: pwsh
+
     # Pack the library
     - name: Pack
       run: dotnet pack -p:TargetNetNext=${{ env.TargetNetNext }} --configuration Release --no-restore --no-build -v m Microsoft.Identity.Abstractions.sln
