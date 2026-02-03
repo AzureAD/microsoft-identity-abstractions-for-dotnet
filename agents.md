@@ -117,6 +117,7 @@ Microsoft.Identity.Abstractions is a core authentication and authorization libra
 * Use pattern matching and switch expressions wherever possible
 * Use `nameof` instead of string literals when referring to member names
 * Ensure that XML doc comments are created for any public APIs. When applicable, include `<example>` and `<code>` documentation in the comments
+* Use sentence casing for documentation (e.g., "This is a sentence" not "This Is A Sentence")
 
 ### Nullable Reference Types
 
@@ -159,6 +160,90 @@ Through its well-designed abstractions and interfaces, Microsoft.Identity.Abstra
   - TokenAcquisition - Options and interfaces to acquire tokens, and creating Authorization headers
 - `/tests` - Unit tests
 - `/build` - Build configuration and scripts
+
+## Quick Navigation Map
+
+### Where to Find Things
+
+| I want to... | Look in | Key files |
+|--------------|---------|-----------|
+| Understand app configuration options | `src/ApplicationOptions/` | `IdentityApplicationOptions.cs`, `MicrosoftIdentityApplicationOptions.cs` |
+| Add a new credential source | `src/Credentials/` | `CredentialSource.cs` (enum), `ICredentialSourceLoader.cs` (interface) |
+| Modify token acquisition | `src/TokenAcquisition/` | `ITokenAcquirer.cs`, `AcquireTokenOptions.cs` |
+| Change downstream API calling | `src/DownstreamApi/` | `IDownstreamApi.cs`, `DownstreamApiOptions.cs` |
+| Add HTTP method variants | `src/DownstreamApi/` | `IDownstreamApi.HttpMethods.tt` (T4 template!) |
+| Work with result patterns | `src/Results/` | `OperationResult.cs`, `OperationError.cs` |
+
+### ⚠️ Important: Generated Files
+
+**Do NOT edit directly:**
+- `IDownstreamApi.HttpMethods.cs` — Generated from `IDownstreamApi.HttpMethods.tt`
+
+**Edit the T4 template instead**, then regenerate.
+
+### Class Hierarchy (Inheritance)
+
+```
+IdentityApplicationOptions
+└── MicrosoftEntraApplicationOptions
+    └── MicrosoftIdentityApplicationOptions
+
+AuthorizationHeaderProviderOptions
+└── DownstreamApiOptions
+    └── DownstreamApiOptionsReadOnlyHttpMethod
+
+OperationError (abstract)
+└── AuthorizationHeaderError
+```
+
+### Interface Implementation Contract
+
+When implementing these interfaces, you must:
+
+| Interface | Contract Requirements |
+|-----------|----------------------|
+| `ITokenAcquirer` | Both `GetTokenForUserAsync` and `GetTokenForAppAsync` |
+| `ICredentialSourceLoader` | `LoadIfNeededAsync` + expose `CredentialSource` enum value |
+| `ICustomSignedAssertionProvider` | Extends `ICredentialSourceLoader`, adds `Name` property |
+| `IDownstreamApi` | ~50+ methods (use IDE to implement) |
+
+## Architecture Decisions (ADRs)
+
+### ADR-1: Why separate `CredentialSource` (enum) from `CredentialType` (enum)?
+
+**Context:** Credentials can come from many *sources* (KeyVault, file, managed identity) but are fundamentally only a few *types* (certificate, secret, signed assertion).
+
+**Decision:** Two enums:
+- `CredentialSource` — *where* the credential comes from
+- `CredentialType` (4 values) — *what* the credential fundamentally is
+
+**Consequence:** `CredentialDescription.CredentialType` is derived from `CredentialSource`, not set independently.
+
+---
+
+### ADR-2: Why T4 templates for `IDownstreamApi`?
+
+**Context:** `IDownstreamApi` needs methods for every combination of:
+- HTTP method (Get, Post, Put, Patch, Delete)
+- Token type (User, App)  
+- Generic parameters (TInput, TOutput, both, neither)
+- Framework (all, NET8+ for AOT)
+
+**Decision:** Use T4 template to generate all combinations (~50+ methods).
+
+**Consequence:** 
+- Edit `IDownstreamApi.HttpMethods.tt`, not the generated `.cs` file
+- Regenerate after changes by saving the `.tt` file or using VS "Run Custom Tool"
+
+---
+
+### ADR-3: Why `OperationResult<TResult, TError>` pattern?
+
+**Context:** Authorization header creation can fail (token errors, network issues). Need clean error handling without exceptions for expected failures.
+
+**Decision:** Discriminated union pattern via `OperationResult<T, E>` record struct.
+
+**Consequence:** Callers check `result.Succeeded` before accessing `result.Result` or `result.Error`.
 
 ### Key Components
 

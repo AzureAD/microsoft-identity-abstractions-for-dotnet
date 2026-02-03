@@ -1,11 +1,87 @@
-# Microsoft Identity Abstractions for .NET welcomes new contributors
+# Contributing to Microsoft.Identity.Abstractions
 
-This document will guide you through the process.
+Thank you for your interest in contributing to Microsoft.Identity.Abstractions!
 
-## Contributor License agreement
+## Quick start
+
+1. **Read first**: `agents.md` for coding standards and AI agent guidelines
+2. **Understand the domain**: This is an *abstractions* library — no implementations belong here
+3. **Check generated files**: `IDownstreamApi.HttpMethods.cs` is generated from `.tt` template
+
+## Development setup
+
+```bash
+# Clone the repository
+git clone https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet.git
+
+# Build the solution
+dotnet build Microsoft.Identity.Abstractions.sln
+
+# Run tests
+dotnet test Microsoft.Identity.Abstractions.sln
+```
+
+## Common tasks
+
+### Adding a new credential source
+
+1. Add enum value to `src/Microsoft.Identity.Abstractions/ApplicationOptions/CredentialSource.cs`
+2. Add corresponding properties to `src/Microsoft.Identity.Abstractions/ApplicationOptions/CredentialDescription.cs`
+3. Update `CredentialDescription.Id` property logic for the new source
+4. Update `CredentialDescription.CredentialType` derivation if needed
+5. Document in `docs/credentialdescription.md`
+6. Update Mermaid diagrams in `README.md`
+7. Add to `PublicAPI/$(TFM)/PublicAPI.Unshipped.txt` for each target framework
+
+### Adding a property to options classes
+
+1. Add property to the options class with XML documentation
+2. Update `Clone()` method to copy the new property
+3. Update copy constructor if one exists
+4. Consider default values and backward compatibility
+5. Add to `PublicAPI/$(TFM)/PublicAPI.Unshipped.txt`
+
+### Modifying IDownstreamApi
+
+⚠️ **Do NOT edit `IDownstreamApi.HttpMethods.cs` directly!**
+
+This file is generated from a T4 template. To make changes:
+
+1. Edit `src/Microsoft.Identity.Abstractions/DownstreamApi/IDownstreamApi.HttpMethods.tt`
+2. Regenerate: 
+   - Visual Studio: Right-click the `.tt` file → "Run Custom Tool", or simply save the `.tt` file
+   - Command line / CI: T4 templates are not executed as part of `dotnet build` for this project; regenerate in Visual Studio and commit the updated `IDownstreamApi.HttpMethods.cs`.
+3. Review the generated output in `IDownstreamApi.HttpMethods.cs`
+4. Update `PublicAPI/$(TFM)/PublicAPI.Unshipped.txt` for new public APIs
+
+## Files NOT to edit directly
+
+| File | Reason | Edit Instead |
+|------|--------|--------------|
+| `IDownstreamApi.HttpMethods.cs` | Generated from T4 template | `IDownstreamApi.HttpMethods.tt` |
+| `src/Microsoft.Identity.Abstractions/PublicAPI/<TFM>/PublicAPI.Shipped.txt` | Historical release record | `src/Microsoft.Identity.Abstractions/PublicAPI/<TFM>/PublicAPI.Unshipped.txt` |
+| `CompatibilitySuppressions.xml` | Auto-managed by analyzer | Let the build process handle it |
+
+## Pull request guidelines
+
+1. **One concern per PR** — Keep changes focused
+2. **Update documentation** — If you change public API, update README diagrams
+3. **Add tests** — New functionality should have corresponding tests
+4. **Follow existing patterns** — Look at similar code in the repo for guidance
+5. **Public API tracking** — The build will fail if you forget `PublicAPI.Unshipped.txt`
+
+## Code style
+
+- Follow `.editorconfig` rules
+- Use C# 14+ features where appropriate
+- Enable nullable reference types (`#nullable enable`)
+- Add XML documentation for all public APIs
+- Use `nameof()` instead of string literals for member names
+
+## Contributor license agreement
 
 Please visit [https://cla.microsoft.com/](https://cla.microsoft.com/) and sign the Contributor License
-Agreement.  You only need to do that once. We can not look at your code until you've submitted this request.
+Agreement. You only need to do that once. We cannot look at your code until you've submitted this request.
 
 ## Finding an issue to work on
 
@@ -69,3 +145,9 @@ Your pull request will now go through extensive checks by the subject matter exp
 
 When your pull request has had all feedback addressed, it has been signed off by one or more reviewers with commit access, and all checks are green, we will commit it.
 We commit pull requests as a single Squash commit unless there are special circumstances. This creates a simpler history than a Merge or Rebase commit. "Special circumstances" are rare, and typically mean that there are a series of cleanly separated changes that will be too hard to understand if squashed together, or for some reason we want to preserve the ability to dissect them.
+
+## Questions?
+
+- Check `agents.md` for detailed coding standards
+- Review existing code for patterns and conventions
+- Open an issue for design discussions before large changes
