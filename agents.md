@@ -216,7 +216,7 @@ When implementing these interfaces, you must:
 - `CredentialSource` (12 values) — *where* the credential comes from
 - `CredentialType` (4 values) — *what* the credential fundamentally is
 
-**Consequence:** `CredentialDescription.CredentialType` is derived from `SourceType`, not set independently.
+**Consequence:** `CredentialDescription.CredentialType` is derived from `CredentialSource`, not set independently.
 
 ---
 
