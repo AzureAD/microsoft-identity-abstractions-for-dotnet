@@ -25,8 +25,8 @@ dotnet test Microsoft.Identity.Abstractions.sln
 
 ### Adding a New Credential Source
 
-1. Add enum value to `src/.../ApplicationOptions/CredentialSource.cs`
-2. Add corresponding properties to `src/.../ApplicationOptions/CredentialDescription.cs`
+1. Add enum value to `src/Microsoft.Identity.Abstractions/ApplicationOptions/CredentialSource.cs`
+2. Add corresponding properties to `src/Microsoft.Identity.Abstractions/ApplicationOptions/CredentialDescription.cs`
 3. Update `CredentialDescription.Id` property logic for the new source
 4. Update `CredentialDescription.CredentialType` derivation if needed
 5. Document in `docs/credentialdescription.md`
@@ -47,9 +47,9 @@ dotnet test Microsoft.Identity.Abstractions.sln
 
 This file is generated from a T4 template. To make changes:
 
-1. Edit `src/.../DownstreamApi/IDownstreamApi.HttpMethods.tt`
+1. Edit `src/Microsoft.Identity.Abstractions/DownstreamApi/IDownstreamApi.HttpMethods.tt`
 2. Regenerate: 
-   - Visual Studio: Right-click the `.tt` file → "Run Custom Tool"
+   - Visual Studio: Right-click the `.tt` file → "Run Custom Tool", or simply save the `.tt` file
    - Command line / CI: T4 templates are not executed as part of `dotnet build` for this project; regenerate in Visual Studio and commit the updated `IDownstreamApi.HttpMethods.cs`.
 3. Review the generated output in `IDownstreamApi.HttpMethods.cs`
 4. Update `PublicAPI/$(TFM)/PublicAPI.Unshipped.txt` for new public APIs
@@ -73,7 +73,7 @@ This file is generated from a T4 template. To make changes:
 ## Code Style
 
 - Follow `.editorconfig` rules
-- Use C# 12+ features where appropriate
+- Use C# 14+ features where appropriate
 - Enable nullable reference types (`#nullable enable`)
 - Add XML documentation for all public APIs
 - Use `nameof()` instead of string literals for member names

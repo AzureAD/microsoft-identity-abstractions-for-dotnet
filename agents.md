@@ -117,6 +117,7 @@ Microsoft.Identity.Abstractions is a core authentication and authorization libra
 * Use pattern matching and switch expressions wherever possible
 * Use `nameof` instead of string literals when referring to member names
 * Ensure that XML doc comments are created for any public APIs. When applicable, include `<example>` and `<code>` documentation in the comments
+* Use sentence casing for documentation (e.g., "This is a sentence" not "This Is A Sentence")
 
 ### Nullable Reference Types
 
@@ -232,7 +233,7 @@ When implementing these interfaces, you must:
 
 **Consequence:** 
 - Edit `IDownstreamApi.HttpMethods.tt`, not the generated `.cs` file
-- Regenerate after changes: `dotnet build` or use VS "Run Custom Tool"
+- Regenerate after changes by saving the `.tt` file or using VS "Run Custom Tool"
 
 ---
 

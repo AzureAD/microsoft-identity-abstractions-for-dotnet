@@ -25,9 +25,9 @@ The following table lists Microsoft.Identity.Abstractions versions currently sup
 
 ## Concepts
 
-## For Contributors & Agents
+### For Contributors & Agents
 
-### Repository Layout
+#### Repository Layout
 
 ```
 ├── src/Microsoft.Identity.Abstractions/
@@ -42,14 +42,14 @@ The following table lists Microsoft.Identity.Abstractions versions currently sup
 └── agents.md                   # AI agent guidelines
 ```
 
-### Key Design Principles
+#### Key Design Principles
 
 1. **Interfaces only** — No implementations in this package
 2. **POCO classes for options** — Serializable from `appsettings.json`
 3. **Clone pattern** — All options implement `Clone()` for safe overrides
 4. **Extensibility via interfaces** — `ICredentialSourceLoader`, `ICustomSignedAssertionProvider`
 
-### Making Changes
+#### Making Changes
 
 | Change Type | Files to Update |
 |-------------|-----------------|
@@ -58,13 +58,13 @@ The following table lists Microsoft.Identity.Abstractions versions currently sup
 | New HTTP method variant | `IDownstreamApi.HttpMethods.tt` (template!) |
 | README diagrams | Update Mermaid in `README.md` |
 
-### Running Tests
+#### Running Tests
 
 ```bash
 dotnet test Microsoft.Identity.Abstractions.sln
 ```
 
-### Conceptual Dependency Graph
+#### Conceptual Dependency Graph
 
 ```mermaid
 graph LR
@@ -79,7 +79,7 @@ graph LR
     end
     
     subgraph "API Layer"
-        G[IAuthorizationHeaderProvider] --> H[AuthorizationHeaderResult]
+        G[IAuthorizationHeaderProvider] --> H["Task&lt;string&gt;"]
         I[IDownstreamApi] --> J[HttpResponseMessage]
     end
     
