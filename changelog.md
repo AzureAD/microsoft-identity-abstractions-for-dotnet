@@ -25,14 +25,21 @@ Made `CredentialDescription` AOT-compatible for .NET 10+ by using C# 14 extensio
 
 This enhancement ensures `CredentialDescription` works seamlessly in AOT/NativeAOT compilation scenarios while maintaining backward compatibility.
 
+## New features
+* Make CredentialDescription AOT-compatible via C# 14 extension properties (v11.0.0). See [PR #238](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/238).
+
+## Bug fixes
+* Invalidate _cachedId in all property setters that affect Id computation. See [PR #240](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/240).
+
+## Fundamentals
+* Add codebase navigation guides and architecture decision records. See [PR #241](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/241).
+
 10.0.0
 =======
 ## Breaking changes
 Rename `IAuthorizationHeaderProvider2` to `BoundAuthorizationHeaderProvider`. This interface extends `IAuthorizationHeaderProvider` to  create authorization headers with a token which is optionally bound to a certificate (for mTLS Pop). For details, see [PR #232](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/232)
 
 In practice, it's unlikely that this breaking change affects anybody as the renamed interface was new in 9.6.0, and not yet used to the team's knowledge.
-
-## Improvements and fundamentals
 
 9.6.0
 ======
@@ -291,6 +298,7 @@ Added a new interface `IAuthenticationSchemeInformationProvider` to get the effe
 2.0.0
 ==========
 Initial release of Microsoft.Identity.Abstractions which brings interfaces and POCO classes used in all the Microsoft .NET authentication libraries provided by Identity and Network Access (IDNA) see ReadME.md for details.
+
 
 
 
