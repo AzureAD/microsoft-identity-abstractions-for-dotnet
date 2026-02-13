@@ -12,6 +12,13 @@ namespace Microsoft.Identity.Abstractions
     public class CredentialSourceLoaderParameters
     {
         /// <summary>
+        /// Initialize the CredentialSourceLoaderParameters.
+        /// </summary>
+        public CredentialSourceLoaderParameters()
+        {
+        }
+
+        /// <summary>
         /// Initialize the CredentialSourceLoaderParameters from the application ID and authority.
         /// </summary>
         /// <param name="clientId">Application ID of the confidential client application that
@@ -26,11 +33,23 @@ namespace Microsoft.Identity.Abstractions
         /// <summary>
         /// Application ID of the confidential client application that wants to present the client credentials to the authority.
         /// </summary>
-        public string ClientId { get; set; }
+        public string ClientId { get; set; } = string.Empty;
 
         /// <summary>
         /// Authority (Cloud instance and tenant) to which the credential will be presented.
         /// </summary>
-        public string Authority { get; set; }
+        public string Authority { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets the authentication protocol being used for this request.
+        /// For example, "Bearer", "MTLS_POP", "MTLS".
+        /// </summary>
+        public string Protocol { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets the URL of the API which will be hit with this request.
+        /// </summary>
+        /// <remarks>The value should be a valid absolute URI.</remarks>
+        public string ApiUrl { get; set; } = string.Empty;
     }
 }

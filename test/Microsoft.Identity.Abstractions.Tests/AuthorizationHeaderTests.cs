@@ -22,6 +22,7 @@ namespace Microsoft.Identity.Abstractions.Tests
             // Assert
             Assert.Null(info.AuthorizationHeaderValue);
             Assert.Null(info.BindingCertificate);
+            Assert.Null(info.BindingCertificateDescription);
         }
 
         [Fact]
@@ -29,15 +30,27 @@ namespace Microsoft.Identity.Abstractions.Tests
         {
             // Arrange
             const string headerValue = "Bearer token123";
+#pragma warning disable SYSLIB0026 // Type or member is obsolete. For test cert only, an empty certificate is fine.
+            X509Certificate2 bindingCertificateValue = new();
+#pragma warning restore SYSLIB0026 // Type or member is obsolete
+            CredentialDescription bindingCertificateDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.Certificate,
+                Certificate = bindingCertificateValue,
+            };
 
             // Act
             var info = new AuthorizationHeaderInformation
             {
-                AuthorizationHeaderValue = headerValue
+                AuthorizationHeaderValue = headerValue,
+                BindingCertificate = bindingCertificateValue,
+                BindingCertificateDescription = bindingCertificateDescription,
             };
 
             // Assert
             Assert.Equal(headerValue, info.AuthorizationHeaderValue);
+            Assert.Equal(bindingCertificateValue, info.BindingCertificate);
+            Assert.Equal(bindingCertificateDescription, info.BindingCertificateDescription);
         }
 
         [Fact]
@@ -260,21 +273,6 @@ namespace Microsoft.Identity.Abstractions.Tests
             // Assert
             Assert.False(result.Succeeded);
             Assert.Equal(error, result.Error);
-        }
-
-        [Fact]
-        public void AuthorizationHeaderInformation_WithBindingCertificate_WorksCorrectly()
-        {
-            // Arrange
-            var info = new AuthorizationHeaderInformation();
-            
-            // Act
-            // Note: We can't create a real X509Certificate2 in tests easily,
-            // so we just test that the property can be set to null
-            info.BindingCertificate = null;
-
-            // Assert
-            Assert.Null(info.BindingCertificate);
         }
     }
 }
