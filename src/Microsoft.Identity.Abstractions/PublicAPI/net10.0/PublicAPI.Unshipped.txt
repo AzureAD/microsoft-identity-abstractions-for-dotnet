@@ -17,5 +17,12 @@ static Microsoft.Identity.Abstractions.CredentialDescriptionExtensions.get_Cache
 static Microsoft.Identity.Abstractions.CredentialDescriptionExtensions.get_Certificate(Microsoft.Identity.Abstractions.CredentialDescription! credential) -> System.Security.Cryptography.X509Certificates.X509Certificate2?
 static Microsoft.Identity.Abstractions.CredentialDescriptionExtensions.set_CachedValue(Microsoft.Identity.Abstractions.CredentialDescription! credential, object? value) -> void
 static Microsoft.Identity.Abstractions.CredentialDescriptionExtensions.set_Certificate(Microsoft.Identity.Abstractions.CredentialDescription! credential, System.Security.Cryptography.X509Certificates.X509Certificate2? value) -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.BindingCertificateDescription.get -> Microsoft.Identity.Abstractions.CredentialDescription?
+Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.BindingCertificateDescription.set -> void
+Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.ApiUrl.get -> string!
+Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.ApiUrl.set -> void
+Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.CredentialSourceLoaderParameters() -> void
+Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.Protocol.get -> string!
+Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.Protocol.set -> void
 Microsoft.Identity.Abstractions.IBoundAuthorizationHeaderProvider
 Microsoft.Identity.Abstractions.IBoundAuthorizationHeaderProvider.CreateBoundAuthorizationHeaderAsync(Microsoft.Identity.Abstractions.DownstreamApiOptions! downstreamApiOptions, System.Security.Claims.ClaimsPrincipal? claimsPrincipal = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Microsoft.Identity.Abstractions.OperationResult<Microsoft.Identity.Abstractions.AuthorizationHeaderInformation!, Microsoft.Identity.Abstractions.AuthorizationHeaderError!>>!

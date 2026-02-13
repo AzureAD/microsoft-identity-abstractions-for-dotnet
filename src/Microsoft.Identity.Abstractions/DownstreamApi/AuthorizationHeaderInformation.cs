@@ -23,5 +23,11 @@ namespace Microsoft.Identity.Abstractions
         /// commonly used in mutual TLS (mTLS) authentication scenarios and Proof-of-Possession (PoP) protocols.
         /// </summary>
         public X509Certificate2? BindingCertificate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the corresponding <see cref="CredentialDescription"/> for the provided <see cref="BindingCertificate"/>, if applicable.
+        /// This will only be present if the binding certificate is provided by the client. If the STS provided the certificate, then this will not be present.
+        /// </summary>
+        public CredentialDescription? BindingCertificateDescription { get; set; }
     }
 }
