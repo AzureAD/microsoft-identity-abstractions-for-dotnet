@@ -354,11 +354,11 @@ var credentialDescription = new CredentialDescription
       * You're working in air-gapped scenarios
 
 3. **Certificate Store Paths**:
-- Format: `{StoreLocation}/{StoreName}`
-- Common values:
-  - `CurrentUser/My`: User certificates
-  - `LocalMachine/My`: Computer certificates
-- Used with `StoreWithThumbprint`, `StoreWithDistinguishedName`, and `StoreWithSubjectName`
+   - Format: `{StoreLocation}/{StoreName}`
+   - Common values:
+     - `CurrentUser/My`: User certificates
+     - `LocalMachine/My`: Computer certificates
+   - Used with `StoreWithThumbprint`, `StoreWithDistinguishedName`, and `StoreWithSubjectName`
 
 4. **Federation Identity Credential with Managed Identity**:
    - For system-assigned managed identity, use `SignedAssertionFromManagedIdentity` source type without specifying `ManagedIdentityClientId`

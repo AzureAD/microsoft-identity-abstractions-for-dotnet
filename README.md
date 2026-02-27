@@ -135,6 +135,7 @@ direction TB
     SignedAssertionFromVault = 9
     AutoDecryptKeys = 10
     CustomSignedAssertion = 11
+    ManagedCertificate = 12
     StoreWithSubjectName = 13
     }
     class CredentialType { <<enum>>
