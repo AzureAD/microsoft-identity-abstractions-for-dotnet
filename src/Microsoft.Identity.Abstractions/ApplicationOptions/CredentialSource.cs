@@ -191,5 +191,22 @@ namespace Microsoft.Identity.Abstractions
         /// This is currently a Microsoft-Internal concept which has no meaning outside of Microsoft.
         /// </summary>
         ManagedCertificate = 12,
+
+        /// <summary>
+        /// Use this value when you provide a certificate from the certificate store, described by its subject name.
+        /// When setting the <see cref="CredentialDescription.SourceType"/> property to this value, you'll also provide the <see cref="CredentialDescription.CertificateSubjectName"/>
+        /// and <see cref="CredentialDescription.CertificateStorePath"/> properties.
+        /// </summary>
+        /// <example>
+        /// <format type="text/markdown">
+        /// <![CDATA[
+        /// The Json fragment below describes a user certificate stored in the personal certificates folder (<b>CurrentUser/My</b>) and specified by its subject name, used as a client credential in a confidential client application:
+        /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="subjectname_json":::
+        /// 
+        /// The code below describes programmatically in C#, a computer certificate in the personal certificates folder (<b>LocalMachine/My</b>) accessed by its subject name.
+        /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="subjectname_csharp":::
+        /// ]]></format>
+        /// </example>
+        StoreWithSubjectName = 13,
     }
 }
