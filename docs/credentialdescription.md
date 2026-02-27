@@ -56,7 +56,7 @@ This is the recommended approach
 |----------------|------------|-------------|------------|----------------|
 | **Federation identity credential with Managed Identity (FIC+MSI)** <br> (`SignedAssertionFromManagedIdentity`) | Azure Managed Identity | • Production on Azure<br>• Zero cert management<br>• Cloud-native apps<br><br>_System-assigned_: Resource lifecycle<br>_User-assigned_: Share across resources | • No secret management<br>• Automatic rotation<br>• Azure integration<br>• Enhanced security | Best choice for Azure workloads |
 | **Key Vault** <br> (`SourceType = KeyVault`) | Certificate stored in Azure Key Vault | • Production environments<br>• Need for centralized management<br>• Require automatic rotation<br>• Share across services | • Secure storage & access control<br>• Automatic renewal<br>• Audit logging<br>• Managed backup/recovery | Best choice for production workloads not hosted on an Azure compute supporting managed identity|
-| **Certificate Store** <br> (`StoreWithThumbprint` or `StoreWithDistinguishedName`) | Certificate in Windows Certificate Store | • Production on Windows<br>• Using Windows cert management<br><br>_Thumbprint_: Target specific version<br>_DistinguishedName_: Auto rollover | • Native Windows management<br>• Windows security integration<br>• HSM support | Ideal for Windows production environments |
+| **Certificate Store** <br> (`StoreWithThumbprint` or `StoreWithDistinguishedName` or `StoreWithSubjectName`) | Certificate in Windows Certificate Store | • Production on Windows<br>• Using Windows cert management<br><br>_Thumbprint_: Target specific version<br>_DistinguishedName_: Auto rollover<br>_SubjectName_: Flexible name-based lookup | • Native Windows management<br>• Windows security integration<br>• HSM support | Ideal for Windows production environments |
 | **File Path** <br> (`SourceType = Path`) | PFX/P12 file on disk | • Development/testing<br>• Simple deployment<br>• File-based config preferred | • Simple setup<br>• Easy deployment<br>• Direct file access | **Not for production:**<br>• Password in config<br>• Manual management<br>• Less secure storage |
 | **Base64 Encoded** <br> (`SourceType = Base64Encoded`) | Certificate as base64 string | • Development/testing<br>• Config-embedded certificates | • Simple configuration<br>• No file system dependency | **Not for production:**<br>• Exposed in config<br>• Manual management<br>• Less secure |
 | **Client Secret** <br> (`SourceType = ClientSecret`) | Simple shared secret string | • Development/testing<br>• Basic security requirements | • Simple to use<br>• Easy to configure | **Not for production:**<br>• Less secure<br>• No auto-rotation<br>• Easy to expose |
@@ -115,6 +115,18 @@ This is the case where the client credentials are a certificate.
   "SourceType": "StoreWithDistinguishedName",
   "CertificateStorePath": "CurrentUser/My",
   "CertificateDistinguishedName": "CN=WebAppCallingWebApiCert"
+ }]
+}
+```
+
+#### From Certificate Store (Using Subject Name)
+```json
+{
+ "ClientCredentials": [
+ {
+  "SourceType": "StoreWithSubjectName",
+  "CertificateStorePath": "CurrentUser/My",
+  "CertificateSubjectName": "CN=WebAppCallingWebApiCert"
  }]
 }
 ```
@@ -234,6 +246,17 @@ var credentialDescription = CredentialDescription.FromCertificateStore(
     distinguishedName: "CN=WebAppCallingWebApiCert");
 ```
 
+#### From Certificate Store (Using Subject Name)
+```csharp
+// Using property initialization
+var credentialDescription = new CredentialDescription
+{
+    SourceType = CredentialSource.StoreWithSubjectName,
+    CertificateStorePath = "LocalMachine/My",
+    CertificateSubjectName = "CN=WebAppCallingWebApiCert"
+};
+```
+
 #### From File Path
 ```csharp
 // Using property initialization
@@ -331,10 +354,11 @@ var credentialDescription = new CredentialDescription
       * You're working in air-gapped scenarios
 
 3. **Certificate Store Paths**:
-   - Format: `{StoreLocation}/{StoreName}`
-   - Common values:
-     - `CurrentUser/My`: User certificates
-     - `LocalMachine/My`: Computer certificates
+- Format: `{StoreLocation}/{StoreName}`
+- Common values:
+  - `CurrentUser/My`: User certificates
+  - `LocalMachine/My`: Computer certificates
+- Used with `StoreWithThumbprint`, `StoreWithDistinguishedName`, and `StoreWithSubjectName`
 
 4. **Federation Identity Credential with Managed Identity**:
    - For system-assigned managed identity, use `SignedAssertionFromManagedIdentity` source type without specifying `ManagedIdentityClientId`
