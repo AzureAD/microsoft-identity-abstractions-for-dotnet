@@ -1,4 +1,7 @@
 #nullable enable
+Microsoft.Identity.Abstractions.CredentialDescription.CertificateSubjectName.get -> string?
+Microsoft.Identity.Abstractions.CredentialDescription.CertificateSubjectName.set -> void
+Microsoft.Identity.Abstractions.CredentialSource.StoreWithSubjectName = 13 -> Microsoft.Identity.Abstractions.CredentialSource
 *REMOVED*Microsoft.Identity.Abstractions.CredentialDescription.Certificate.get -> System.Security.Cryptography.X509Certificates.X509Certificate2?
 *REMOVED*Microsoft.Identity.Abstractions.CredentialDescription.Certificate.set -> void
 *REMOVED*virtual Microsoft.Identity.Abstractions.CredentialDescription.CachedValue.get -> object?

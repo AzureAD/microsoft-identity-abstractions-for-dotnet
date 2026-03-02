@@ -77,6 +77,29 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
         }
 
         [Fact]
+        public void SerializeDeserialize_CertificateFromStoreBySubjectName()
+        {
+            // Arrange
+            var original = new CredentialDescription
+            {
+                SourceType = CredentialSource.StoreWithSubjectName,
+                CertificateStorePath = "LocalMachine/My",
+                CertificateSubjectName = "CN=WebAppCallingWebApiCert"
+            };
+
+            // Act
+            string json = JsonSerializer.Serialize(original, _options);
+            var deserialized = JsonSerializer.Deserialize<CredentialDescription>(json, _options);
+
+            // Assert
+            Assert.NotNull(deserialized);
+            Assert.Equal(original.SourceType, deserialized.SourceType);
+            Assert.Equal(original.CertificateStorePath, deserialized.CertificateStorePath);
+            Assert.Equal(original.CertificateSubjectName, deserialized.CertificateSubjectName);
+            Assert.Equal(CredentialType.Certificate, deserialized.CredentialType);
+        }
+
+        [Fact]
         public void SerializeDeserialize_CertificateFromKeyVault()
         {
             var original = new CredentialDescription

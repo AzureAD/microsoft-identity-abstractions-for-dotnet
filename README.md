@@ -104,6 +104,7 @@ direction TB
             &lt;&lt;rw&gt;&gt; +string CertificateDistinguishedName
             &lt;&lt;rw&gt;&gt; +string KeyVaultCertificateName
             &lt;&lt;rw&gt;&gt; +string CertificateThumbprint
+            &lt;&lt;rw&gt;&gt; +string CertificateSubjectName
             &lt;&lt;rw&gt;&gt; +string CertificateDiskPath
             &lt;&lt;rw&gt;&gt; +string CertificatePassword
             &lt;&lt;rw&gt;&gt; +string Base64EncodedValue
@@ -134,6 +135,8 @@ direction TB
     SignedAssertionFromVault = 9
     AutoDecryptKeys = 10
     CustomSignedAssertion = 11
+    ManagedCertificate = 12
+    StoreWithSubjectName = 13
     }
     class CredentialType { <<enum>>
     Certificate = 0
@@ -298,6 +301,7 @@ Note:
     &lt;&lt;rw&gt;&gt; +string KeyVaultUrl
     &lt;&lt;rw&gt;&gt; +string CertificateStorePath
     &lt;&lt;rw&gt;&gt; +string CertificateDistinguishedName
+    &lt;&lt;rw&gt;&gt; +string CertificateSubjectName
     &lt;&lt;rw&gt;&gt; +string KeyVaultCertificateName
     &lt;&lt;rw&gt;&gt; +string CertificateThumbprint
     &lt;&lt;rw&gt;&gt; +string CertificateDiskPath
@@ -330,6 +334,8 @@ Note:
     SignedAssertionFromVault = 9
     AutoDecryptKeys = 10
     CustomSignedAssertion = 11
+    ManagedCertificate = 12
+    StoreWithSubjectName = 13
     }
     class CredentialType { <<enum>>
     Certificate = 0

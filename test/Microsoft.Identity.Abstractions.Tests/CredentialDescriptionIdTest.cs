@@ -170,6 +170,17 @@ namespace Microsoft.Identity.Abstractions.Tests
                                     { "MyCustomProviderData_Key", "MyCustomProviderData_Data" }
                                 }
                             }
+                        },
+
+                        // StoreWithSubjectName
+                        {
+                            CredentialSource.StoreWithSubjectName,
+                            new CredentialDescription
+                            {
+                                SourceType = CredentialSource.StoreWithSubjectName,
+                                CertificateStorePath = "CurrentUser/My",
+                                CertificateSubjectName = "CN=WebAppCallingWebApiCert"
+                            }
                         }
                     };
 #pragma warning restore SYSLIB0026 // Type or member is obsolete
@@ -470,6 +481,29 @@ namespace Microsoft.Identity.Abstractions.Tests
 
             Assert.NotEqual(initialId, updatedId);
             Assert.Contains("Value2", updatedId, StringComparison.Ordinal);
+        }
+
+        [Fact]
+        public void CachedId_InvalidatedWhen_CertificateSubjectName_Changes()
+        {
+            // Arrange
+            var credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.StoreWithSubjectName,
+                CertificateStorePath = "CurrentUser/My",
+                CertificateSubjectName = "CN=Cert1"
+            };
+
+            var initialId = credentialDescription.Id;
+            Assert.Contains("CN=Cert1", initialId, StringComparison.Ordinal);
+
+            // Act
+            credentialDescription.CertificateSubjectName = "CN=Cert2";
+            var updatedId = credentialDescription.Id;
+
+            // Assert
+            Assert.NotEqual(initialId, updatedId);
+            Assert.Contains("CN=Cert2", updatedId, StringComparison.Ordinal);
         }
     }
 }

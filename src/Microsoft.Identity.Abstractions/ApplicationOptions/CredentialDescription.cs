@@ -47,6 +47,7 @@ namespace Microsoft.Identity.Abstractions
             _certificate = other._certificate;
             CertificateStorePath = other.CertificateStorePath;
             CertificateDistinguishedName = other.CertificateDistinguishedName;
+            CertificateSubjectName = other.CertificateSubjectName;
             CertificateThumbprint = other.CertificateThumbprint;
             CertificateDiskPath = other.CertificateDiskPath;
             CertificatePassword = other.CertificatePassword;
@@ -107,6 +108,9 @@ namespace Microsoft.Identity.Abstractions
                             break;
                         case CredentialSource.StoreWithDistinguishedName:
                             _cachedId = $"CertificateStoreWithDistinguishedName={CertificateStorePath}/{CertificateDistinguishedName};Thumbprint={certificateThumbprint}";
+                            break;
+                        case CredentialSource.StoreWithSubjectName:
+                            _cachedId = $"CertificateStoreWithSubjectName={CertificateStorePath}/{CertificateSubjectName};Thumbprint={certificateThumbprint}";
                             break;
                         case CredentialSource.ClientSecret:
                             _cachedId = $"RedactedClientSecret={GenerateHash(ClientSecret)}";
@@ -203,11 +207,11 @@ namespace Microsoft.Identity.Abstractions
 
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.StoreWithDistinguishedName"/> or
-        /// <see cref="CredentialSource.StoreWithThumbprint"/>, specifies the certificate store from which to extract
+        /// <see cref="CredentialSource.StoreWithThumbprint"/> or <see cref="CredentialSource.StoreWithSubjectName"/>, specifies the certificate store from which to extract
         /// the certificate. The format is the concatenation of a value of <see cref="StoreLocation"/> and a value of <see cref="StoreName"/>
         /// separated by a slash. For instance, use <c>CurrentUser/My</c> for a user certificate, and <c>LocalMachine/My</c> for a computer certificate.
         /// </summary>
-        /// <remarks>Use this property in conjunction with <see cref="CertificateDistinguishedName"/> or <see cref="CertificateThumbprint"/>.</remarks>
+        /// <remarks>Use this property in conjunction with <see cref="CertificateDistinguishedName"/>, <see cref="CertificateThumbprint"/>, or <see cref="CertificateSubjectName"/>.</remarks>
         /// <seealso cref="SourceType"/>
         /// <seealso cref="CertificateStorePath"/>
         /// <seealso cref="CertificateDistinguishedName"/>
@@ -250,6 +254,33 @@ namespace Microsoft.Identity.Abstractions
             }
         }
         private string? _certificateDistinguishedName;
+
+        /// <summary>
+        /// When <see cref="SourceType"/> is <see cref="CredentialSource.StoreWithSubjectName"/>, specifies the subject name of
+        /// the certificate in the store specified by <see cref="CertificateStorePath"/>.
+        /// </summary>
+        /// <example>
+        /// <format type="text/markdown">
+        /// <![CDATA[
+        /// The JSON fragment below describes a user certificate stored in the personal certificates folder (<b>CurrentUser/My</b>) and specified by its subject name, used as a client credential in a confidential client application:
+        /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="subjectname_json":::
+        ///
+        /// The code below describes programmatically in C#, a computer certificate in the personal certificates folder (<b>LocalMachine/My</b>) accessed by its subject name.
+        /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="subjectname_csharp":::
+        /// ]]></format>
+        /// </example>
+        /// <seealso cref="SourceType"/>
+        /// <seealso cref="CertificateStorePath"/>
+        public string? CertificateSubjectName
+        {
+            get => _certificateSubjectName;
+            set
+            {
+                _certificateSubjectName = value;
+                _cachedId = null;
+            }
+        }
+        private string? _certificateSubjectName;
 
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.KeyVault"/>, use this property to specify the
@@ -595,7 +626,8 @@ namespace Microsoft.Identity.Abstractions
         /// <term><see cref="CredentialType.Certificate"/></term>
         /// <description>when <see cref="SourceType"/> is <see cref="CredentialSource.Certificate"/>, you will use this property to provide the certificate yourself.
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.Base64Encoded"/> or <see cref="CredentialSource.KeyVault"/>
-        /// or <see cref="CredentialSource.Path"/> or <see cref="CredentialSource.StoreWithDistinguishedName"/> or <see cref="CredentialSource.StoreWithThumbprint"/></description>
+        /// or <see cref="CredentialSource.Path"/> or <see cref="CredentialSource.StoreWithDistinguishedName"/> or <see cref="CredentialSource.StoreWithThumbprint"/>
+        /// or <see cref="CredentialSource.StoreWithSubjectName"/></description>
         /// </item>
         /// <item>
         /// <term><see cref="CredentialType.Secret"/></term>
@@ -622,6 +654,7 @@ namespace Microsoft.Identity.Abstractions
                     or CredentialSource.Path
                     or CredentialSource.StoreWithThumbprint
                     or CredentialSource.StoreWithDistinguishedName
+                    or CredentialSource.StoreWithSubjectName
                     or CredentialSource.Certificate
                     or CredentialSource.Base64Encoded
                     or CredentialSource.ManagedCertificate => CredentialType.Certificate,
