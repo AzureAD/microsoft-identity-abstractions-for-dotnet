@@ -1,6 +1,1 @@
 #nullable enable
-Microsoft.Identity.Abstractions.CredentialDescription.CertificateSubjectName.get -> string?
-Microsoft.Identity.Abstractions.CredentialDescription.CertificateSubjectName.set -> void
-Microsoft.Identity.Abstractions.CredentialSource.StoreWithSubjectName = 13 -> Microsoft.Identity.Abstractions.CredentialSource
-Microsoft.Identity.Abstractions.IBoundAuthorizationHeaderProvider
-Microsoft.Identity.Abstractions.IBoundAuthorizationHeaderProvider.CreateBoundAuthorizationHeaderAsync(Microsoft.Identity.Abstractions.DownstreamApiOptions! downstreamApiOptions, System.Security.Claims.ClaimsPrincipal? claimsPrincipal = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Microsoft.Identity.Abstractions.OperationResult<Microsoft.Identity.Abstractions.AuthorizationHeaderInformation!, Microsoft.Identity.Abstractions.AuthorizationHeaderError!>>!
