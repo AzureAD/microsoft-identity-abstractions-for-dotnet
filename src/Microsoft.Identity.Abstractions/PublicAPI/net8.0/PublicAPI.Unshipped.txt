@@ -1,1 +1,6 @@
 #nullable enable
+Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.ApiUrl.get -> string!
+Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.ApiUrl.set -> void
+Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.CredentialSourceLoaderParameters() -> void
+Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.Protocol.get -> string!
+Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.Protocol.set -> void
