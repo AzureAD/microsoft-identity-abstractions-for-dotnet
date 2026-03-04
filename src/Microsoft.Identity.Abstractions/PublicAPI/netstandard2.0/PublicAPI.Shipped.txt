@@ -112,6 +112,8 @@ Microsoft.Identity.Abstractions.CredentialDescription.CertificatePassword.get ->
 Microsoft.Identity.Abstractions.CredentialDescription.CertificatePassword.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.CertificateStorePath.get -> string?
 Microsoft.Identity.Abstractions.CredentialDescription.CertificateStorePath.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.CertificateSubjectName.get -> string?
+Microsoft.Identity.Abstractions.CredentialDescription.CertificateSubjectName.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.CertificateThumbprint.get -> string?
 Microsoft.Identity.Abstractions.CredentialDescription.CertificateThumbprint.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.ClientSecret.get -> string?
@@ -155,6 +157,7 @@ Microsoft.Identity.Abstractions.CredentialSource.SignedAssertionFilePath = 8 -> 
 Microsoft.Identity.Abstractions.CredentialSource.SignedAssertionFromManagedIdentity = 7 -> Microsoft.Identity.Abstractions.CredentialSource
 Microsoft.Identity.Abstractions.CredentialSource.SignedAssertionFromVault = 9 -> Microsoft.Identity.Abstractions.CredentialSource
 Microsoft.Identity.Abstractions.CredentialSource.StoreWithDistinguishedName = 5 -> Microsoft.Identity.Abstractions.CredentialSource
+Microsoft.Identity.Abstractions.CredentialSource.StoreWithSubjectName = 13 -> Microsoft.Identity.Abstractions.CredentialSource
 Microsoft.Identity.Abstractions.CredentialSource.StoreWithThumbprint = 4 -> Microsoft.Identity.Abstractions.CredentialSource
 Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters
 Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.Authority.get -> string!
@@ -197,6 +200,8 @@ Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider.CreateAuthorization
 Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider.CreateAuthorizationHeaderForUserAsync(System.Collections.Generic.IEnumerable<string!>! scopes, Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions? authorizationHeaderProviderOptions = null, System.Security.Claims.ClaimsPrincipal? claimsPrincipal = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<string!>!
 Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider<TResult>
 Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider<TResult>.CreateAuthorizationHeaderAsync(Microsoft.Identity.Abstractions.DownstreamApiOptions! downstreamApiOptions, System.Security.Claims.ClaimsPrincipal? claimsPrincipal = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TResult>!
+Microsoft.Identity.Abstractions.IBoundAuthorizationHeaderProvider
+Microsoft.Identity.Abstractions.IBoundAuthorizationHeaderProvider.CreateBoundAuthorizationHeaderAsync(Microsoft.Identity.Abstractions.DownstreamApiOptions! downstreamApiOptions, System.Security.Claims.ClaimsPrincipal? claimsPrincipal = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Microsoft.Identity.Abstractions.OperationResult<Microsoft.Identity.Abstractions.AuthorizationHeaderInformation!, Microsoft.Identity.Abstractions.AuthorizationHeaderError!>>!
 Microsoft.Identity.Abstractions.ICredentialsLoader
 Microsoft.Identity.Abstractions.ICredentialsLoader.CredentialSourceLoaders.get -> System.Collections.Generic.IDictionary<Microsoft.Identity.Abstractions.CredentialSource, Microsoft.Identity.Abstractions.ICredentialSourceLoader!>!
 Microsoft.Identity.Abstractions.ICredentialsLoader.LoadCredentialsIfNeededAsync(Microsoft.Identity.Abstractions.CredentialDescription! credentialDescription, Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters? parameters = null) -> System.Threading.Tasks.Task!

@@ -1,3 +1,8 @@
+11.1.0
+=======
+## New features
+* Added StoreWithSubjectName credential source. See [PR #245](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/245).
+
 11.0.0
 =======
 ## Breaking changes
@@ -6,7 +11,7 @@ If you build code with the .NET 10 target framework and get this error:
 ```txt
 error CS9260: Feature 'extensions' is not available in C# 13.0. Please use language version 14.0 or greater.
 ```
-make sure you update the `LangVersion` property in your project to 14 or later. 
+make sure you update the `LangVersion` property in your project to 14 or later.
 
 ### AOT/NativeAOT Compatibility for .NET 10+
 
@@ -87,11 +92,11 @@ Added a new interface `IAuthenticationSchemeInformationProvider` to get the effe
 ======
 ### New features
 
-* **OperationResult and OperationError abstractions:**  
-  Introduced a new `OperationResult<TResult, TError>` struct and `OperationError` base class. These provide a discriminated union for representing either a result or an error, improving error handling and propagation.  
+* **OperationResult and OperationError abstractions:**
+  Introduced a new `OperationResult<TResult, TError>` struct and `OperationError` base class. These provide a discriminated union for representing either a result or an error, improving error handling and propagation.
   See implementation in [`src/Microsoft.Identity.Abstractions/Results/OperationResult.cs`](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/blob/main/src/Microsoft.Identity.Abstractions/Results/OperationResult.cs) and [`OperationError.cs`](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/blob/main/src/Microsoft.Identity.Abstractions/Results/OperationError.cs).
 
-* **DownstreamApiOptions extensibility:**  
+* **DownstreamApiOptions extensibility:**
   Added two new properties to `DownstreamApiOptions`:
   - `ExtraHeaderParameters` (`IDictionary<string, string>?`): Set extra headers in HTTP requests to downstream APIs.
   - `ExtraQueryParameters` (`IDictionary<string, string>?`): Set extra query parameters in HTTP requests to downstream APIs.
@@ -99,11 +104,11 @@ Added a new interface `IAuthenticationSchemeInformationProvider` to get the effe
 
 ### Fundamentals
 
-* **Development guidelines and Copilot integration:**  
+* **Development guidelines and Copilot integration:**
   - Introduced `.clinerules/abstractions-guidelines.md`, `.clinerules/csharp-guidelines.md`, `.clinerules/ai-guidelines.md`, and `.github/copilot-instructions.md` to formalize and document development, AI assistant, and C# code standards for contributors and tooling.
   - Solution file and README updated to reference these guidelines.
 
-* **Analyzer and dependency updates:**  
+* **Analyzer and dependency updates:**
   - Bumped analyzer versions in `Directory.Build.props` for better static analysis (BannedApiAnalyzers and MicrosoftCodeAnalysisPublicApiAnalyzers updated from 3.3.4 to 4.14.0).
 
 9.1.0
@@ -117,13 +122,13 @@ Added a new interface `IAuthenticationSchemeInformationProvider` to get the effe
 * Add dev container to work in Code Spaces. See PR [#175](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/175)
 * Adding a doc about CredentialDescription. See PR [#181](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/181)
 * Fixing AoT warnings: part 1 - non breaking. See PR [#187](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/187)
-* update Readme.md to explain the support policy for the library and the notion of LTS. See PRs [171](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/171), [183](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/184), , [185](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/185) 
+* update Readme.md to explain the support policy for the library and the notion of LTS. See PRs [171](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/171), [183](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/184), , [185](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/185)
 
 9.0.0
 ======
 ## New features
 
-- Added a new class named `MicrosoftEntraApplicationOptions` inheriting from `IdentityApplicationOptions` and from which `MicrosoftIdentityApplicationOptions` inherits. Moved the EntraID specific 
+- Added a new class named `MicrosoftEntraApplicationOptions` inheriting from `IdentityApplicationOptions` and from which `MicrosoftIdentityApplicationOptions` inherits. Moved the EntraID specific
   properties related to web APIs from `MicrosoftIdentityApplicationOptions` to `MicrosoftEntraApplicationOptions`. `MicrosoftIdentityApplicationOptions` now only contains the
   properties related to web apps and B2C. See [#165](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/165) for details.
 - Added a `Name` property in `MicrosoftEntraApplicationOptions` to allow for dynamic discovery of ASP.NET Core authentication schemes / named options. See [#168](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/168) for details.
@@ -250,7 +255,7 @@ Added a new interface `IAuthenticationSchemeInformationProvider` to get the effe
 
 2.0.0
 ========
-- Rename DownstreamRestApi to DownstreamApi. 
+- Rename DownstreamRestApi to DownstreamApi.
 
 1.2.0
 ========

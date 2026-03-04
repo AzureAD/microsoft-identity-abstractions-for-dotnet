@@ -56,6 +56,9 @@ namespace Microsoft.Identity.Abstractions
                     case string _ when propertyName.Equals(nameof(CredentialDescription.CertificateDistinguishedName), StringComparison.OrdinalIgnoreCase):
                         credentialDescription.CertificateDistinguishedName = reader.GetString();
                         break;
+                    case string _ when propertyName.Equals(nameof(CredentialDescription.CertificateSubjectName), StringComparison.OrdinalIgnoreCase):
+                        credentialDescription.CertificateSubjectName = reader.GetString();
+                        break;
                     case string _ when propertyName.Equals(nameof(CredentialDescription.CertificateThumbprint), StringComparison.OrdinalIgnoreCase):
                         credentialDescription.CertificateThumbprint = reader.GetString();
                         break;
@@ -142,6 +145,13 @@ namespace Microsoft.Identity.Abstractions
                         writer.WriteString(nameof(CredentialDescription.CertificateStorePath), value.CertificateStorePath);
                     if (!string.IsNullOrEmpty(value.CertificateDistinguishedName))
                         writer.WriteString(nameof(CredentialDescription.CertificateDistinguishedName), value.CertificateDistinguishedName);
+                    break;
+
+                case CredentialSource.StoreWithSubjectName:
+                    if (!string.IsNullOrEmpty(value.CertificateStorePath))
+                        writer.WriteString(nameof(CredentialDescription.CertificateStorePath), value.CertificateStorePath);
+                    if (!string.IsNullOrEmpty(value.CertificateSubjectName))
+                        writer.WriteString(nameof(CredentialDescription.CertificateSubjectName), value.CertificateSubjectName);
                     break;
 
                 case CredentialSource.KeyVault:

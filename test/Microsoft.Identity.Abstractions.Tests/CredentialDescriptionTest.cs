@@ -130,6 +130,36 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
         }
 
         [Fact]
+        public void CertificateFromStoreBySubjectName()
+        {
+            // Certificate from credential store by subject name
+            // -------------------------------------------------
+            /*
+            // <subjectname_json>
+            {
+             "ClientCredentials": [
+             {
+              "SourceType": "StoreWithSubjectName",
+              "CertificateStorePath": "CurrentUser/My",
+              "CertificateSubjectName": "CN=WebAppCallingWebApiCert"
+             }]
+            }
+            // </subjectname_json>
+            */
+
+            // <subjectname_csharp>
+            CredentialDescription credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.StoreWithSubjectName,
+                CertificateStorePath = "LocalMachine/My",
+                CertificateSubjectName = "CN=WebAppCallingWebApiCert"
+            };
+            // </subjectname_csharp>
+
+            Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
+        }
+
+        [Fact]
         public void CertificateFromKeyVault()
         {
             // Certificate from KeyVault
