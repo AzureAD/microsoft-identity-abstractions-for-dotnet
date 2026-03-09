@@ -13,19 +13,6 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
         const string apiUrl = "https://api.example.com/v1";
         
         [Fact]
-        public void DefaultConstructor_InitializesEmptyProperties()
-        {
-            // Arrange & Act
-            CredentialSourceLoaderParameters parameters = new();
-
-            // Assert
-            Assert.Equal(string.Empty, parameters.ClientId);
-            Assert.Equal(string.Empty, parameters.Authority);
-            Assert.Equal(string.Empty, parameters.Protocol);
-            Assert.Equal(string.Empty, parameters.ApiUrl);
-        }
-
-        [Fact]
         public void ParameterizedConstructor_InitializesClientIdAndAuthority()
         {
             // Arrange & Act
@@ -34,19 +21,15 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             // Assert
             Assert.Equal(clientId, parameters.ClientId);
             Assert.Equal(authority, parameters.Authority);
-            Assert.Equal(string.Empty, parameters.Protocol);
-            Assert.Equal(string.Empty, parameters.ApiUrl);
+            Assert.Null(parameters.Protocol);
+            Assert.Null(parameters.ApiUrl);
         }
 
         [Fact]
         public void Properties_CanBeSetIndividually()
         {
-            // Arrange
-            CredentialSourceLoaderParameters parameters = new();
-
-            // Act
-            parameters.ClientId = clientId;
-            parameters.Authority = authority;
+            // Arrange & Act
+            CredentialSourceLoaderParameters parameters = new(clientId, authority);
             parameters.Protocol = protocol;
             parameters.ApiUrl = apiUrl;
 
