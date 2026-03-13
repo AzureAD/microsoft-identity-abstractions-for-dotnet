@@ -267,7 +267,7 @@ namespace Microsoft.Identity.Abstractions.Tests
         {
             // Arrange
             var info = new AuthorizationHeaderInformation();
-            
+
             // Act
             // Note: We can't create a real X509Certificate2 in tests easily,
             // so we just test that the property can be set to null
