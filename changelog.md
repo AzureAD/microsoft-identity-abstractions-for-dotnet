@@ -1,3 +1,8 @@
+11.2.0
+=======
+
+Properties for mTLS authentication - see [#244](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/244)
+
 11.1.0
 =======
 ## New features
