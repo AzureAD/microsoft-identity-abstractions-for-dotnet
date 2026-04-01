@@ -102,6 +102,8 @@ Microsoft.Identity.Abstractions.CredentialDescription.Algorithm.get -> string?
 Microsoft.Identity.Abstractions.CredentialDescription.Algorithm.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.Base64EncodedValue.get -> string?
 Microsoft.Identity.Abstractions.CredentialDescription.Base64EncodedValue.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.Certificate.get -> System.Security.Cryptography.X509Certificates.X509Certificate2?
+Microsoft.Identity.Abstractions.CredentialDescription.Certificate.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.CertificateDiskPath.get -> string?
 Microsoft.Identity.Abstractions.CredentialDescription.CertificateDiskPath.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.CertificateDistinguishedName.get -> string?
@@ -125,8 +127,6 @@ Microsoft.Identity.Abstractions.CredentialDescription.CustomSignedAssertionProvi
 Microsoft.Identity.Abstractions.CredentialDescription.CustomSignedAssertionProviderName.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.DecryptKeysAuthenticationOptions.get -> Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions?
 Microsoft.Identity.Abstractions.CredentialDescription.DecryptKeysAuthenticationOptions.set -> void
-Microsoft.Identity.Abstractions.CredentialDescription.GetCachedValueInternal() -> object?
-Microsoft.Identity.Abstractions.CredentialDescription.GetCertificateInternal() -> System.Security.Cryptography.X509Certificates.X509Certificate2?
 Microsoft.Identity.Abstractions.CredentialDescription.Id.get -> string!
 Microsoft.Identity.Abstractions.CredentialDescription.KeyVaultCertificateName.get -> string?
 Microsoft.Identity.Abstractions.CredentialDescription.KeyVaultCertificateName.set -> void
@@ -134,8 +134,6 @@ Microsoft.Identity.Abstractions.CredentialDescription.KeyVaultUrl.get -> string?
 Microsoft.Identity.Abstractions.CredentialDescription.KeyVaultUrl.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.ManagedIdentityClientId.get -> string?
 Microsoft.Identity.Abstractions.CredentialDescription.ManagedIdentityClientId.set -> void
-Microsoft.Identity.Abstractions.CredentialDescription.SetCachedValueInternal(object? value) -> void
-Microsoft.Identity.Abstractions.CredentialDescription.SetCertificateInternal(System.Security.Cryptography.X509Certificates.X509Certificate2? value) -> void
 Microsoft.Identity.Abstractions.CredentialDescription.SignedAssertionFileDiskPath.get -> string?
 Microsoft.Identity.Abstractions.CredentialDescription.SignedAssertionFileDiskPath.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.Skip.get -> bool
@@ -146,12 +144,6 @@ Microsoft.Identity.Abstractions.CredentialDescription.TokenExchangeAuthority.get
 Microsoft.Identity.Abstractions.CredentialDescription.TokenExchangeAuthority.set -> void
 Microsoft.Identity.Abstractions.CredentialDescription.TokenExchangeUrl.get -> string?
 Microsoft.Identity.Abstractions.CredentialDescription.TokenExchangeUrl.set -> void
-Microsoft.Identity.Abstractions.CredentialDescriptionExtensions
-Microsoft.Identity.Abstractions.CredentialDescriptionExtensions.extension(Microsoft.Identity.Abstractions.CredentialDescription!)
-Microsoft.Identity.Abstractions.CredentialDescriptionExtensions.extension(Microsoft.Identity.Abstractions.CredentialDescription!).CachedValue.get -> object?
-Microsoft.Identity.Abstractions.CredentialDescriptionExtensions.extension(Microsoft.Identity.Abstractions.CredentialDescription!).CachedValue.set -> void
-Microsoft.Identity.Abstractions.CredentialDescriptionExtensions.extension(Microsoft.Identity.Abstractions.CredentialDescription!).Certificate.get -> System.Security.Cryptography.X509Certificates.X509Certificate2?
-Microsoft.Identity.Abstractions.CredentialDescriptionExtensions.extension(Microsoft.Identity.Abstractions.CredentialDescription!).Certificate.set -> void
 Microsoft.Identity.Abstractions.CredentialDescriptionJsonConverter
 Microsoft.Identity.Abstractions.CredentialDescriptionJsonConverter.CredentialDescriptionJsonConverter() -> void
 Microsoft.Identity.Abstractions.CredentialSource
@@ -358,13 +350,11 @@ static Microsoft.Identity.Abstractions.AcquireTokenOptions.LongRunningWebApiSess
 static Microsoft.Identity.Abstractions.AuthorizationHeaderResult.implicit operator Microsoft.Identity.Abstractions.AuthorizationHeaderResult!(Microsoft.Identity.Abstractions.AuthorizationHeaderError! error) -> Microsoft.Identity.Abstractions.AuthorizationHeaderResult!
 static Microsoft.Identity.Abstractions.AuthorizationHeaderResult.implicit operator Microsoft.Identity.Abstractions.AuthorizationHeaderResult!(Microsoft.Identity.Abstractions.AuthorizationHeaderInformation! info) -> Microsoft.Identity.Abstractions.AuthorizationHeaderResult!
 static Microsoft.Identity.Abstractions.AuthorizationHeaderResult.implicit operator string!(Microsoft.Identity.Abstractions.AuthorizationHeaderResult! result) -> string!
-static Microsoft.Identity.Abstractions.CredentialDescriptionExtensions.get_CachedValue(Microsoft.Identity.Abstractions.CredentialDescription! credential) -> object?
-static Microsoft.Identity.Abstractions.CredentialDescriptionExtensions.get_Certificate(Microsoft.Identity.Abstractions.CredentialDescription! credential) -> System.Security.Cryptography.X509Certificates.X509Certificate2?
-static Microsoft.Identity.Abstractions.CredentialDescriptionExtensions.set_CachedValue(Microsoft.Identity.Abstractions.CredentialDescription! credential, object? value) -> void
-static Microsoft.Identity.Abstractions.CredentialDescriptionExtensions.set_Certificate(Microsoft.Identity.Abstractions.CredentialDescription! credential, System.Security.Cryptography.X509Certificates.X509Certificate2? value) -> void
 static Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.implicit operator Microsoft.Identity.Abstractions.OperationResult<TResult, TError!>(TError! error) -> Microsoft.Identity.Abstractions.OperationResult<TResult, TError!>
 static Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.implicit operator Microsoft.Identity.Abstractions.OperationResult<TResult, TError!>(TResult result) -> Microsoft.Identity.Abstractions.OperationResult<TResult, TError!>
 virtual Microsoft.Identity.Abstractions.AcquireTokenOptions.Clone() -> Microsoft.Identity.Abstractions.AcquireTokenOptions!
 virtual Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.CloneInternal() -> Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions!
+virtual Microsoft.Identity.Abstractions.CredentialDescription.CachedValue.get -> object?
+virtual Microsoft.Identity.Abstractions.CredentialDescription.CachedValue.set -> void
 virtual Microsoft.Identity.Abstractions.IdentityApplicationOptions.Authority.get -> string?
 virtual Microsoft.Identity.Abstractions.IdentityApplicationOptions.Authority.set -> void

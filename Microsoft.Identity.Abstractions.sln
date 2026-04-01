@@ -27,6 +27,28 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Identity.Abstract
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Identity.Abstractions.AotTests", "test\Microsoft.Identity.Abstractions.AotTests\Microsoft.Identity.Abstractions.AotTests.csproj", "{39865C17-1E90-495D-BCB1-C171FCE7078D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{06A44D1E-DF13-47CD-A765-0E329E189715}"
+	ProjectSection(SolutionItems) = preProject
+		build\build.md = build\build.md
+		build\CodeCoverage.runsettings = build\CodeCoverage.runsettings
+		build\pipeline-releasebuild.yaml = build\pipeline-releasebuild.yaml
+		build\policheck_filetypes.xml = build\policheck_filetypes.xml
+		build\template-bootstrap-build.yaml = build\template-bootstrap-build.yaml
+		build\template-install-dotnet-core.yaml = build\template-install-dotnet-core.yaml
+		build\template-install-nuget.yaml = build\template-install-nuget.yaml
+		build\template-nuget-pack.yaml = build\template-nuget-pack.yaml
+		build\template-onebranch-build-and-sign.yaml = build\template-onebranch-build-and-sign.yaml
+		build\template-pack-and-sign-all-nugets.yaml = build\template-pack-and-sign-all-nugets.yaml
+		build\template-pack-and-sign-nuget.yaml = build\template-pack-and-sign-nuget.yaml
+		build\template-postbuild-code-analysis.yaml = build\template-postbuild-code-analysis.yaml
+		build\template-prebuild-code-analysis.yaml = build\template-prebuild-code-analysis.yaml
+		build\template-publish-analysis-and-cleanup.yaml = build\template-publish-analysis-and-cleanup.yaml
+		build\template-publish-packages-and-symbols.yaml = build\template-publish-packages-and-symbols.yaml
+		build\template-restore-build-MSIdentityAbstractions.yaml = build\template-restore-build-MSIdentityAbstractions.yaml
+		build\template-sign-binary.yaml = build\template-sign-binary.yaml
+		build\tsaConfig.json = build\tsaConfig.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
