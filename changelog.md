@@ -1,3 +1,9 @@
+12.0.0
+=======
+
+## What's Changed
+* Revert breaking changes introduced in Abstractions 11. On .NET 10 target, `CachedValue` and `Certificate` extension methods in `CredentialDescription` were reverted to normal properties. See [#250](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/250).
+
 11.2.0
 =======
 
