@@ -92,6 +92,9 @@ namespace Microsoft.Identity.Abstractions
                     case string _ when propertyName.Equals(nameof(CredentialDescription.Skip), StringComparison.OrdinalIgnoreCase):
                         credentialDescription.Skip = reader.GetBoolean();
                         break;
+                    case string _ when propertyName.Equals(nameof(CredentialDescription.UseBoundCredential), StringComparison.OrdinalIgnoreCase):
+                        credentialDescription.UseBoundCredential = reader.GetBoolean();
+                        break;
                     case string _ when propertyName.Equals(nameof(CredentialDescription.CustomSignedAssertionProviderName), StringComparison.OrdinalIgnoreCase):
                         credentialDescription.CustomSignedAssertionProviderName = reader.GetString();
                         break;
@@ -197,6 +200,11 @@ namespace Microsoft.Identity.Abstractions
                         JsonSerializer.Serialize(writer, value.CustomSignedAssertionProviderData, options);
                     }
                     break;
+            }
+
+            if (value.UseBoundCredential)
+            {
+                writer.WriteBoolean(nameof(CredentialDescription.UseBoundCredential), value.UseBoundCredential);
             }
 
             writer.WriteEndObject();

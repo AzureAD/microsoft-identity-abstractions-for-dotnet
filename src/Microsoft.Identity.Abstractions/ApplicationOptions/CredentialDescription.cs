@@ -37,7 +37,7 @@ namespace Microsoft.Identity.Abstractions
 #if NET8_0_OR_GREATER
             ArgumentNullException.ThrowIfNull(other);
 #else
-            if (other == null)
+            if (other is null)
                 throw new ArgumentNullException(nameof(other));
 #endif
             Algorithm = other.Algorithm;
@@ -63,6 +63,7 @@ namespace Microsoft.Identity.Abstractions
             SourceType = other.SourceType;
             TokenExchangeUrl = other.TokenExchangeUrl;
             TokenExchangeAuthority = other.TokenExchangeAuthority;
+            UseBoundCredential = other.UseBoundCredential;
         }
 
         private string? _cachedId;
@@ -571,6 +572,43 @@ namespace Microsoft.Identity.Abstractions
         /// It will also be used by the <see cref="ICredentialsLoader"/> if it cannot find or load the credential.
         /// </summary>
         public bool Skip { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this credential is intended to be used as a bound credential (mTLS bound)
+        /// when supported by the host library.
+        /// Certificate-flavored sources (<see cref="CredentialSource.Certificate"/>, <see cref="CredentialSource.KeyVault"/>,
+        /// <see cref="CredentialSource.Base64Encoded"/>, <see cref="CredentialSource.Path"/>,
+        /// <see cref="CredentialSource.StoreWithThumbprint"/>, <see cref="CredentialSource.StoreWithDistinguishedName"/>,
+        /// <see cref="CredentialSource.StoreWithSubjectName"/>, and <see cref="CredentialSource.ManagedCertificate"/>)
+        /// and <see cref="CredentialSource.SignedAssertionFromManagedIdentity"/> are expected to honor this setting.
+        /// Other source types are expected to ignore this setting, based on the host library's choice.
+        /// The default value is <see langword="false"/>, which preserves existing behavior.
+        /// For more context, see <see href="https://github.com/AzureAD/microsoft-authentication-library-for-dotnet/issues/5791">MSAL.NET issue 5791</see>.
+        /// </summary>
+        /// <example>
+        /// <format type="text/markdown">
+        /// <![CDATA[
+        /// The JSON fragment below opts a signed assertion from managed identity credential into the bound credential flow:
+        /// ```json
+        /// {
+        ///   "AzureAd": {
+        ///     "Instance": "https://login.microsoftonline.com/",
+        ///     "TenantId": "your-tenant-id",
+        ///     "ClientId": "your-client-id",
+        ///     "ClientCredentials": [
+        ///       {
+        ///         "SourceType": "SignedAssertionFromManagedIdentity",
+        ///         "ManagedIdentityClientId": "your-user-assigned-managed-identity-client-id",
+        ///         "TokenExchangeUrl": "api://AzureADTokenExchange",
+        ///         "UseBoundCredential": true
+        ///       }
+        ///     ]
+        ///   }
+        /// }
+        /// ```
+        /// ]]></format>
+        /// </example>
+        public bool UseBoundCredential { get; set; }
 
         /// <summary>
         /// Describes the type of credentials, based on the <see cref="SourceType"/>.
