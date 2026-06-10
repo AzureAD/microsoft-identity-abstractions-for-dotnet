@@ -94,5 +94,11 @@ namespace Microsoft.Identity.Abstractions
         /// The certificate bound to the access token, specific to mTLS POP tokens.
         /// </summary>
         public X509Certificate2? BindingCertificate { get; set; }
+
+        /// <summary>
+        /// Metadata describing how the token was acquired (timings, cache state, region routing,
+        /// additional response parameters). <see langword="null"/> if no metadata was captured.
+        /// </summary>
+        public TokenAcquisitionMetadata? Metadata { get; set; }
     }
 }

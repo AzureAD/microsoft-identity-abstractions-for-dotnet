@@ -23,5 +23,11 @@ namespace Microsoft.Identity.Abstractions
         /// commonly used in mutual TLS (mTLS) authentication scenarios and Proof-of-Possession (PoP) protocols.
         /// </summary>
         public X509Certificate2? BindingCertificate { get; set; }
+
+        /// <summary>
+        /// Metadata describing how the access token backing this header was acquired,
+        /// or <see langword="null"/> when no metadata was captured.
+        /// </summary>
+        public TokenAcquisitionMetadata? Metadata { get; set; }
     }
 }

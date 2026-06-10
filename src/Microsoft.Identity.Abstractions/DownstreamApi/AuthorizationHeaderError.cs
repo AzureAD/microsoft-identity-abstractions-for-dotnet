@@ -59,5 +59,17 @@ namespace Microsoft.Identity.Abstractions
         /// Gets or sets the underlying exception that caused this error, if any.
         /// </summary>
         public Exception? Exception { get; set; }
+
+        /// <summary>
+        /// Metadata captured during the failed token-acquisition attempt that produced this error,
+        /// or <see langword="null"/> when no metadata was captured.
+        /// </summary>
+        public TokenAcquisitionMetadata? Metadata { get; set; }
+
+        /// <summary>
+        /// Diagnostic details about the failure (server error code, status code, claims challenge,
+        /// correlation id), or <see langword="null"/> when no such details were captured.
+        /// </summary>
+        public TokenAcquisitionFailureDetails? FailureDetails { get; set; }
     }
 }
