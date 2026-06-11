@@ -116,6 +116,7 @@ direction TB
             &lt;&lt;rw&gt;&gt; +X509Certificate2 Certificate
             &lt;&lt;rw&gt;&gt; +object CachedValue
             &lt;&lt;rw&gt;&gt; +bool Skip
+            &lt;&lt;rw&gt;&gt; +bool UseBoundCredential
             &lt;&lt;ro&gt;&gt; +CredentialType CredentialType
             &lt;&lt;rw&gt;&gt; +string TokenExchangeUrl
             &lt;&lt;rw&gt;&gt; +string CustomSignedAssertionProviderName
@@ -315,6 +316,7 @@ Note:
     &lt;&lt;rw&gt;&gt; +X509Certificate2 Certificate
     &lt;&lt;rw&gt;&gt; +Object CachedValue
     &lt;&lt;rw&gt;&gt; +bool Skip
+    &lt;&lt;rw&gt;&gt; +bool UseBoundCredential
     &lt;&lt;ro&gt;&gt; +CredentialType CredentialType
     &lt;&lt;rw&gt;&gt; +string TokenExchangeUrl
     &lt;&lt;rw&gt;&gt; +string CustomSignedAssertionProviderName

@@ -1,9 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using Xunit;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+#if NET8_0_OR_GREATER
+using System.Text.Json;
+#endif
+using Xunit;
 
 namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
 {
@@ -400,6 +403,95 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
 
             Assert.Equal("api://AzureADTokenExchangeChina", credentialDescription.TokenExchangeUrl);
         }
+
+        [Fact]
+        public void CredentialDescription_DefaultUseBoundCredential_IsFalse()
+        {
+            // Arrange
+            var credentialDescription = new CredentialDescription();
+
+            // Act
+            bool useBoundCredential = credentialDescription.UseBoundCredential;
+
+            // Assert
+            Assert.False(useBoundCredential);
+        }
+
+        [Fact]
+        public void CredentialDescription_UseBoundCredential_SetTrue_RoundTrips()
+        {
+            // Arrange
+            var credentialDescription = new CredentialDescription();
+
+            // Act
+            credentialDescription.UseBoundCredential = true;
+
+            // Assert
+            Assert.True(credentialDescription.UseBoundCredential);
+        }
+
+        [Fact]
+        public void CopyConstructor_ShouldCopyUseBoundCredentialTrue()
+        {
+            // Arrange
+            var original = new CredentialDescription
+            {
+                UseBoundCredential = true
+            };
+
+            // Act
+            var copy = new CredentialDescription(original);
+
+            // Assert
+            Assert.True(copy.UseBoundCredential);
+        }
+
+        [Fact]
+        public void CopyConstructor_ShouldCopyUseBoundCredentialFalse()
+        {
+            // Arrange
+            var original = new CredentialDescription
+            {
+                UseBoundCredential = false
+            };
+
+            // Act
+            var copy = new CredentialDescription(original);
+
+            // Assert
+            Assert.False(copy.UseBoundCredential);
+        }
+
+#if NET8_0_OR_GREATER
+        [Fact]
+        public void CredentialDescription_UseBoundCredentialJson_RoundTripsWithConverter()
+        {
+            // Arrange
+            var options = new JsonSerializerOptions
+            {
+                Converters = { new CredentialDescriptionJsonConverter() }
+            };
+            string json = """
+                {
+                  "SourceType": "SignedAssertionFromManagedIdentity",
+                  "ManagedIdentityClientId": "your-user-assigned-managed-identity-client-id",
+                  "TokenExchangeUrl": "api://AzureADTokenExchange",
+                  "UseBoundCredential": true
+                }
+                """;
+
+            // Act
+            var credentialDescription = JsonSerializer.Deserialize<CredentialDescription>(json, options);
+            string roundTripJson = JsonSerializer.Serialize(credentialDescription!, options);
+            var roundTrippedCredentialDescription = JsonSerializer.Deserialize<CredentialDescription>(roundTripJson, options);
+
+            // Assert
+            Assert.NotNull(credentialDescription);
+            Assert.True(credentialDescription!.UseBoundCredential);
+            Assert.NotNull(roundTrippedCredentialDescription);
+            Assert.True(roundTrippedCredentialDescription!.UseBoundCredential);
+        }
+#endif
 
         [Fact]
         public void UnknownCredentialSource()
