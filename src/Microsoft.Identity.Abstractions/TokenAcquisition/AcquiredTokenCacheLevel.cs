@@ -9,7 +9,9 @@ namespace Microsoft.Identity.Abstractions
     public enum AcquiredTokenCacheLevel
     {
         /// <summary>
-        /// The cache was not consulted.
+        /// Token was retrieved from the identity provider rather than from a cache tier.
+        /// This includes cache misses (entry absent or expired), forced or proactive refresh,
+        /// and cases where the cache was bypassed.
         /// </summary>
         None = 0,
 
