@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
 
 namespace Microsoft.Identity.Abstractions
 {
@@ -57,10 +56,5 @@ namespace Microsoft.Identity.Abstractions
         /// Regional ESTS routing details, or <see langword="null"/> when regional routing was not used.
         /// </summary>
         public AcquiredTokenRegionDetails? RegionDetails { get; init; }
-
-        /// <summary>
-        /// Additional parameters returned on the token-endpoint response, or <see langword="null"/> if none.
-        /// </summary>
-        public IReadOnlyDictionary<string, string>? AdditionalResponseParameters { get; init; }
     }
 }

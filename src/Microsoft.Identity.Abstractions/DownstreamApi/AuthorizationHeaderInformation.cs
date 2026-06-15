@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Microsoft.Identity.Abstractions
@@ -29,5 +30,12 @@ namespace Microsoft.Identity.Abstractions
         /// or <see langword="null"/> when no metadata was captured.
         /// </summary>
         public TokenAcquisitionMetadata? Metadata { get; set; }
+
+        /// <summary>
+        /// Additional parameters returned on the token-endpoint response, or <see langword="null"/> if none.
+        /// Mirrors <see cref="AcquireTokenResult.AdditionalResponseParameters"/>; populated on the header surface
+        /// so callers do not need a separate <see cref="AcquireTokenResult"/> lookup.
+        /// </summary>
+        public IReadOnlyDictionary<string, string>? AdditionalResponseParameters { get; set; }
     }
 }
