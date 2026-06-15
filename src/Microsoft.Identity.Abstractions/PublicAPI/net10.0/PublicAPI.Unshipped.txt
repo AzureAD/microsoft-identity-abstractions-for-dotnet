@@ -40,6 +40,8 @@ Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.AdditionalRespons
 Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.AdditionalResponseParameters.set -> void
 Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.Metadata.get -> Microsoft.Identity.Abstractions.TokenAcquisitionMetadata?
 Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.Metadata.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.UseBoundCredential.get -> bool
+Microsoft.Identity.Abstractions.CredentialDescription.UseBoundCredential.set -> void
 Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.ApiUrl.get -> string?
 Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.ApiUrl.set -> void
 Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.Protocol.get -> string?
