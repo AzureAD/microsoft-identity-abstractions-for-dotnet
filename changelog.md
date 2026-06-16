@@ -1,3 +1,9 @@
+12.1.0
+=======
+
+## What's Changed
+* Added UseBoundCredential property to CredentialDescription to opt in to Bearer-over-mTLS authentication on a per-credential basis. Defaults to false, so existing configurations are unaffected. Consumer libraries (Microsoft.Identity.Web) read this property at credential-load time to either present a certificate over mTLS for Certificate-type credentials, or wire a bound-credential bundle (signed assertion + binding certificate) for SignedAssertionFromManagedIdentity-type credentials. See PR #252(https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/252).
+
 12.0.0
 =======
 
