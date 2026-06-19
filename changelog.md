@@ -1,3 +1,10 @@
+12.2.0
+=======
+
+## What's Changed
+* Added a token-acquisition metadata and failure-details api surface. `AcquireTokenResult`, `AuthorizationHeaderInformation`, and `AuthorizationHeaderError` now expose `TokenAcquisitionMetadata` (cache level, cache-refresh reason, token source, region details, durations, token endpoint, and refresh-on), and `AuthorizationHeaderError` also exposes `TokenAcquisitionFailureDetails` (error code, sub-error, status code, correlation id, and claims). See [#253](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/253).
+* Added `AcquireTokenOptionsExtensions` with `GetHttpRequestMessage`/`SetHttpRequestMessage` so callers can flow an `HttpRequestMessage` through `AcquireTokenOptions` for request-aware authorization header creation. See [#255](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/255).
+
 12.1.0
 =======
 
