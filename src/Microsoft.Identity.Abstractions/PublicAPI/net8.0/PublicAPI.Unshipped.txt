@@ -1,3 +1,4 @@
 #nullable enable
-Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider2
-Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider2.CreateAuthorizationHeaderAsync(System.Collections.Generic.IEnumerable<string!>! scopes, System.Net.Http.HttpRequestMessage! httpRequestMessage, Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions? options = null, System.Security.Claims.ClaimsPrincipal? claimsPrincipal = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<string!>!
+Microsoft.Identity.Abstractions.AcquireTokenOptionsExtensions
+static Microsoft.Identity.Abstractions.AcquireTokenOptionsExtensions.GetHttpRequestMessage(this Microsoft.Identity.Abstractions.AcquireTokenOptions! options) -> System.Net.Http.HttpRequestMessage?
+static Microsoft.Identity.Abstractions.AcquireTokenOptionsExtensions.SetHttpRequestMessage(this Microsoft.Identity.Abstractions.AcquireTokenOptions! options, System.Net.Http.HttpRequestMessage! httpRequestMessage) -> void
