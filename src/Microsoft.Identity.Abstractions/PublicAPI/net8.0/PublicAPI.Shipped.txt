@@ -358,3 +358,85 @@ virtual Microsoft.Identity.Abstractions.CredentialDescription.CachedValue.get ->
 virtual Microsoft.Identity.Abstractions.CredentialDescription.CachedValue.set -> void
 virtual Microsoft.Identity.Abstractions.IdentityApplicationOptions.Authority.get -> string?
 virtual Microsoft.Identity.Abstractions.IdentityApplicationOptions.Authority.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenOptionsExtensions
+static Microsoft.Identity.Abstractions.AcquireTokenOptionsExtensions.GetHttpRequestMessage(this Microsoft.Identity.Abstractions.AcquireTokenOptions! options) -> System.Net.Http.HttpRequestMessage?
+static Microsoft.Identity.Abstractions.AcquireTokenOptionsExtensions.SetHttpRequestMessage(this Microsoft.Identity.Abstractions.AcquireTokenOptions! options, System.Net.Http.HttpRequestMessage! httpRequestMessage) -> void
+Microsoft.Identity.Abstractions.AcquiredTokenCacheLevel
+Microsoft.Identity.Abstractions.AcquiredTokenCacheLevel.L1Cache = 2 -> Microsoft.Identity.Abstractions.AcquiredTokenCacheLevel
+Microsoft.Identity.Abstractions.AcquiredTokenCacheLevel.L2Cache = 3 -> Microsoft.Identity.Abstractions.AcquiredTokenCacheLevel
+Microsoft.Identity.Abstractions.AcquiredTokenCacheLevel.None = 0 -> Microsoft.Identity.Abstractions.AcquiredTokenCacheLevel
+Microsoft.Identity.Abstractions.AcquiredTokenCacheLevel.Unknown = 1 -> Microsoft.Identity.Abstractions.AcquiredTokenCacheLevel
+Microsoft.Identity.Abstractions.AcquiredTokenCacheRefreshReason
+Microsoft.Identity.Abstractions.AcquiredTokenCacheRefreshReason.CacheDisabled = 5 -> Microsoft.Identity.Abstractions.AcquiredTokenCacheRefreshReason
+Microsoft.Identity.Abstractions.AcquiredTokenCacheRefreshReason.Expired = 3 -> Microsoft.Identity.Abstractions.AcquiredTokenCacheRefreshReason
+Microsoft.Identity.Abstractions.AcquiredTokenCacheRefreshReason.ForceRefreshOrClaims = 1 -> Microsoft.Identity.Abstractions.AcquiredTokenCacheRefreshReason
+Microsoft.Identity.Abstractions.AcquiredTokenCacheRefreshReason.NoCachedAccessToken = 2 -> Microsoft.Identity.Abstractions.AcquiredTokenCacheRefreshReason
+Microsoft.Identity.Abstractions.AcquiredTokenCacheRefreshReason.NotApplicable = 0 -> Microsoft.Identity.Abstractions.AcquiredTokenCacheRefreshReason
+Microsoft.Identity.Abstractions.AcquiredTokenCacheRefreshReason.ProactivelyRefreshed = 4 -> Microsoft.Identity.Abstractions.AcquiredTokenCacheRefreshReason
+Microsoft.Identity.Abstractions.AcquiredTokenRegionDetails
+Microsoft.Identity.Abstractions.AcquiredTokenRegionDetails.AcquiredTokenRegionDetails() -> void
+Microsoft.Identity.Abstractions.AcquiredTokenRegionDetails.AutoDetectionError.get -> string?
+Microsoft.Identity.Abstractions.AcquiredTokenRegionDetails.AutoDetectionError.init -> void
+Microsoft.Identity.Abstractions.AcquiredTokenRegionDetails.RegionOutcome.get -> Microsoft.Identity.Abstractions.AcquiredTokenRegionOutcome
+Microsoft.Identity.Abstractions.AcquiredTokenRegionDetails.RegionOutcome.init -> void
+Microsoft.Identity.Abstractions.AcquiredTokenRegionDetails.RegionUsed.get -> string?
+Microsoft.Identity.Abstractions.AcquiredTokenRegionDetails.RegionUsed.init -> void
+Microsoft.Identity.Abstractions.AcquiredTokenRegionOutcome
+Microsoft.Identity.Abstractions.AcquiredTokenRegionOutcome.AutodetectSuccess = 4 -> Microsoft.Identity.Abstractions.AcquiredTokenRegionOutcome
+Microsoft.Identity.Abstractions.AcquiredTokenRegionOutcome.FallbackToGlobal = 5 -> Microsoft.Identity.Abstractions.AcquiredTokenRegionOutcome
+Microsoft.Identity.Abstractions.AcquiredTokenRegionOutcome.None = 0 -> Microsoft.Identity.Abstractions.AcquiredTokenRegionOutcome
+Microsoft.Identity.Abstractions.AcquiredTokenRegionOutcome.UserProvidedAutodetectionFailed = 2 -> Microsoft.Identity.Abstractions.AcquiredTokenRegionOutcome
+Microsoft.Identity.Abstractions.AcquiredTokenRegionOutcome.UserProvidedInvalid = 3 -> Microsoft.Identity.Abstractions.AcquiredTokenRegionOutcome
+Microsoft.Identity.Abstractions.AcquiredTokenRegionOutcome.UserProvidedValid = 1 -> Microsoft.Identity.Abstractions.AcquiredTokenRegionOutcome
+Microsoft.Identity.Abstractions.AcquiredTokenSource
+Microsoft.Identity.Abstractions.AcquiredTokenSource.Broker = 2 -> Microsoft.Identity.Abstractions.AcquiredTokenSource
+Microsoft.Identity.Abstractions.AcquiredTokenSource.Cache = 1 -> Microsoft.Identity.Abstractions.AcquiredTokenSource
+Microsoft.Identity.Abstractions.AcquiredTokenSource.IdentityProvider = 0 -> Microsoft.Identity.Abstractions.AcquiredTokenSource
+Microsoft.Identity.Abstractions.AcquireTokenResult.Metadata.get -> Microsoft.Identity.Abstractions.TokenAcquisitionMetadata?
+Microsoft.Identity.Abstractions.AcquireTokenResult.Metadata.set -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderError.FailureDetails.get -> Microsoft.Identity.Abstractions.TokenAcquisitionFailureDetails?
+Microsoft.Identity.Abstractions.AuthorizationHeaderError.FailureDetails.set -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderError.Metadata.get -> Microsoft.Identity.Abstractions.TokenAcquisitionMetadata?
+Microsoft.Identity.Abstractions.AuthorizationHeaderError.Metadata.set -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.AdditionalResponseParameters.get -> System.Collections.Generic.IReadOnlyDictionary<string!, string!>?
+Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.AdditionalResponseParameters.set -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.Metadata.get -> Microsoft.Identity.Abstractions.TokenAcquisitionMetadata?
+Microsoft.Identity.Abstractions.AuthorizationHeaderInformation.Metadata.set -> void
+Microsoft.Identity.Abstractions.CredentialDescription.UseBoundCredential.get -> bool
+Microsoft.Identity.Abstractions.CredentialDescription.UseBoundCredential.set -> void
+Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.ApiUrl.get -> string?
+Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.ApiUrl.set -> void
+Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.Protocol.get -> string?
+Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters.Protocol.set -> void
+Microsoft.Identity.Abstractions.TokenAcquisitionFailureDetails
+Microsoft.Identity.Abstractions.TokenAcquisitionFailureDetails.Claims.get -> string?
+Microsoft.Identity.Abstractions.TokenAcquisitionFailureDetails.Claims.init -> void
+Microsoft.Identity.Abstractions.TokenAcquisitionFailureDetails.CorrelationId.get -> string?
+Microsoft.Identity.Abstractions.TokenAcquisitionFailureDetails.CorrelationId.init -> void
+Microsoft.Identity.Abstractions.TokenAcquisitionFailureDetails.ErrorCode.get -> string?
+Microsoft.Identity.Abstractions.TokenAcquisitionFailureDetails.ErrorCode.init -> void
+Microsoft.Identity.Abstractions.TokenAcquisitionFailureDetails.StatusCode.get -> int?
+Microsoft.Identity.Abstractions.TokenAcquisitionFailureDetails.StatusCode.init -> void
+Microsoft.Identity.Abstractions.TokenAcquisitionFailureDetails.SubError.get -> string?
+Microsoft.Identity.Abstractions.TokenAcquisitionFailureDetails.SubError.init -> void
+Microsoft.Identity.Abstractions.TokenAcquisitionFailureDetails.TokenAcquisitionFailureDetails() -> void
+Microsoft.Identity.Abstractions.TokenAcquisitionMetadata
+Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.CacheLevel.get -> Microsoft.Identity.Abstractions.AcquiredTokenCacheLevel
+Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.CacheLevel.init -> void
+Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.CacheRefreshReason.get -> Microsoft.Identity.Abstractions.AcquiredTokenCacheRefreshReason
+Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.CacheRefreshReason.init -> void
+Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.DurationInCacheInMs.get -> long
+Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.DurationInCacheInMs.init -> void
+Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.DurationInHttpInMs.get -> long
+Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.DurationInHttpInMs.init -> void
+Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.DurationTotalInMs.get -> long
+Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.DurationTotalInMs.init -> void
+Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.RefreshOn.get -> System.DateTimeOffset?
+Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.RefreshOn.init -> void
+Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.RegionDetails.get -> Microsoft.Identity.Abstractions.AcquiredTokenRegionDetails?
+Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.RegionDetails.init -> void
+Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.TokenAcquisitionMetadata() -> void
+Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.TokenEndpoint.get -> string?
+Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.TokenEndpoint.init -> void
+Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.TokenSource.get -> Microsoft.Identity.Abstractions.AcquiredTokenSource
+Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.TokenSource.init -> void
