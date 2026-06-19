@@ -114,9 +114,10 @@ namespace Microsoft.Identity.Abstractions
         ///         });
         /// </code>
         /// </example>
-<# if (framework != "net8"){ #>
+<# if ((hasInput || hasOutput) && (framework != "net8" && framework != "net9")){ #>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
 <# } #>
         public <#= returnType #> <#= httpMethod #>For<#= token #>Async<#= template #>(
@@ -124,10 +125,10 @@ namespace Microsoft.Identity.Abstractions
 <# if (hasInput){ #>
             TInput input,
 <# } #>
-<# if (hasInput && framework == "net8"){ #>
+<# if (hasInput && (framework == "net8" || framework == "net9")){ #>
             JsonTypeInfo<TInput> inputJsonTypeInfo,
 <# } #>
-<# if (hasOutput && framework == "net8"){ #>
+<# if (hasOutput && (framework == "net8" || framework == "net9")){ #>
             JsonTypeInfo<TOutput> outputJsonTypeInfo,
 <# } #>
             Action<DownstreamApiOptionsReadOnlyHttpMethod>? downstreamApiOptionsOverride = null,

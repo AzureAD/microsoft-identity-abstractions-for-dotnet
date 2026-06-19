@@ -15,7 +15,7 @@ namespace Microsoft.Identity.Abstractions
     {
         /// <summary>
         /// Use this value if you provide a certificate yourself. When setting the <see cref="CredentialDescription.SourceType"/> property to this value,
-        /// you will also provide the <see cref="CredentialDescription.Certificate"/>.
+        /// you will also provide the <b>CredentialDescription.Certificate</b>.
         /// </summary>
         Certificate = 0,
 
@@ -50,6 +50,7 @@ namespace Microsoft.Identity.Abstractions
         /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="base64_csharp":::
         /// ]]></format>
         /// </example>
+        /// <remarks>Using the base64 encoded representation of a certificate is not recommended in production.</remarks>
         Base64Encoded = 2,
 
         /// <summary>
@@ -66,6 +67,7 @@ namespace Microsoft.Identity.Abstractions
         /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="path_csharp":::
         /// ]]></format>
         /// </example>
+        /// <remarks>Using a certificate from a local path is not recommended in production.</remarks>
         Path = 3,
 
         /// <summary>
@@ -116,6 +118,7 @@ namespace Microsoft.Identity.Abstractions
         /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="secret_csharp":::
         /// ]]></format>
         /// </example>
+        /// <remarks>Using a client secret is not recommended in production.</remarks>
         ClientSecret = 6,
 
         /// <summary>
@@ -181,6 +184,29 @@ namespace Microsoft.Identity.Abstractions
         /// Use this value in order to utilize a credential provider that is not part of the Microsoft.Identity.Abstractions library.
         /// This is an extension point, which goes along with <see cref = "CredentialDescription.CustomSignedAssertionProviderName" />
         /// </summary>
-        CustomSignedAssertion = 11
+        CustomSignedAssertion = 11,
+
+        /// <summary>
+        /// Use this value to indicate that the credential is a managed certificate.
+        /// This is currently a Microsoft-Internal concept which has no meaning outside of Microsoft.
+        /// </summary>
+        ManagedCertificate = 12,
+
+        /// <summary>
+        /// Use this value when you provide a certificate from the certificate store, described by its subject name.
+        /// When setting the <see cref="CredentialDescription.SourceType"/> property to this value, you'll also provide the <see cref="CredentialDescription.CertificateSubjectName"/>
+        /// and <see cref="CredentialDescription.CertificateStorePath"/> properties.
+        /// </summary>
+        /// <example>
+        /// <format type="text/markdown">
+        /// <![CDATA[
+        /// The Json fragment below describes a user certificate stored in the personal certificates folder (<b>CurrentUser/My</b>) and specified by its subject name, used as a client credential in a confidential client application:
+        /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="subjectname_json":::
+        /// 
+        /// The code below describes programmatically in C#, a computer certificate in the personal certificates folder (<b>LocalMachine/My</b>) accessed by its subject name.
+        /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="subjectname_csharp":::
+        /// ]]></format>
+        /// </example>
+        StoreWithSubjectName = 13,
     }
 }

@@ -161,7 +161,8 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
         Task<TOutput?> CallApiForUserAsync<TInput, TOutput>(
             string? serviceName,
@@ -187,7 +188,8 @@ namespace Microsoft.Identity.Abstractions
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The value returned by the downstream web API.</returns>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
         Task<TOutput?> CallApiForUserAsync<TOutput>(
             string serviceName,
@@ -211,7 +213,8 @@ namespace Microsoft.Identity.Abstractions
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The value returned by the downstream web API.</returns>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
         Task<TOutput?> CallApiForAppAsync<TInput, TOutput>(
             string? serviceName,
@@ -233,7 +236,8 @@ namespace Microsoft.Identity.Abstractions
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The value returned by the downstream web API.</returns>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
         Task<TOutput?> CallApiForAppAsync<TOutput>(
             string serviceName,

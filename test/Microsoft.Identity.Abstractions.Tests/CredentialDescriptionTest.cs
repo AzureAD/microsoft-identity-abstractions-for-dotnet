@@ -1,8 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using Xunit;
+using System;
 using System.Collections.Generic;
+#if NET8_0_OR_GREATER
+using System.Text.Json;
+#endif
+using Xunit;
 
 namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
 {
@@ -34,14 +38,13 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             // </base64_csharp>
 
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
-            Assert.Null(credentialDescription.Container);
-            Assert.Equal(credentialDescription.Base64EncodedValue, credentialDescription.ReferenceOrValue);
+            Assert.DoesNotContain(credentialDescription.Id, credentialDescription.Base64EncodedValue, System.StringComparison.OrdinalIgnoreCase);
         }
 
         [Fact]
         public void CertificateFromPath()
         {
-            // Certificate from path 
+            // Certificate from path
             // ---------------------
             /*
             // <path_json>
@@ -66,8 +69,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             // </path_csharp>
 
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
-            Assert.Equal(credentialDescription.CertificateDiskPath, credentialDescription.Container);
-            Assert.Equal(credentialDescription.CertificatePassword, credentialDescription.ReferenceOrValue);
+            Assert.DoesNotContain(credentialDescription.Id, credentialDescription.CertificatePassword, System.StringComparison.OrdinalIgnoreCase);
         }
 
         [Fact]
@@ -94,13 +96,10 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                 SourceType = CredentialSource.StoreWithThumbprint,
                 CertificateStorePath = "LocalMachine/My",
                 CertificateThumbprint = "962D129A...D18EFEB6961684"
-
             };
             // </thumbprint_csharp>
 
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
-            Assert.Equal(credentialDescription.CertificateStorePath, credentialDescription.Container);
-            Assert.Equal(credentialDescription.CertificateThumbprint, credentialDescription.ReferenceOrValue);
         }
 
         [Fact]
@@ -127,15 +126,41 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                 SourceType = CredentialSource.StoreWithDistinguishedName,
                 CertificateStorePath = "LocalMachine/My",
                 CertificateDistinguishedName = "CN=WebAppCallingWebApiCert"
-
             };
             // </distinguishedname_csharp>
 
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
-            Assert.Equal(credentialDescription.CertificateStorePath, credentialDescription.Container);
-            Assert.Equal(credentialDescription.CertificateDistinguishedName, credentialDescription.ReferenceOrValue);
         }
 
+        [Fact]
+        public void CertificateFromStoreBySubjectName()
+        {
+            // Certificate from credential store by subject name
+            // -------------------------------------------------
+            /*
+            // <subjectname_json>
+            {
+             "ClientCredentials": [
+             {
+              "SourceType": "StoreWithSubjectName",
+              "CertificateStorePath": "CurrentUser/My",
+              "CertificateSubjectName": "CN=WebAppCallingWebApiCert"
+             }]
+            }
+            // </subjectname_json>
+            */
+
+            // <subjectname_csharp>
+            CredentialDescription credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.StoreWithSubjectName,
+                CertificateStorePath = "LocalMachine/My",
+                CertificateSubjectName = "CN=WebAppCallingWebApiCert"
+            };
+            // </subjectname_csharp>
+
+            Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
+        }
 
         [Fact]
         public void CertificateFromKeyVault()
@@ -161,13 +186,10 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                 SourceType = CredentialSource.KeyVault,
                 KeyVaultUrl = "https://msidentitywebsamples.vault.azure.net",
                 KeyVaultCertificateName = "MicrosoftIdentitySamplesCert"
-
             };
             // </keyvault_csharp>
 
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
-            Assert.Equal(credentialDescription.KeyVaultUrl, credentialDescription.Container);
-            Assert.Equal(credentialDescription.KeyVaultCertificateName, credentialDescription.ReferenceOrValue);
         }
 
         [Fact]
@@ -196,8 +218,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             // </secret_csharp>
 
             Assert.Equal(CredentialType.Secret, credentialDescription.CredentialType);
-            Assert.Null(credentialDescription.Container);
-            Assert.Equal("***", credentialDescription.ReferenceOrValue);
+            Assert.DoesNotContain(credentialDescription.Id, credentialDescription.ClientSecret, StringComparison.OrdinalIgnoreCase);
         }
 
         [Fact]
@@ -227,10 +248,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             // </msi_csharp>
 
             Assert.Equal(CredentialType.SignedAssertion, credentialDescription.CredentialType);
-            Assert.Null(credentialDescription.Container);
-            Assert.Equal(credentialDescription.ManagedIdentityClientId, credentialDescription.ReferenceOrValue);
         }
-
 
         [Fact]
         public void SignedAssertionFromFilePath()
@@ -257,8 +275,6 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                 SignedAssertionFileDiskPath = "c:/path.signedAssertion"
             };
             Assert.Equal(CredentialType.SignedAssertion, credentialDescription.CredentialType);
-            Assert.Null(credentialDescription.ReferenceOrValue);
-            Assert.Equal(credentialDescription.SignedAssertionFileDiskPath, credentialDescription.Container);
         }
 
         [Fact]
@@ -279,7 +295,6 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             Assert.NotNull(credentialDescription.CachedValue);
 #pragma warning restore SYSLIB0026 // Type or member is obsolete
             Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
-            Assert.Null(credentialDescription.Container);
             Assert.NotNull(credentialDescription.Certificate);
         }
 
@@ -340,8 +355,6 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             Assert.Equal(CredentialType.DecryptKeys, credentialDescription.CredentialType);
             Assert.Equal("mytenant.onmicrosoftonline.com", credentialDescription.DecryptKeysAuthenticationOptions.AcquireTokenOptions.Tenant);
             Assert.Equal("Bearer", credentialDescription.DecryptKeysAuthenticationOptions.ProtocolScheme);
-            Assert.Null(credentialDescription.ReferenceOrValue);
-            Assert.Null(credentialDescription.Container);
         }
 
         [Fact]
@@ -350,13 +363,11 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             // Signed assertion from a custom provider
             // -------------------------------------------
             // Arrange
-            string expectedId = "CustomSignedAssertion_MyCustomProvider_";
             CredentialDescription credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.CustomSignedAssertion,
                 CustomSignedAssertionProviderName = "MyCustomProvider",
                 CustomSignedAssertionProviderData = new Dictionary<string, object>() { { "MyCustomProviderData_Key", "MyCustomProviderData_Data" } }
-
             };
 
             // Act
@@ -364,9 +375,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
 
             // Assert
             Assert.Equal(CredentialType.SignedAssertion, credentialDescription.CredentialType);
-            Assert.Equal(expectedId, id);
-            Assert.Equal(credentialDescription.CustomSignedAssertionProviderName, credentialDescription.Container);
-            Assert.Null(credentialDescription.ReferenceOrValue);
+            Assert.Equal("MyCustomProvider", credentialDescription.CustomSignedAssertionProviderName);
         }
 
         [Fact]
@@ -396,6 +405,95 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
         }
 
         [Fact]
+        public void CredentialDescription_DefaultUseBoundCredential_IsFalse()
+        {
+            // Arrange
+            var credentialDescription = new CredentialDescription();
+
+            // Act
+            bool useBoundCredential = credentialDescription.UseBoundCredential;
+
+            // Assert
+            Assert.False(useBoundCredential);
+        }
+
+        [Fact]
+        public void CredentialDescription_UseBoundCredential_SetTrue_RoundTrips()
+        {
+            // Arrange
+            var credentialDescription = new CredentialDescription();
+
+            // Act
+            credentialDescription.UseBoundCredential = true;
+
+            // Assert
+            Assert.True(credentialDescription.UseBoundCredential);
+        }
+
+        [Fact]
+        public void CopyConstructor_ShouldCopyUseBoundCredentialTrue()
+        {
+            // Arrange
+            var original = new CredentialDescription
+            {
+                UseBoundCredential = true
+            };
+
+            // Act
+            var copy = new CredentialDescription(original);
+
+            // Assert
+            Assert.True(copy.UseBoundCredential);
+        }
+
+        [Fact]
+        public void CopyConstructor_ShouldCopyUseBoundCredentialFalse()
+        {
+            // Arrange
+            var original = new CredentialDescription
+            {
+                UseBoundCredential = false
+            };
+
+            // Act
+            var copy = new CredentialDescription(original);
+
+            // Assert
+            Assert.False(copy.UseBoundCredential);
+        }
+
+#if NET8_0_OR_GREATER
+        [Fact]
+        public void CredentialDescription_UseBoundCredentialJson_RoundTripsWithConverter()
+        {
+            // Arrange
+            var options = new JsonSerializerOptions
+            {
+                Converters = { new CredentialDescriptionJsonConverter() }
+            };
+            string json = """
+                {
+                  "SourceType": "SignedAssertionFromManagedIdentity",
+                  "ManagedIdentityClientId": "your-user-assigned-managed-identity-client-id",
+                  "TokenExchangeUrl": "api://AzureADTokenExchange",
+                  "UseBoundCredential": true
+                }
+                """;
+
+            // Act
+            var credentialDescription = JsonSerializer.Deserialize<CredentialDescription>(json, options);
+            string roundTripJson = JsonSerializer.Serialize(credentialDescription!, options);
+            var roundTrippedCredentialDescription = JsonSerializer.Deserialize<CredentialDescription>(roundTripJson, options);
+
+            // Assert
+            Assert.NotNull(credentialDescription);
+            Assert.True(credentialDescription!.UseBoundCredential);
+            Assert.NotNull(roundTrippedCredentialDescription);
+            Assert.True(roundTrippedCredentialDescription!.UseBoundCredential);
+        }
+#endif
+
+        [Fact]
         public void UnknownCredentialSource()
         {
             CredentialDescription credentialDescription = new CredentialDescription
@@ -403,110 +501,18 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
                 SourceType = (CredentialSource)(1000)
             };
             Assert.Equal(default(CredentialType), credentialDescription.CredentialType);
-            Assert.Null(credentialDescription.ReferenceOrValue);
-            Assert.Null(credentialDescription.Container);
 
             credentialDescription.SourceType = (CredentialSource)(-1);
-            credentialDescription.ReferenceOrValue = "referenceOrValue";
-            credentialDescription.Container = "container";
             Assert.Equal(default(CredentialType), credentialDescription.CredentialType);
-            Assert.Null(credentialDescription.ReferenceOrValue);
-            Assert.Null(credentialDescription.Container);
-        }
-
-        // Both container and reference or value.
-        [Theory]
-        [InlineData(CredentialSource.Base64Encoded)]
-        [InlineData(CredentialSource.StoreWithThumbprint)]
-        [InlineData(CredentialSource.StoreWithDistinguishedName)]
-        [InlineData(CredentialSource.SignedAssertionFromVault)]
-        [InlineData(CredentialSource.KeyVault)]
-        [InlineData(CredentialSource.Path)]
-        public void TestContainerAndValueOrReference(CredentialSource credentialSource)
-        {
-            CredentialDescription credentialDescription = new CredentialDescription { SourceType = credentialSource };
-            credentialDescription.Container = "container";
-            Assert.Equal("container", credentialDescription.Container);
-            credentialDescription.ReferenceOrValue = "referenceOrValue";
-            Assert.Equal("referenceOrValue", credentialDescription.ReferenceOrValue);
+            Assert.Throws<ArgumentException>(() => credentialDescription.Id);
         }
 
         [Fact]
-        public void TestContainerAndValueOrReferenceForCertificate()
+        public void TestNullCertificate()
         {
             CredentialDescription credentialDescription = new();
             credentialDescription.Certificate = null;
-            credentialDescription.Container = "container";
-            credentialDescription.ReferenceOrValue = "referenceOrValue";
-            Assert.Null(credentialDescription.Container);
-            Assert.Null(credentialDescription.ReferenceOrValue);
-        }
-
-        [Fact]
-        public void TestContainerAndValueOrReferenceForCustomSignedAssertion()
-        {
-            CredentialDescription credentialDescription = new()
-            {
-                SourceType = CredentialSource.CustomSignedAssertion,
-                Container = "container",
-                ReferenceOrValue = "referenceOrValue"
-            };
-
-            Assert.Equal(credentialDescription.Container, credentialDescription.CustomSignedAssertionProviderName);
-            Assert.Null(credentialDescription.ReferenceOrValue);
-        }
-
-        // Container only
-        [Theory]
-        [InlineData(CredentialSource.SignedAssertionFilePath)]
-        public void TestContainer(CredentialSource credentialSource)
-        {
-            CredentialDescription credentialDescription = new CredentialDescription { SourceType = credentialSource };
-            credentialDescription.Container = "container";
-            Assert.Equal("container", credentialDescription.Container);
-        }
-
-        // Ref/Value only
-        [Fact]
-        public void TestValueOrReferenceForSignedAssertionManagedIdentity()
-        {
-            CredentialDescription credentialDescription = new CredentialDescription
-            { SourceType = CredentialSource.SignedAssertionFromManagedIdentity };
-            credentialDescription.ReferenceOrValue = "referenceOrValue";
-            Assert.Equal("referenceOrValue", credentialDescription.ReferenceOrValue);
-        }
-
-        // Ref/Value only
-        [Fact]
-        public void TestValueOrReferenceForClientSecret()
-        {
-            CredentialDescription credentialDescription = new CredentialDescription
-            { SourceType = CredentialSource.ClientSecret };
-            credentialDescription.ReferenceOrValue = "referenceOrValue";
-            Assert.Equal("***", credentialDescription.ReferenceOrValue);
-        }
-
-        [Theory]
-        [InlineData(CredentialSource.KeyVault, "KeyVaultUrl", "CertificateName")]
-        [InlineData(CredentialSource.KeyVault, null, "CertificateName")]
-        [InlineData(CredentialSource.KeyVault, "KeyVaultUrl", null)]
-        [InlineData(CredentialSource.KeyVault, null, null)]
-        public void TestId(CredentialSource sourceType, string credentialLocation, string credentialName)
-        {
-            var credentialDescription = new CredentialDescription
-            {
-                SourceType = sourceType,
-                Container = credentialLocation,
-                ReferenceOrValue = credentialName
-            };
-
-            var id = credentialDescription.Id;
-
-            var expectedId = $"{credentialDescription.SourceType}_{credentialDescription.Container}_{credentialDescription.ReferenceOrValue}";
-            Assert.Equal(expectedId, id);
-
-            var cachedId = credentialDescription.Id;
-            Assert.Equal(expectedId, cachedId);
+            Assert.NotNull(credentialDescription.Id);
         }
 
         [Fact]
@@ -558,6 +564,86 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
 
             // Assert
             Assert.Equal(original.TokenExchangeAuthority, copy.TokenExchangeAuthority);
+        }
+
+        [Fact]
+        public void CopyConstructorFromNull_ShouldThrow()
+        {
+            // Arrange
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+            CredentialDescription original = null;
+            // Act & Assert
+            _ = Assert.Throws<ArgumentNullException>(() => new CredentialDescription(original!));
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+        }
+
+        [Fact]
+        public void Algorithm_SetAndGet_ShouldWork()
+        {
+            /*
+            // <algorithm_json>
+            {
+                "ClientCredentials": [
+                {
+                    "SourceType": "KeyVault",
+                    "KeyVaultUrl": "https://msidentitywebsamples.vault.azure.net",
+                    "KeyVaultCertificateName": "MicrosoftIdentitySamplesCert"
+                    "Algorithm": "RS256",
+                }]
+            }
+            // </algorithm_json>
+            */
+
+            // <algorithm_csharp>
+            // Arrange
+            var credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.KeyVault,
+                Algorithm = "RS256",
+                KeyVaultCertificateName = "MicrosoftIdentitySamplesCert",
+                KeyVaultUrl = "https://msidentitywebsamples.vault.azure.net",
+            };
+
+            // Act
+            var actualAlgorithm = credentialDescription.Algorithm;
+            // </algorithm_csharp>
+
+            // Assert
+            Assert.Equal("RS256", actualAlgorithm);
+        }
+
+        [Fact]
+        public void CopyConstructor_ShouldCopyAlgorithm()
+        {
+            // Arrange
+            var original = new CredentialDescription
+            {
+                Algorithm = "RS256"
+            };
+
+            // Act
+            var copy = new CredentialDescription(original);
+
+            // Assert
+            Assert.Equal(original.Algorithm, copy.Algorithm);
+        }
+
+        [Fact]
+        public void ManagedCertificateCredential()
+        {
+            // Example value of what the managed certificate string will likely look like.
+            string exampleManagedCertId = "Keyvault::myvault.vault.core.windows.net/secrets/mycert::11111-2222-3333-4444";
+            CredentialDescription credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.ManagedCertificate,
+                CachedValue = exampleManagedCertId
+            };
+            // </managedcertificate_csharp>
+
+            Assert.Equal(CredentialType.Certificate, credentialDescription.CredentialType);
+            Assert.Equal($"ManagedCertificate={exampleManagedCertId};Thumbprint=null", credentialDescription.Id);
+            credentialDescription.CachedValue = null;
+            Assert.Equal("ManagedCertificate=null;Thumbprint=null", credentialDescription.Id);
         }
     }
 }

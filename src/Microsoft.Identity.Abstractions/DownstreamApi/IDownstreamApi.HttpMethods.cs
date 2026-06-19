@@ -50,7 +50,8 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
         public Task<TOutput?> GetForUserAsync<TOutput>(
             string? serviceName,
@@ -89,7 +90,8 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
         public Task<TOutput?> GetForUserAsync<TInput, TOutput>(
             string? serviceName,
@@ -123,7 +125,8 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
         public Task<TOutput?> GetForAppAsync<TOutput>(
             string? serviceName,
@@ -158,7 +161,8 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
         public Task<TOutput?> GetForAppAsync<TInput, TOutput>(
             string? serviceName,
@@ -196,7 +200,8 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
         public Task PostForUserAsync<TInput>(
             string? serviceName,
@@ -236,7 +241,8 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
         public Task<TOutput?> PostForUserAsync<TInput, TOutput>(
             string? serviceName,
@@ -272,7 +278,8 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
         public Task PostForAppAsync<TInput>(
             string? serviceName,
@@ -308,7 +315,8 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
         public Task<TOutput?> PostForAppAsync<TInput, TOutput>(
             string? serviceName,
@@ -346,7 +354,8 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
         public Task PutForUserAsync<TInput>(
             string? serviceName,
@@ -386,7 +395,8 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
         public Task<TOutput?> PutForUserAsync<TInput, TOutput>(
             string? serviceName,
@@ -422,7 +432,8 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
         public Task PutForAppAsync<TInput>(
             string? serviceName,
@@ -458,7 +469,8 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
         public Task<TOutput?> PutForAppAsync<TInput, TOutput>(
             string? serviceName,
@@ -498,7 +510,8 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
         public Task PatchForUserAsync<TInput>(
             string? serviceName,
@@ -538,7 +551,8 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
         public Task<TOutput?> PatchForUserAsync<TInput, TOutput>(
             string? serviceName,
@@ -574,7 +588,8 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
         public Task PatchForAppAsync<TInput>(
             string? serviceName,
@@ -610,7 +625,8 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
         public Task<TOutput?> PatchForAppAsync<TInput, TOutput>(
             string? serviceName,
@@ -650,7 +666,8 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
         public Task DeleteForUserAsync<TInput>(
             string? serviceName,
@@ -690,7 +707,8 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
         public Task<TOutput?> DeleteForUserAsync<TInput, TOutput>(
             string? serviceName,
@@ -726,7 +744,8 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
         public Task DeleteForAppAsync<TInput>(
             string? serviceName,
@@ -762,7 +781,8 @@ namespace Microsoft.Identity.Abstractions
         /// </code>
         /// </example>
 #if NET8_0_OR_GREATER
-        [RequiresUnreferencedCode("This method's implementations also use generic types and are not trim-friendly.")]
+        [RequiresUnreferencedCode("Calls JsonSerializer.Serialize<TInput>")]
+        [RequiresDynamicCode("Calls JsonSerializer.Serialize<TInput>")]
 #endif
         public Task<TOutput?> DeleteForAppAsync<TInput, TOutput>(
             string? serviceName,

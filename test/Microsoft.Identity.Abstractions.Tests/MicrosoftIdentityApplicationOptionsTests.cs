@@ -20,12 +20,13 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
         private CredentialDescription decryptCert = new CredentialDescription { SourceType = CredentialSource.Base64Encoded, Base64EncodedValue = "0123" };
         private string[] audiences = new[] { "https://myapi", clientId };
         private const string appHomeTenantId = "this-is-a-tenant-guid";
-
+        private const string name = "OptionsName";
         [Fact]
         public void MicrosoftIdentityApplicationOptionsProperties()
         {
             MicrosoftIdentityApplicationOptions microsoftIdentityApplicationOptions = new()
             {
+                Name = name,
                 Instance = instance,
                 TenantId = tenant,
                 AppHomeTenantId = appHomeTenantId,
@@ -58,6 +59,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
             
             microsoftIdentityApplicationOptions.Authority = "https://login.microsoftonline.com/common";
 
+            Assert.Equal(name, microsoftIdentityApplicationOptions.Name);
             Assert.Equal("https://login.microsoftonline.com/common", microsoftIdentityApplicationOptions.Authority);
             Assert.Equal(clientId, microsoftIdentityApplicationOptions.ClientId);
             Assert.Equal(tenant, microsoftIdentityApplicationOptions.TenantId);
@@ -100,7 +102,7 @@ namespace Microsoft.Identity.Abstractions.ApplicationOptions.Tests
         [InlineData("Instance", "Tenant", null, "Instance/Tenant/v2.0")]
         [InlineData("Instance/", "Tenant", null, "Instance/Tenant/v2.0")]
         [InlineData("Instance/", "Tenant", "Authority", "Authority")]
-        public void AuthorityDefaultValues(string instance, string tenant, string authorityIn, string authorityOut)
+        public void AuthorityDefaultValues(string? instance, string? tenant, string? authorityIn, string authorityOut)
         {
             MicrosoftIdentityApplicationOptions identityApplicationOptions = new()
             {

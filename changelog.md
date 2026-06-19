@@ -1,8 +1,160 @@
-8.2.0
+12.1.0
+=======
 
+## What's Changed
+* Added UseBoundCredential property to CredentialDescription to opt in to Bearer-over-mTLS authentication on a per-credential basis. Defaults to false, so existing configurations are unaffected. Consumer libraries (Microsoft.Identity.Web) read this property at credential-load time to either present a certificate over mTLS for Certificate-type credentials, or wire a bound-credential bundle (signed assertion + binding certificate) for SignedAssertionFromManagedIdentity-type credentials. See PR #252(https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/252).
+
+12.0.0
+=======
+
+## What's Changed
+* Revert breaking changes introduced in Abstractions 11.0.0. On .NET 10 target, `CachedValue` and `Certificate` extension methods in `CredentialDescription` were reverted to normal properties. See [#250](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/250).
+
+11.2.0
+=======
+
+Properties for mTLS authentication - see [#244](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/244)
+
+11.1.0
+=======
+## New features
+* Added StoreWithSubjectName credential source. See [PR #245](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/245).
+
+11.0.0
+=======
+## Breaking changes
+
+If you build code with the .NET 10 target framework and get this error:
+```txt
+error CS9260: Feature 'extensions' is not available in C# 13.0. Please use language version 14.0 or greater.
+```
+make sure you update the `LangVersion` property in your project to 14 or later.
+
+### AOT/NativeAOT Compatibility for .NET 10+
+
+Made `CredentialDescription` AOT-compatible for .NET 10+ by using C# 14 extension properties. This is a **binary breaking change** (though source compatible) for .NET 10+ targets:
+- Removes `Certificate` and `CachedValue` as public properties from `CredentialDescription` when targeting .NET 10+
+- Adds extension properties with the same names and signatures for .NET 10+, providing property-style access
+- Maintains full source compatibility - no code changes required for consumers provided the .NET 10 code is built with C#14 or later.
+- Prevents AOT/NativeAOT configuration binding issues with reference-typed properties
+- Keeps existing behavior for older target frameworks (netstandard2.0, netstandard2.1, net462, net8.0, net9.0)
+
+**Technical details:**
+- For .NET 10+: `Certificate` and `CachedValue` are implemented as extension properties (not visible to config binders)
+- For older TFMs: `Certificate` and `CachedValue` remain as regular public properties
+- LangVersion updated to `14` to enable C# 14 extension property syntax
+- Internal accessor methods (`GetCertificateInternal`, `SetCertificateInternal`, etc.) support extension properties
+
+This enhancement ensures `CredentialDescription` works seamlessly in AOT/NativeAOT compilation scenarios while maintaining backward compatibility.
+
+## New features
+* Make CredentialDescription AOT-compatible via C# 14 extension properties (v11.0.0). See [PR #238](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/238).
+
+## Bug fixes
+* Invalidate _cachedId in all property setters that affect Id computation. See [PR #240](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/240).
+
+## Fundamentals
+* Add codebase navigation guides and architecture decision records. See [PR #241](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/241).
+
+10.0.0
+=======
+## Breaking changes
+Rename `IAuthorizationHeaderProvider2` to `BoundAuthorizationHeaderProvider`. This interface extends `IAuthorizationHeaderProvider` to  create authorization headers with a token which is optionally bound to a certificate (for mTLS Pop). For details, see [PR #232](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/232)
+
+In practice, it's unlikely that this breaking change affects anybody as the renamed interface was new in 9.6.0, and not yet used to the team's knowledge.
+
+9.6.0
+======
+## New features
+
+* Added new authorization header provider interface  `IAuthorizationHeaderProvider2` supporting token return with binding certificate, expanding certificate-based authentication scenarios. For details, see [PR #223](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/223) and [PR #228](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/228).
+* In the ID property of CredentialDescription, renamed ClientSecret to RedactedClientSecret to be more precise about what this is. For details, see [PR #224](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/224).
+* Added "Thumbprint" to the ID property in CredentialDescription, enhancing traceability for credentials. For details, see [PR #212](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/212).
+
+## Improvements and fundamentals
+
+* Updated support to .NET 10 GA, ensuring compatibility and access to latest platform features. For details, see [PR #226](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/226).
+* Upgraded GitHub Actions workflows to v5 for both checkout and setup-dotnet, improving CI reliability and consistency. For details, see [PR #222](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/222).
+* Synchronized README.md diagrams with the current public API surface to keep documentation up to date. See [PR #220](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/220).
+* Fixed tests affected by recent internal changes. See [PR #221](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/221).
+
+9.5.0
+======
+## New features
+* Expand Authorization header to support binding certificate for mTLS scenarios. For Details see [#209](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/209)
+
+## Fundamentals
+* Migrate repository agent rules from .clinerules to agents.md. For details, see [#206](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/206)
+* Update to .NET 10 RC 1 (10.0.100-rc.1.25451.107) with explicit SDK version.
+  - Updated GitHub Actions workflow to use explicit .NET 10 RC 1 SDK version instead of wildcard
+  - Updated Azure DevOps pipeline template to use explicit .NET 10 RC 1 SDK version
+  - Verified compatibility with .NET 10 RC 1 breaking changes
+
+9.4.0
+======
+# New features
+* Add AdditionalResponseParameters and BindingCertificate to AcquireTokenResult. For details see [PR 203](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/203)
+* Add conditional targeting for NET 10. See [PR 202](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/202)
+* Add enum value for managed certificate in SourceType. For details, see [PR 204](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/204)
+
+Thanks @tlupes made your first contribution in https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/204
+
+9.3.0
+======
+### New features
+
+Added a new interface `IAuthenticationSchemeInformationProvider` to get the effective authentication scheme corresponding to an option name, depending on the platform. For details, see [PR #200](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/200)
+
+9.2.0
+======
+### New features
+
+* **OperationResult and OperationError abstractions:**
+  Introduced a new `OperationResult<TResult, TError>` struct and `OperationError` base class. These provide a discriminated union for representing either a result or an error, improving error handling and propagation.
+  See implementation in [`src/Microsoft.Identity.Abstractions/Results/OperationResult.cs`](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/blob/main/src/Microsoft.Identity.Abstractions/Results/OperationResult.cs) and [`OperationError.cs`](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/blob/main/src/Microsoft.Identity.Abstractions/Results/OperationError.cs).
+
+* **DownstreamApiOptions extensibility:**
+  Added two new properties to `DownstreamApiOptions`:
+  - `ExtraHeaderParameters` (`IDictionary<string, string>?`): Set extra headers in HTTP requests to downstream APIs.
+  - `ExtraQueryParameters` (`IDictionary<string, string>?`): Set extra query parameters in HTTP requests to downstream APIs.
+  This enables more flexible API calls and improved integration scenarios.
+
+### Fundamentals
+
+* **Development guidelines and Copilot integration:**
+  - Introduced `.clinerules/abstractions-guidelines.md`, `.clinerules/csharp-guidelines.md`, `.clinerules/ai-guidelines.md`, and `.github/copilot-instructions.md` to formalize and document development, AI assistant, and C# code standards for contributors and tooling.
+  - Solution file and README updated to reference these guidelines.
+
+* **Analyzer and dependency updates:**
+  - Bumped analyzer versions in `Directory.Build.props` for better static analysis (BannedApiAnalyzers and MicrosoftCodeAnalysisPublicApiAnalyzers updated from 3.3.4 to 4.14.0).
+
+9.1.0
+======
+## New features
+* Add a new generic IAuthorizationHeaderProvider<TResult> to have the possiblity of returning authorization header and metadata or error instead of throwing. For details see [#172](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/172)
+* Add Algorithm property to CredentialDescription to describe signing credentials. For details see [#182](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/182)
+* Adding serializer for CredentialDescription in .NET 8+. See [#176](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/176)
+
+## Foundamentals
+* Add dev container to work in Code Spaces. See PR [#175](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/175)
+* Adding a doc about CredentialDescription. See PR [#181](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/181)
+* Fixing AoT warnings: part 1 - non breaking. See PR [#187](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/187)
+* update Readme.md to explain the support policy for the library and the notion of LTS. See PRs [171](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/171), [183](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/184), , [185](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/185)
+
+9.0.0
+======
+## New features
+
+- Added a new class named `MicrosoftEntraApplicationOptions` inheriting from `IdentityApplicationOptions` and from which `MicrosoftIdentityApplicationOptions` inherits. Moved the EntraID specific
+  properties related to web APIs from `MicrosoftIdentityApplicationOptions` to `MicrosoftEntraApplicationOptions`. `MicrosoftIdentityApplicationOptions` now only contains the
+  properties related to web apps and B2C. See [#165](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/165) for details.
+- Added a `Name` property in `MicrosoftEntraApplicationOptions` to allow for dynamic discovery of ASP.NET Core authentication schemes / named options. See [#168](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/168) for details.
+- Changed the way the ID property is computed in ClientCredentials. All sensitive data is also now replaced by a hash. See [#163](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/issues/163) for details.
+- Added XML comments with recommendations on which CredentialSource not to use in production. See [#167](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/167) for details.
+
+8.2.0
 ======
 - To support Federated Managed Identities a new parameter `FmiPath` was added to `AcquireTokenOptions`. See [#161](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/161) for details.
-
 
 8.1.1
 ======
@@ -120,7 +272,7 @@
 
 2.0.0
 ========
-- Rename DownstreamRestApi to DownstreamApi. 
+- Rename DownstreamRestApi to DownstreamApi.
 
 1.2.0
 ========
@@ -168,3 +320,9 @@
 2.0.0
 ==========
 Initial release of Microsoft.Identity.Abstractions which brings interfaces and POCO classes used in all the Microsoft .NET authentication libraries provided by Identity and Network Access (IDNA) see ReadME.md for details.
+
+
+
+
+
+

@@ -1,10 +1,12 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 namespace Microsoft.Identity.Abstractions
 {
@@ -12,7 +14,7 @@ namespace Microsoft.Identity.Abstractions
     /// Description of a credential. Credentials are used to prove the identity of the
     /// application (See <see cref="IdentityApplicationOptions.ClientCredentials"/>), or
     /// to decrypt tokens (See <see cref="IdentityApplicationOptions.TokenDecryptionCredentials"/>). Credentials can be
-    /// secrets (client secrets), certificates, or signed assertions. They can be stored or provided in a variety of ways, 
+    /// secrets (client secrets), certificates, or signed assertions. They can be stored or provided in a variety of ways,
     /// and this class provides a way to describe them. The description is then used by Microsoft.Identity.Web to retrieve the credential.
     /// (See the DefaultCredentialProvider class)
     /// </summary>
@@ -35,14 +37,17 @@ namespace Microsoft.Identity.Abstractions
 #if NET8_0_OR_GREATER
             ArgumentNullException.ThrowIfNull(other);
 #else
-            if (other == null)
+            if (other is null)
                 throw new ArgumentNullException(nameof(other));
 #endif
+            Algorithm = other.Algorithm;
             Base64EncodedValue = other.Base64EncodedValue;
-            CachedValue = other.CachedValue;
-            Certificate = other.Certificate;
+            // Copy the backing fields directly. This is safe to do in a copy-constructor, because the ID is NULL initially.
+            _cachedValue = other._cachedValue;
+            _certificate = other._certificate;
             CertificateStorePath = other.CertificateStorePath;
             CertificateDistinguishedName = other.CertificateDistinguishedName;
+            CertificateSubjectName = other.CertificateSubjectName;
             CertificateThumbprint = other.CertificateThumbprint;
             CertificateDiskPath = other.CertificateDiskPath;
             CertificatePassword = other.CertificatePassword;
@@ -58,98 +63,121 @@ namespace Microsoft.Identity.Abstractions
             SourceType = other.SourceType;
             TokenExchangeUrl = other.TokenExchangeUrl;
             TokenExchangeAuthority = other.TokenExchangeAuthority;
+            UseBoundCredential = other.UseBoundCredential;
         }
 
         private string? _cachedId;
+        private X509Certificate2? _certificate;
+        private object? _cachedValue;
+        private string? _clientSecret;
 
         /// <summary>
-        /// Gets a unique identifier for a CredentialDescription based on <see cref="SourceType"/> and <see cref="ReferenceOrValue"/>.
+        /// Gets a unique identifier for a CredentialDescription based on <see cref="SourceType"/>.
         /// </summary>
         public string Id
         {
             get
             {
                 if (_cachedId == null)
-                    _cachedId = $"{SourceType}_{Container}_{ReferenceOrValue}";
+                {
+                    // Use backing field directly for efficiency
+                    string certificateThumbprint = _certificate?.Thumbprint ?? "null";
 
-                return _cachedId;
+                    switch (SourceType)
+                    {
+                        case CredentialSource.Certificate:
+                            if (_certificate != null)
+                            {
+                                _cachedId = $"Certificate={_certificate.Thumbprint}";
+                            }
+                            else
+                            {
+                                _cachedId = $"Certificate=null";
+                            }
+                            break;
+                        case CredentialSource.KeyVault:
+                            _cachedId = $"CertificateFromKeyVault={KeyVaultUrl}/{KeyVaultCertificateName};Thumbprint={certificateThumbprint}";
+                            break;
+                        case CredentialSource.Base64Encoded:
+                            _cachedId = $"CertificateFromBase64Encoded={GenerateHash(Base64EncodedValue)};Thumbprint={certificateThumbprint}";
+                            break;
+                        case CredentialSource.Path:
+                            _cachedId = $"CertificateFromPath={CertificateDiskPath};Thumbprint={certificateThumbprint}";
+                            break;
+                        case CredentialSource.StoreWithThumbprint:
+                            _cachedId = $"CertificateStoreWithThumbprint={CertificateStorePath}/{CertificateThumbprint}";
+                            break;
+                        case CredentialSource.StoreWithDistinguishedName:
+                            _cachedId = $"CertificateStoreWithDistinguishedName={CertificateStorePath}/{CertificateDistinguishedName};Thumbprint={certificateThumbprint}";
+                            break;
+                        case CredentialSource.StoreWithSubjectName:
+                            _cachedId = $"CertificateStoreWithSubjectName={CertificateStorePath}/{CertificateSubjectName};Thumbprint={certificateThumbprint}";
+                            break;
+                        case CredentialSource.ClientSecret:
+                            _cachedId = $"RedactedClientSecret={GenerateHash(ClientSecret)}";
+                            break;
+                        case CredentialSource.SignedAssertionFromManagedIdentity:
+                            _cachedId = $"SignedAssertionFromManagedIdentity={ManagedIdentityClientId}";
+                            break;
+                        case CredentialSource.SignedAssertionFilePath:
+                            _cachedId = $"SignedAssertionFilePath={SignedAssertionFileDiskPath}";
+                            break;
+                        case CredentialSource.SignedAssertionFromVault:
+                            _cachedId = $"SignedAssertionFromVault={KeyVaultCertificateName}";
+                            break;
+                        case CredentialSource.AutoDecryptKeys:
+                            _cachedId = $"AutoDecryptKeys";
+                            break;
+                        case CredentialSource.CustomSignedAssertion:
+                            string parameterNames = string.Join(",", (IEnumerable<string>?)CustomSignedAssertionProviderData?.Keys ?? []);
+                            _cachedId = $"CustomSignedAssertion={CustomSignedAssertionProviderName}({parameterNames})";
+                            break;
+                        case CredentialSource.ManagedCertificate:
+                            if (_cachedValue != null)
+                            {
+                                _cachedId = $"ManagedCertificate={_cachedValue};Thumbprint={certificateThumbprint}";
+                            }
+                            else
+                            {
+                                _cachedId = $"ManagedCertificate=null;Thumbprint={certificateThumbprint}";
+                            }
+                            break;
+                        default:
+                            throw new ArgumentException("Unknown credential source type");
+                    }
+                }
+                return _cachedId!;
             }
         }
+
+        private string GenerateHash(string? secret)
+        {
+            if (secret == null)
+                return string.Empty;
+
+            byte[] digest;
+
+#if !NET8_0_OR_GREATER
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                digest = sha256.ComputeHash(Encoding.Unicode.GetBytes(secret));
+            }
+#else
+            digest = SHA256.HashData(Encoding.Unicode.GetBytes(secret));
+#endif
+            return Convert.ToBase64String(digest);
+        }
+
+        /// <summary>
+        /// Algorithm used to create signing credentials.
+        /// </summary>
+        public string? Algorithm { get; set; }
 
         /// <summary>
         /// Type of the source of the credential. This property is used to determine which other properties need
         /// to be provided to describe the credential.
         /// </summary>
         public CredentialSource SourceType { get; set; }
-
-        /// <summary>
-        /// Container in which to find the credential. You will normally not use this property directly. It could be used
-        /// by property editors in tools or IDEs. Instead, use the properties that are specific to the <see cref="SourceType"/>.
-        /// </summary>
-        /// <remarks>
-        /// <list type="bullet">
-        /// <item>If <see cref="SourceType"/> equals <see cref="CredentialSource.KeyVault"/>, then
-        /// the container is the Key Vault base URL.</item>
-        /// <item>If <see cref="SourceType"/> equals <see cref="CredentialSource.Base64Encoded"/>, then
-        /// this value is not used.</item>
-        /// <item>If <see cref="SourceType"/> equals <see cref="CredentialSource.Path"/>, then
-        /// this value is the path on disk where to find the credential.</item>
-        /// <item>If <see cref="SourceType"/> equals <see cref="CredentialSource.StoreWithDistinguishedName"/>,
-        /// or <see cref="CredentialSource.StoreWithThumbprint"/>, then
-        /// this value is the path to the credential in the cert store, for instance <c>CurrentUser/My</c>.</item>
-        /// </list>
-        /// </remarks>
-        internal string? Container
-        {
-            get
-            {
-                return SourceType switch
-                {
-                    CredentialSource.Certificate => null,
-                    CredentialSource.KeyVault => KeyVaultUrl,
-                    CredentialSource.Base64Encoded => CertificatePassword,
-                    CredentialSource.Path => CertificateDiskPath,
-                    CredentialSource.StoreWithThumbprint or CredentialSource.StoreWithDistinguishedName => CertificateStorePath,
-                    CredentialSource.SignedAssertionFilePath => SignedAssertionFileDiskPath,
-                    CredentialSource.SignedAssertionFromVault => KeyVaultUrl,
-                    CredentialSource.CustomSignedAssertion => CustomSignedAssertionProviderName,
-                    _ => null
-                };
-            }
-            set
-            {
-                switch (SourceType)
-                {
-                    case CredentialSource.Certificate:
-                        break;
-                    case CredentialSource.KeyVault:
-                    case CredentialSource.SignedAssertionFromVault:
-                        KeyVaultUrl = value;
-                        break;
-                    case CredentialSource.Base64Encoded:
-                        // This is to avoid a breaking change (in v1.0 there was no password for
-                        // base 64 encoded assertion, which was therefore the reference or value.
-                        // We consider the password as a kind of enveloppe, hence being the container
-                        CertificatePassword = value;
-                        break;
-                    case CredentialSource.Path:
-                        CertificateDiskPath = value;
-                        break;
-                    case CredentialSource.StoreWithDistinguishedName:
-                    case CredentialSource.StoreWithThumbprint:
-                        CertificateStorePath = value;
-                        break;
-                    case CredentialSource.SignedAssertionFilePath:
-                        SignedAssertionFileDiskPath = value;
-                        break;
-                    case CredentialSource.CustomSignedAssertion:
-                        CustomSignedAssertionProviderName = value;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
 
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.KeyVault"/>, use this property to specify the
@@ -160,27 +188,45 @@ namespace Microsoft.Identity.Abstractions
         /// <![CDATA[
         /// The JSON fragment below describes a certificate stored in Key Vault used as a client credential in a confidential client application:
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="keyvault_json":::
-        /// 
+        ///
         /// The code below describes programmatically in C#, the same certificate stored in Key Vault.
         /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="keyvault_csharp":::
         /// ]]></format>
         /// </example>
         /// <seealso cref="SourceType"/>
         /// <seealso cref="KeyVaultCertificateName"/>
-        public string? KeyVaultUrl { get; set; }
+        public string? KeyVaultUrl
+        {
+            get => _keyVaultUrl;
+            set
+            {
+                _keyVaultUrl = value;
+                _cachedId = null;
+            }
+        }
+        private string? _keyVaultUrl;
 
         /// <summary>
-        /// When <see cref="SourceType"/> is <see cref="CredentialSource.StoreWithDistinguishedName"/> or 
-        /// <see cref="CredentialSource.StoreWithThumbprint"/>, specifies the certificate store from which to extract
+        /// When <see cref="SourceType"/> is <see cref="CredentialSource.StoreWithDistinguishedName"/> or
+        /// <see cref="CredentialSource.StoreWithThumbprint"/> or <see cref="CredentialSource.StoreWithSubjectName"/>, specifies the certificate store from which to extract
         /// the certificate. The format is the concatenation of a value of <see cref="StoreLocation"/> and a value of <see cref="StoreName"/>
         /// separated by a slash. For instance, use <c>CurrentUser/My</c> for a user certificate, and <c>LocalMachine/My</c> for a computer certificate.
         /// </summary>
-        /// <remarks>Use this property in conjunction with <see cref="CertificateDistinguishedName"/> or <see cref="CertificateThumbprint"/>.</remarks>
+        /// <remarks>Use this property in conjunction with <see cref="CertificateDistinguishedName"/>, <see cref="CertificateThumbprint"/>, or <see cref="CertificateSubjectName"/>.</remarks>
         /// <seealso cref="SourceType"/>
         /// <seealso cref="CertificateStorePath"/>
         /// <seealso cref="CertificateDistinguishedName"/>
         /// <seealso cref="CertificateThumbprint"/>
-        public string? CertificateStorePath { get; set; }
+        public string? CertificateStorePath
+        {
+            get => _certificateStorePath;
+            set
+            {
+                _certificateStorePath = value;
+                _cachedId = null;
+            }
+        }
+        private string? _certificateStorePath;
 
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.StoreWithDistinguishedName"/>, specifies the distinguished name of
@@ -191,7 +237,7 @@ namespace Microsoft.Identity.Abstractions
         /// <![CDATA[
         /// The JSON fragment below describes a user certificate stored in the personal certificates folder (<b>CurrentUser/My</b>) and specified by its distinguised name, used as a client credential in a confidential client application:
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="distinguishedname_json":::
-        /// 
+        ///
         /// The code below describes programmatically in C#, a computer certificate in the personal certificates folder (<b>LocalMachine/My<b>).
         /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="distinguishedname_csharp":::
         /// ]]></format>
@@ -199,7 +245,43 @@ namespace Microsoft.Identity.Abstractions
         /// <seealso cref="SourceType"/>
         /// <seealso cref="CertificateStorePath"/>
         /// <seealso cref="CertificateThumbprint"/>
-        public string? CertificateDistinguishedName { get; set; }
+        public string? CertificateDistinguishedName
+        {
+            get => _certificateDistinguishedName;
+            set
+            {
+                _certificateDistinguishedName = value;
+                _cachedId = null;
+            }
+        }
+        private string? _certificateDistinguishedName;
+
+        /// <summary>
+        /// When <see cref="SourceType"/> is <see cref="CredentialSource.StoreWithSubjectName"/>, specifies the subject name of
+        /// the certificate in the store specified by <see cref="CertificateStorePath"/>.
+        /// </summary>
+        /// <example>
+        /// <format type="text/markdown">
+        /// <![CDATA[
+        /// The JSON fragment below describes a user certificate stored in the personal certificates folder (<b>CurrentUser/My</b>) and specified by its subject name, used as a client credential in a confidential client application:
+        /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="subjectname_json":::
+        ///
+        /// The code below describes programmatically in C#, a computer certificate in the personal certificates folder (<b>LocalMachine/My</b>) accessed by its subject name.
+        /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="subjectname_csharp":::
+        /// ]]></format>
+        /// </example>
+        /// <seealso cref="SourceType"/>
+        /// <seealso cref="CertificateStorePath"/>
+        public string? CertificateSubjectName
+        {
+            get => _certificateSubjectName;
+            set
+            {
+                _certificateSubjectName = value;
+                _cachedId = null;
+            }
+        }
+        private string? _certificateSubjectName;
 
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.KeyVault"/>, use this property to specify the
@@ -210,12 +292,21 @@ namespace Microsoft.Identity.Abstractions
         /// <![CDATA[
         /// The JSON fragment below describes a certificate stored in Key Vault used as a client credential in a confidential client application:
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="keyvault_json":::
-        /// 
+        ///
         /// The code below describes programmatically in C#, the same certificate stored in Key Vault.
         /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="keyvault_csharp":::
         /// ]]></format>
         /// </example>
-        public string? KeyVaultCertificateName { get; set; }
+        public string? KeyVaultCertificateName
+        {
+            get => _keyVaultCertificateName;
+            set
+            {
+                _keyVaultCertificateName = value;
+                _cachedId = null;
+            }
+        }
+        private string? _keyVaultCertificateName;
 
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.StoreWithThumbprint"/> specifies the thumbprint of the certificate to extract from
@@ -226,7 +317,7 @@ namespace Microsoft.Identity.Abstractions
         /// <![CDATA[
         /// The JSON fragment below describes a user certificate stored in the personal certificates folder (<b>CurrentUser/My</b>) and specified by its thumbprint, used as a client credential in a confidential client application:
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="thumbprint_json":::
-        /// 
+        ///
         /// The code below describes programmatically in C#, a computer certificate in the personal certificates folder (<b>LocalMachine/My<b>) accessed by its thumbprint.
         /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="thumbprint_csharp":::
         /// ]]></format>
@@ -235,11 +326,20 @@ namespace Microsoft.Identity.Abstractions
         /// <seealso cref="SourceType"/>
         /// <seealso cref="CertificateDistinguishedName"/>
         /// <seealso cref="CertificateStorePath"/>
-        public string? CertificateThumbprint { get; set; }
+        public string? CertificateThumbprint
+        {
+            get => _certificateThumbprint;
+            set
+            {
+                _certificateThumbprint = value;
+                _cachedId = null;
+            }
+        }
+        private string? _certificateThumbprint;
 
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.Path"/>, specifies the path to the certificate on disk. You can
-        /// use this property to specify the path to a PFX file containing the certificate and its private key. If a password is needed, 
+        /// use this property to specify the path to a PFX file containing the certificate and its private key. If a password is needed,
         /// use <see cref="CertificatePassword"/>.
         /// </summary>
         /// <example>
@@ -247,14 +347,24 @@ namespace Microsoft.Identity.Abstractions
         /// <![CDATA[
         /// The JSON fragment below describes a certificate retrieved by its path and a password to be used as a client credential in a confidential client application:
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="path_json":::
-        /// 
+        ///
         /// The code below describes programmatically in C#, a the same certificate.
         /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="path_csharp":::
         /// ]]></format>
         /// </example>
         /// <seealso cref="SourceType"/>
         /// <seealso cref="CertificatePassword"/>
-        public string? CertificateDiskPath { get; set; }
+        /// <remarks>Using a certificate from a file is not recommended in production.</remarks>
+        public string? CertificateDiskPath
+        {
+            get => _certificateDiskPath;
+            set
+            {
+                _certificateDiskPath = value;
+                _cachedId = null;
+            }
+        }
+        private string? _certificateDiskPath;
 
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.Path"/>, specifies the password to use to access the certificate which
@@ -265,13 +375,14 @@ namespace Microsoft.Identity.Abstractions
         /// <![CDATA[
         /// The JSON fragment below describes a certificate retrieved by its path and a password to be used as a client credential in a confidential client application:
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="path_json":::
-        /// 
+        ///
         /// The code below describes programmatically in C#, the same certificate.
         /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="path_csharp":::
         /// ]]></format>
         /// </example>
         /// <seealso cref="SourceType"/>
         /// <seealso cref="CertificateDiskPath"/>
+        /// <remarks>Using a certificate from a file is not recommended in production.</remarks>
         public string? CertificatePassword { get; set; }
 
         /// <summary>
@@ -282,12 +393,22 @@ namespace Microsoft.Identity.Abstractions
         /// <![CDATA[
         /// The JSON fragment below describes a certificate by its base64 encoded value, to be used as a client credential in a confidential client application:
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="base64_json":::
-        /// 
+        ///
         /// The code below describes programmatically in C#, the same certificate.
         /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="base64_csharp":::
         /// ]]></format>
         /// </example>
-        public string? Base64EncodedValue { get; set; }
+        /// <remarks>Using a certificate from its base64 encoded value is not recommended in production.</remarks>
+        public string? Base64EncodedValue
+        {
+            get => _base64EncodedValue;
+            set
+            {
+                _base64EncodedValue = value;
+                _cachedId = null;
+            }
+        }
+        private string? _base64EncodedValue;
 
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.ClientSecret"/>, describes the client secret to use as a client credential in a confidential client application.
@@ -298,16 +419,26 @@ namespace Microsoft.Identity.Abstractions
         /// <![CDATA[
         /// The JSON fragment below describes a client secret used as a client credential in a confidential client application:
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="secret_json":::
-        /// 
+        ///
         /// The code below describes programmatically in C#, the same client secret.
         /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="secret_csharp":::
         /// ]]></format>
         /// </example>
-        public string? ClientSecret { get; set; }
+        public string? ClientSecret
+        {
+            get => _clientSecret;
+            set
+            {
+                _clientSecret = value;
+
+                // CachedID can depend on the client secret. Set it to null so that it will be recomputed.
+                _cachedId = null;
+            }
+        }
 
         /// <summary>
-        /// When <see cref="SourceType"/> is <see cref="CredentialSource.SignedAssertionFromManagedIdentity"/>, it specifies the client ID of the Azure user-assigned managed identity 
-        /// used to provide a signed assertion to act as a client credential for the application. This requires that the application is deployed on Azure, that the managed identity is configured, 
+        /// When <see cref="SourceType"/> is <see cref="CredentialSource.SignedAssertionFromManagedIdentity"/>, it specifies the client ID of the Azure user-assigned managed identity
+        /// used to provide a signed assertion to act as a client credential for the application. This requires that the application is deployed on Azure, that the managed identity is configured,
         /// and that workload identity federation with the managed identity is declared in the application registration. For details, see https://learn.microsoft.com/azure/active-directory/workload-identities/workload-identity-federation.
         /// </summary>
         /// <example>
@@ -315,20 +446,29 @@ namespace Microsoft.Identity.Abstractions
         /// <![CDATA[
         /// The JSON fragment below describes a workload identity federation with a user assigned managed identity:
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="msi_json":::
-        /// 
+        ///
         /// The code below describes programmatically in C#, the same workload identity federation with a user assigned managed identity.
         /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="msi_csharp":::
         /// ]]></format>
-        /// </example>        
+        /// </example>
         /// <remarks>If you want to use the system-assigned managed identity, just use <see cref="SourceType"/> = <see cref="CredentialSource.SignedAssertionFromManagedIdentity"/> and
         /// don't provide a managed identity client ID.</remarks>
-        public string? ManagedIdentityClientId { get; set; }
+        public string? ManagedIdentityClientId
+        {
+            get => _managedIdentityClientId;
+            set
+            {
+                _managedIdentityClientId = value;
+                _cachedId = null;
+            }
+        }
+        private string? _managedIdentityClientId;
 
         /// <summary>
-        /// When <see cref="SourceType"/> is <see cref="CredentialSource.SignedAssertionFilePath"/>, optionally specifies the path on disk of a file 
-        /// containing a signed assertion used as a client assertion for the confidential client application. 
+        /// When <see cref="SourceType"/> is <see cref="CredentialSource.SignedAssertionFilePath"/>, optionally specifies the path on disk of a file
+        /// containing a signed assertion used as a client assertion for the confidential client application.
         /// The signed assertion file is a file containing a signed JWT assertion that is used as a client credential. You will usually use this option when you want to integrate
-        /// with workload identity federation with Azure Kubernetes Service (AKS). 
+        /// with workload identity federation with Azure Kubernetes Service (AKS).
         /// For details, see https://learn.microsoft.com/azure/active-directory/workload-identities/workload-identity-federation.
         /// </summary>
         /// <example>
@@ -336,15 +476,24 @@ namespace Microsoft.Identity.Abstractions
         /// <![CDATA[
         /// The JSON fragment below describes a signed assertion acquired with workload identity federation with Azure Kubernetes Services (AKS):
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="aks_json":::
-        /// 
+        ///
         /// The code below describes programmatically in C#, the same workload identity federation with with Azure Kubernetes Services (AKS) signed assertion.
         /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="aks_csharp":::
         /// ]]></format>
         /// </example>
         /// <remarks>When deployed to AKS, if you specify <see cref="SourceType"/> = <see cref="CredentialSource.SignedAssertionFilePath"/> but don't provide
-        /// the signed assertion file disk path, the file will be searched based on the content of two environment variables: 
+        /// the signed assertion file disk path, the file will be searched based on the content of two environment variables:
         /// <b>AZURE_FEDERATED_TOKEN_FILE</b> and <b>AZURE_ACCESS_TOKEN_FILE</b>.</remarks>
-        public string? SignedAssertionFileDiskPath { get; set; }
+        public string? SignedAssertionFileDiskPath
+        {
+            get => _signedAssertionFileDiskPath;
+            set
+            {
+                _signedAssertionFileDiskPath = value;
+                _cachedId = null;
+            }
+        }
+        private string? _signedAssertionFileDiskPath;
 
         /// <summary>
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.AutoDecryptKeys"/>, this property describes the authority to use
@@ -358,7 +507,7 @@ namespace Microsoft.Identity.Abstractions
         /// <![CDATA[
         /// The JSON fragment below describes a decrypt credential to get the decrypt keys automatically:
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="autodecryp_json":::
-        /// 
+        ///
         /// The code below describes the same, programmatically in C#.
         /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="autodecryp_csharp":::
         /// ]]></format>
@@ -366,8 +515,8 @@ namespace Microsoft.Identity.Abstractions
         public AuthorizationHeaderProviderOptions? DecryptKeysAuthenticationOptions { get; set; }
 
         /// <summary>
-        /// When <see cref="SourceType"/> is <see cref="CredentialSource.SignedAssertionFromManagedIdentity"/>, 
-        /// specifies the authority URL to use for token exchange. This is useful in scenarios where the issuer 
+        /// When <see cref="SourceType"/> is <see cref="CredentialSource.SignedAssertionFromManagedIdentity"/>,
+        /// specifies the authority URL to use for token exchange. This is useful in scenarios where the issuer
         /// for the token exchange is different from the application's authority.
         /// </summary>
         /// <example>
@@ -375,7 +524,7 @@ namespace Microsoft.Identity.Abstractions
         /// <![CDATA[
         /// The JSON fragment below describes a workload identity federation with a user assigned managed identity:
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="tokenExchangeAuthority_json":::
-        /// 
+        ///
         /// The code below describes programmatically in C#, the same workload identity federation with a user assigned managed identity.
         /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="tokenExchangeAuthority_csharp":::
         /// ]]></format>
@@ -384,92 +533,38 @@ namespace Microsoft.Identity.Abstractions
         public string? TokenExchangeAuthority { get; set; }
 
         /// <summary>
-        /// Reference to the certificate or value. You will normally not use this property directly. It could be used
-        /// by property editors in tools or IDEs. Instead, use the properties that are specific to the <see cref="SourceType"/>.
-        /// </summary>
-        /// <remarks>
-        /// <list type="bullet">
-        /// <item>If <see cref="SourceType"/> equals <see cref="CredentialSource.KeyVault"/>, then
-        /// the reference is the name of the certificate in Key Vault (maybe the version?).</item>
-        /// <item>If <see cref="SourceType"/> equals <see cref="CredentialSource.Base64Encoded"/>, then
-        /// this value is the base 64 encoded certificate itself.</item>
-        /// <item>If <see cref="SourceType"/> equals <see cref="CredentialSource.Path"/>, then
-        /// this value is the password to access the certificate (if needed).</item>
-        /// <item>If <see cref="SourceType"/> equals <see cref="CredentialSource.StoreWithDistinguishedName"/>,
-        /// this value is the distinguished name.</item>
-        /// <item>If <see cref="SourceType"/> equals <see cref="CredentialSource.StoreWithThumbprint"/>,
-        /// this value is the thumbprint.</item>
-        /// </list>
-        /// </remarks>
-        internal string? ReferenceOrValue
-        {
-            get
-            {
-                return SourceType switch
-                {
-                    CredentialSource.KeyVault => KeyVaultCertificateName,
-                    CredentialSource.SignedAssertionFromVault => KeyVaultCertificateName,
-                    CredentialSource.Path => CertificatePassword,
-                    CredentialSource.StoreWithThumbprint => CertificateThumbprint,
-                    CredentialSource.StoreWithDistinguishedName => CertificateDistinguishedName,
-                    CredentialSource.Certificate or CredentialSource.Base64Encoded => Base64EncodedValue,
-                    CredentialSource.SignedAssertionFromManagedIdentity => ManagedIdentityClientId,
-                    CredentialSource.ClientSecret => "***",
-                    CredentialSource.CustomSignedAssertion => null,
-                    _ => null,
-                };
-            }
-            set
-            {
-                switch (SourceType)
-                {
-                    case CredentialSource.Certificate:
-                        break;
-                    case CredentialSource.KeyVault:
-                        KeyVaultCertificateName = value;
-                        break;
-                    case CredentialSource.SignedAssertionFromVault:
-                        KeyVaultCertificateName = value;
-                        break;
-                    case CredentialSource.Base64Encoded:
-                        Base64EncodedValue = value;
-                        break;
-                    case CredentialSource.Path:
-                        CertificatePassword = value;
-                        break;
-                    case CredentialSource.StoreWithThumbprint:
-                        CertificateThumbprint = value;
-                        break;
-                    case CredentialSource.StoreWithDistinguishedName:
-                        CertificateDistinguishedName = value;
-                        break;
-                    case CredentialSource.ClientSecret:
-                        ClientSecret = value;
-                        break;
-                    case CredentialSource.SignedAssertionFromManagedIdentity:
-                        ManagedIdentityClientId = value;
-                        break;
-                    case CredentialSource.CustomSignedAssertion:
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-
-        /// <summary>
-        /// When <see cref="SourceType"/> is <see cref="CredentialSource.Certificate"/>, you will use this property to provide the certificate yourself. 
+        /// When <see cref="SourceType"/> is <see cref="CredentialSource.Certificate"/>, you will use this property to provide the certificate yourself.
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.Base64Encoded"/> or <see cref="CredentialSource.KeyVault"/>
         /// or <see cref="CredentialSource.Path"/> or <see cref="CredentialSource.StoreWithDistinguishedName"/> or <see cref="CredentialSource.StoreWithThumbprint"/>
         /// after the certificate is retrieved by a <see cref="ICredentialsLoader"/>, it will be stored in this property and also in the <see cref="CachedValue"/>.
         /// </summary>
-        public X509Certificate2? Certificate { get; set; }
+        public X509Certificate2? Certificate
+        {
+            get => _certificate;
+            set
+            {
+                _certificate = value;
+
+                // CachedID can depend on the certificate thumbprint. Set it to null so that it will be recomputed.
+                _cachedId = null;
+            }
+        }
 
         /// <summary>
         /// When the credential is retrieved by a <see cref="ICredentialsLoader"/>, it will be stored in this property, where you can retrieve it. If the credential is a certificate,
         /// it will also be stored in the <see cref="Certificate"/> property.
         /// </summary>
-        public virtual object? CachedValue { get; set; }
+        public virtual object? CachedValue
+        {
+            get => _cachedValue;
+            set
+            {
+                _cachedValue = value;
+
+                // CachedID can depend on the cached value. Set it to null so that it will be recomputed.
+                _cachedId = null;
+            }
+        }
 
         /// <summary>
         /// Skip this credential description. This is useful when, you specify a list of
@@ -479,6 +574,43 @@ namespace Microsoft.Identity.Abstractions
         public bool Skip { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether this credential is intended to be used as a bound credential (mTLS bound)
+        /// when supported by the host library.
+        /// Certificate-flavored sources (<see cref="CredentialSource.Certificate"/>, <see cref="CredentialSource.KeyVault"/>,
+        /// <see cref="CredentialSource.Base64Encoded"/>, <see cref="CredentialSource.Path"/>,
+        /// <see cref="CredentialSource.StoreWithThumbprint"/>, <see cref="CredentialSource.StoreWithDistinguishedName"/>,
+        /// <see cref="CredentialSource.StoreWithSubjectName"/>, and <see cref="CredentialSource.ManagedCertificate"/>)
+        /// and <see cref="CredentialSource.SignedAssertionFromManagedIdentity"/> are expected to honor this setting.
+        /// Other source types are expected to ignore this setting, based on the host library's choice.
+        /// The default value is <see langword="false"/>, which preserves existing behavior.
+        /// For more context, see <see href="https://github.com/AzureAD/microsoft-authentication-library-for-dotnet/issues/5791">MSAL.NET issue 5791</see>.
+        /// </summary>
+        /// <example>
+        /// <format type="text/markdown">
+        /// <![CDATA[
+        /// The JSON fragment below opts a signed assertion from managed identity credential into the bound credential flow:
+        /// ```json
+        /// {
+        ///   "AzureAd": {
+        ///     "Instance": "https://login.microsoftonline.com/",
+        ///     "TenantId": "your-tenant-id",
+        ///     "ClientId": "your-client-id",
+        ///     "ClientCredentials": [
+        ///       {
+        ///         "SourceType": "SignedAssertionFromManagedIdentity",
+        ///         "ManagedIdentityClientId": "your-user-assigned-managed-identity-client-id",
+        ///         "TokenExchangeUrl": "api://AzureADTokenExchange",
+        ///         "UseBoundCredential": true
+        ///       }
+        ///     ]
+        ///   }
+        /// }
+        /// ```
+        /// ]]></format>
+        /// </example>
+        public bool UseBoundCredential { get; set; }
+
+        /// <summary>
         /// Describes the type of credentials, based on the <see cref="SourceType"/>.
         /// </summary>
         /// <remarks>
@@ -486,9 +618,10 @@ namespace Microsoft.Identity.Abstractions
         /// <list type="bullet">
         /// <item>
         /// <term><see cref="CredentialType.Certificate"/></term>
-        /// <description>when <see cref="SourceType"/> is <see cref="CredentialSource.Certificate"/>, you will use this property to provide the certificate yourself. 
+        /// <description>when <see cref="SourceType"/> is <see cref="CredentialSource.Certificate"/>, you will use this property to provide the certificate yourself.
         /// When <see cref="SourceType"/> is <see cref="CredentialSource.Base64Encoded"/> or <see cref="CredentialSource.KeyVault"/>
-        /// or <see cref="CredentialSource.Path"/> or <see cref="CredentialSource.StoreWithDistinguishedName"/> or <see cref="CredentialSource.StoreWithThumbprint"/></description>
+        /// or <see cref="CredentialSource.Path"/> or <see cref="CredentialSource.StoreWithDistinguishedName"/> or <see cref="CredentialSource.StoreWithThumbprint"/>
+        /// or <see cref="CredentialSource.StoreWithSubjectName"/></description>
         /// </item>
         /// <item>
         /// <term><see cref="CredentialType.Secret"/></term>
@@ -511,17 +644,19 @@ namespace Microsoft.Identity.Abstractions
             {
                 return SourceType switch
                 {
-                    CredentialSource.KeyVault 
-                    or CredentialSource.Path 
-                    or CredentialSource.StoreWithThumbprint 
-                    or CredentialSource.StoreWithDistinguishedName 
-                    or CredentialSource.Certificate 
-                    or CredentialSource.Base64Encoded => CredentialType.Certificate,
-                    
+                    CredentialSource.KeyVault
+                    or CredentialSource.Path
+                    or CredentialSource.StoreWithThumbprint
+                    or CredentialSource.StoreWithDistinguishedName
+                    or CredentialSource.StoreWithSubjectName
+                    or CredentialSource.Certificate
+                    or CredentialSource.Base64Encoded
+                    or CredentialSource.ManagedCertificate => CredentialType.Certificate,
+
                     CredentialSource.ClientSecret => CredentialType.Secret,
-                    
-                    CredentialSource.SignedAssertionFromManagedIdentity 
-                    or CredentialSource.SignedAssertionFilePath 
+
+                    CredentialSource.SignedAssertionFromManagedIdentity
+                    or CredentialSource.SignedAssertionFilePath
                     or CredentialSource.SignedAssertionFromVault
                     or CredentialSource.CustomSignedAssertion => CredentialType.SignedAssertion,
 
@@ -542,11 +677,11 @@ namespace Microsoft.Identity.Abstractions
         /// <![CDATA[
         /// The JSON fragment below describes a workload identity federation with a user assigned managed identity:
         /// :::code language="json" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="tokenExchangeUrl_json":::
-        /// 
+        ///
         /// The code below describes programmatically in C#, the same workload identity federation with a user assigned managed identity.
         /// :::code language="csharp" source="~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs" id="tokenExchangeUrl_csharp":::
         /// ]]></format>
-        /// </example> 
+        /// </example>
         /// <remarks>If you want to use the default token exchange resource "api://AzureADTokenExchange", don't provide a token exchange url.</remarks>
         public string? TokenExchangeUrl { get; set; }
 
@@ -554,14 +689,32 @@ namespace Microsoft.Identity.Abstractions
         /// Extensibility. When used with <see cref="SourceType"/> = <see cref="CredentialSource.CustomSignedAssertion"/>, this property specifies the fully qualified
         /// named of the extension that will be used to retrieve the signed assertion used as a client credentials.
         /// </summary>
-        public string? CustomSignedAssertionProviderName { get; set; }
+        public string? CustomSignedAssertionProviderName
+        {
+            get => _customSignedAssertionProviderName;
+            set
+            {
+                _customSignedAssertionProviderName = value;
+                _cachedId = null;
+            }
+        }
+        private string? _customSignedAssertionProviderName;
 
         /// <summary>
-        /// Extensibility. When used with <see cref="SourceType"/> = <see cref="CredentialSource.CustomSignedAssertion"/>, this property specifies 
+        /// Extensibility. When used with <see cref="SourceType"/> = <see cref="CredentialSource.CustomSignedAssertion"/>, this property specifies
         /// additional data that will be passed to the extension computing the signed assertion. This is meant for SDKs extending the credential
         /// description capabilities.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public Dictionary<string, object>? CustomSignedAssertionProviderData { get; set; }
+        public Dictionary<string, object>? CustomSignedAssertionProviderData
+        {
+            get => _customSignedAssertionProviderData;
+            set
+            {
+                _customSignedAssertionProviderData = value;
+                _cachedId = null;
+            }
+        }
+        private Dictionary<string, object>? _customSignedAssertionProviderData;
     }
 }

@@ -4,6 +4,11 @@
 steps:
 
 - task: UseDotNet@2
-  displayName: 'Use .Net Core SDK 8'
+  displayName: 'Use .NET version from global.json'
+  inputs:
+    useGlobalJson: true  
+
+- task: UseDotNet@2
+  displayName: 'Use .NET 8 SDK'
   inputs:
     version: 8.0.x 

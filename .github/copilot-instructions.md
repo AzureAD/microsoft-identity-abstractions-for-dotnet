@@ -1,0 +1,1 @@
+Please review the comprehensive agent automation and development guidelines in the agents.md file located in the root directory. This document contains all custom instructions, development standards, and AI assistant guidelines for the repository.

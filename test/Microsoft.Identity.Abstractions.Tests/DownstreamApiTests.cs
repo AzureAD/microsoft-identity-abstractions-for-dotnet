@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 using Xunit;
+
 
 
 #if NET8_0_OR_GREATER
@@ -55,7 +57,9 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
                 HttpMethod = HttpMethod.Trace.ToString(),
                 ProtocolScheme = "bearer",
                 RelativePath = "/api/values",
-                RequestAppToken = true
+                RequestAppToken = true,
+                ExtraHeaderParameters = new Dictionary<string, string> { { "OData-Version", "4.0" } },
+                ExtraQueryParameters = new Dictionary<string, string> { { "filter", "name eq 'test'" } }
             };
 
             Assert.Equal("https://apitocall.domain.com/api/values", downstreamApiOptions.GetApiUrl());
@@ -94,9 +98,11 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.UserFlow, downstreamApiClone.AcquireTokenOptions.UserFlow);
             Assert.Equal("application/json", downstreamApiClone.AcceptHeader);
             Assert.Equal("application/json", downstreamApiClone.ContentType);
+            Assert.Equal(downstreamApiOptions.ExtraHeaderParameters, downstreamApiClone.ExtraHeaderParameters);
+            Assert.Equal(downstreamApiOptions.ExtraQueryParameters, downstreamApiClone.ExtraQueryParameters);
 
             // If this fails, think of also adding a line to test the new property
-            Assert.Equal(12, typeof(DownstreamApiOptions).GetProperties().Length);
+            Assert.Equal(14, typeof(DownstreamApiOptions).GetProperties().Length);
             Assert.Equal(15, typeof(AcquireTokenOptions).GetProperties().Length);
 
             DownstreamApiOptionsReadOnlyHttpMethod options = new DownstreamApiOptionsReadOnlyHttpMethod(downstreamApiOptions, HttpMethod.Delete.ToString());
@@ -160,9 +166,9 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
         [InlineData("https://myapi", null, "https://myapi/")]
         [InlineData(null, "/controller/action", "/controller/action")]
         [InlineData(null, "controller/action", "/controller/action")]
-        public void ComputeUrl(string baseUrl, string relativePath, string expectedUrl)
+        public void ComputeUrl(string? baseUrl, string? relativePath, string expectedUrl)
         {
-            DownstreamApiOptions options = new DownstreamApiOptions { BaseUrl = baseUrl, RelativePath = relativePath };
+            DownstreamApiOptions options = new DownstreamApiOptions { BaseUrl = baseUrl, RelativePath = relativePath! };
             Assert.Equal(expectedUrl, options.GetApiUrl());
         }
 
@@ -184,18 +190,64 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
         }
 
         [Fact]
-        public void ExerciseApiAotOverloads()
+        public async Task ExerciseApiAotOverloads()
         {
             // Test that the AOT Json serialzation overloads work
 
             IDownstreamApi downstreamApi = new CustomDownstreamApi();
-            CustomApiResponse? response = downstreamApi.CallApiForUserAsync<CustomApiResponse>("service", CustomApiResponseJsonContext.Default.CustomApiResponse).Result;
+            CustomApiResponse? response = await downstreamApi.CallApiForUserAsync<CustomApiResponse>("service", CustomApiResponseJsonContext.Default.CustomApiResponse);
             Assert.Equal(200, response?.ErrorCode);
 
             CustomApiInput input = new CustomApiInput { ErrorCode = 123 };
-            response = downstreamApi.GetForAppAsync<CustomApiInput, CustomApiResponse>("service", input, CustomApiResponseJsonContext.Default.CustomApiInput, CustomApiResponseJsonContext.Default.CustomApiResponse).Result;
+            response = await downstreamApi.GetForAppAsync<CustomApiInput, CustomApiResponse>("service", input, CustomApiResponseJsonContext.Default.CustomApiInput, CustomApiResponseJsonContext.Default.CustomApiResponse);
             Assert.Equal(123, response?.ErrorCode);
         }
+
+        [Fact]
+        public void ExtraParametersWorkCorrectly()
+        {
+            var downstreamApiOptions = new DownstreamApiOptions
+            {
+                ExtraHeaderParameters = new Dictionary<string, string>
+                {
+                    { "OData-Version", "4.0" },
+                    { "Accept-Language", "en-US" }
+                },
+                ExtraQueryParameters = new Dictionary<string, string>
+                {
+                    { "filter", "name eq 'test'" },
+                    { "top", "10" }
+                }
+            };
+
+            // Test that properties are set correctly
+            Assert.NotNull(downstreamApiOptions.ExtraHeaderParameters);
+            Assert.Equal(2, downstreamApiOptions.ExtraHeaderParameters.Count);
+            Assert.Equal("4.0", downstreamApiOptions.ExtraHeaderParameters["OData-Version"]);
+            Assert.Equal("en-US", downstreamApiOptions.ExtraHeaderParameters["Accept-Language"]);
+
+            Assert.NotNull(downstreamApiOptions.ExtraQueryParameters);
+            Assert.Equal(2, downstreamApiOptions.ExtraQueryParameters.Count);
+            Assert.Equal("name eq 'test'", downstreamApiOptions.ExtraQueryParameters["filter"]);
+            Assert.Equal("10", downstreamApiOptions.ExtraQueryParameters["top"]);
+
+            // Test cloning preserves the properties
+            var clonedOptions = downstreamApiOptions.Clone();
+            Assert.NotNull(clonedOptions.ExtraHeaderParameters);
+            Assert.Equal(downstreamApiOptions.ExtraHeaderParameters, clonedOptions.ExtraHeaderParameters);
+            Assert.NotNull(clonedOptions.ExtraQueryParameters);
+            Assert.Equal(downstreamApiOptions.ExtraQueryParameters, clonedOptions.ExtraQueryParameters);
+
+            // Test null values work
+            var emptyOptions = new DownstreamApiOptions();
+            Assert.Null(emptyOptions.ExtraHeaderParameters);
+            Assert.Null(emptyOptions.ExtraQueryParameters);
+
+            var clonedEmptyOptions = emptyOptions.Clone();
+            Assert.Null(clonedEmptyOptions.ExtraHeaderParameters);
+            Assert.Null(clonedEmptyOptions.ExtraQueryParameters);
+        }
+
 #endif
     }
 
