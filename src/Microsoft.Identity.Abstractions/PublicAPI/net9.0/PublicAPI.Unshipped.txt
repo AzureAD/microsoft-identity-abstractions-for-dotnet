@@ -78,3 +78,6 @@ Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.TokenEndpoint.get -> st
 Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.TokenEndpoint.init -> void
 Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.TokenSource.get -> Microsoft.Identity.Abstractions.AcquiredTokenSource
 Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.TokenSource.init -> void
+Microsoft.Identity.Abstractions.AcquireTokenOptionsExtensions
+static Microsoft.Identity.Abstractions.AcquireTokenOptionsExtensions.GetHttpRequestMessage(this Microsoft.Identity.Abstractions.AcquireTokenOptions! options) -> System.Net.Http.HttpRequestMessage?
+static Microsoft.Identity.Abstractions.AcquireTokenOptionsExtensions.SetHttpRequestMessage(this Microsoft.Identity.Abstractions.AcquireTokenOptions! options, System.Net.Http.HttpRequestMessage! httpRequestMessage) -> void

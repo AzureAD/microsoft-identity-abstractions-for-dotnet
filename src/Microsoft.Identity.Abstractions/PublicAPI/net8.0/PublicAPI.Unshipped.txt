@@ -1,4 +1,7 @@
 #nullable enable
+Microsoft.Identity.Abstractions.AcquireTokenOptionsExtensions
+static Microsoft.Identity.Abstractions.AcquireTokenOptionsExtensions.GetHttpRequestMessage(this Microsoft.Identity.Abstractions.AcquireTokenOptions! options) -> System.Net.Http.HttpRequestMessage?
+static Microsoft.Identity.Abstractions.AcquireTokenOptionsExtensions.SetHttpRequestMessage(this Microsoft.Identity.Abstractions.AcquireTokenOptions! options, System.Net.Http.HttpRequestMessage! httpRequestMessage) -> void
 Microsoft.Identity.Abstractions.AcquiredTokenCacheLevel
 Microsoft.Identity.Abstractions.AcquiredTokenCacheLevel.L1Cache = 2 -> Microsoft.Identity.Abstractions.AcquiredTokenCacheLevel
 Microsoft.Identity.Abstractions.AcquiredTokenCacheLevel.L2Cache = 3 -> Microsoft.Identity.Abstractions.AcquiredTokenCacheLevel
