@@ -1,3 +1,9 @@
+12.3.0
+=======
+
+## What's Changed
+* Added `IAuthorizationHeaderProvider2` (extends `IAuthorizationHeaderProvider`) with metadata-returning counterparts to the three base header-creation methods: `CreateAuthorizationHeaderInformationForUserAsync`, `CreateAuthorizationHeaderInformationForAppAsync`, and `CreateAuthorizationHeaderInformationAsync`. Each mirrors the inputs of its base method and returns `OperationResult<AuthorizationHeaderInformation, AuthorizationHeaderError>` (header value, binding certificate, and token-acquisition metadata) instead of a bare `string`. Additive and non-breaking — existing string-returning callers are unaffected. See [#257](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/257).
+
 12.2.0
 =======
 
