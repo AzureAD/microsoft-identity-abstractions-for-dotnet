@@ -47,6 +47,12 @@ namespace Microsoft.Identity.Abstractions
         public long DurationInCacheInMs { get; init; }
 
         /// <summary>
+        /// Point in time at which the access token expires, or <see langword="null"/> when not captured.
+        /// Mirrors <see cref="AcquireTokenResult.ExpiresOn"/>.
+        /// </summary>
+        public DateTimeOffset? ExpiresOn { get; init; }
+
+        /// <summary>
         /// Point in time at which the token should be proactively refreshed,
         /// or <see langword="null"/> when no proactive refresh hint was provided.
         /// </summary>
