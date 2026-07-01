@@ -1,3 +1,9 @@
+12.4.0
+=======
+
+## What's Changed
+* Added `TokenAcquisitionMetadata.ExpiresOn` exposing the access token's absolute expiration on the token-acquisition metadata surface, mirroring `AcquireTokenResult.ExpiresOn`. Additive and non-breaking.
+
 12.3.0
 =======
 
