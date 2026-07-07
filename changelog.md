@@ -2,7 +2,7 @@
 =======
 
 ## What's Changed
-* Added `TokenAcquisitionMetadata.ExpiresOn` exposing the access token's absolute expiration on the token-acquisition metadata surface, mirroring `AcquireTokenResult.ExpiresOn`. Additive and non-breaking.
+* Added `TokenAcquisitionMetadata.ExpiresOn` exposing the access token's absolute expiration on the token-acquisition metadata surface, mirroring `AcquireTokenResult.ExpiresOn`. Additive and non-breaking. See [#259](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/259).
 
 12.3.0
 =======
