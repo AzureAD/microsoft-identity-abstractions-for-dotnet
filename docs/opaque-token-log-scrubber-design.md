@@ -162,27 +162,37 @@ sees the fully-assembled error/exception text), not only at token-handling call 
 ### .NET — `microsoft-authentication-library-for-dotnet`
 
 - **New file:** `src/client/Microsoft.Identity.Client/Internal/Logger/TokenScrubber.cs` (`internal static`).
-- **Patterns:** private static readonly array of the 3 eSTS patterns + MSA form. Compile once into
-  a `static readonly Regex` with `RegexOptions.Compiled | RegexOptions.CultureInvariant` (ordinal),
-  or a hand-rolled `ReadOnlySpan<char>` scan (preferred for zero allocation on the no-match path).
-- **Hook (both choke points):**
-  - `IdentityLogger.Log(LogEntry entry)`: `entry.Message = TokenScrubber.Scrub(entry.Message);`
-    after `FormatLogMessage`, before `_identityLogger.Log(entry)`.
-  - `CallbackIdentityLogger.Log(LogEntry entry)`: scrub `formattedMessage` before `_logCallback.Invoke`.
-  - Put the call in one shared place (e.g. extend `LoggerHelper`) so both adapters stay in sync.
-- **Fast path:** first do `message.IndexOf('R'…)`/`Contains` anchor test using `StringComparison.Ordinal`;
-  return the original reference unchanged when no anchor → no allocation.
-- **Config / kill switch:** a static `AppContext` switch or an internal
-  `ApplicationConfiguration` flag (default ON). Keep it independent of `EnablePiiLogging`.
-- **Public API analyzer:** if anything new is `public`/`internal`, update `PublicAPI.Unshipped.txt` /
-  `InternalAPI.Unshipped.txt` (repo enforces this). Prefer keeping `TokenScrubber` `internal` so
-  only `InternalAPI.Unshipped.txt` changes.
-- **Tests:** xUnit in `tests/Microsoft.Identity.Test.Unit/CoreTests/LoggerTests/` — drive the shared
-  corpus (all 3 offsets, base64 + base64url, MSA, the `esctx` cookie sample), assert redaction +
-  no-false-positive on ordinary messages. Add a `[Benchmark]`/perf assertion for the no-match path.
-- **Frameworks:** must compile for `netstandard2.0`/`net462`/`net8.0`/`net9.0` — avoid `Regex`
-  source-generator-only APIs if targeting older TFMs, or `#if NET8_0_OR_GREATER` for the generated
-  regex variant.
+- **Patterns:** private static readonly array of the 3 eSTS patterns + MSA form. Matched with
+  ordinal `string.IndexOf` + a hand-rolled boundary scan (zero allocation on the no-match path).
+- **Single integration point (verified):** both `IdentityLogger.Log()` and
+  `CallbackIdentityLogger.Log()` call `LoggerHelper.FormatLogMessage()` as their last step, so scrub
+  there once to cover **both** the `LogCallback` and `IIdentityLogger` public paths:
+  ```csharp
+  public static string FormatLogMessage(string message, bool piiEnabled, string correlationId, string clientInformation)
+  {
+      string formatted = string.Format(CultureInfo.InvariantCulture,
+          "{0} MSAL {1} {2} {3} {4} [{5}{6}]{7} {8}",
+          piiEnabled, s_msalVersionLazy.Value, s_skuLazy.Value, s_runtimeVersionLazy.Value,
+          s_osLazy.Value, DateTime.UtcNow.ToString("u"), correlationId, clientInformation, message);
+      return TokenScrubber.Scrub(formatted);   // <-- single choke point, both loggers covered
+  }
+  ```
+  Running here means the scrubber sees the fully-assembled line, so it also catches tokens buried
+  inside a logged `HttpResponseMessage` (the `esctx` case).
+- **Fast path:** `ContainsAnyPattern` (ordinal `IndexOf` per pattern); return the original reference
+  unchanged when nothing matches → no allocation.
+- **Config / kill switch:** a static `AppContext` switch (e.g.
+  `Microsoft.Identity.Client.DisableOpaqueTokenScrubbing`) checked once and cached, default ON.
+  Keep it independent of `EnablePiiLogging`.
+- **Public API analyzer:** keep `TokenScrubber` `internal`; add to `InternalAPI.Unshipped.txt`:
+  `Microsoft.Identity.Client.Internal.Logger.TokenScrubber` and
+  `static Microsoft.Identity.Client.Internal.Logger.TokenScrubber.Scrub(string message) -> string`.
+- **Tests:** MSTest in `tests/Microsoft.Identity.Test.Unit/CoreTests/LoggerTests/TokenScrubberTests.cs`
+  — drive the shared corpus (all 3 offsets, base64 + base64url, MSA, the `esctx` cookie sample),
+  assert redaction + no false positives on ordinary messages, plus a no-match perf check.
+- **Frameworks:** no `#if` guards needed — `string.IndexOf(string, int, StringComparison)`,
+  `StringBuilder`, and relational patterns all exist on `netstandard2.0`/`net462`/`net8.0`/`net9.0`.
+  (Guards only become necessary if switching to `[GeneratedRegex]`.)
 
 ### JavaScript/TypeScript — `microsoft-authentication-library-for-js`
 
