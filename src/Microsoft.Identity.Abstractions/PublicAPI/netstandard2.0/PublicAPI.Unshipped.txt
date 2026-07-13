@@ -1,1 +1,5 @@
 #nullable enable
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.OnAfterAuthHeaderCreation.get -> System.Action<System.Net.Http.HttpRequestMessage!>?
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.OnAfterAuthHeaderCreation.set -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.OnBeforeAuthHeaderCreation.get -> System.Action<System.Net.Http.HttpRequestMessage!>?
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.OnBeforeAuthHeaderCreation.set -> void
