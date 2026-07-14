@@ -38,6 +38,8 @@ namespace Microsoft.Identity.Abstractions
             AcquireTokenOptions = other.AcquireTokenOptions.Clone();
             HttpMethod = other.HttpMethod.ToString();
             CustomizeHttpRequestMessage = other.CustomizeHttpRequestMessage;
+            OnBeforeAuthHeaderCreation = other.OnBeforeAuthHeaderCreation;
+            OnAfterAuthHeaderCreation = other.OnAfterAuthHeaderCreation;
             ProtocolScheme = other.ProtocolScheme;
             RequestAppToken = other.RequestAppToken;
         }
@@ -74,6 +76,28 @@ namespace Microsoft.Identity.Abstractions
         /// the Authorization header, and just before the message is sent.
         /// </summary>
         public Action<HttpRequestMessage>? CustomizeHttpRequestMessage { get; set; }
+
+        /// <summary>
+        /// Provides an opportunity for the caller app to customize the <see cref="HttpRequestMessage"/> <b>before</b>
+        /// the authorization header is created. At this point the <c>Authorization</c> header is not yet present.
+        /// Use this to shape the request that a request-binding protocol signs — for example a SignedHttpRequest
+        /// (SHR) that binds the query, headers, or body (the <c>q</c>/<c>h</c>/<c>b</c> claims) to the token — so the
+        /// signature covers the finalized request. To observe or adjust the request <b>after</b> the header has been
+        /// created, use <see cref="OnAfterAuthHeaderCreation"/> (or <see cref="CustomizeHttpRequestMessage"/>).
+        /// </summary>
+        public Action<HttpRequestMessage>? OnBeforeAuthHeaderCreation { get; set; }
+
+        /// <summary>
+        /// Provides an opportunity for the caller app to customize the <see cref="HttpRequestMessage"/> <b>after</b>
+        /// the authorization header (including the <c>Authorization</c> header) has been set, and just before the
+        /// message is sent — the point at which the finalized request can be read or adjusted. Provided for naming
+        /// symmetry with <see cref="OnBeforeAuthHeaderCreation"/>; it shares this timing with the pre-existing
+        /// <see cref="CustomizeHttpRequestMessage"/>, which continues to be invoked for backwards compatibility. When
+        /// both are set they run at the same point, so callers should not depend on their relative order. Do
+        /// not modify material bound by a request-binding protocol (SHR <c>q</c>/<c>h</c>/<c>b</c>) here, since it
+        /// runs after signing; use <see cref="OnBeforeAuthHeaderCreation"/> for that.
+        /// </summary>
+        public Action<HttpRequestMessage>? OnAfterAuthHeaderCreation { get; set; }
 
         /// <summary>
         /// Options related to token acquisition.

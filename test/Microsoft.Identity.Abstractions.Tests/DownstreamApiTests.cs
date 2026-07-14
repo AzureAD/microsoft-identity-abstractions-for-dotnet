@@ -47,6 +47,8 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
                 },
                 BaseUrl = "https://apitocall.domain.com",
                 CustomizeHttpRequestMessage = message => message.Headers.Add("x-sku", "sku-value"),
+                OnBeforeAuthHeaderCreation = message => message.Headers.Add("x-before", "before-value"),
+                OnAfterAuthHeaderCreation = message => message.Headers.Add("x-after", "after-value"),
                 Deserializer = value => value,
                 Serializer = input => (input != null) ? new StringContent(input.ToString()!, Encoding.UTF8
 #if !NETFRAMEWORK
@@ -75,6 +77,8 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             Assert.Equal(downstreamApiOptions.Scopes, downstreamApiClone.Scopes!);
             Assert.Equal(downstreamApiOptions.BaseUrl, downstreamApiClone.BaseUrl);
             Assert.Equal(downstreamApiOptions.CustomizeHttpRequestMessage, downstreamApiClone.CustomizeHttpRequestMessage);
+            Assert.Equal(downstreamApiOptions.OnBeforeAuthHeaderCreation, downstreamApiClone.OnBeforeAuthHeaderCreation);
+            Assert.Equal(downstreamApiOptions.OnAfterAuthHeaderCreation, downstreamApiClone.OnAfterAuthHeaderCreation);
             Assert.Equal(downstreamApiOptions.Deserializer, downstreamApiClone.Deserializer);
             Assert.Equal(downstreamApiOptions.Serializer, downstreamApiClone.Serializer);
             Assert.Equal(downstreamApiOptions.HttpMethod, downstreamApiClone.HttpMethod);
@@ -102,7 +106,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             Assert.Equal(downstreamApiOptions.ExtraQueryParameters, downstreamApiClone.ExtraQueryParameters);
 
             // If this fails, think of also adding a line to test the new property
-            Assert.Equal(14, typeof(DownstreamApiOptions).GetProperties().Length);
+            Assert.Equal(16, typeof(DownstreamApiOptions).GetProperties().Length);
             Assert.Equal(15, typeof(AcquireTokenOptions).GetProperties().Length);
 
             DownstreamApiOptionsReadOnlyHttpMethod options = new DownstreamApiOptionsReadOnlyHttpMethod(downstreamApiOptions, HttpMethod.Delete.ToString());
