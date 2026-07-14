@@ -446,3 +446,7 @@ Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider2.CreateAuthorizatio
 Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider2.CreateAuthorizationHeaderInformationForUserAsync(System.Collections.Generic.IEnumerable<string!>! scopes, Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions? authorizationHeaderProviderOptions = null, System.Security.Claims.ClaimsPrincipal? claimsPrincipal = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Microsoft.Identity.Abstractions.OperationResult<Microsoft.Identity.Abstractions.AuthorizationHeaderInformation!, Microsoft.Identity.Abstractions.AuthorizationHeaderError!>>!
 Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.ExpiresOn.get -> System.DateTimeOffset?
 Microsoft.Identity.Abstractions.TokenAcquisitionMetadata.ExpiresOn.init -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.OnAfterAuthHeaderCreation.get -> System.Action<System.Net.Http.HttpRequestMessage!>?
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.OnAfterAuthHeaderCreation.set -> void
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.OnBeforeAuthHeaderCreation.get -> System.Action<System.Net.Http.HttpRequestMessage!>?
+Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions.OnBeforeAuthHeaderCreation.set -> void

@@ -1,3 +1,9 @@
+12.5.0
+=======
+
+## What's Changed
+* Added `AuthorizationHeaderProviderOptions.OnBeforeAuthHeaderCreation` and `AuthorizationHeaderProviderOptions.OnAfterAuthHeaderCreation`. `OnBeforeAuthHeaderCreation` (`Action<HttpRequestMessage>?`) runs before the authorization header is created — use it to shape the request that a request-binding protocol signs (for example a SignedHttpRequest binding the query, headers, or body via the `q`/`h`/`b` claims), so the signature covers the finalized request. `OnAfterAuthHeaderCreation` runs after the header is set, just before the message is sent; it shares this timing with the existing `CustomizeHttpRequestMessage`, which continues to be invoked for backwards compatibility. Additive and non-breaking. See [#262](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/262).
+
 12.4.0
 =======
 
