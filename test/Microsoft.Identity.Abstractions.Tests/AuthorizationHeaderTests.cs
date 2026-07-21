@@ -276,5 +276,43 @@ namespace Microsoft.Identity.Abstractions.Tests
             // Assert
             Assert.Null(info.BindingCertificate);
         }
+
+        [Fact]
+        public void TokenAcquisitionFailureDetails_Properties_CanBeSet()
+        {
+            // Arrange & Act
+            var details = new TokenAcquisitionFailureDetails
+            {
+                ErrorCode = "invalid_grant",
+                SubError = "bad_token",
+                ServiceErrorCodes = new[] { "50076", "500011" },
+                StatusCode = 400,
+                Claims = "******",
+                CorrelationId = "00000000-0000-0000-0000-000000000000"
+            };
+
+            // Assert
+            Assert.Equal("invalid_grant", details.ErrorCode);
+            Assert.Equal("bad_token", details.SubError);
+            Assert.Equal(new[] { "50076", "500011" }, details.ServiceErrorCodes);
+            Assert.Equal(400, details.StatusCode);
+            Assert.Equal("******", details.Claims);
+            Assert.Equal("00000000-0000-0000-0000-000000000000", details.CorrelationId);
+        }
+
+        [Fact]
+        public void TokenAcquisitionFailureDetails_DefaultValues_AreNull()
+        {
+            // Arrange & Act
+            var details = new TokenAcquisitionFailureDetails();
+
+            // Assert
+            Assert.Null(details.ErrorCode);
+            Assert.Null(details.SubError);
+            Assert.Null(details.ServiceErrorCodes);
+            Assert.Null(details.StatusCode);
+            Assert.Null(details.Claims);
+            Assert.Null(details.CorrelationId);
+        }
     }
 }
