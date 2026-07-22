@@ -32,7 +32,7 @@ namespace Microsoft.Identity.Abstractions
         /// <summary>
         /// The raw STS-specific error codes returned by the token service (for example the numeric
         /// <c>AADSTS</c> codes) that further refine <see cref="ErrorCode"/>. Mirrors
-        /// <c>MsalServiceException.ErrorCodes</c> when MSAL is the underlying acquirer; diagnostic only.
+        /// <c>MsalServiceException.ErrorCodesForLogging</c> when MSAL is the underlying acquirer; diagnostic only.
         /// </summary>
         public IReadOnlyList<string>? ServiceErrorCodes { get; init; }
 
