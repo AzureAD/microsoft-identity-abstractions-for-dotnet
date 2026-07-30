@@ -10,5 +10,6 @@ Microsoft.Identity.Abstractions.ICloudMetadataProvider
 Microsoft.Identity.Abstractions.ICloudMetadataProvider.GetByAuthorityHost(string! authorityHost) -> Microsoft.Identity.Abstractions.CloudMetadata?
 Microsoft.Identity.Abstractions.InMemoryCloudMetadataProvider
 Microsoft.Identity.Abstractions.InMemoryCloudMetadataProvider.AddOrUpdate(string! authorityHost, System.Collections.Generic.IReadOnlyDictionary<string!, string!>! values) -> Microsoft.Identity.Abstractions.InMemoryCloudMetadataProvider!
+Microsoft.Identity.Abstractions.InMemoryCloudMetadataProvider.AddOrUpdate(string! authorityHost, string! key, string! value) -> Microsoft.Identity.Abstractions.InMemoryCloudMetadataProvider!
 Microsoft.Identity.Abstractions.InMemoryCloudMetadataProvider.GetByAuthorityHost(string! authorityHost) -> Microsoft.Identity.Abstractions.CloudMetadata?
 Microsoft.Identity.Abstractions.InMemoryCloudMetadataProvider.InMemoryCloudMetadataProvider(Microsoft.Identity.Abstractions.ICloudMetadataProvider? fallback = null) -> void

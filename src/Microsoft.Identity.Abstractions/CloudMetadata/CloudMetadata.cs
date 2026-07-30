@@ -99,5 +99,36 @@ namespace Microsoft.Identity.Abstractions
         {
             return _values.TryGetValue(key, out string? value) ? value : null;
         }
+
+        /// <summary>
+        /// Merges two metadata bags for the same host into a new instance, with <paramref name="higher"/>
+        /// taking precedence per key and <paramref name="lower"/> supplying any keys the higher layer does
+        /// not set. Either argument may be <c>null</c>.
+        /// </summary>
+        internal static CloudMetadata? Merge(CloudMetadata? lower, CloudMetadata? higher)
+        {
+            if (higher is null)
+            {
+                return lower;
+            }
+
+            if (lower is null)
+            {
+                return higher;
+            }
+
+            var merged = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            foreach (KeyValuePair<string, string> pair in lower._values)
+            {
+                merged[pair.Key] = pair.Value;
+            }
+
+            foreach (KeyValuePair<string, string> pair in higher._values)
+            {
+                merged[pair.Key] = pair.Value;
+            }
+
+            return new CloudMetadata(merged);
+        }
     }
 }

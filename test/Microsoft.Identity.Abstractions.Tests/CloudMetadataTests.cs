@@ -103,6 +103,75 @@ namespace Microsoft.Identity.Abstractions.Tests
         }
 
         [Fact]
+        public void InMemoryProvider_PerKeyOverride_OverFallback_Wins_AndKeepsOtherKeys()
+        {
+            // Arrange: fallback carries two keys for a host.
+            var fallback = new InMemoryCloudMetadataProvider().AddOrUpdate(
+                "login.microsoftonline.us",
+                new Dictionary<string, string>
+                {
+                    [AbstractionsCloudKeys.TokenExchangeAudience] = "api://AzureADTokenExchangeUSGov",
+                    ["other_key"] = "keep-me",
+                });
+            var provider = new InMemoryCloudMetadataProvider(fallback)
+                .AddOrUpdate("login.microsoftonline.us", AbstractionsCloudKeys.TokenExchangeAudience, "api://custom");
+
+            // Act
+            CloudMetadata? metadata = provider.GetByAuthorityHost("login.microsoftonline.us");
+
+            // Assert: own key wins, fallback's other key is preserved.
+            Assert.Equal("api://custom", metadata!.GetValueOrDefault(AbstractionsCloudKeys.TokenExchangeAudience));
+            Assert.Equal("keep-me", metadata.GetValueOrDefault("other_key"));
+        }
+
+        [Fact]
+        public void InMemoryProvider_PerKeyAdd_KeepsFallbackKeys()
+        {
+            // Arrange: fallback has the audience; caller adds an unrelated key over it.
+            var fallback = new InMemoryCloudMetadataProvider().AddOrUpdate(
+                "login.microsoftonline.us",
+                new Dictionary<string, string>
+                {
+                    [AbstractionsCloudKeys.TokenExchangeAudience] = "api://AzureADTokenExchangeUSGov",
+                });
+            var provider = new InMemoryCloudMetadataProvider(fallback)
+                .AddOrUpdate("login.microsoftonline.us", "extra_key", "extra-value");
+
+            // Act
+            CloudMetadata? metadata = provider.GetByAuthorityHost("login.microsoftonline.us");
+
+            // Assert: both the fallback key and the added key resolve.
+            Assert.Equal("api://AzureADTokenExchangeUSGov", metadata!.GetValueOrDefault(AbstractionsCloudKeys.TokenExchangeAudience));
+            Assert.Equal("extra-value", metadata.GetValueOrDefault("extra_key"));
+        }
+
+        [Fact]
+        public void InMemoryProvider_PerKey_MergesWithPriorValues_ForSameHost()
+        {
+            // Arrange & Act: accumulate two distinct keys via two per-key calls (no fallback).
+            var provider = new InMemoryCloudMetadataProvider()
+                .AddOrUpdate("login.partner.example", AbstractionsCloudKeys.TokenExchangeAudience, "api://first")
+                .AddOrUpdate("login.partner.example", "second_key", "second-value");
+
+            // Assert
+            CloudMetadata? metadata = provider.GetByAuthorityHost("login.partner.example");
+            Assert.Equal("api://first", metadata!.GetValueOrDefault(AbstractionsCloudKeys.TokenExchangeAudience));
+            Assert.Equal("second-value", metadata.GetValueOrDefault("second_key"));
+        }
+
+        [Fact]
+        public void InMemoryProvider_PerKey_NullArguments_Throw()
+        {
+            // Arrange
+            var provider = new InMemoryCloudMetadataProvider();
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => provider.AddOrUpdate(null!, "key", "value"));
+            Assert.Throws<ArgumentNullException>(() => provider.AddOrUpdate("host", null!, "value"));
+            Assert.Throws<ArgumentNullException>(() => provider.AddOrUpdate("host", "key", null!));
+        }
+
+        [Fact]
         public void InMemoryProvider_NullArguments_Throw()
         {
             // Arrange
