@@ -1,3 +1,9 @@
+12.6.0
+=======
+
+## What's Changed
+* Added `TokenAcquisitionFailureDetails.ServiceErrorCodes` (`IReadOnlyList<string>?`) exposing the service-side error codes returned during a failed token acquisition, alongside the existing error code, sub-error, status code, correlation id, and claims. Additive and non-breaking. See [#264](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/264).
+
 12.5.0
 =======
 

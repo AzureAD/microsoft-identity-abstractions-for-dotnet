@@ -1,3 +1,1 @@
 #nullable enable
-Microsoft.Identity.Abstractions.TokenAcquisitionFailureDetails.ServiceErrorCodes.get -> System.Collections.Generic.IReadOnlyList<string!>?
-Microsoft.Identity.Abstractions.TokenAcquisitionFailureDetails.ServiceErrorCodes.init -> void
