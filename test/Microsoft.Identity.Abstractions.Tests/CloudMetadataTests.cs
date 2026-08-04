@@ -181,5 +181,37 @@ namespace Microsoft.Identity.Abstractions.Tests
             Assert.Throws<ArgumentNullException>(() => provider.AddOrUpdate(null!, new Dictionary<string, string>()));
             Assert.Throws<ArgumentNullException>(() => provider.AddOrUpdate("host", null!));
         }
+
+        [Fact]
+        public void CloudMetadata_Values_ExposesAllPairs_CaseInsensitively()
+        {
+            // Arrange
+            var metadata = new CloudMetadata(new Dictionary<string, string>
+            {
+                [AbstractionsCloudKeys.TokenExchangeAudience] = "api://AzureADTokenExchangeUSGov",
+                ["other_key"] = "other-value",
+            });
+
+            // Act & Assert: the read-only Values view exposes every stored pair, keyed case-insensitively.
+            Assert.Equal(2, metadata.Values.Count);
+            Assert.Equal("api://AzureADTokenExchangeUSGov", metadata.Values[AbstractionsCloudKeys.TokenExchangeAudience]);
+            Assert.Equal("other-value", metadata.Values["OTHER_KEY"]);
+        }
+
+        [Fact]
+        public void InMemoryProvider_NullOrEmptyHost_WithoutFallback_ReturnsNull()
+        {
+            // Arrange
+            var provider = new InMemoryCloudMetadataProvider().AddOrUpdate(
+                "login.microsoftonline.us",
+                new Dictionary<string, string>
+                {
+                    [AbstractionsCloudKeys.TokenExchangeAudience] = "api://AzureADTokenExchangeUSGov",
+                });
+
+            // Act & Assert: a null or empty host resolves to null rather than throwing.
+            Assert.Null(provider.GetByAuthorityHost(null!));
+            Assert.Null(provider.GetByAuthorityHost(string.Empty));
+        }
     }
 }
