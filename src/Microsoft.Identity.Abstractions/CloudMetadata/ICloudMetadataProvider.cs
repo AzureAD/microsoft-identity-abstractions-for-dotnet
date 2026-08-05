@@ -28,7 +28,8 @@ namespace Microsoft.Identity.Abstractions
         /// <param name="authorityHost">The authority host (for example <c>login.microsoftonline.us</c>). This
         /// is a bare host, not a full URL.</param>
         /// <returns>The <see cref="CloudMetadata"/> for that cloud, or <c>null</c> if the host is unknown to
-        /// this provider (allowing a caller to fall back to another provider or a default).</returns>
+        /// this provider (allowing a caller to fall back to another provider or a default). A <c>null</c> or
+        /// empty <paramref name="authorityHost"/> also resolves to <c>null</c> rather than throwing.</returns>
         CloudMetadata? GetByAuthorityHost(string authorityHost);
     }
 }

@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Microsoft.Identity.Abstractions
 {
@@ -37,7 +38,7 @@ namespace Microsoft.Identity.Abstractions
     /// </example>
     public sealed class CloudMetadata
     {
-        private readonly Dictionary<string, string> _values;
+        private readonly ReadOnlyDictionary<string, string> _values;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CloudMetadata"/> class from the supplied key/value
@@ -64,7 +65,8 @@ namespace Microsoft.Identity.Abstractions
                 copy[pair.Key] = pair.Value;
             }
 
-            _values = copy;
+            // Wrap read-only so callers cannot downcast Values to mutate a shared instance.
+            _values = new ReadOnlyDictionary<string, string>(copy);
         }
 
         /// <summary>

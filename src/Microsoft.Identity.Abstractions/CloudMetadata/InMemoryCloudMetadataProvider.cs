@@ -56,19 +56,18 @@ namespace Microsoft.Identity.Abstractions
         /// <param name="values">The cloud-specific key/value pairs. Keys should come from
         /// <see cref="AbstractionsCloudKeys"/> (or an SDK-specific extension of that vocabulary).</param>
         /// <returns>This same instance, to allow chaining multiple <see cref="AddOrUpdate(string, IReadOnlyDictionary{string, string})"/> calls.</returns>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="authorityHost"/> or
-        /// <paramref name="values"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentException">Thrown when <paramref name="authorityHost"/> is null or whitespace.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="values"/> is <c>null</c>.</exception>
         public InMemoryCloudMetadataProvider AddOrUpdate(string authorityHost, IReadOnlyDictionary<string, string> values)
         {
-#if NET8_0_OR_GREATER
-            ArgumentNullException.ThrowIfNull(authorityHost);
-            ArgumentNullException.ThrowIfNull(values);
-#else
-            if (authorityHost is null)
+            if (string.IsNullOrWhiteSpace(authorityHost))
             {
-                throw new ArgumentNullException(nameof(authorityHost));
+                throw new ArgumentException("Authority host cannot be null or whitespace.", nameof(authorityHost));
             }
 
+#if NET8_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(values);
+#else
             if (values is null)
             {
                 throw new ArgumentNullException(nameof(values));
@@ -93,25 +92,24 @@ namespace Microsoft.Identity.Abstractions
         /// <param name="key">The value's key, typically one of the <see cref="AbstractionsCloudKeys"/> literals.</param>
         /// <param name="value">The value to set.</param>
         /// <returns>This same instance, to allow chaining.</returns>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="authorityHost"/>,
-        /// <paramref name="key"/>, or <paramref name="value"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentException">Thrown when <paramref name="authorityHost"/> or
+        /// <paramref name="key"/> is null or whitespace.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="value"/> is <c>null</c>.</exception>
         public InMemoryCloudMetadataProvider AddOrUpdate(string authorityHost, string key, string value)
         {
+            if (string.IsNullOrWhiteSpace(authorityHost))
+            {
+                throw new ArgumentException("Authority host cannot be null or whitespace.", nameof(authorityHost));
+            }
+
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                throw new ArgumentException("Key cannot be null or whitespace.", nameof(key));
+            }
+
 #if NET8_0_OR_GREATER
-            ArgumentNullException.ThrowIfNull(authorityHost);
-            ArgumentNullException.ThrowIfNull(key);
             ArgumentNullException.ThrowIfNull(value);
 #else
-            if (authorityHost is null)
-            {
-                throw new ArgumentNullException(nameof(authorityHost));
-            }
-
-            if (key is null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
             if (value is null)
             {
                 throw new ArgumentNullException(nameof(value));
@@ -127,7 +125,7 @@ namespace Microsoft.Identity.Abstractions
         {
             if (string.IsNullOrEmpty(authorityHost))
             {
-                return _fallback?.GetByAuthorityHost(authorityHost);
+                return null;
             }
 
             CloudMetadata? fallbackMetadata = _fallback?.GetByAuthorityHost(authorityHost);

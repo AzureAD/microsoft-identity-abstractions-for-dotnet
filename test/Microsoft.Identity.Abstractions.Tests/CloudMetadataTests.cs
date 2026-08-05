@@ -160,25 +160,33 @@ namespace Microsoft.Identity.Abstractions.Tests
         }
 
         [Fact]
-        public void InMemoryProvider_PerKey_NullArguments_Throw()
+        public void InMemoryProvider_PerKey_InvalidArguments_Throw()
         {
             // Arrange
             var provider = new InMemoryCloudMetadataProvider();
 
-            // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => provider.AddOrUpdate(null!, "key", "value"));
-            Assert.Throws<ArgumentNullException>(() => provider.AddOrUpdate("host", null!, "value"));
+            // Act & Assert: host and key are rejected for null/empty/whitespace (ArgumentException); a null
+            // value is an ArgumentNullException. Kept consistent with the MSAL and MISE twins.
+            Assert.Throws<ArgumentException>(() => provider.AddOrUpdate(null!, "key", "value"));
+            Assert.Throws<ArgumentException>(() => provider.AddOrUpdate(string.Empty, "key", "value"));
+            Assert.Throws<ArgumentException>(() => provider.AddOrUpdate("   ", "key", "value"));
+            Assert.Throws<ArgumentException>(() => provider.AddOrUpdate("host", null!, "value"));
+            Assert.Throws<ArgumentException>(() => provider.AddOrUpdate("host", string.Empty, "value"));
+            Assert.Throws<ArgumentException>(() => provider.AddOrUpdate("host", "   ", "value"));
             Assert.Throws<ArgumentNullException>(() => provider.AddOrUpdate("host", "key", null!));
         }
 
         [Fact]
-        public void InMemoryProvider_NullArguments_Throw()
+        public void InMemoryProvider_InvalidArguments_Throw()
         {
             // Arrange
             var provider = new InMemoryCloudMetadataProvider();
 
-            // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => provider.AddOrUpdate(null!, new Dictionary<string, string>()));
+            // Act & Assert: host is rejected for null/empty/whitespace (ArgumentException); a null values
+            // bag is an ArgumentNullException.
+            Assert.Throws<ArgumentException>(() => provider.AddOrUpdate(null!, new Dictionary<string, string>()));
+            Assert.Throws<ArgumentException>(() => provider.AddOrUpdate(string.Empty, new Dictionary<string, string>()));
+            Assert.Throws<ArgumentException>(() => provider.AddOrUpdate("   ", new Dictionary<string, string>()));
             Assert.Throws<ArgumentNullException>(() => provider.AddOrUpdate("host", null!));
         }
 
@@ -212,6 +220,38 @@ namespace Microsoft.Identity.Abstractions.Tests
             // Act & Assert: a null or empty host resolves to null rather than throwing.
             Assert.Null(provider.GetByAuthorityHost(null!));
             Assert.Null(provider.GetByAuthorityHost(string.Empty));
+        }
+
+        [Fact]
+        public void InMemoryProvider_NullOrEmptyHost_WithFallback_ShortCircuitsToNull()
+        {
+            // Arrange: a fallback that would resolve any host is present.
+            var fallback = new InMemoryCloudMetadataProvider().AddOrUpdate(
+                "login.microsoftonline.com",
+                new Dictionary<string, string>
+                {
+                    [AbstractionsCloudKeys.TokenExchangeAudience] = "api://AzureADTokenExchange",
+                });
+            var provider = new InMemoryCloudMetadataProvider(fallback);
+
+            // Act & Assert: a null/empty host short-circuits to null and is NOT forwarded to the fallback.
+            Assert.Null(provider.GetByAuthorityHost(null!));
+            Assert.Null(provider.GetByAuthorityHost(string.Empty));
+        }
+
+        [Fact]
+        public void CloudMetadata_Values_IsReadOnly()
+        {
+            // Arrange
+            var metadata = new CloudMetadata(new Dictionary<string, string>
+            {
+                [AbstractionsCloudKeys.TokenExchangeAudience] = "api://AzureADTokenExchange",
+            });
+
+            // Act & Assert: the exposed view cannot be downcast to mutate the underlying bag.
+            Assert.IsNotType<Dictionary<string, string>>(metadata.Values);
+            Assert.Throws<NotSupportedException>(
+                () => ((IDictionary<string, string>)metadata.Values).Add("k", "v"));
         }
     }
 }
