@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Xunit;
@@ -17,12 +18,19 @@ namespace Microsoft.Identity.Abstractions.Tests
         [Fact]
         public void NullSecretIdTest()
         {
+            // Arrange
             var credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.ClientSecret,
                 ClientSecret = null
             };
-            Assert.Equal("RedactedClientSecret=", credentialDescription.Id);
+
+            // Act
+            string id = credentialDescription.Id;
+
+            // Assert
+            Assert.StartsWith("RedactedClientSecret=", id, StringComparison.Ordinal);
+            Assert.True(Guid.TryParseExact(id.Substring("RedactedClientSecret=".Length), "N", out _));
         }
 
         [Fact]
@@ -424,6 +432,7 @@ namespace Microsoft.Identity.Abstractions.Tests
         [Fact]
         public void CachedId_InvalidatedWhen_ClientSecret_Changes()
         {
+            // Arrange
             var credentialDescription = new CredentialDescription
             {
                 SourceType = CredentialSource.ClientSecret,
@@ -432,10 +441,75 @@ namespace Microsoft.Identity.Abstractions.Tests
 
             var initialId = credentialDescription.Id;
 
+            // Act
             credentialDescription.ClientSecret = "Secret2";
             var updatedId = credentialDescription.Id;
 
+            // Assert
             Assert.NotEqual(initialId, updatedId);
+            Assert.DoesNotContain("Secret1", initialId, StringComparison.Ordinal);
+            Assert.DoesNotContain("Secret2", updatedId, StringComparison.Ordinal);
+            Assert.True(Guid.TryParseExact(initialId.Substring("RedactedClientSecret=".Length), "N", out _));
+            Assert.True(Guid.TryParseExact(updatedId.Substring("RedactedClientSecret=".Length), "N", out _));
+        }
+
+        [Fact]
+        public void CachedId_NotInvalidatedWhen_ClientSecretIsUnchanged()
+        {
+            // Arrange
+            var credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.ClientSecret,
+                ClientSecret = "Secret"
+            };
+
+            string initialId = credentialDescription.Id;
+
+            // Act
+            credentialDescription.ClientSecret = "Secret";
+
+            // Assert
+            Assert.Equal(initialId, credentialDescription.Id);
+        }
+
+        [Fact]
+        public void CopyConstructor_PreservesClientSecretId()
+        {
+            // Arrange
+            var credentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.ClientSecret,
+                ClientSecret = "Secret"
+            };
+
+            // Act
+            var copy = new CredentialDescription(credentialDescription);
+
+            // Assert
+            Assert.Equal(credentialDescription.Id, copy.Id);
+        }
+
+        [Fact]
+        public void ClientSecretId_IsUniqueForSeparateDescriptions()
+        {
+            // Arrange
+            var firstCredentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.ClientSecret,
+                ClientSecret = "Secret"
+            };
+            var secondCredentialDescription = new CredentialDescription
+            {
+                SourceType = CredentialSource.ClientSecret,
+                ClientSecret = "Secret"
+            };
+
+            // Act
+            string firstId = firstCredentialDescription.Id;
+            string secondId = secondCredentialDescription.Id;
+
+            // Assert
+            Assert.NotEqual(firstId, secondId);
         }
 
         [Fact]
@@ -451,7 +525,9 @@ namespace Microsoft.Identity.Abstractions.Tests
             };
 
             var initialId = credentialDescription.Id;
-            Assert.Contains(cert.Thumbprint, initialId, StringComparison.Ordinal);
+            string sha256CertificateHash = GenerateSha256CertificateHash(cert);
+            Assert.Contains(sha256CertificateHash, initialId, StringComparison.Ordinal);
+            Assert.DoesNotContain(cert.Thumbprint, initialId, StringComparison.Ordinal);
             Assert.DoesNotContain("null", initialId, StringComparison.Ordinal);
 
             // Change certificate to null to verify cache invalidation
@@ -504,6 +580,27 @@ namespace Microsoft.Identity.Abstractions.Tests
             // Assert
             Assert.NotEqual(initialId, updatedId);
             Assert.Contains("CN=Cert2", updatedId, StringComparison.Ordinal);
+        }
+
+        private static string GenerateSha256CertificateHash(X509Certificate2 certificate)
+        {
+            byte[] digest;
+
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                digest = sha256.ComputeHash(certificate.RawData);
+            }
+
+            const string HexCharacters = "0123456789ABCDEF";
+            char[] hash = new char[digest.Length * 2];
+
+            for (int i = 0; i < digest.Length; i++)
+            {
+                hash[i * 2] = HexCharacters[digest[i] >> 4];
+                hash[(i * 2) + 1] = HexCharacters[digest[i] & 0xF];
+            }
+
+            return new string(hash);
         }
     }
 }
