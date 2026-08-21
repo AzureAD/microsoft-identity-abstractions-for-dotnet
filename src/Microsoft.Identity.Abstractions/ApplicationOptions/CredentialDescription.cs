@@ -52,6 +52,7 @@ namespace Microsoft.Identity.Abstractions
             CertificateDiskPath = other.CertificateDiskPath;
             CertificatePassword = other.CertificatePassword;
             ClientSecret = other.ClientSecret;
+            _clientSecretId = other._clientSecretId;
             CustomSignedAssertionProviderData = other.CustomSignedAssertionProviderData;
             CustomSignedAssertionProviderName = other.CustomSignedAssertionProviderName;
             DecryptKeysAuthenticationOptions = other.DecryptKeysAuthenticationOptions;
@@ -70,10 +71,15 @@ namespace Microsoft.Identity.Abstractions
         private X509Certificate2? _certificate;
         private object? _cachedValue;
         private string? _clientSecret;
+        private string _clientSecretId = Guid.NewGuid().ToString("N");
 
         /// <summary>
         /// Gets a unique identifier for a CredentialDescription based on <see cref="SourceType"/>.
         /// </summary>
+        /// <remarks>
+        /// Client secret identifiers are opaque and do not contain a value derived from the secret.
+        /// Loaded certificate identifiers use the SHA-256 hash of the certificate.
+        /// </remarks>
         public string Id
         {
             get
@@ -81,14 +87,14 @@ namespace Microsoft.Identity.Abstractions
                 if (_cachedId == null)
                 {
                     // Use backing field directly for efficiency
-                    string certificateThumbprint = _certificate?.Thumbprint ?? "null";
+                    string certificateThumbprint = GenerateCertificateHash(_certificate);
 
                     switch (SourceType)
                     {
                         case CredentialSource.Certificate:
                             if (_certificate != null)
                             {
-                                _cachedId = $"Certificate={_certificate.Thumbprint}";
+                                _cachedId = $"Certificate={certificateThumbprint}";
                             }
                             else
                             {
@@ -114,7 +120,7 @@ namespace Microsoft.Identity.Abstractions
                             _cachedId = $"CertificateStoreWithSubjectName={CertificateStorePath}/{CertificateSubjectName};Thumbprint={certificateThumbprint}";
                             break;
                         case CredentialSource.ClientSecret:
-                            _cachedId = $"RedactedClientSecret={GenerateHash(ClientSecret)}";
+                            _cachedId = $"RedactedClientSecret={_clientSecretId}";
                             break;
                         case CredentialSource.SignedAssertionFromManagedIdentity:
                             _cachedId = $"SignedAssertionFromManagedIdentity={ManagedIdentityClientId}";
@@ -166,6 +172,35 @@ namespace Microsoft.Identity.Abstractions
             digest = SHA256.HashData(Encoding.Unicode.GetBytes(secret));
 #endif
             return Convert.ToBase64String(digest);
+        }
+
+        private static string GenerateCertificateHash(X509Certificate2? certificate)
+        {
+            if (certificate is null)
+            {
+                return "null";
+            }
+
+            byte[] digest;
+
+#if !NET8_0_OR_GREATER
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                digest = sha256.ComputeHash(certificate.RawData);
+            }
+#else
+            digest = SHA256.HashData(certificate.RawData);
+#endif
+            const string HexCharacters = "0123456789ABCDEF";
+            char[] hash = new char[digest.Length * 2];
+
+            for (int i = 0; i < digest.Length; i++)
+            {
+                hash[i * 2] = HexCharacters[digest[i] >> 4];
+                hash[(i * 2) + 1] = HexCharacters[digest[i] & 0xF];
+            }
+
+            return new string(hash);
         }
 
         /// <summary>
@@ -429,7 +464,13 @@ namespace Microsoft.Identity.Abstractions
             get => _clientSecret;
             set
             {
+                if (string.Equals(_clientSecret, value, StringComparison.Ordinal))
+                {
+                    return;
+                }
+
                 _clientSecret = value;
+                _clientSecretId = Guid.NewGuid().ToString("N");
 
                 // CachedID can depend on the client secret. Set it to null so that it will be recomputed.
                 _cachedId = null;
