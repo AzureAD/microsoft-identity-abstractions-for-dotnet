@@ -154,6 +154,13 @@ namespace Microsoft.Identity.Abstractions.Tests
             Assert.Throws<ArgumentException>(() => provider.AddOrUpdate(string.Empty, new Dictionary<string, string>()));
             Assert.Throws<ArgumentException>(() => provider.AddOrUpdate("   ", new Dictionary<string, string>()));
             Assert.Throws<ArgumentNullException>(() => provider.AddOrUpdate("host", null!));
+
+            // The bulk overload validates pair contents too (consistent with the per-key overload): a
+            // whitespace key is an ArgumentException, a null value is an ArgumentNullException.
+            Assert.Throws<ArgumentException>(() => provider.AddOrUpdate(
+                "host", new Dictionary<string, string> { ["  "] = "value" }));
+            Assert.Throws<ArgumentNullException>(() => provider.AddOrUpdate(
+                "host", new Dictionary<string, string> { ["key"] = null! }));
         }
 
         [Fact]

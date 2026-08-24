@@ -69,8 +69,10 @@ namespace Microsoft.Identity.Abstractions
         /// <param name="values">The cloud-specific key/value pairs. Keys should come from
         /// <see cref="CloudMetadataKeyNames"/> (or an SDK-specific extension of that vocabulary).</param>
         /// <returns>This same instance, to allow chaining multiple <see cref="AddOrUpdate(string, IReadOnlyDictionary{string, string})"/> calls.</returns>
-        /// <exception cref="ArgumentException">Thrown when <paramref name="authorityHost"/> is null or whitespace.</exception>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="values"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentException">Thrown when <paramref name="authorityHost"/> is null or whitespace,
+        /// or when any key in <paramref name="values"/> is null or whitespace.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="values"/> is <c>null</c>, or when
+        /// any value in <paramref name="values"/> is <c>null</c>.</exception>
         public InMemoryCloudMetadataProvider AddOrUpdate(string authorityHost, IReadOnlyDictionary<string, string> values)
         {
             if (string.IsNullOrWhiteSpace(authorityHost))
@@ -86,6 +88,22 @@ namespace Microsoft.Identity.Abstractions
                 throw new ArgumentNullException(nameof(values));
             }
 #endif
+
+            // Validate every pair up front so this bulk overload cannot store null values or whitespace keys
+            // that the per-key AddOrUpdate(host, key, value) overload rejects — the two must behave consistently
+            // and the public contract is a non-null string-to-string map.
+            foreach (KeyValuePair<string, string> pair in values)
+            {
+                if (string.IsNullOrWhiteSpace(pair.Key))
+                {
+                    throw new ArgumentException("Keys cannot be null or whitespace.", nameof(values));
+                }
+
+                if (pair.Value is null)
+                {
+                    throw new ArgumentNullException(nameof(values), $"Value for key '{pair.Key}' cannot be null.");
+                }
+            }
 
             Dictionary<string, string> bag = GetOrAddBag(authorityHost);
             foreach (KeyValuePair<string, string> pair in values)

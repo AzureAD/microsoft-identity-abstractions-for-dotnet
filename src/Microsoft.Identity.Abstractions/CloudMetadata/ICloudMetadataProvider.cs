@@ -29,10 +29,10 @@ namespace Microsoft.Identity.Abstractions
         /// Gets the cloud-specific metadata for the cloud that owns <paramref name="authorityHost"/>.
         /// </summary>
         /// <param name="authorityHost">The authority host (for example <c>login.microsoftonline.us</c>). This
-        /// is a bare host, not a full URL.</param>
+        /// is a bare, non-null host, not a full URL.</param>
         /// <returns>A case-insensitive, read-only dictionary of cloud-specific values (keyed by
         /// <see cref="CloudMetadataKeyNames"/>) for that cloud, or <c>null</c> if the host is unknown to this
-        /// provider (allowing a caller to fall back to another provider or a default). A <c>null</c> or empty
+        /// provider (allowing a caller to fall back to another provider or a default). An empty
         /// <paramref name="authorityHost"/> also resolves to <c>null</c> rather than throwing.</returns>
         IReadOnlyDictionary<string, string>? GetByAuthorityHost(string authorityHost);
     }
