@@ -29,9 +29,15 @@ namespace Microsoft.Identity.Abstractions
 
             AuthenticationOptionsName = other.AuthenticationOptionsName;
             CorrelationId = other.CorrelationId;
-            ExtraQueryParameters = other.ExtraQueryParameters;
-            ExtraHeadersParameters = other.ExtraHeadersParameters;
-            ExtraParameters = other.ExtraParameters;
+            ExtraQueryParameters = other.ExtraQueryParameters is null
+                ? null
+                : new Dictionary<string, string>(other.ExtraQueryParameters);
+            ExtraHeadersParameters = other.ExtraHeadersParameters is null
+                ? null
+                : new Dictionary<string, string>(other.ExtraHeadersParameters);
+            ExtraParameters = other.ExtraParameters is null
+                ? null
+                : new Dictionary<string, object>(other.ExtraParameters);
             ForceRefresh = other.ForceRefresh;
             FmiPath = other.FmiPath;
             Claims = other.Claims;
@@ -168,9 +174,12 @@ namespace Microsoft.Identity.Abstractions
         public string? UserFlow { get; set; }
 
         /// <summary>
-        /// Performs a shallow Clone the options (to be able to override them).
+        /// Clones the options so they can be overridden without affecting the original. Mutable
+        /// collections (<see cref="ExtraParameters"/>, <see cref="ExtraQueryParameters"/> and
+        /// <see cref="ExtraHeadersParameters"/>) are copied into new containers, so that mutating
+        /// the clone's collections does not mutate the collections of the original instance.
         /// </summary>
-        /// <returns>A shallow Clone of the options.</returns>
+        /// <returns>A clone of the options with independent mutable collections.</returns>
         public virtual AcquireTokenOptions Clone()
         {
             return new AcquireTokenOptions(this);
