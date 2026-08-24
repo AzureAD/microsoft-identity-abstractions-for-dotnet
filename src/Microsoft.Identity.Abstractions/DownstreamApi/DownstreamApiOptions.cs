@@ -74,8 +74,12 @@ namespace Microsoft.Identity.Abstractions
             Deserializer = other.Deserializer;
             AcceptHeader = other.AcceptHeader;
             ContentType = other.ContentType;
-            ExtraHeaderParameters = other.ExtraHeaderParameters;
-            ExtraQueryParameters = other.ExtraQueryParameters;
+            ExtraHeaderParameters = other.ExtraHeaderParameters is null
+                ? null
+                : new Dictionary<string, string>(other.ExtraHeaderParameters);
+            ExtraQueryParameters = other.ExtraQueryParameters is null
+                ? null
+                : new Dictionary<string, string>(other.ExtraQueryParameters);
         }
 
         /// <summary>
