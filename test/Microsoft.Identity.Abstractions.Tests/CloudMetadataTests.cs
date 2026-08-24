@@ -9,43 +9,9 @@ namespace Microsoft.Identity.Abstractions.Tests
 {
     public class CloudMetadataTests
     {
-        [Fact]
-        public void CloudMetadata_CopiesValues_AndIsCaseInsensitive()
+        private static string? ValueOrNull(IReadOnlyDictionary<string, string>? bag, string key)
         {
-            // Arrange
-            var source = new Dictionary<string, string>
-            {
-                [AbstractionsCloudKeys.TokenExchangeAudience] = "api://AzureADTokenExchangeUSGov",
-            };
-
-            // Act
-            var metadata = new CloudMetadata(source);
-            source[AbstractionsCloudKeys.TokenExchangeAudience] = "mutated"; // must not affect the copy
-
-            // Assert
-            Assert.Equal("api://AzureADTokenExchangeUSGov", metadata.GetValueOrDefault(AbstractionsCloudKeys.TokenExchangeAudience));
-            Assert.Equal("api://AzureADTokenExchangeUSGov", metadata.GetValueOrDefault("TOKEN_EXCHANGE_AUDIENCE"));
-            Assert.True(metadata.TryGetValue(AbstractionsCloudKeys.TokenExchangeAudience, out string? value));
-            Assert.Equal("api://AzureADTokenExchangeUSGov", value);
-        }
-
-        [Fact]
-        public void CloudMetadata_MissingKey_ReturnsNullOrFalse()
-        {
-            // Arrange
-            var metadata = new CloudMetadata(new Dictionary<string, string>());
-
-            // Act & Assert
-            Assert.Null(metadata.GetValueOrDefault(AbstractionsCloudKeys.TokenExchangeAudience));
-            Assert.False(metadata.TryGetValue(AbstractionsCloudKeys.TokenExchangeAudience, out string? value));
-            Assert.Null(value);
-        }
-
-        [Fact]
-        public void CloudMetadata_NullValues_Throws()
-        {
-            // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => new CloudMetadata(null!));
+            return bag is not null && bag.TryGetValue(key, out string? value) ? value : null;
         }
 
         [Fact]
@@ -56,15 +22,15 @@ namespace Microsoft.Identity.Abstractions.Tests
                 "login.microsoftonline.us",
                 new Dictionary<string, string>
                 {
-                    [AbstractionsCloudKeys.TokenExchangeAudience] = "api://AzureADTokenExchangeUSGov",
+                    [CloudMetadataKeyNames.FederatedCredentialAudience] = "api://AzureADTokenExchangeUSGov",
                 });
 
             // Act
-            CloudMetadata? metadata = provider.GetByAuthorityHost("LOGIN.MICROSOFTONLINE.US");
+            IReadOnlyDictionary<string, string>? metadata = provider.GetByAuthorityHost("LOGIN.MICROSOFTONLINE.US");
 
             // Assert
             Assert.NotNull(metadata);
-            Assert.Equal("api://AzureADTokenExchangeUSGov", metadata!.GetValueOrDefault(AbstractionsCloudKeys.TokenExchangeAudience));
+            Assert.Equal("api://AzureADTokenExchangeUSGov", ValueOrNull(metadata, CloudMetadataKeyNames.FederatedCredentialAudience));
         }
 
         [Fact]
@@ -74,15 +40,15 @@ namespace Microsoft.Identity.Abstractions.Tests
             var provider = new InMemoryCloudMetadataProvider()
                 .AddOrUpdate("login.partner.example", new Dictionary<string, string>
                 {
-                    [AbstractionsCloudKeys.TokenExchangeAudience] = "api://first",
+                    [CloudMetadataKeyNames.FederatedCredentialAudience] = "api://first",
                 })
                 .AddOrUpdate("login.partner.example", new Dictionary<string, string>
                 {
-                    [AbstractionsCloudKeys.TokenExchangeAudience] = "api://second",
+                    [CloudMetadataKeyNames.FederatedCredentialAudience] = "api://second",
                 });
 
             // Assert
-            Assert.Equal("api://second", provider.GetByAuthorityHost("login.partner.example")!.GetValueOrDefault(AbstractionsCloudKeys.TokenExchangeAudience));
+            Assert.Equal("api://second", ValueOrNull(provider.GetByAuthorityHost("login.partner.example"), CloudMetadataKeyNames.FederatedCredentialAudience));
         }
 
         [Fact]
@@ -93,12 +59,12 @@ namespace Microsoft.Identity.Abstractions.Tests
                 "login.microsoftonline.com",
                 new Dictionary<string, string>
                 {
-                    [AbstractionsCloudKeys.TokenExchangeAudience] = "api://AzureADTokenExchange",
+                    [CloudMetadataKeyNames.FederatedCredentialAudience] = "api://AzureADTokenExchange",
                 });
             var provider = new InMemoryCloudMetadataProvider(fallback);
 
             // Act & Assert: own entries are empty, so it defers to the fallback, then null for truly unknown.
-            Assert.Equal("api://AzureADTokenExchange", provider.GetByAuthorityHost("login.microsoftonline.com")!.GetValueOrDefault(AbstractionsCloudKeys.TokenExchangeAudience));
+            Assert.Equal("api://AzureADTokenExchange", ValueOrNull(provider.GetByAuthorityHost("login.microsoftonline.com"), CloudMetadataKeyNames.FederatedCredentialAudience));
             Assert.Null(provider.GetByAuthorityHost("login.unknown.example"));
         }
 
@@ -110,18 +76,18 @@ namespace Microsoft.Identity.Abstractions.Tests
                 "login.microsoftonline.us",
                 new Dictionary<string, string>
                 {
-                    [AbstractionsCloudKeys.TokenExchangeAudience] = "api://AzureADTokenExchangeUSGov",
+                    [CloudMetadataKeyNames.FederatedCredentialAudience] = "api://AzureADTokenExchangeUSGov",
                     ["other_key"] = "keep-me",
                 });
             var provider = new InMemoryCloudMetadataProvider(fallback)
-                .AddOrUpdate("login.microsoftonline.us", AbstractionsCloudKeys.TokenExchangeAudience, "api://custom");
+                .AddOrUpdate("login.microsoftonline.us", CloudMetadataKeyNames.FederatedCredentialAudience, "api://custom");
 
             // Act
-            CloudMetadata? metadata = provider.GetByAuthorityHost("login.microsoftonline.us");
+            IReadOnlyDictionary<string, string>? metadata = provider.GetByAuthorityHost("login.microsoftonline.us");
 
             // Assert: own key wins, fallback's other key is preserved.
-            Assert.Equal("api://custom", metadata!.GetValueOrDefault(AbstractionsCloudKeys.TokenExchangeAudience));
-            Assert.Equal("keep-me", metadata.GetValueOrDefault("other_key"));
+            Assert.Equal("api://custom", ValueOrNull(metadata, CloudMetadataKeyNames.FederatedCredentialAudience));
+            Assert.Equal("keep-me", ValueOrNull(metadata, "other_key"));
         }
 
         [Fact]
@@ -132,17 +98,17 @@ namespace Microsoft.Identity.Abstractions.Tests
                 "login.microsoftonline.us",
                 new Dictionary<string, string>
                 {
-                    [AbstractionsCloudKeys.TokenExchangeAudience] = "api://AzureADTokenExchangeUSGov",
+                    [CloudMetadataKeyNames.FederatedCredentialAudience] = "api://AzureADTokenExchangeUSGov",
                 });
             var provider = new InMemoryCloudMetadataProvider(fallback)
                 .AddOrUpdate("login.microsoftonline.us", "extra_key", "extra-value");
 
             // Act
-            CloudMetadata? metadata = provider.GetByAuthorityHost("login.microsoftonline.us");
+            IReadOnlyDictionary<string, string>? metadata = provider.GetByAuthorityHost("login.microsoftonline.us");
 
             // Assert: both the fallback key and the added key resolve.
-            Assert.Equal("api://AzureADTokenExchangeUSGov", metadata!.GetValueOrDefault(AbstractionsCloudKeys.TokenExchangeAudience));
-            Assert.Equal("extra-value", metadata.GetValueOrDefault("extra_key"));
+            Assert.Equal("api://AzureADTokenExchangeUSGov", ValueOrNull(metadata, CloudMetadataKeyNames.FederatedCredentialAudience));
+            Assert.Equal("extra-value", ValueOrNull(metadata, "extra_key"));
         }
 
         [Fact]
@@ -150,13 +116,13 @@ namespace Microsoft.Identity.Abstractions.Tests
         {
             // Arrange & Act: accumulate two distinct keys via two per-key calls (no fallback).
             var provider = new InMemoryCloudMetadataProvider()
-                .AddOrUpdate("login.partner.example", AbstractionsCloudKeys.TokenExchangeAudience, "api://first")
+                .AddOrUpdate("login.partner.example", CloudMetadataKeyNames.FederatedCredentialAudience, "api://first")
                 .AddOrUpdate("login.partner.example", "second_key", "second-value");
 
             // Assert
-            CloudMetadata? metadata = provider.GetByAuthorityHost("login.partner.example");
-            Assert.Equal("api://first", metadata!.GetValueOrDefault(AbstractionsCloudKeys.TokenExchangeAudience));
-            Assert.Equal("second-value", metadata.GetValueOrDefault("second_key"));
+            IReadOnlyDictionary<string, string>? metadata = provider.GetByAuthorityHost("login.partner.example");
+            Assert.Equal("api://first", ValueOrNull(metadata, CloudMetadataKeyNames.FederatedCredentialAudience));
+            Assert.Equal("second-value", ValueOrNull(metadata, "second_key"));
         }
 
         [Fact]
@@ -191,22 +157,6 @@ namespace Microsoft.Identity.Abstractions.Tests
         }
 
         [Fact]
-        public void CloudMetadata_Values_ExposesAllPairs_CaseInsensitively()
-        {
-            // Arrange
-            var metadata = new CloudMetadata(new Dictionary<string, string>
-            {
-                [AbstractionsCloudKeys.TokenExchangeAudience] = "api://AzureADTokenExchangeUSGov",
-                ["other_key"] = "other-value",
-            });
-
-            // Act & Assert: the read-only Values view exposes every stored pair, keyed case-insensitively.
-            Assert.Equal(2, metadata.Values.Count);
-            Assert.Equal("api://AzureADTokenExchangeUSGov", metadata.Values[AbstractionsCloudKeys.TokenExchangeAudience]);
-            Assert.Equal("other-value", metadata.Values["OTHER_KEY"]);
-        }
-
-        [Fact]
         public void InMemoryProvider_NullOrEmptyHost_WithoutFallback_ReturnsNull()
         {
             // Arrange
@@ -214,7 +164,7 @@ namespace Microsoft.Identity.Abstractions.Tests
                 "login.microsoftonline.us",
                 new Dictionary<string, string>
                 {
-                    [AbstractionsCloudKeys.TokenExchangeAudience] = "api://AzureADTokenExchangeUSGov",
+                    [CloudMetadataKeyNames.FederatedCredentialAudience] = "api://AzureADTokenExchangeUSGov",
                 });
 
             // Act & Assert: a null or empty host resolves to null rather than throwing.
@@ -230,7 +180,7 @@ namespace Microsoft.Identity.Abstractions.Tests
                 "login.microsoftonline.com",
                 new Dictionary<string, string>
                 {
-                    [AbstractionsCloudKeys.TokenExchangeAudience] = "api://AzureADTokenExchange",
+                    [CloudMetadataKeyNames.FederatedCredentialAudience] = "api://AzureADTokenExchange",
                 });
             var provider = new InMemoryCloudMetadataProvider(fallback);
 
@@ -240,18 +190,46 @@ namespace Microsoft.Identity.Abstractions.Tests
         }
 
         [Fact]
-        public void CloudMetadata_Values_IsReadOnly()
+        public void InMemoryProvider_ReturnedDictionary_IsCaseInsensitive()
         {
             // Arrange
-            var metadata = new CloudMetadata(new Dictionary<string, string>
-            {
-                [AbstractionsCloudKeys.TokenExchangeAudience] = "api://AzureADTokenExchange",
-            });
+            var provider = new InMemoryCloudMetadataProvider().AddOrUpdate(
+                "login.microsoftonline.us",
+                new Dictionary<string, string>
+                {
+                    [CloudMetadataKeyNames.FederatedCredentialAudience] = "api://AzureADTokenExchangeUSGov",
+                    ["other_key"] = "other-value",
+                });
 
-            // Act & Assert: the exposed view cannot be downcast to mutate the underlying bag.
-            Assert.IsNotType<Dictionary<string, string>>(metadata.Values);
+            // Act
+            IReadOnlyDictionary<string, string>? metadata = provider.GetByAuthorityHost("login.microsoftonline.us");
+
+            // Assert: the returned bag exposes every stored pair, keyed case-insensitively.
+            Assert.NotNull(metadata);
+            Assert.Equal(2, metadata!.Count);
+            Assert.Equal("api://AzureADTokenExchangeUSGov", metadata["FEDERATED_CREDENTIAL_AUDIENCE"]);
+            Assert.Equal("other-value", metadata["OTHER_KEY"]);
+        }
+
+        [Fact]
+        public void InMemoryProvider_ReturnedDictionary_IsReadOnly()
+        {
+            // Arrange
+            var provider = new InMemoryCloudMetadataProvider().AddOrUpdate(
+                "login.microsoftonline.us",
+                new Dictionary<string, string>
+                {
+                    [CloudMetadataKeyNames.FederatedCredentialAudience] = "api://AzureADTokenExchangeUSGov",
+                });
+
+            // Act
+            IReadOnlyDictionary<string, string>? metadata = provider.GetByAuthorityHost("login.microsoftonline.us");
+
+            // Assert: the returned view cannot be downcast to mutate the underlying bag.
+            Assert.NotNull(metadata);
+            Assert.IsNotType<Dictionary<string, string>>(metadata);
             Assert.Throws<NotSupportedException>(
-                () => ((IDictionary<string, string>)metadata.Values).Add("k", "v"));
+                () => ((IDictionary<string, string>)metadata!).Add("k", "v"));
         }
     }
 }

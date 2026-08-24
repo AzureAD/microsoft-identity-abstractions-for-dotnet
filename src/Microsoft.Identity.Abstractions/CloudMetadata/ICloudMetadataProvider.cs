@@ -1,18 +1,21 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
+
 namespace Microsoft.Identity.Abstractions
 {
     /// <summary>
-    /// Resolves cloud-specific <see cref="CloudMetadata"/> for an Azure cloud, keyed by an authority host
+    /// Resolves cloud-specific metadata for an Azure cloud, keyed by an authority host
     /// (for example <c>login.microsoftonline.com</c> or <c>login.microsoftonline.us</c>).
     /// </summary>
     /// <remarks>
     /// <para>
     /// This is the dependency-injection seam that lets one SDK contribute cloud-specific values that another
-    /// SDK consumes, without either depending on the other's concrete types. For example MISE can register an
-    /// implementation that knows about internal-only sovereign clouds, and Microsoft.Identity.Web resolves it
-    /// from the shared container to obtain the correct FIC token-exchange audience for those clouds.
+    /// SDK consumes, without either depending on the other's concrete types. The values are carried as a
+    /// plain case-insensitive dictionary of strings keyed by the well-known literals in
+    /// <see cref="CloudMetadataKeyNames"/>, so new keys can be added without changing this contract or
+    /// breaking existing consumers.
     /// </para>
     /// <para>
     /// Implementations should be thread-safe and return quickly, as they may be consulted on the token
@@ -27,9 +30,10 @@ namespace Microsoft.Identity.Abstractions
         /// </summary>
         /// <param name="authorityHost">The authority host (for example <c>login.microsoftonline.us</c>). This
         /// is a bare host, not a full URL.</param>
-        /// <returns>The <see cref="CloudMetadata"/> for that cloud, or <c>null</c> if the host is unknown to
-        /// this provider (allowing a caller to fall back to another provider or a default). A <c>null</c> or
-        /// empty <paramref name="authorityHost"/> also resolves to <c>null</c> rather than throwing.</returns>
-        CloudMetadata? GetByAuthorityHost(string authorityHost);
+        /// <returns>A case-insensitive, read-only dictionary of cloud-specific values (keyed by
+        /// <see cref="CloudMetadataKeyNames"/>) for that cloud, or <c>null</c> if the host is unknown to this
+        /// provider (allowing a caller to fall back to another provider or a default). A <c>null</c> or empty
+        /// <paramref name="authorityHost"/> also resolves to <c>null</c> rather than throwing.</returns>
+        IReadOnlyDictionary<string, string>? GetByAuthorityHost(string authorityHost);
     }
 }
