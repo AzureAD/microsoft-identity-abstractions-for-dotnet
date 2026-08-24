@@ -1,3 +1,10 @@
+12.6.1
+=======
+
+## What's Changed
+* `Clone()` on `AcquireTokenOptions` and `DownstreamApiOptions` (and their copy constructors) now allocate a new container for each mutable collection (`ExtraParameters`, `ExtraQueryParameters`, `ExtraHeadersParameters`, and the `DownstreamApiOptions` header/query collections) instead of copying the references. This makes cloned options safe to override per request without mutating the original — for example a named-configuration instance shared across concurrent requests. Null collections stay null, so the default path allocates nothing, and there is no public API change. See [#269](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/269).
+* Improved `CredentialDescription` ID computation. See [#268](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/268).
+
 12.6.0
 =======
 
