@@ -15,8 +15,9 @@ namespace Microsoft.Identity.Abstractions
     /// </para>
     /// <para>
     /// The list is <b>add-only</b>: new keys can be introduced without breaking existing callers, because
-    /// consumers look up only the keys they understand and ignore the rest. A key that must be retired
-    /// should first be marked <see cref="System.ObsoleteAttribute"/> for at least one release before removal.
+    /// consumers look up only the keys they understand and ignore the rest. When no longer needed, keys
+    /// can be marked as <see cref="System.ObsoleteAttribute"/> to discourage new use while leaving the
+    /// constant in place; producers simply stop writing a value under it and consumers stop reading.
     /// </para>
     /// </remarks>
     public static class CloudMetadataKeyNames
