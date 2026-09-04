@@ -4,6 +4,7 @@
 ~override Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.ToString() -> string
 ~static Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.operator !=(Microsoft.Identity.Abstractions.OperationResult<TResult, TError> left, Microsoft.Identity.Abstractions.OperationResult<TResult, TError> right) -> bool
 ~static Microsoft.Identity.Abstractions.OperationResult<TResult, TError>.operator ==(Microsoft.Identity.Abstractions.OperationResult<TResult, TError> left, Microsoft.Identity.Abstractions.OperationResult<TResult, TError> right) -> bool
+const Microsoft.Identity.Abstractions.CloudMetadataKeyNames.FederatedCredentialAudience = "federated_credential_audience" -> string!
 Microsoft.Identity.Abstractions.AcquiredTokenCacheLevel
 Microsoft.Identity.Abstractions.AcquiredTokenCacheLevel.L1Cache = 2 -> Microsoft.Identity.Abstractions.AcquiredTokenCacheLevel
 Microsoft.Identity.Abstractions.AcquiredTokenCacheLevel.L2Cache = 3 -> Microsoft.Identity.Abstractions.AcquiredTokenCacheLevel
@@ -143,6 +144,7 @@ Microsoft.Identity.Abstractions.AuthorizationHeaderResult.AuthorizationHeaderRes
 Microsoft.Identity.Abstractions.AuthorizationHeaderResult.Error.get -> Microsoft.Identity.Abstractions.AuthorizationHeaderError?
 Microsoft.Identity.Abstractions.AuthorizationHeaderResult.Result.get -> Microsoft.Identity.Abstractions.AuthorizationHeaderInformation?
 Microsoft.Identity.Abstractions.AuthorizationHeaderResult.Succeeded.get -> bool
+Microsoft.Identity.Abstractions.CloudMetadataKeyNames
 Microsoft.Identity.Abstractions.CredentialDescription
 Microsoft.Identity.Abstractions.CredentialDescription.Algorithm.get -> string?
 Microsoft.Identity.Abstractions.CredentialDescription.Algorithm.set -> void
@@ -258,6 +260,8 @@ Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider2.CreateAuthorizatio
 Microsoft.Identity.Abstractions.IAuthorizationHeaderProvider2.CreateAuthorizationHeaderInformationForUserAsync(System.Collections.Generic.IEnumerable<string!>! scopes, Microsoft.Identity.Abstractions.AuthorizationHeaderProviderOptions? authorizationHeaderProviderOptions = null, System.Security.Claims.ClaimsPrincipal? claimsPrincipal = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Microsoft.Identity.Abstractions.OperationResult<Microsoft.Identity.Abstractions.AuthorizationHeaderInformation!, Microsoft.Identity.Abstractions.AuthorizationHeaderError!>>!
 Microsoft.Identity.Abstractions.IBoundAuthorizationHeaderProvider
 Microsoft.Identity.Abstractions.IBoundAuthorizationHeaderProvider.CreateBoundAuthorizationHeaderAsync(Microsoft.Identity.Abstractions.DownstreamApiOptions! downstreamApiOptions, System.Security.Claims.ClaimsPrincipal? claimsPrincipal = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Microsoft.Identity.Abstractions.OperationResult<Microsoft.Identity.Abstractions.AuthorizationHeaderInformation!, Microsoft.Identity.Abstractions.AuthorizationHeaderError!>>!
+Microsoft.Identity.Abstractions.ICloudMetadataProvider
+Microsoft.Identity.Abstractions.ICloudMetadataProvider.GetByAuthorityHost(string! authorityHost) -> System.Collections.Generic.IReadOnlyDictionary<string!, string!>?
 Microsoft.Identity.Abstractions.ICredentialsLoader
 Microsoft.Identity.Abstractions.ICredentialsLoader.CredentialSourceLoaders.get -> System.Collections.Generic.IDictionary<Microsoft.Identity.Abstractions.CredentialSource, Microsoft.Identity.Abstractions.ICredentialSourceLoader!>!
 Microsoft.Identity.Abstractions.ICredentialsLoader.LoadCredentialsIfNeededAsync(Microsoft.Identity.Abstractions.CredentialDescription! credentialDescription, Microsoft.Identity.Abstractions.CredentialSourceLoaderParameters? parameters = null) -> System.Threading.Tasks.Task!
@@ -311,6 +315,11 @@ Microsoft.Identity.Abstractions.IDownstreamApi.PutForAppAsync<TInput, TOutput>(s
 Microsoft.Identity.Abstractions.IDownstreamApi.PutForAppAsync<TInput>(string? serviceName, TInput input, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod!>? downstreamApiOptionsOverride = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
 Microsoft.Identity.Abstractions.IDownstreamApi.PutForUserAsync<TInput, TOutput>(string? serviceName, TInput input, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod!>? downstreamApiOptionsOverride = null, System.Security.Claims.ClaimsPrincipal? user = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TOutput?>!
 Microsoft.Identity.Abstractions.IDownstreamApi.PutForUserAsync<TInput>(string? serviceName, TInput input, System.Action<Microsoft.Identity.Abstractions.DownstreamApiOptionsReadOnlyHttpMethod!>? downstreamApiOptionsOverride = null, System.Security.Claims.ClaimsPrincipal? user = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+Microsoft.Identity.Abstractions.InMemoryCloudMetadataProvider
+Microsoft.Identity.Abstractions.InMemoryCloudMetadataProvider.AddOrUpdate(string! authorityHost, string! key, string! value) -> Microsoft.Identity.Abstractions.InMemoryCloudMetadataProvider!
+Microsoft.Identity.Abstractions.InMemoryCloudMetadataProvider.AddOrUpdate(string! authorityHost, System.Collections.Generic.IReadOnlyDictionary<string!, string!>! values) -> Microsoft.Identity.Abstractions.InMemoryCloudMetadataProvider!
+Microsoft.Identity.Abstractions.InMemoryCloudMetadataProvider.GetByAuthorityHost(string! authorityHost) -> System.Collections.Generic.IReadOnlyDictionary<string!, string!>?
+Microsoft.Identity.Abstractions.InMemoryCloudMetadataProvider.InMemoryCloudMetadataProvider(Microsoft.Identity.Abstractions.ICloudMetadataProvider? fallback = null) -> void
 Microsoft.Identity.Abstractions.ITokenAcquirer
 Microsoft.Identity.Abstractions.ITokenAcquirer.GetTokenForAppAsync(string! scope, Microsoft.Identity.Abstractions.AcquireTokenOptions? tokenAcquisitionOptions = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Microsoft.Identity.Abstractions.AcquireTokenResult!>!
 Microsoft.Identity.Abstractions.ITokenAcquirer.GetTokenForUserAsync(System.Collections.Generic.IEnumerable<string!>! scopes, Microsoft.Identity.Abstractions.AcquireTokenOptions? tokenAcquisitionOptions = null, System.Security.Claims.ClaimsPrincipal? user = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Microsoft.Identity.Abstractions.AcquireTokenResult!>!

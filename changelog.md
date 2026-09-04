@@ -1,3 +1,9 @@
+12.7.0
+=======
+
+## What's Changed
+* Added a neutral, dependency-free cross-cloud metadata contract with `ICloudMetadataProvider`, `CloudMetadataKeyNames.FederatedCredentialAudience`, and `InMemoryCloudMetadataProvider`. This enables SDKs to contribute and consume metadata by authority host without depending on each other's concrete types. See [#266](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/266).
+
 12.6.1
 =======
 
@@ -358,7 +364,6 @@ Added a new interface `IAuthenticationSchemeInformationProvider` to get the effe
 2.0.0
 ==========
 Initial release of Microsoft.Identity.Abstractions which brings interfaces and POCO classes used in all the Microsoft .NET authentication libraries provided by Identity and Network Access (IDNA) see ReadME.md for details.
-
 
 
 
