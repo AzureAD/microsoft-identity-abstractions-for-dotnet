@@ -187,6 +187,7 @@ namespace TokenAcquisition {
             &lt;&lt;rw&gt;&gt; +IDictionary&lt;string, Object&gt; ExtraParameters
             &lt;&lt;rw&gt;&gt; +IDictionary&lt;string, string&gt; ExtraHeaderParameters
             &lt;&lt;rw&gt;&gt; +string Claims
+            &lt;&lt;rw&gt;&gt; +string ClaimsFromClient
             &lt;&lt;rw&gt;&gt; +string FmiPath
             &lt;&lt;rw&gt;&gt; +bool ForceRefresh
             &lt;&lt;rw&gt;&gt; +string PopPublicKey
@@ -445,6 +446,7 @@ classDiagram
     &lt;&lt;rw&gt;&gt; +IDictionary&lt;string, Object&gt; ExtraParameters
     &lt;&lt;rw&gt;&gt; +IDictionary&lt;string, string&gt; ExtraHeaderParameters
     &lt;&lt;rw&gt;&gt; +string Claims
+    &lt;&lt;rw&gt;&gt; +string ClaimsFromClient
     &lt;&lt;rw&gt;&gt; +string FmiPath
     &lt;&lt;rw&gt;&gt; +bool ForceRefresh
     &lt;&lt;rw&gt;&gt; +string PopPublicKey

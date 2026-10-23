@@ -60,6 +60,23 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
         }
 
         [Fact]
+        public void AcquireTokenOptionsClone_ClaimsFromClient_PreservesExactRawString()
+        {
+            // Arrange
+            const string claimsFromClient = " { \"access_token\": { \"xms_cc\": { \"values\": [ \"cp1\" ] } } } ";
+            var original = new AcquireTokenOptions
+            {
+                ClaimsFromClient = claimsFromClient,
+            };
+
+            // Act
+            AcquireTokenOptions clone = original.Clone();
+
+            // Assert
+            Assert.Equal(claimsFromClient, clone.ClaimsFromClient);
+        }
+
+        [Fact]
         public void DownstreamApiOptionsClone_MutableCollections_AreNewContainers()
         {
             // Arrange

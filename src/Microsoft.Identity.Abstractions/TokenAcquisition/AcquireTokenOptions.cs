@@ -41,6 +41,7 @@ namespace Microsoft.Identity.Abstractions
             ForceRefresh = other.ForceRefresh;
             FmiPath = other.FmiPath;
             Claims = other.Claims;
+            ClaimsFromClient = other.ClaimsFromClient;
             PopPublicKey = other.PopPublicKey;
             PopClaim = other.PopClaim;
             ManagedIdentity = other.ManagedIdentity?.Clone();
@@ -87,6 +88,18 @@ namespace Microsoft.Identity.Abstractions
         /// CA Auth context</see>
         /// </summary>
         public string? Claims { get; set; }
+
+        /// <summary>
+        /// Gets or sets the client-originated claims JSON to pass to the token acquisition request.
+        /// This value is distinct from the server claims challenge in <see cref="Claims"/> and from claims
+        /// embedded in a signed client assertion.
+        /// </summary>
+        /// <remarks>
+        /// The exact raw string is passed to MSAL.NET's <c>WithClaimsFromClient</c> API without parsing,
+        /// normalization, or merging. MSAL.NET uses the exact string in its token cache partition, so callers
+        /// should provide the same value consistently for equivalent token acquisition requests.
+        /// </remarks>
+        public string? ClaimsFromClient { get; set; }
 
         /// <summary>
         /// Federated Managed Identity (FMI) sub-path.

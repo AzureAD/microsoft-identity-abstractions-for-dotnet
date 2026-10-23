@@ -31,6 +31,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
                 {
                     AuthenticationOptionsName = "AzureAd",
                     Claims = "claims",
+                    ClaimsFromClient = " { \"access_token\": { \"xms_cc\": { \"values\": [ \"cp1\" ] } } } ",
                     CorrelationId = Guid.NewGuid(),
                     ExtraHeadersParameters = new Dictionary<string, string> { { "slice", "test" } },
                     ExtraQueryParameters = new Dictionary<string, string> { { "slice", "test" } },
@@ -88,6 +89,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
 
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.AuthenticationOptionsName, downstreamApiClone.AcquireTokenOptions.AuthenticationOptionsName);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.Claims, downstreamApiClone.AcquireTokenOptions.Claims);
+            Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ClaimsFromClient, downstreamApiClone.AcquireTokenOptions.ClaimsFromClient);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.CorrelationId, downstreamApiClone.AcquireTokenOptions.CorrelationId);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ExtraHeadersParameters, downstreamApiClone.AcquireTokenOptions.ExtraHeadersParameters);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ExtraQueryParameters, downstreamApiClone.AcquireTokenOptions.ExtraQueryParameters);
@@ -107,7 +109,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
 
             // If this fails, think of also adding a line to test the new property
             Assert.Equal(16, typeof(DownstreamApiOptions).GetProperties().Length);
-            Assert.Equal(15, typeof(AcquireTokenOptions).GetProperties().Length);
+            Assert.Equal(16, typeof(AcquireTokenOptions).GetProperties().Length);
 
             DownstreamApiOptionsReadOnlyHttpMethod options = new DownstreamApiOptionsReadOnlyHttpMethod(downstreamApiOptions, HttpMethod.Delete.ToString());
             Assert.Equal(HttpMethod.Delete.ToString(), options.HttpMethod);
