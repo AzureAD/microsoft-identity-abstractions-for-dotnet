@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using Xunit;
 
@@ -13,6 +14,97 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
     /// </summary>
     public class OptionsCloneIsolationTests
     {
+        [Theory]
+        [InlineData(0, false)]
+        [InlineData(0, true)]
+        [InlineData(1, false)]
+        [InlineData(1, true)]
+        [InlineData(2, false)]
+        [InlineData(2, true)]
+        public void AcquireTokenOptionsCopy_PreservesDictionaryComparers(int dictionaryKind, bool useCopyConstructor)
+        {
+            // Arrange
+            var original = new AcquireTokenOptions
+            {
+                ExtraParameters = CreateDictionary<object>(dictionaryKind),
+                ExtraQueryParameters = CreateDictionary<string>(dictionaryKind),
+                ExtraHeadersParameters = CreateDictionary<string>(dictionaryKind),
+            };
+            original.ExtraParameters["Configured"] = "value";
+            original.ExtraQueryParameters["Configured"] = "value";
+            original.ExtraHeadersParameters["Configured"] = "value";
+
+            // Act
+            AcquireTokenOptions copy = useCopyConstructor ? new AcquireTokenOptions(original) : original.Clone();
+
+            // Assert
+            Assert.NotSame(original.ExtraParameters, copy.ExtraParameters);
+            Assert.NotSame(original.ExtraQueryParameters, copy.ExtraQueryParameters);
+            Assert.NotSame(original.ExtraHeadersParameters, copy.ExtraHeadersParameters);
+            Assert.Equal("value", copy.ExtraParameters!["CONFIGURED"]);
+            Assert.Equal("value", copy.ExtraQueryParameters!["CONFIGURED"]);
+            Assert.Equal("value", copy.ExtraHeadersParameters!["CONFIGURED"]);
+
+            copy.ExtraParameters["CONFIGURED"] = "request";
+            copy.ExtraQueryParameters["CONFIGURED"] = "request";
+            copy.ExtraHeadersParameters["CONFIGURED"] = "request";
+            Assert.Single(copy.ExtraParameters);
+            Assert.Single(copy.ExtraQueryParameters);
+            Assert.Single(copy.ExtraHeadersParameters);
+            Assert.Equal("value", original.ExtraParameters["Configured"]);
+            Assert.Equal("value", original.ExtraQueryParameters["Configured"]);
+            Assert.Equal("value", original.ExtraHeadersParameters["Configured"]);
+        }
+
+        [Theory]
+        [InlineData(0, false)]
+        [InlineData(0, true)]
+        [InlineData(1, false)]
+        [InlineData(1, true)]
+        [InlineData(2, false)]
+        [InlineData(2, true)]
+        public void DownstreamApiOptionsCopy_PreservesDictionaryComparers(int dictionaryKind, bool useCopyConstructor)
+        {
+            // Arrange
+            var original = new DownstreamApiOptions
+            {
+                ExtraHeaderParameters = CreateDictionary<string>(dictionaryKind),
+                ExtraQueryParameters = CreateDictionary<string>(dictionaryKind),
+            };
+            original.ExtraHeaderParameters["Configured"] = "value";
+            original.ExtraQueryParameters["Configured"] = "value";
+            original.AcquireTokenOptions.ExtraParameters = CreateDictionary<object>(dictionaryKind);
+            original.AcquireTokenOptions.ExtraParameters["Configured"] = "value";
+
+            // Act
+            DownstreamApiOptions copy = useCopyConstructor ? new DownstreamApiOptions(original) : original.Clone();
+
+            // Assert
+            Assert.NotSame(original.ExtraHeaderParameters, copy.ExtraHeaderParameters);
+            Assert.NotSame(original.ExtraQueryParameters, copy.ExtraQueryParameters);
+            Assert.Equal("value", copy.ExtraHeaderParameters!["CONFIGURED"]);
+            Assert.Equal("value", copy.ExtraQueryParameters!["CONFIGURED"]);
+            Assert.Equal("value", copy.AcquireTokenOptions.ExtraParameters!["CONFIGURED"]);
+
+            copy.ExtraHeaderParameters["CONFIGURED"] = "request";
+            copy.ExtraQueryParameters["CONFIGURED"] = "request";
+            Assert.Single(copy.ExtraHeaderParameters);
+            Assert.Single(copy.ExtraQueryParameters);
+            Assert.Equal("value", original.ExtraHeaderParameters["Configured"]);
+            Assert.Equal("value", original.ExtraQueryParameters["Configured"]);
+        }
+
+        private static IDictionary<string, TValue> CreateDictionary<TValue>(int dictionaryKind)
+        {
+            return dictionaryKind switch
+            {
+                0 => new Dictionary<string, TValue>(StringComparer.OrdinalIgnoreCase),
+                1 => new SortedDictionary<string, TValue>(StringComparer.OrdinalIgnoreCase),
+                2 => new SortedList<string, TValue>(StringComparer.OrdinalIgnoreCase),
+                _ => throw new ArgumentOutOfRangeException(nameof(dictionaryKind)),
+            };
+        }
+
         [Fact]
         public void AcquireTokenOptionsClone_MutableCollections_AreNewContainers()
         {
