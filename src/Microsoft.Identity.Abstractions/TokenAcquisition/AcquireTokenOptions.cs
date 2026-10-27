@@ -29,15 +29,9 @@ namespace Microsoft.Identity.Abstractions
 
             AuthenticationOptionsName = other.AuthenticationOptionsName;
             CorrelationId = other.CorrelationId;
-            ExtraQueryParameters = other.ExtraQueryParameters is null
-                ? null
-                : new Dictionary<string, string>(other.ExtraQueryParameters);
-            ExtraHeadersParameters = other.ExtraHeadersParameters is null
-                ? null
-                : new Dictionary<string, string>(other.ExtraHeadersParameters);
-            ExtraParameters = other.ExtraParameters is null
-                ? null
-                : new Dictionary<string, object>(other.ExtraParameters);
+            ExtraQueryParameters = DictionaryCloner.Clone(other.ExtraQueryParameters);
+            ExtraHeadersParameters = DictionaryCloner.Clone(other.ExtraHeadersParameters);
+            ExtraParameters = DictionaryCloner.Clone(other.ExtraParameters);
             ForceRefresh = other.ForceRefresh;
             FmiPath = other.FmiPath;
             Claims = other.Claims;
