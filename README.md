@@ -190,6 +190,7 @@ namespace TokenAcquisition {
             &lt;&lt;rw&gt;&gt; +string ClaimsFromClient
             &lt;&lt;rw&gt;&gt; +string FmiPath
             &lt;&lt;rw&gt;&gt; +bool ForceRefresh
+            &lt;&lt;rw&gt;&gt; +bool RequestOverMtls
             &lt;&lt;rw&gt;&gt; +string PopPublicKey
             &lt;&lt;rw&gt;&gt; +string PopClaim
             &lt;&lt;rw&gt;&gt; +ManagedIdentityOptions ManagedIdentity
@@ -436,6 +437,22 @@ really want to use the lower level API, you should:
 - From the token acquirer get a token for on behalf of the user, or the app. If you don't specify any AcquireTokenOptions,
   the implementation should do its best effort. The AcquireTokenOptions enable you to override the defaults.
 
+For implementations that support managed identity token acquisition over mTLS, set
+`AcquireTokenOptions.RequestOverMtls` directly:
+
+```json
+{
+  "AcquireTokenOptions": {
+    "ManagedIdentity": { "UserAssignedClientId": "" },
+    "RequestOverMtls": true
+  }
+}
+```
+
+An empty client ID selects the system-assigned identity; set the client ID for a
+user-assigned identity. This requests a standard Bearer token without a binding
+certificate, not an mTLS proof-of-possession token. The default is `false`.
+
 ```mermaid
 classDiagram
    class AcquireTokenOptions {
@@ -449,6 +466,7 @@ classDiagram
     &lt;&lt;rw&gt;&gt; +string ClaimsFromClient
     &lt;&lt;rw&gt;&gt; +string FmiPath
     &lt;&lt;rw&gt;&gt; +bool ForceRefresh
+    &lt;&lt;rw&gt;&gt; +bool RequestOverMtls
     &lt;&lt;rw&gt;&gt; +string PopPublicKey
     &lt;&lt;rw&gt;&gt; +string PopClaim
     &lt;&lt;rw&gt;&gt; +ManagedIdentityOptions ManagedIdentity

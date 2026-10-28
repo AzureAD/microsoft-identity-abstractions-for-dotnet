@@ -168,6 +168,48 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             Assert.Equal(claimsFromClient, clone.ClaimsFromClient);
         }
 
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void AcquireTokenOptionsCopy_RequestOverMtls_IsPreserved(bool useCopyConstructor)
+        {
+            // Arrange
+            var original = new AcquireTokenOptions
+            {
+                ManagedIdentity = new ManagedIdentityOptions(),
+                RequestOverMtls = true,
+            };
+
+            // Act
+            AcquireTokenOptions copy = useCopyConstructor ? new AcquireTokenOptions(original) : original.Clone();
+
+            // Assert
+            Assert.True(copy.RequestOverMtls);
+            Assert.NotNull(copy.ManagedIdentity);
+            Assert.Null(copy.ExtraParameters);
+        }
+
+        [Fact]
+        public void DownstreamApiOptionsClone_RequestOverMtls_IsPreserved()
+        {
+            // Arrange
+            var original = new DownstreamApiOptions
+            {
+                AcquireTokenOptions = new AcquireTokenOptions
+                {
+                    ManagedIdentity = new ManagedIdentityOptions(),
+                    RequestOverMtls = true,
+                },
+            };
+
+            // Act
+            DownstreamApiOptions copy = original.Clone();
+
+            // Assert
+            Assert.True(copy.AcquireTokenOptions.RequestOverMtls);
+            Assert.Null(copy.AcquireTokenOptions.ExtraParameters);
+        }
+
         [Fact]
         public void DownstreamApiOptionsClone_MutableCollections_AreNewContainers()
         {

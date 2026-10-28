@@ -33,6 +33,7 @@ namespace Microsoft.Identity.Abstractions
             ExtraHeadersParameters = DictionaryCloner.Clone(other.ExtraHeadersParameters);
             ExtraParameters = DictionaryCloner.Clone(other.ExtraParameters);
             ForceRefresh = other.ForceRefresh;
+            RequestOverMtls = other.RequestOverMtls;
             FmiPath = other.FmiPath;
             Claims = other.Claims;
             ClaimsFromClient = other.ClaimsFromClient;
@@ -108,6 +109,17 @@ namespace Microsoft.Identity.Abstractions
         /// for it induces performance degradation, as the token cache is not utilized, and the STS might throttle the app.
         /// </summary>
         public bool ForceRefresh { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether to acquire a managed identity token over mutual TLS while returning
+        /// a standard Bearer token without a binding certificate. The default is <c>false</c>.
+        /// </summary>
+        /// <remarks>
+        /// Requires <see cref="ManagedIdentity"/> and a supported IMDSv2 host. This option cannot be
+        /// combined with mTLS proof-of-possession token binding. Key attestation is configured
+        /// separately by the token acquisition implementation.
+        /// </remarks>
+        public bool RequestOverMtls { get; set; }
 
         /// <summary>
         /// Modifies the token acquisition request so that the acquired token is a Proof of Possession token (PoP),

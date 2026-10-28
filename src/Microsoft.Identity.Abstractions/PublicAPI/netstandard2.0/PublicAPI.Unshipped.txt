@@ -1,1 +1,3 @@
 #nullable enable
+Microsoft.Identity.Abstractions.AcquireTokenOptions.RequestOverMtls.get -> bool
+Microsoft.Identity.Abstractions.AcquireTokenOptions.RequestOverMtls.set -> void
