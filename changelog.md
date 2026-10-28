@@ -1,4 +1,4 @@
-12.7.1
+12.8.0
 =======
 
 ## What's Changed
@@ -371,7 +371,6 @@ Added a new interface `IAuthenticationSchemeInformationProvider` to get the effe
 2.0.0
 ==========
 Initial release of Microsoft.Identity.Abstractions which brings interfaces and POCO classes used in all the Microsoft .NET authentication libraries provided by Identity and Network Access (IDNA) see ReadME.md for details.
-
 
 
 
