@@ -43,6 +43,8 @@ Microsoft.Identity.Abstractions.AcquireTokenOptions.AuthenticationOptionsName.ge
 Microsoft.Identity.Abstractions.AcquireTokenOptions.AuthenticationOptionsName.set -> void
 Microsoft.Identity.Abstractions.AcquireTokenOptions.Claims.get -> string?
 Microsoft.Identity.Abstractions.AcquireTokenOptions.Claims.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenOptions.ClaimsFromClient.get -> string?
+Microsoft.Identity.Abstractions.AcquireTokenOptions.ClaimsFromClient.set -> void
 Microsoft.Identity.Abstractions.AcquireTokenOptions.CorrelationId.get -> System.Guid?
 Microsoft.Identity.Abstractions.AcquireTokenOptions.CorrelationId.set -> void
 Microsoft.Identity.Abstractions.AcquireTokenOptions.ExtraHeadersParameters.get -> System.Collections.Generic.IDictionary<string!, string!>?

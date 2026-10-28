@@ -1,3 +1,1 @@
 #nullable enable
-Microsoft.Identity.Abstractions.AcquireTokenOptions.ClaimsFromClient.get -> string?
-Microsoft.Identity.Abstractions.AcquireTokenOptions.ClaimsFromClient.set -> void

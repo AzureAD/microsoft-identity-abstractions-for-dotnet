@@ -1,3 +1,10 @@
+12.7.1
+=======
+
+## What's Changed
+* Cloning or copying token acquisition and downstream API options now preserves configured comparers for `Dictionary`, `SortedDictionary`, and `SortedList` collections while keeping the copied collections independent. See [#275](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/275) by [@iarekk](https://github.com/iarekk).
+* Added `AcquireTokenOptions.ClaimsFromClient` as the shared contract for client-originated claims JSON. The value is preserved through cloning and is distinct from a server claims challenge or claims embedded in a signed client assertion. See [#274](https://github.com/AzureAD/microsoft-identity-abstractions-for-dotnet/pull/274) by [@Robbie-Microsoft](https://github.com/Robbie-Microsoft).
+
 12.7.0
 =======
 
@@ -364,7 +371,6 @@ Added a new interface `IAuthenticationSchemeInformationProvider` to get the effe
 2.0.0
 ==========
 Initial release of Microsoft.Identity.Abstractions which brings interfaces and POCO classes used in all the Microsoft .NET authentication libraries provided by Identity and Network Access (IDNA) see ReadME.md for details.
-
 
 
 
