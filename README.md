@@ -193,10 +193,17 @@ namespace TokenAcquisition {
             &lt;&lt;rw&gt;&gt; +string PopPublicKey
             &lt;&lt;rw&gt;&gt; +string PopClaim
             &lt;&lt;rw&gt;&gt; +ManagedIdentityOptions ManagedIdentity
+            &lt;&lt;rw&gt;&gt; +bool RequestOverMtls
+            &lt;&lt;rw&gt;&gt; +KeyAttestationMode KeyAttestation
             &lt;&lt;rw&gt;&gt; +string LongRunningWebApiSessionKey
             &lt;&lt;ro&gt;&gt; +string LongRunningWebApiSessionKeyAuto
             &lt;&lt;rw&gt;&gt; +string Tenant
             &lt;&lt;rw&gt;&gt; +string UserFlow
+    }
+    class KeyAttestationMode {
+    <<enumeration>>
+    Required = 0
+    Disabled = 1
     }
     class AcquireTokenResult {
             &lt;&lt;rw&gt;&gt; +string AccessToken
@@ -436,6 +443,43 @@ really want to use the lower level API, you should:
 - From the token acquirer get a token for on behalf of the user, or the app. If you don't specify any AcquireTokenOptions,
   the implementation should do its best effort. The AcquireTokenOptions enable you to override the defaults.
 
+For direct managed identity acquisition, `RequestOverMtls` requests a bearer token over mutual TLS
+without binding the returned token to the certificate. It defaults to `false`. To request an mTLS
+proof-of-possession token instead, set `ProtocolScheme` to `MTLS_POP` on the authorization header or
+downstream API options and omit `RequestOverMtls`.
+
+`KeyAttestation` defaults to `Required` for both managed identity mTLS modes. Implementations must
+fail if attestation support is unavailable or attestation fails, rather than silently downgrade.
+Set it to `Disabled` to explicitly opt out, even when attestation support is registered. This policy
+does not enable mTLS or change ordinary bearer acquisition, and opting out does not relax platform
+or service requirements. These are shared contracts; the token acquisition implementation must
+support them and provide the attestation capability.
+
+The following downstream API options request a bearer token over mTLS with attestation required by
+default. Set `UserAssignedClientId` to a client ID for a user-assigned identity; the empty value
+selects a system-assigned identity.
+
+```json
+{
+  "ProtocolScheme": "Bearer",
+  "RequestAppToken": true,
+  "AcquireTokenOptions": {
+    "ManagedIdentity": { "UserAssignedClientId": "" },
+    "RequestOverMtls": true
+  }
+}
+```
+
+Add `"KeyAttestation": "Disabled"` inside `AcquireTokenOptions` only for an explicitly unattested
+request. The same choices apply to mTLS PoP:
+
+| Token | `ProtocolScheme` | `RequestOverMtls` | `KeyAttestation` |
+|---|---|---|---|
+| Bearer over mTLS, attested | `Bearer` | `true` | Omit (`Required`) |
+| Bearer over mTLS, unattested | `Bearer` | `true` | `Disabled` |
+| mTLS PoP, attested | `MTLS_POP` | Omit (`false`) | Omit (`Required`) |
+| mTLS PoP, unattested | `MTLS_POP` | Omit (`false`) | `Disabled` |
+
 ```mermaid
 classDiagram
    class AcquireTokenOptions {
@@ -452,10 +496,17 @@ classDiagram
     &lt;&lt;rw&gt;&gt; +string PopPublicKey
     &lt;&lt;rw&gt;&gt; +string PopClaim
     &lt;&lt;rw&gt;&gt; +ManagedIdentityOptions ManagedIdentity
+    &lt;&lt;rw&gt;&gt; +bool RequestOverMtls
+    &lt;&lt;rw&gt;&gt; +KeyAttestationMode KeyAttestation
     &lt;&lt;rw&gt;&gt; +string LongRunningWebApiSessionKey
     &lt;&lt;ro&gt;&gt; +string LongRunningWebApiSessionKeyAuto
     &lt;&lt;rw&gt;&gt; +string Tenant
     &lt;&lt;rw&gt;&gt; +string UserFlow
+    }
+    class KeyAttestationMode {
+    <<enumeration>>
+    Required = 0
+    Disabled = 1
     }
     class AcquireTokenResult {
     &lt;&lt;rw&gt;&gt; +string AccessToken

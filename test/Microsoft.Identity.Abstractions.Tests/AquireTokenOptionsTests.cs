@@ -1,12 +1,40 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using Newtonsoft.Json;
 using Xunit;
 
 namespace Microsoft.Identity.Abstractions.Tests
 {
     public class AquireTokenOptionsTests
     {
+        [Theory]
+        [InlineData(
+            "{\"ManagedIdentity\":{\"UserAssignedClientId\":\"\"},\"RequestOverMtls\":true}",
+            KeyAttestationMode.Required)]
+        [InlineData(
+            "{\"ManagedIdentity\":{\"UserAssignedClientId\":\"\"},\"RequestOverMtls\":true,\"KeyAttestation\":\"Disabled\"}",
+            KeyAttestationMode.Disabled)]
+        public void MtlsOptionsDeserializeAndPreserveAttestationPolicy(string json, KeyAttestationMode expectedAttestation)
+        {
+            // Arrange
+            AcquireTokenOptions options = Assert.IsType<AcquireTokenOptions>(
+                JsonConvert.DeserializeObject<AcquireTokenOptions>(json));
+
+            // Act
+            AcquireTokenOptions copy = new AcquireTokenOptions(options);
+            AcquireTokenOptions clone = options.Clone();
+
+            // Assert
+            Assert.NotNull(options.ManagedIdentity);
+            Assert.True(options.RequestOverMtls);
+            Assert.Equal(expectedAttestation, options.KeyAttestation);
+            Assert.True(copy.RequestOverMtls);
+            Assert.Equal(expectedAttestation, copy.KeyAttestation);
+            Assert.True(clone.RequestOverMtls);
+            Assert.Equal(expectedAttestation, clone.KeyAttestation);
+        }
+
         [Fact]
         public void ManagedIdentitySystemAssigned()
         {
