@@ -40,6 +40,8 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
                     ForceRefresh = true,
                     LongRunningWebApiSessionKey = AcquireTokenOptions.LongRunningWebApiSessionKeyAuto,
                     ManagedIdentity = new ManagedIdentityOptions(),
+                    RequestOverMtls = true,
+                    KeyAttestation = KeyAttestationMode.Disabled,
                     PopPublicKey = "PopKey",
                     PopClaim = "jwkClaim",
                     Tenant = "domain.com",
@@ -98,6 +100,10 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ForceRefresh, downstreamApiClone.AcquireTokenOptions.ForceRefresh);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.LongRunningWebApiSessionKey, downstreamApiClone.AcquireTokenOptions.LongRunningWebApiSessionKey);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ManagedIdentity.UserAssignedClientId, downstreamApiClone.AcquireTokenOptions.ManagedIdentity?.UserAssignedClientId);
+            Assert.Equal(downstreamApiOptions.AcquireTokenOptions.RequestOverMtls, downstreamApiClone.AcquireTokenOptions.RequestOverMtls);
+            Assert.Equal(downstreamApiOptions.AcquireTokenOptions.KeyAttestation, downstreamApiClone.AcquireTokenOptions.KeyAttestation);
+            Assert.True(authorizationHeaderProviderOptionsClone.AcquireTokenOptions.RequestOverMtls);
+            Assert.Equal(KeyAttestationMode.Disabled, authorizationHeaderProviderOptionsClone.AcquireTokenOptions.KeyAttestation);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.PopPublicKey, downstreamApiClone.AcquireTokenOptions.PopPublicKey);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.PopClaim, downstreamApiClone.AcquireTokenOptions.PopClaim);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.Tenant, downstreamApiClone.AcquireTokenOptions.Tenant);
@@ -109,11 +115,13 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
 
             // If this fails, think of also adding a line to test the new property
             Assert.Equal(16, typeof(DownstreamApiOptions).GetProperties().Length);
-            Assert.Equal(16, typeof(AcquireTokenOptions).GetProperties().Length);
+            Assert.Equal(18, typeof(AcquireTokenOptions).GetProperties().Length);
 
             DownstreamApiOptionsReadOnlyHttpMethod options = new DownstreamApiOptionsReadOnlyHttpMethod(downstreamApiOptions, HttpMethod.Delete.ToString());
             Assert.Equal(HttpMethod.Delete.ToString(), options.HttpMethod);
             Assert.Equal(HttpMethod.Delete.ToString(), options.Clone().HttpMethod);
+            Assert.True(options.Clone().AcquireTokenOptions.RequestOverMtls);
+            Assert.Equal(KeyAttestationMode.Disabled, options.Clone().AcquireTokenOptions.KeyAttestation);
 
             // Special cases
             authorizationHeaderProviderOptions.HttpMethod = null!;

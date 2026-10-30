@@ -1,1 +1,8 @@
 #nullable enable
+Microsoft.Identity.Abstractions.AcquireTokenOptions.KeyAttestation.get -> Microsoft.Identity.Abstractions.KeyAttestationMode
+Microsoft.Identity.Abstractions.AcquireTokenOptions.KeyAttestation.set -> void
+Microsoft.Identity.Abstractions.AcquireTokenOptions.RequestOverMtls.get -> bool
+Microsoft.Identity.Abstractions.AcquireTokenOptions.RequestOverMtls.set -> void
+Microsoft.Identity.Abstractions.KeyAttestationMode
+Microsoft.Identity.Abstractions.KeyAttestationMode.Disabled = 1 -> Microsoft.Identity.Abstractions.KeyAttestationMode
+Microsoft.Identity.Abstractions.KeyAttestationMode.Required = 0 -> Microsoft.Identity.Abstractions.KeyAttestationMode

@@ -39,6 +39,8 @@ namespace Microsoft.Identity.Abstractions
             PopPublicKey = other.PopPublicKey;
             PopClaim = other.PopClaim;
             ManagedIdentity = other.ManagedIdentity?.Clone();
+            RequestOverMtls = other.RequestOverMtls;
+            KeyAttestation = other.KeyAttestation;
             LongRunningWebApiSessionKey = other.LongRunningWebApiSessionKey;
             Tenant = other.Tenant;
             UserFlow = other.UserFlow;
@@ -148,6 +150,33 @@ namespace Microsoft.Identity.Abstractions
         /// ]]></format>
         /// </example>
         public ManagedIdentityOptions? ManagedIdentity { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether to acquire a managed identity bearer token over mutual TLS (mTLS).
+        /// The default is <c>false</c>.
+        /// </summary>
+        /// <remarks>
+        /// Applies when <see cref="ManagedIdentity"/> is set. The certificate authenticates the
+        /// token request, but the returned bearer token is not bound to that certificate.
+        /// This option does not select mTLS proof-of-possession. To request a bound token, use
+        /// <see cref="AuthorizationHeaderProviderOptions.ProtocolScheme"/> with <c>MTLS_POP</c>
+        /// instead; that protocol already requires mTLS.
+        /// Key attestation is controlled separately by <see cref="KeyAttestation"/>.
+        /// </remarks>
+        public bool RequestOverMtls { get; set; }
+
+        /// <summary>
+        /// Gets or sets the key attestation policy for managed identity mTLS token acquisition.
+        /// The default is <see cref="KeyAttestationMode.Required"/>.
+        /// </summary>
+        /// <remarks>
+        /// Applies to both bearer token acquisition over mTLS and mTLS proof-of-possession.
+        /// It does not enable mTLS or change ordinary bearer token acquisition.
+        /// When required, token acquisition implementations must fail if attestation support is
+        /// unavailable or attestation fails, rather than fall back to an unattested request.
+        /// Set <see cref="KeyAttestationMode.Disabled"/> to explicitly opt out of key attestation.
+        /// </remarks>
+        public KeyAttestationMode KeyAttestation { get; set; } = KeyAttestationMode.Required;
 
         /// <summary>
         /// Key used for long running web APIs that need to call downstream web
