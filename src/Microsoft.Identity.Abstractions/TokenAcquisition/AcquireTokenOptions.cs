@@ -39,6 +39,8 @@ namespace Microsoft.Identity.Abstractions
             PopPublicKey = other.PopPublicKey;
             PopClaim = other.PopClaim;
             ManagedIdentity = other.ManagedIdentity?.Clone();
+            RequestOverMtls = other.RequestOverMtls;
+            MinimumTokenBindingStrength = other.MinimumTokenBindingStrength;
             LongRunningWebApiSessionKey = other.LongRunningWebApiSessionKey;
             Tenant = other.Tenant;
             UserFlow = other.UserFlow;
@@ -148,6 +150,39 @@ namespace Microsoft.Identity.Abstractions
         /// ]]></format>
         /// </example>
         public ManagedIdentityOptions? ManagedIdentity { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether to acquire a managed identity bearer token over mutual TLS (mTLS).
+        /// The default is <c>false</c>.
+        /// </summary>
+        /// <remarks>
+        /// Applies when <see cref="ManagedIdentity"/> is set. The certificate authenticates the
+        /// token request, but the returned bearer token is not bound to that certificate.
+        /// This option does not select mTLS proof-of-possession. To request a bound token, use
+        /// <see cref="AuthorizationHeaderProviderOptions.ProtocolScheme"/> with <c>MTLS_POP</c>
+        /// instead; that protocol already requires mTLS. Implementations must reject combining
+        /// this option with <c>MTLS_POP</c>.
+        /// A bearer token has no token binding strength. Leave <see cref="MinimumTokenBindingStrength"/>
+        /// unset when using this option.
+        /// </remarks>
+        public bool RequestOverMtls { get; set; }
+
+        /// <summary>
+        /// Gets or sets the minimum binding strength required for managed identity mTLS proof-of-possession.
+        /// </summary>
+        /// <remarks>
+        /// Applies when <see cref="ManagedIdentity"/> is set and
+        /// <see cref="AuthorizationHeaderProviderOptions.ProtocolScheme"/> is <c>MTLS_POP</c>.
+        /// This is a minimum requirement, not a selection of a particular key or a request to downgrade.
+        /// When unset, the value is <see cref="MtlsBindingStrength.None"/>, which imposes no minimum
+        /// and does not disable proof-of-possession or attestation.
+        /// <see cref="MtlsBindingStrength.KeyGuard"/> requires KeyGuard capability and key attestation.
+        /// Implementations must fail if the minimum cannot be met, required attestation support is
+        /// unavailable, or attestation fails; they must not fall back to weaker binding or a bearer token.
+        /// A non-<see cref="MtlsBindingStrength.None"/> value must be rejected outside managed identity
+        /// mTLS proof-of-possession, including bearer token acquisition with <see cref="RequestOverMtls"/>.
+        /// </remarks>
+        public MtlsBindingStrength MinimumTokenBindingStrength { get; set; }
 
         /// <summary>
         /// Key used for long running web APIs that need to call downstream web

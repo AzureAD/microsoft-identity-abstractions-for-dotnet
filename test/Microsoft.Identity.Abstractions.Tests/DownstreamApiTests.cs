@@ -21,8 +21,11 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
 {
     public partial class DownstreamApiTests
     {
-        [Fact]
-        public void CloneClonesAllProperties()
+        [Theory]
+        [InlineData(true, MtlsBindingStrength.None, "Bearer")]
+        [InlineData(false, MtlsBindingStrength.Software, "MTLS_POP")]
+        [InlineData(false, MtlsBindingStrength.KeyGuard, "MTLS_POP")]
+        public void CloneClonesAllProperties(bool requestOverMtls, MtlsBindingStrength minimumStrength, string protocolScheme)
         {
             var downstreamApiOptions = new DownstreamApiOptions
             {
@@ -40,6 +43,8 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
                     ForceRefresh = true,
                     LongRunningWebApiSessionKey = AcquireTokenOptions.LongRunningWebApiSessionKeyAuto,
                     ManagedIdentity = new ManagedIdentityOptions(),
+                    RequestOverMtls = requestOverMtls,
+                    MinimumTokenBindingStrength = minimumStrength,
                     PopPublicKey = "PopKey",
                     PopClaim = "jwkClaim",
                     Tenant = "domain.com",
@@ -58,7 +63,7 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
                 )
                                                       : null,
                 HttpMethod = HttpMethod.Trace.ToString(),
-                ProtocolScheme = "bearer",
+                ProtocolScheme = protocolScheme,
                 RelativePath = "/api/values",
                 RequestAppToken = true,
                 ExtraHeaderParameters = new Dictionary<string, string> { { "OData-Version", "4.0" } },
@@ -98,6 +103,11 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ForceRefresh, downstreamApiClone.AcquireTokenOptions.ForceRefresh);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.LongRunningWebApiSessionKey, downstreamApiClone.AcquireTokenOptions.LongRunningWebApiSessionKey);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.ManagedIdentity.UserAssignedClientId, downstreamApiClone.AcquireTokenOptions.ManagedIdentity?.UserAssignedClientId);
+            Assert.Equal(downstreamApiOptions.AcquireTokenOptions.RequestOverMtls, downstreamApiClone.AcquireTokenOptions.RequestOverMtls);
+            Assert.Equal(downstreamApiOptions.AcquireTokenOptions.MinimumTokenBindingStrength, downstreamApiClone.AcquireTokenOptions.MinimumTokenBindingStrength);
+            Assert.Equal(requestOverMtls, authorizationHeaderProviderOptionsClone.AcquireTokenOptions.RequestOverMtls);
+            Assert.Equal(minimumStrength, authorizationHeaderProviderOptionsClone.AcquireTokenOptions.MinimumTokenBindingStrength);
+            Assert.Equal(protocolScheme, authorizationHeaderProviderOptionsClone.ProtocolScheme);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.PopPublicKey, downstreamApiClone.AcquireTokenOptions.PopPublicKey);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.PopClaim, downstreamApiClone.AcquireTokenOptions.PopClaim);
             Assert.Equal(downstreamApiOptions.AcquireTokenOptions.Tenant, downstreamApiClone.AcquireTokenOptions.Tenant);
@@ -109,11 +119,14 @@ namespace Microsoft.Identity.Abstractions.DownstreamApi.Tests
 
             // If this fails, think of also adding a line to test the new property
             Assert.Equal(16, typeof(DownstreamApiOptions).GetProperties().Length);
-            Assert.Equal(16, typeof(AcquireTokenOptions).GetProperties().Length);
+            Assert.Equal(18, typeof(AcquireTokenOptions).GetProperties().Length);
 
             DownstreamApiOptionsReadOnlyHttpMethod options = new DownstreamApiOptionsReadOnlyHttpMethod(downstreamApiOptions, HttpMethod.Delete.ToString());
             Assert.Equal(HttpMethod.Delete.ToString(), options.HttpMethod);
             Assert.Equal(HttpMethod.Delete.ToString(), options.Clone().HttpMethod);
+            Assert.Equal(requestOverMtls, options.Clone().AcquireTokenOptions.RequestOverMtls);
+            Assert.Equal(minimumStrength, options.Clone().AcquireTokenOptions.MinimumTokenBindingStrength);
+            Assert.Equal(protocolScheme, options.Clone().ProtocolScheme);
 
             // Special cases
             authorizationHeaderProviderOptions.HttpMethod = null!;

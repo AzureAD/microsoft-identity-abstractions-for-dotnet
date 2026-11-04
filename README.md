@@ -193,10 +193,18 @@ namespace TokenAcquisition {
             &lt;&lt;rw&gt;&gt; +string PopPublicKey
             &lt;&lt;rw&gt;&gt; +string PopClaim
             &lt;&lt;rw&gt;&gt; +ManagedIdentityOptions ManagedIdentity
+            &lt;&lt;rw&gt;&gt; +bool RequestOverMtls
+            &lt;&lt;rw&gt;&gt; +MtlsBindingStrength MinimumTokenBindingStrength
             &lt;&lt;rw&gt;&gt; +string LongRunningWebApiSessionKey
             &lt;&lt;ro&gt;&gt; +string LongRunningWebApiSessionKeyAuto
             &lt;&lt;rw&gt;&gt; +string Tenant
             &lt;&lt;rw&gt;&gt; +string UserFlow
+    }
+    class MtlsBindingStrength {
+    <<enumeration>>
+    None = 0
+    Software = 1
+    KeyGuard = 3
     }
     class AcquireTokenResult {
             &lt;&lt;rw&gt;&gt; +string AccessToken
@@ -436,6 +444,86 @@ really want to use the lower level API, you should:
 - From the token acquirer get a token for on behalf of the user, or the app. If you don't specify any AcquireTokenOptions,
   the implementation should do its best effort. The AcquireTokenOptions enable you to override the defaults.
 
+For direct managed identity acquisition, `RequestOverMtls` requests a bearer token over mutual TLS
+without binding the returned token to the certificate. It defaults to `false`. To request an mTLS
+proof-of-possession token instead, set `ProtocolScheme` to `MTLS_POP` on the authorization header or
+downstream API options and omit `RequestOverMtls`.
+
+`MinimumTokenBindingStrength` specifies a minimum for managed identity `MTLS_POP`, not a choice of
+a particular key. It does not enable PoP or apply to bearer tokens, including those acquired over
+mTLS. Both properties have no explicit initializers: an unset `RequestOverMtls` is `false`, and an
+unset `MinimumTokenBindingStrength` is `None`. There is no imposed KeyGuard requirement.
+
+The public `MtlsBindingStrength` enum aligns with MSAL's names and numeric values:
+
+| Strength | Value | Requirement |
+|---|---|---|
+| `None` | `0` | No minimum; does not disable PoP or attestation. |
+| `Software` | `1` | At least software-backed binding; hardware isolation and attestation are not required. |
+| `KeyGuard` | `3` | KeyGuard-backed binding with key attestation. |
+
+Value `2` is reserved. A lower minimum permits stronger binding: `Software` does not force a
+KeyGuard-capable host to use a software key. For an explicit `KeyGuard` requirement, implementations
+must require both host capability and attestation support, and fail if either is unavailable or
+attestation fails. An unmet minimum must not fall back to weaker binding or a bearer token.
+There is no separate per-request attestation-disable switch.
+
+Implementations must reject combining `RequestOverMtls` with `MTLS_POP`, and reject non-`None`
+minimum strengths outside direct managed identity `MTLS_POP`. These are shared contracts; runtime
+validation, strength enforcement, attestation integration, and cache isolation belong to the token
+acquisition implementation. This contract does not extend strength controls to federated identity
+credentials, certificate-based confidential clients, or user-token flows.
+
+The following downstream API options request a bearer token over mTLS. Set `UserAssignedClientId`
+to a client ID for a user-assigned identity; the empty value selects a system-assigned identity.
+
+```json
+{
+  "ProtocolScheme": "Bearer",
+  "RequestAppToken": true,
+  "AcquireTokenOptions": {
+    "ManagedIdentity": { "UserAssignedClientId": "" },
+    "RequestOverMtls": true
+  }
+}
+```
+
+To request a PoP token with an explicit KeyGuard minimum:
+
+```json
+{
+  "ProtocolScheme": "MTLS_POP",
+  "RequestAppToken": true,
+  "AcquireTokenOptions": {
+    "ManagedIdentity": { "UserAssignedClientId": "" },
+    "MinimumTokenBindingStrength": "KeyGuard"
+  }
+}
+```
+
+The equivalent C# options are:
+
+```csharp
+var options = new DownstreamApiOptions
+{
+    ProtocolScheme = "MTLS_POP",
+    RequestAppToken = true,
+    AcquireTokenOptions = new AcquireTokenOptions
+    {
+        ManagedIdentity = new ManagedIdentityOptions(),
+        MinimumTokenBindingStrength = MtlsBindingStrength.KeyGuard
+    }
+};
+```
+
+| Token | `ProtocolScheme` | `RequestOverMtls` | `MinimumTokenBindingStrength` |
+|---|---|---|---|
+| Ordinary bearer | `Bearer` | Omit | Omit |
+| Bearer over mTLS | `Bearer` | `true` | Omit |
+| mTLS PoP, no minimum | `MTLS_POP` | Omit | Omit or `None` |
+| mTLS PoP, software minimum | `MTLS_POP` | Omit | `Software` |
+| mTLS PoP, KeyGuard minimum | `MTLS_POP` | Omit | `KeyGuard` |
+
 ```mermaid
 classDiagram
    class AcquireTokenOptions {
@@ -452,10 +540,18 @@ classDiagram
     &lt;&lt;rw&gt;&gt; +string PopPublicKey
     &lt;&lt;rw&gt;&gt; +string PopClaim
     &lt;&lt;rw&gt;&gt; +ManagedIdentityOptions ManagedIdentity
+    &lt;&lt;rw&gt;&gt; +bool RequestOverMtls
+    &lt;&lt;rw&gt;&gt; +MtlsBindingStrength MinimumTokenBindingStrength
     &lt;&lt;rw&gt;&gt; +string LongRunningWebApiSessionKey
     &lt;&lt;ro&gt;&gt; +string LongRunningWebApiSessionKeyAuto
     &lt;&lt;rw&gt;&gt; +string Tenant
     &lt;&lt;rw&gt;&gt; +string UserFlow
+    }
+    class MtlsBindingStrength {
+    <<enumeration>>
+    None = 0
+    Software = 1
+    KeyGuard = 3
     }
     class AcquireTokenResult {
     &lt;&lt;rw&gt;&gt; +string AccessToken
