@@ -10,12 +10,25 @@ namespace Microsoft.Identity.Abstractions.Tests
     {
         [Theory]
         [InlineData(
-            "{\"ManagedIdentity\":{\"UserAssignedClientId\":\"\"},\"RequestOverMtls\":true}",
-            KeyAttestationMode.Required)]
+            "{\"ManagedIdentity\":{\"UserAssignedClientId\":\"\"}}",
+            false, MtlsBindingStrength.None)]
         [InlineData(
-            "{\"ManagedIdentity\":{\"UserAssignedClientId\":\"\"},\"RequestOverMtls\":true,\"KeyAttestation\":\"Disabled\"}",
-            KeyAttestationMode.Disabled)]
-        public void MtlsOptionsDeserializeAndPreserveAttestationPolicy(string json, KeyAttestationMode expectedAttestation)
+            "{\"ManagedIdentity\":{\"UserAssignedClientId\":\"\"},\"RequestOverMtls\":true}",
+            true, MtlsBindingStrength.None)]
+        [InlineData(
+            "{\"ManagedIdentity\":{\"UserAssignedClientId\":\"\"},\"RequestOverMtls\":false,\"MinimumTokenBindingStrength\":\"None\"}",
+            false, MtlsBindingStrength.None)]
+        [InlineData(
+            "{\"ManagedIdentity\":{\"UserAssignedClientId\":\"\"},\"MinimumTokenBindingStrength\":\"Software\"}",
+            false, MtlsBindingStrength.Software)]
+        [InlineData(
+            "{\"ManagedIdentity\":{\"UserAssignedClientId\":\"\"},\"MinimumTokenBindingStrength\":\"KeyGuard\"}",
+            false, MtlsBindingStrength.KeyGuard)]
+        [InlineData(
+            "{\"ManagedIdentity\":{\"UserAssignedClientId\":\"\"},\"MinimumTokenBindingStrength\":3}",
+            false, MtlsBindingStrength.KeyGuard)]
+        public void MtlsOptionsDeserializeAndPreserveBindingStrength(
+            string json, bool expectedRequestOverMtls, MtlsBindingStrength expectedStrength)
         {
             // Arrange
             AcquireTokenOptions options = Assert.IsType<AcquireTokenOptions>(
@@ -24,15 +37,44 @@ namespace Microsoft.Identity.Abstractions.Tests
             // Act
             AcquireTokenOptions copy = new AcquireTokenOptions(options);
             AcquireTokenOptions clone = options.Clone();
+            AcquireTokenOptions roundTrip = Assert.IsType<AcquireTokenOptions>(
+                JsonConvert.DeserializeObject<AcquireTokenOptions>(JsonConvert.SerializeObject(options)));
 
             // Assert
             Assert.NotNull(options.ManagedIdentity);
-            Assert.True(options.RequestOverMtls);
-            Assert.Equal(expectedAttestation, options.KeyAttestation);
-            Assert.True(copy.RequestOverMtls);
-            Assert.Equal(expectedAttestation, copy.KeyAttestation);
-            Assert.True(clone.RequestOverMtls);
-            Assert.Equal(expectedAttestation, clone.KeyAttestation);
+            Assert.Equal(expectedRequestOverMtls, options.RequestOverMtls);
+            Assert.Equal(expectedStrength, options.MinimumTokenBindingStrength);
+            Assert.Equal(expectedRequestOverMtls, copy.RequestOverMtls);
+            Assert.Equal(expectedStrength, copy.MinimumTokenBindingStrength);
+            Assert.Equal(expectedRequestOverMtls, clone.RequestOverMtls);
+            Assert.Equal(expectedStrength, clone.MinimumTokenBindingStrength);
+            Assert.Equal(expectedRequestOverMtls, roundTrip.RequestOverMtls);
+            Assert.Equal(expectedStrength, roundTrip.MinimumTokenBindingStrength);
+        }
+
+        [Fact]
+        public void MtlsOptionsDoNotImposeTransportOrBindingStrength()
+        {
+            // Arrange
+            AcquireTokenOptions options = new AcquireTokenOptions();
+
+            // Act
+            AcquireTokenOptions clone = options.Clone();
+
+            // Assert
+            Assert.False(options.RequestOverMtls);
+            Assert.Equal(MtlsBindingStrength.None, options.MinimumTokenBindingStrength);
+            Assert.False(clone.RequestOverMtls);
+            Assert.Equal(MtlsBindingStrength.None, clone.MinimumTokenBindingStrength);
+        }
+
+        [Theory]
+        [InlineData(MtlsBindingStrength.None, 0)]
+        [InlineData(MtlsBindingStrength.Software, 1)]
+        [InlineData(MtlsBindingStrength.KeyGuard, 3)]
+        public void MtlsBindingStrengthValuesMatchMsal(MtlsBindingStrength strength, int expectedValue)
+        {
+            Assert.Equal(expectedValue, (int)strength);
         }
 
         [Fact]

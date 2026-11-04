@@ -194,16 +194,17 @@ namespace TokenAcquisition {
             &lt;&lt;rw&gt;&gt; +string PopClaim
             &lt;&lt;rw&gt;&gt; +ManagedIdentityOptions ManagedIdentity
             &lt;&lt;rw&gt;&gt; +bool RequestOverMtls
-            &lt;&lt;rw&gt;&gt; +KeyAttestationMode KeyAttestation
+            &lt;&lt;rw&gt;&gt; +MtlsBindingStrength MinimumTokenBindingStrength
             &lt;&lt;rw&gt;&gt; +string LongRunningWebApiSessionKey
             &lt;&lt;ro&gt;&gt; +string LongRunningWebApiSessionKeyAuto
             &lt;&lt;rw&gt;&gt; +string Tenant
             &lt;&lt;rw&gt;&gt; +string UserFlow
     }
-    class KeyAttestationMode {
+    class MtlsBindingStrength {
     <<enumeration>>
-    Required = 0
-    Disabled = 1
+    None = 0
+    Software = 1
+    KeyGuard = 3
     }
     class AcquireTokenResult {
             &lt;&lt;rw&gt;&gt; +string AccessToken
@@ -448,16 +449,33 @@ without binding the returned token to the certificate. It defaults to `false`. T
 proof-of-possession token instead, set `ProtocolScheme` to `MTLS_POP` on the authorization header or
 downstream API options and omit `RequestOverMtls`.
 
-`KeyAttestation` defaults to `Required` for both managed identity mTLS modes. Implementations must
-fail if attestation support is unavailable or attestation fails, rather than silently downgrade.
-Set it to `Disabled` to explicitly opt out, even when attestation support is registered. This policy
-does not enable mTLS or change ordinary bearer acquisition, and opting out does not relax platform
-or service requirements. These are shared contracts; the token acquisition implementation must
-support them and provide the attestation capability.
+`MinimumTokenBindingStrength` specifies a minimum for managed identity `MTLS_POP`, not a choice of
+a particular key. It does not enable PoP or apply to bearer tokens, including those acquired over
+mTLS. Both properties have no explicit initializers: an unset `RequestOverMtls` is `false`, and an
+unset `MinimumTokenBindingStrength` is `None`. There is no imposed KeyGuard requirement.
 
-The following downstream API options request a bearer token over mTLS with attestation required by
-default. Set `UserAssignedClientId` to a client ID for a user-assigned identity; the empty value
-selects a system-assigned identity.
+The public `MtlsBindingStrength` enum aligns with MSAL's names and numeric values:
+
+| Strength | Value | Requirement |
+|---|---|---|
+| `None` | `0` | No minimum; does not disable PoP or attestation. |
+| `Software` | `1` | At least software-backed binding; hardware isolation and attestation are not required. |
+| `KeyGuard` | `3` | KeyGuard-backed binding with key attestation. |
+
+Value `2` is reserved. A lower minimum permits stronger binding: `Software` does not force a
+KeyGuard-capable host to use a software key. For an explicit `KeyGuard` requirement, implementations
+must require both host capability and attestation support, and fail if either is unavailable or
+attestation fails. An unmet minimum must not fall back to weaker binding or a bearer token.
+There is no separate per-request attestation-disable switch.
+
+Implementations must reject combining `RequestOverMtls` with `MTLS_POP`, and reject non-`None`
+minimum strengths outside direct managed identity `MTLS_POP`. These are shared contracts; runtime
+validation, strength enforcement, attestation integration, and cache isolation belong to the token
+acquisition implementation. This contract does not extend strength controls to federated identity
+credentials, certificate-based confidential clients, or user-token flows.
+
+The following downstream API options request a bearer token over mTLS. Set `UserAssignedClientId`
+to a client ID for a user-assigned identity; the empty value selects a system-assigned identity.
 
 ```json
 {
@@ -470,15 +488,41 @@ selects a system-assigned identity.
 }
 ```
 
-Add `"KeyAttestation": "Disabled"` inside `AcquireTokenOptions` only for an explicitly unattested
-request. The same choices apply to mTLS PoP:
+To request a PoP token with an explicit KeyGuard minimum:
 
-| Token | `ProtocolScheme` | `RequestOverMtls` | `KeyAttestation` |
+```json
+{
+  "ProtocolScheme": "MTLS_POP",
+  "RequestAppToken": true,
+  "AcquireTokenOptions": {
+    "ManagedIdentity": { "UserAssignedClientId": "" },
+    "MinimumTokenBindingStrength": "KeyGuard"
+  }
+}
+```
+
+The equivalent C# options are:
+
+```csharp
+var options = new DownstreamApiOptions
+{
+    ProtocolScheme = "MTLS_POP",
+    RequestAppToken = true,
+    AcquireTokenOptions = new AcquireTokenOptions
+    {
+        ManagedIdentity = new ManagedIdentityOptions(),
+        MinimumTokenBindingStrength = MtlsBindingStrength.KeyGuard
+    }
+};
+```
+
+| Token | `ProtocolScheme` | `RequestOverMtls` | `MinimumTokenBindingStrength` |
 |---|---|---|---|
-| Bearer over mTLS, attested | `Bearer` | `true` | Omit (`Required`) |
-| Bearer over mTLS, unattested | `Bearer` | `true` | `Disabled` |
-| mTLS PoP, attested | `MTLS_POP` | Omit (`false`) | Omit (`Required`) |
-| mTLS PoP, unattested | `MTLS_POP` | Omit (`false`) | `Disabled` |
+| Ordinary bearer | `Bearer` | Omit | Omit |
+| Bearer over mTLS | `Bearer` | `true` | Omit |
+| mTLS PoP, no minimum | `MTLS_POP` | Omit | Omit or `None` |
+| mTLS PoP, software minimum | `MTLS_POP` | Omit | `Software` |
+| mTLS PoP, KeyGuard minimum | `MTLS_POP` | Omit | `KeyGuard` |
 
 ```mermaid
 classDiagram
@@ -497,16 +541,17 @@ classDiagram
     &lt;&lt;rw&gt;&gt; +string PopClaim
     &lt;&lt;rw&gt;&gt; +ManagedIdentityOptions ManagedIdentity
     &lt;&lt;rw&gt;&gt; +bool RequestOverMtls
-    &lt;&lt;rw&gt;&gt; +KeyAttestationMode KeyAttestation
+    &lt;&lt;rw&gt;&gt; +MtlsBindingStrength MinimumTokenBindingStrength
     &lt;&lt;rw&gt;&gt; +string LongRunningWebApiSessionKey
     &lt;&lt;ro&gt;&gt; +string LongRunningWebApiSessionKeyAuto
     &lt;&lt;rw&gt;&gt; +string Tenant
     &lt;&lt;rw&gt;&gt; +string UserFlow
     }
-    class KeyAttestationMode {
+    class MtlsBindingStrength {
     <<enumeration>>
-    Required = 0
-    Disabled = 1
+    None = 0
+    Software = 1
+    KeyGuard = 3
     }
     class AcquireTokenResult {
     &lt;&lt;rw&gt;&gt; +string AccessToken

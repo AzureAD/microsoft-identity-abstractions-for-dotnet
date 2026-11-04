@@ -40,7 +40,7 @@ namespace Microsoft.Identity.Abstractions
             PopClaim = other.PopClaim;
             ManagedIdentity = other.ManagedIdentity?.Clone();
             RequestOverMtls = other.RequestOverMtls;
-            KeyAttestation = other.KeyAttestation;
+            MinimumTokenBindingStrength = other.MinimumTokenBindingStrength;
             LongRunningWebApiSessionKey = other.LongRunningWebApiSessionKey;
             Tenant = other.Tenant;
             UserFlow = other.UserFlow;
@@ -160,23 +160,29 @@ namespace Microsoft.Identity.Abstractions
         /// token request, but the returned bearer token is not bound to that certificate.
         /// This option does not select mTLS proof-of-possession. To request a bound token, use
         /// <see cref="AuthorizationHeaderProviderOptions.ProtocolScheme"/> with <c>MTLS_POP</c>
-        /// instead; that protocol already requires mTLS.
-        /// Key attestation is controlled separately by <see cref="KeyAttestation"/>.
+        /// instead; that protocol already requires mTLS. Implementations must reject combining
+        /// this option with <c>MTLS_POP</c>.
+        /// A bearer token has no token binding strength. Leave <see cref="MinimumTokenBindingStrength"/>
+        /// unset when using this option.
         /// </remarks>
         public bool RequestOverMtls { get; set; }
 
         /// <summary>
-        /// Gets or sets the key attestation policy for managed identity mTLS token acquisition.
-        /// The default is <see cref="KeyAttestationMode.Required"/>.
+        /// Gets or sets the minimum binding strength required for managed identity mTLS proof-of-possession.
         /// </summary>
         /// <remarks>
-        /// Applies to both bearer token acquisition over mTLS and mTLS proof-of-possession.
-        /// It does not enable mTLS or change ordinary bearer token acquisition.
-        /// When required, token acquisition implementations must fail if attestation support is
-        /// unavailable or attestation fails, rather than fall back to an unattested request.
-        /// Set <see cref="KeyAttestationMode.Disabled"/> to explicitly opt out of key attestation.
+        /// Applies when <see cref="ManagedIdentity"/> is set and
+        /// <see cref="AuthorizationHeaderProviderOptions.ProtocolScheme"/> is <c>MTLS_POP</c>.
+        /// This is a minimum requirement, not a selection of a particular key or a request to downgrade.
+        /// When unset, the value is <see cref="MtlsBindingStrength.None"/>, which imposes no minimum
+        /// and does not disable proof-of-possession or attestation.
+        /// <see cref="MtlsBindingStrength.KeyGuard"/> requires KeyGuard capability and key attestation.
+        /// Implementations must fail if the minimum cannot be met, required attestation support is
+        /// unavailable, or attestation fails; they must not fall back to weaker binding or a bearer token.
+        /// A non-<see cref="MtlsBindingStrength.None"/> value must be rejected outside managed identity
+        /// mTLS proof-of-possession, including bearer token acquisition with <see cref="RequestOverMtls"/>.
         /// </remarks>
-        public KeyAttestationMode KeyAttestation { get; set; } = KeyAttestationMode.Required;
+        public MtlsBindingStrength MinimumTokenBindingStrength { get; set; }
 
         /// <summary>
         /// Key used for long running web APIs that need to call downstream web
